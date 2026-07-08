@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---- Dark (default): warm charcoal + ivory, molten-amber accent ---- */
+:root,
+:root[data-theme="dark"] {
+  --bg: 16 15 13;
+  --bg2: 24 22 19;
+  --bg3: 31 29 25;
+  --bg4: 41 38 33;
+  --bg5: 56 52 45;
+  --fg: 243 239 231;
+  --fg2: 201 195 183;
+  --fg3: 150 144 132;
+  --fg4: 110 104 94;
+  --line: 243 239 231;
+  --electric: 242 181 60; /* gold */
+  --mint: 255 90 31; /* molten amber (primary accent) */
+}
+
+/* ---- Light: warm ivory ---- */
+:root[data-theme="light"] {
+  --bg: 244 240 232;
+  --bg2: 253 250 244;
+  --bg3: 235 230 220;
+  --bg4: 227 221 210;
+  --bg5: 214 207 195;
+  --fg: 22 20 15;
+  --fg2: 54 50 42;
+  --fg3: 102 95 84;
+  --fg4: 132 124 112;
+  --line: 22 20 15;
+  --electric: 178 120 16;
+  --mint: 214 64 14;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  background-color: rgb(var(--bg));
+}
+
+body {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-feature-settings: "ss01";
+  overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Arabic: swap type stack (incl. display headings) and relax tracking */
+[dir="rtl"] body,
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] .font-display,
+[dir="rtl"] .font-serif {
+  font-family: var(--font-ar), var(--font-sans), system-ui, sans-serif;
+  letter-spacing: 0 !important;
+}
+[dir="rtl"] .italic {
+  font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h1.font-sans,
+h2.font-sans,
+h3.font-sans {
+  font-family: var(--font-display), system-ui, sans-serif;
+}
+
+::selection {
+  background: rgb(var(--mint));
+  color: rgb(var(--bg));
+}
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--bg));
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--bg5));
+  border-radius: 999px;
+}
+
+/* Custom cursor: hide native only when JS-driven cursor is active */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html.cursor-ready,
+  html.cursor-ready a,
+  html.cursor-ready button,
+  html.cursor-ready * {
+    cursor: none;
+  }
+}
+
+/* Inside the consultation modal, restore native cursors (form usability) */
+html.modal-open,
+html.modal-open * {
+  cursor: auto !important;
+}
+html.modal-open input,
+html.modal-open textarea {
+  cursor: text !important;
+}
+html.modal-open a,
+html.modal-open button,
+html.modal-open select,
+html.modal-open label {
+  cursor: pointer !important;
+}
+html.modal-open .custom-cursor {
+  display: none !important;
+}
+
+@layer components {
+  .container-edge {
+    padding-left: clamp(1.25rem, 5vw, 6rem);
+    padding-right: clamp(1.25rem, 5vw, 6rem);
+  }
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  /* Grid-paper backdrop (reference-style), drawn from the theme line colour */
+  .bg-grid {
+    background-image: linear-gradient(
+        to right,
+        rgb(var(--line) / 0.07) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, rgb(var(--line) / 0.07) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
