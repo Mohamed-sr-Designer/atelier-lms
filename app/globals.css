@@ -156,6 +156,28 @@ html.modal-open .custom-cursor {
   .text-pretty {
     text-wrap: pretty;
   }
+  /* Gen-Z display treatments: outlined type that lets imagery breathe through */
+  .text-outline {
+    -webkit-text-stroke: 1.5px rgb(var(--fg) / 0.9);
+    color: transparent;
+  }
+  .text-outline-mint {
+    -webkit-text-stroke: 1.5px rgb(var(--mint));
+    color: transparent;
+  }
+  @media (min-width: 768px) {
+    .text-outline,
+    .text-outline-mint {
+      -webkit-text-stroke-width: 2px;
+    }
+  }
+  /* Film-grain noise overlay (SVG turbulence, no asset needed) */
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+  .glow-mint {
+    text-shadow: 0 0 24px rgb(var(--mint) / 0.55), 0 0 80px rgb(var(--mint) / 0.25);
+  }
   /* Grid-paper backdrop (reference-style), drawn from the theme line colour */
   .bg-grid {
     background-image: linear-gradient(

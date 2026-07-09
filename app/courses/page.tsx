@@ -5,9 +5,9 @@ import { site } from "@/lib/site";
 import { courses, lessonCount, totalMinutes } from "@/lib/courses";
 
 export const metadata: Metadata = {
-  title: "Courses — Photoshop, Illustrator, After Effects, Premiere Pro, Figma & AI Production",
+  title: "Courses — Free Photoshop, Illustrator, After Effects & Premiere + Premium AI Production",
   description:
-    "Browse Atelier's catalog: 7 focused design courses (3–5 hours each) with practical projects, quizzes, final projects and verified certificates — from Photoshop mastery to AI video generation.",
+    "Browse Atelier's catalog: 4 completely free software courses and 2 premium AI production tracks (3–5 hours each) — practical projects, quizzes, final projects and verified certificates.",
   alternates: { canonical: "/courses/" },
 };
 

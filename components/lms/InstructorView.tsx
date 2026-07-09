@@ -285,7 +285,7 @@ export default function InstructorView() {
             <div className="mt-10">
               <Magnetic strength={0.5}>
                 <Link
-                  href="/courses/ai-photoshoot/"
+                  href="/courses/adobe-photoshop/"
                   className="inline-block rounded-full bg-mint px-10 py-5 text-base font-medium text-ink-900 transition-transform duration-300 hover:scale-[1.05]"
                 >
                   {t.home.finalCta}

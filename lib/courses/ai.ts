@@ -1,6 +1,6 @@
 import type { Course } from "./types";
 
-// ---- 06 · AI Photoshoot & Prompt Engineering (free flagship) ---------------
+// ---- 06 · AI Photoshoot & Prompt Engineering (premium flagship) -------------
 // Expanded from the original portfolio course track — same DNA, full ecosystem.
 export const aiPhotoshoot: Course = {
   slug: "ai-photoshoot",
@@ -12,19 +12,20 @@ export const aiPhotoshoot: Course = {
   },
   short: { en: "AI Photoshoot", ar: "التصوير بالذكاء الاصطناعي" },
   tagline: {
-    en: "Direct and produce a full campaign photoshoot with AI — free, forever.",
-    ar: "أخرج ونفّذ جلسة تصوير حملة كاملة بالذكاء الاصطناعي — مجانًا للأبد.",
+    en: "Direct full campaign photoshoots with AI — the skill clients pay premium for.",
+    ar: "أخرج جلسات تصوير حملات كاملة بالذكاء الاصطناعي — المهارة اللي العملاء بيدفعوا فيها بريميوم.",
   },
   desc: {
-    en: "The course that built real campaigns: prompt engineering with a photographer's vocabulary, generating and curating hero frames, then finishing in Photoshop to a standard clients sign. Completely free — my proof of how I teach.",
-    ar: "الكورس اللي اتبنت بيه حملات حقيقية: هندسة برومبت بمفردات المصور المحترف، توليد واختيار اللقطات البطلة، وبعدين التشطيب في فوتوشوب لمستوى العميل يمضي عليه. مجاني بالكامل — ده الدليل على طريقة تدريسي.",
+    en: "The course that built real campaigns: prompt engineering with a photographer's vocabulary, generating and curating hero frames, then finishing in Photoshop to a standard clients sign. This is the exact pipeline behind paid client work — taught end to end, including how to price it.",
+    ar: "الكورس اللي اتبنت بيه حملات حقيقية: هندسة برومبت بمفردات المصور المحترف، توليد واختيار اللقطات البطلة، وبعدين التشطيب في فوتوشوب لمستوى العميل يمضي عليه. ده نفس خط الإنتاج ورا شغل عملاء مدفوع — متشرح من الأول للآخر، وبتتعلم تسعّره كمان.",
   },
   level: { en: "Zero → Professional", ar: "من الصفر → للاحتراف" },
   audience: {
     en: "Designers, marketers and creative teams who need premium visuals without production budgets.",
     ar: "المصممين والماركترز والفرق الإبداعية اللي محتاجين Visuals بريميوم من غير ميزانيات إنتاج.",
   },
-  price: 0,
+  price: 1750,
+  compareAt: 2500,
   cover: "/work/axia/insta-2.webp",
   outcomes: [
     "A repeatable prompt-to-photoshoot workflow",
@@ -105,14 +106,14 @@ export const aiPhotoshoot: Course = {
     deliverables: ["6 finished campaign frames", "Your reusable prompt system", "Moodboard + art direction note", "Social crops of the hero frame"],
   },
   faq: [
-    { q: "Why is this course free?", a: "It's how I teach in public. You get a complete, real course; if the method works for you, the paid tracks go deeper into the craft. No catch, no trial." },
+    { q: "Why is this course priced premium?", a: "Because it's the money skill. AI photoshoots replace studio budgets — one approved client brief covers the course several times over. The course includes the pricing and positioning lessons to make that happen, and the software craft courses on the platform are free so your budget goes where the earning is." },
     { q: "Which AI tool does it use?", a: "The method is tool-agnostic — prompts are taught as photography direction, which transfers across Midjourney, Freepik, Firefly and whatever ships next." },
     { q: "Do I need Photoshop?", a: "For Module 04, yes — any recent version. Modules 01–03 need only a generation tool." },
     { q: "Is AI imagery actually used in real campaigns?", a: "The cover of this course is from a real client campaign produced exactly this way. That's the standard the course teaches to." },
   ],
   reviews: [
     { name: "Rana Sherif", role: "Brand designer", text: "I pitched an AI photoshoot to a client the week after the prompt module. They approved it over the studio quote.", stars: 5 },
-    { name: "Amr Hany", role: "Marketer", text: "Free but better structured than paid courses I've bought. The six-slot formula is stuck in my head permanently.", stars: 5 },
+    { name: "Amr Hany", role: "Marketer", text: "Better structured than any course I've bought. The six-slot formula is stuck in my head permanently — and it closed my first AI brief.", stars: 5 },
     { name: "Nadine Fouad", role: "Art student", text: "The curation lesson changed how I look at my own generations. Less volume, more taste.", stars: 5 },
   ],
   rating: 4.9,
@@ -143,8 +144,8 @@ export const aiVideo: Course = {
     en: "Designers and editors who want to sell AI video — the fastest-growing deliverable in advertising.",
     ar: "المصممين والمونتيرية اللي عايزين يبيعوا فيديو AI — أسرع منتج نموًا في الإعلانات.",
   },
-  price: 750,
-  compareAt: 1100,
+  price: 2250,
+  compareAt: 3200,
   cover: "/motion/ai-motion.jpg",
   outcomes: [
     "Prompt motion with camera language: pans, pushes, speed",

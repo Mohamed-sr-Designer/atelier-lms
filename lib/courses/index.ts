@@ -1,18 +1,17 @@
 import { photoshop, illustrator } from "./adobe";
 import { aftereffects, premiere } from "./motion";
-import { figma } from "./design";
 import { aiPhotoshoot, aiVideo } from "./ai";
 import { totalMinutes, lessonCount, type Course, type Bi } from "./types";
 
 export * from "./types";
 
-// Catalog order = funnel order: free flagship sits by the paid tracks it feeds.
+// The business model: software craft is FREE (the funnel — nobody gatekeeps
+// tools in 2026), AI production is PREMIUM (the money skill clients pay for).
 export const courses: Course[] = [
   photoshop,
   illustrator,
   aftereffects,
   premiere,
-  figma,
   aiPhotoshoot,
   aiVideo,
 ];
@@ -20,8 +19,8 @@ export const courses: Course[] = [
 export const getCourse = (slug: string) =>
   courses.find((c) => c.slug === slug);
 
-// ---- Ultimate Design Bundle -------------------------------------------------
-// Photoshop + the two original AI tracks: the "camera-less campaign" stack.
+// ---- The AI Production Stack -------------------------------------------------
+// Both premium AI tracks: the complete camera-less campaign pipeline.
 export type Bundle = {
   slug: string;
   title: Bi;
@@ -33,19 +32,19 @@ export type Bundle = {
 };
 
 export const bundle: Bundle = {
-  slug: "ultimate-design-bundle",
-  title: { en: "The Ultimate Design Bundle", ar: "باقة التصميم الشاملة" },
+  slug: "ai-production-stack",
+  title: { en: "The AI Production Stack", ar: "باقة إنتاج الـ AI الكاملة" },
   tagline: {
-    en: "Photoshop mastery + the complete AI production stack — one enrollment.",
-    ar: "احتراف فوتوشوب + منظومة إنتاج الذكاء الاصطناعي الكاملة — باشتراك واحد.",
+    en: "Both AI courses — the full camera-less pipeline, one enrollment.",
+    ar: "كورسات الـ AI الاتنين — خط الإنتاج الكامل من غير كاميرا، باشتراك واحد.",
   },
   desc: {
-    en: "The full camera-less campaign pipeline: master Photoshop craft, direct AI photoshoots, then turn stills into finished AI video. Three courses, one workflow, 13+ hours.",
-    ar: "خط إنتاج الحملات الكامل من غير كاميرا: احترف الفوتوشوب، أخرج جلسات تصوير AI، وحوّل الصور لفيديو نهائي. ثلاث كورسات، Workflow واحد، أكتر من ١٣ ساعة.",
+    en: "AI Photoshoot & Prompt Engineering + AI Video Generation: direct stills like a photographer, then turn them into finished spots clients approve. The two highest-earning skills we teach, 6+ hours, two certificates.",
+    ar: "التصوير بالذكاء الاصطناعي وهندسة البرومبت + توليد الفيديو: أخرج الصور كأنك مصوّر محترف، وبعدين حوّلها لإعلانات نهائية العميل يوافق عليها. أعلى مهارتين بيكسّبوا عندنا، أكتر من ٦ ساعات، وشهادتين.",
   },
-  courseSlugs: ["adobe-photoshop", "ai-photoshoot", "ai-video-generation"],
-  price: 1190,
-  compareAt: 1700, // 950 + 0 + 750
+  courseSlugs: ["ai-photoshoot", "ai-video-generation"],
+  price: 2950,
+  compareAt: 4000, // 1,750 + 2,250
 };
 
 export const bundleCourses = bundle.courseSlugs
@@ -60,6 +59,7 @@ export const stats = {
   totalLessons: courses.reduce((n, c) => n + lessonCount(c), 0),
   totalStudents: courses.reduce((n, c) => n + c.students, 0),
   totalCourses: courses.length,
+  freeCourses: courses.filter((c) => c.price === 0).length,
   // Real-world teaching record (from the portfolio's verified history)
   graduates: 1200,
   academies: 4,

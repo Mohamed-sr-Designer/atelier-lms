@@ -4,9 +4,9 @@ export const site = {
   name: "Atelier",
   fullName: "Atelier — The School of Visual Direction",
   title:
-    "Atelier by Mohamed Tarek — Master Photoshop, Illustrator, After Effects, Premiere, Figma & AI Production",
+    "Atelier by Mohamed Tarek — Free Photoshop, Illustrator, After Effects & Premiere Courses + Premium AI Production",
   description:
-    "Atelier is the online design school of art director Mohamed Tarek. Short, premium courses (3–5 hours each) that take you from zero to a professional workflow in Photoshop, Illustrator, After Effects, Premiere Pro, Figma, AI photoshoots and AI video — with projects, quizzes and verified certificates.",
+    "Atelier is the online design school of art director Mohamed Tarek. The software courses — Photoshop, Illustrator, After Effects, Premiere Pro — are completely free with certificates. The premium AI production tracks (AI photoshoots and AI video) teach the highest-earning skill in design today. 3–5 hours each, projects, quizzes, verified certificates.",
   url: "https://mohamed-sr-designer.github.io/atelier-lms",
 
   // Instructor

@@ -5,9 +5,9 @@ import { site } from "@/lib/site";
 import { bundle, bundleCourses } from "@/lib/courses";
 
 export const metadata: Metadata = {
-  title: "The Ultimate Design Bundle — Photoshop + AI Photoshoot + AI Video (Save 30%)",
+  title: "The AI Production Stack — AI Photoshoot + AI Video (Save 26%)",
   description:
-    "Three courses, one camera-less campaign pipeline: Photoshop Mastery, AI Photoshoot & Prompt Engineering, and AI Video Generation. 13+ hours, 3 certificates, one enrollment.",
+    "Both premium AI tracks in one enrollment: AI Photoshoot & Prompt Engineering + AI Video Generation. The complete camera-less campaign pipeline — 6+ hours, 2 certificates, EGP 2,950 instead of 4,000.",
   alternates: { canonical: "/bundle/" },
 };
 

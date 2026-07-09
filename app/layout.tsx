@@ -56,11 +56,10 @@ export const metadata: Metadata = {
   description: site.description,
   keywords: [
     "online design school",
-    "Photoshop course",
-    "Illustrator course",
-    "After Effects course",
-    "Premiere Pro course",
-    "Figma course",
+    "free Photoshop course",
+    "free Illustrator course",
+    "free After Effects course",
+    "free Premiere Pro course",
     "AI photoshoot course",
     "AI video generation course",
     "prompt engineering for designers",
@@ -190,6 +189,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="dark"
+      suppressHydrationWarning
       className={`${display.variable} ${sans.variable} ${serif.variable} ${arabic.variable}`}
     >
       <head>

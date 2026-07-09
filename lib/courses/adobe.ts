@@ -23,8 +23,7 @@ export const photoshop: Course = {
     en: "Beginners, social media designers, and self-taught retouchers who want an agency-grade workflow.",
     ar: "المبتدئين ومصممي السوشيال ميديا وكل اللي اتعلم لوحده وعايز Workflow بمستوى الوكالات.",
   },
-  price: 950,
-  compareAt: 1400,
+  price: 0,
   cover: "/work/axia/hero.webp",
   outcomes: [
     "Cut anything — hair, glass, motion blur — with clean edges",
@@ -167,8 +166,7 @@ export const illustrator: Course = {
     en: "Beginners and social designers who want real logo and identity skills — the highest-paid corner of graphic design.",
     ar: "المبتدئين ومصممي السوشيال اللي عايزين مهارات لوجو وهوية حقيقية — أعلى تخصص أجرًا في التصميم الجرافيكي.",
   },
-  price: 850,
-  compareAt: 1250,
+  price: 0,
   cover: "/work/fresh-valley/marks.webp",
   outcomes: [
     "Draw any mark with the pen tool — confidently, not accidentally",

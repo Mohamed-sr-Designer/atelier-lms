@@ -23,8 +23,7 @@ export const aftereffects: Course = {
     en: "Graphic designers who want the motion skills clients keep asking for — no prior animation experience needed.",
     ar: "مصممين الجرافيك اللي عايزين مهارات الموشن اللي العملاء بيطلبوها — من غير أي خبرة سابقة في التحريك.",
   },
-  price: 1050,
-  compareAt: 1500,
+  price: 0,
   cover: "/motion/reel-a.jpg",
   outcomes: [
     "Animate with real easing — nothing linear, nothing robotic",
@@ -166,8 +165,7 @@ export const premiere: Course = {
     en: "Designers, marketers and creators who need professional edits for brands and social — fast.",
     ar: "المصممين والماركترز وصنّاع المحتوى اللي محتاجين مونتاج احترافي للبرندات والسوشيال — بسرعة.",
   },
-  price: 900,
-  compareAt: 1300,
+  price: 0,
   cover: "/motion/film-2024.jpg",
   outcomes: [
     "Cut with story logic — rhythm, motivation, breathing room",

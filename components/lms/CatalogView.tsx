@@ -14,7 +14,6 @@ type Filter = "all" | "design" | "motion" | "ai";
 const CATEGORY: Record<string, Exclude<Filter, "all">> = {
   "adobe-photoshop": "design",
   "adobe-illustrator": "design",
-  "figma-ui-design": "design",
   "adobe-after-effects": "motion",
   "adobe-premiere-pro": "motion",
   "ai-photoshoot": "ai",

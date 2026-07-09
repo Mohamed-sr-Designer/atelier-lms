@@ -174,7 +174,7 @@ export const posts: Post[] = [
     readMins: 5,
     tag: "Learning Paths",
     cover: "/web/fresh-valley.webp",
-    relatedCourse: "figma-ui-design",
+    relatedCourse: "adobe-photoshop",
     body: [
       {
         p: "Every week a student asks me to settle the Figma vs Photoshop debate. Here's the truth the debate misses: they don't compete. They serve two different careers that happen to share the word 'designer'.",
@@ -185,7 +185,7 @@ export const posts: Post[] = [
       },
       {
         h: "Where the money differs",
-        p: "Photoshop skills monetize faster at entry level (social design and retouch briefs are everywhere, especially in the MENA agency market). Figma skills have a higher ceiling in product companies and remote roles. Graphic designers who add Figma make the single most in-demand career transition of the moment — which is exactly why my Figma course is built for designers coming from the graphic side, not for developers.",
+        p: "Photoshop skills monetize faster at entry level (social design and retouch briefs are everywhere, especially in the MENA agency market). Figma skills have a higher ceiling in product companies and remote roles. Graphic designers who add Figma make the single most in-demand career transition of the moment — and their visual instincts transfer on day one, which is why designers coming from the graphic side pick it up faster than anyone.",
       },
       {
         h: "The honest recommendation",
