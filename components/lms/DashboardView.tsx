@@ -5,12 +5,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import GlyphPlate from "@/components/lms/GlyphPlate";
 import { useLang } from "@/lib/i18n";
-import {
-  useStore,
-  courseProgress,
-  certificateReady,
-  enrolledCourses,
-} from "@/lib/store";
+import { useStore, courseProgress, enrolledCourses } from "@/lib/store";
 import { courses, fmtDuration, getCourse, lessonCount } from "@/lib/courses";
 
 export default function DashboardView() {
@@ -64,6 +59,7 @@ export default function DashboardView() {
     const all = c.modules.flatMap((m) => m.lessons);
     return n + ids.reduce((x, id) => x + (all.find((l) => l.id === id)?.dur || 0), 0);
   }, 0);
+  const quizzesCleared = Object.values(store.quizPassed).filter(Boolean).length;
 
   return (
     <section className="container-edge mx-auto max-w-edge pb-28 pt-32 md:pt-40">
@@ -91,7 +87,7 @@ export default function DashboardView() {
           {[
             { n: lessonsDone, l: t.dash.statsLessons },
             { n: minutesDone, l: t.dash.statsMinutes },
-            { n: store.certificates.length, l: t.dash.statsCerts },
+            { n: quizzesCleared, l: t.dash.statsQuizzes },
           ].map((s) => (
             <div key={s.l} className="bg-ink-900 p-7 text-center">
               <p className="font-display text-4xl font-semibold tabular-nums text-bone-50 md:text-5xl">
@@ -177,8 +173,6 @@ export default function DashboardView() {
             {enrolled.map((c) => {
               const p = courseProgress(store, c.slug);
               const quizDone = Boolean(store.quizPassed[c.slug]);
-              const certReady = certificateReady(store, c.slug);
-              const hasCert = store.certificates.some((x) => x.slug === c.slug);
               return (
                 <StaggerItem key={c.slug}>
                   <div className="flex h-full gap-5 rounded-2xl border border-line/10 bg-ink-800/60 p-5 transition-colors duration-300 hover:border-mint/25">
@@ -215,15 +209,15 @@ export default function DashboardView() {
                         {(store.completed[c.slug] || []).length}/{lessonCount(c)}{" "}
                         {t.common.lessons}
                         {p === 100 && !quizDone ? ` · ${t.dash.finalStep}` : ""}
-                        {hasCert ? ` · ${t.common.completed} ✓` : ""}
+                        {p === 100 && quizDone ? ` · ${t.common.completed} ✓` : ""}
                       </p>
                       <div className="mt-auto pt-4">
-                        {certReady && !hasCert ? (
+                        {p === 100 && !quizDone ? (
                           <Link
                             href={`/learn/${c.slug}/?tab=quiz`}
                             className="inline-block rounded-full bg-electric px-5 py-2.5 text-xs font-medium text-ink-900"
                           >
-                            {t.dash.claimCert}
+                            {t.dash.quizReady} →
                           </Link>
                         ) : (
                           <Link
@@ -243,44 +237,6 @@ export default function DashboardView() {
             })}
           </Stagger>
         )}
-      </div>
-
-      {/* certificates strip */}
-      <div className="mt-16">
-        <div className="flex items-end justify-between gap-4">
-          <Reveal>
-            <SectionLabel index="02">{t.dash.certsLabel}</SectionLabel>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <Link href="/certificates/" className="link-underline text-xs text-mint">
-              {t.certs.title} →
-            </Link>
-          </Reveal>
-        </div>
-        <Reveal delay={0.08}>
-          {store.certificates.length === 0 ? (
-            <p className="mt-6 text-sm text-bone-500">{t.dash.certsEmpty}</p>
-          ) : (
-            <div className="mt-6 flex flex-wrap gap-3">
-              {store.certificates.map((cert) => {
-                const c = getCourse(cert.slug);
-                return (
-                  <Link
-                    key={cert.id}
-                    href="/certificates/"
-                    className="flex items-center gap-3 rounded-full border border-electric/30 bg-electric/5 px-5 py-2.5 text-sm text-bone-50 transition-colors hover:bg-electric/10"
-                  >
-                    <span className="font-serif italic text-electric">A</span>
-                    {c?.short[lang]}
-                    <span className="text-xs text-bone-500" dir="ltr">
-                      {cert.id}
-                    </span>
-                  </Link>
-                );
-              })}
-            </div>
-          )}
-        </Reveal>
       </div>
 
       {/* discover more */}

@@ -7,7 +7,7 @@ import { courses, lessonCount, totalMinutes } from "@/lib/courses";
 export const metadata: Metadata = {
   title: "Courses — Free Photoshop, Illustrator, After Effects & Premiere + Premium AI Production",
   description:
-    "Browse Atelier's catalog: 4 completely free software courses and 2 premium AI production tracks (3–5 hours each) — practical projects, quizzes, final projects and verified certificates.",
+    "Browse Method's catalog: 4 completely free software courses and 2 premium AI production tracks (3–5 hours each) — practical projects, quizzes and reviewed final projects.",
   alternates: { canonical: "/courses/" },
 };
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "Atelier design courses",
+  name: "Method design courses",
   numberOfItems: courses.length,
   itemListElement: courses.map((c, i) => ({
     "@type": "ListItem",

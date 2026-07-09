@@ -131,7 +131,7 @@ export const photoshop: Course = {
     { q: "Do I need a powerful computer?", a: "No — every technique in the course runs on any machine that can install Photoshop CC. Large composites are taught with performance tips included." },
     { q: "Which Photoshop version do I need?", a: "Any Creative Cloud version from 2022 onward. Nothing in the course depends on beta-only features." },
     { q: "Is this for photographers or designers?", a: "Designers first — the course is built around campaign and social production, not photo library management. Photographers who retouch will still benefit." },
-    { q: "Do I get a certificate?", a: "Yes — finish all modules, pass the checkpoint quiz and submit the final project to receive your verified certificate." },
+    { q: "What do I walk away with?", a: "A complete campaign key visual you built yourself — reviewed personally — plus the working files and delivery masters. Your first real portfolio piece, not a watch history." },
   ],
   reviews: [
     { name: "Nour El-Sayed", role: "Social media designer, Cairo", text: "The masking module alone paid for the course. My cutouts stopped looking like stickers within a week.", stars: 5 },

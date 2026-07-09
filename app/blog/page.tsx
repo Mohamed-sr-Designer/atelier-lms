@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Blog",
-  name: "Atelier Journal",
+  name: "Method Journal",
   url: `${site.url}/blog/`,
   publisher: { "@id": `${site.url}/#organization` },
   blogPost: posts.map((p) => ({

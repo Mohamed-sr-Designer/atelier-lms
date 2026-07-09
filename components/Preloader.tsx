@@ -70,7 +70,7 @@ export default function Preloader() {
                 transition={{ duration: 1, ease, delay: 0.1 }}
                 className="block font-display text-[15vw] font-semibold leading-none tracking-tightest text-bone-50 md:text-[8vw]"
               >
-                ATELIER
+                METHOD
               </motion.span>
             </span>
             <motion.span

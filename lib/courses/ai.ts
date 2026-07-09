@@ -227,7 +227,7 @@ export const aiVideo: Course = {
     { q: "Which AI video tools does the course use?", a: "The direction method is model-agnostic and demonstrated across current leaders (Seedance, Kling, Runway). When models change — and they will — the directing skills transfer." },
     { q: "Do I need editing experience?", a: "No — Module 03 teaches the exact Premiere skills the pipeline needs. If you want deeper editing craft, the Premiere Pro course pairs perfectly." },
     { q: "How do subscriptions/credits work cost-wise?", a: "Module 04 includes the real economics: what a spot costs in credits, how to budget generations, and how to price the work so margins stay healthy." },
-    { q: "Is the certificate included?", a: "Yes — complete the modules, pass the checkpoints and submit your final spot for a verified certificate." },
+    { q: "What do I walk away with?", a: "A finished 30-second AI spot — reviewed personally — plus the storyboard system, the Premiere template and the client-presentation deck. A sellable service, not a watch history." },
   ],
   reviews: [
     { name: "Khaled Emad", role: "Freelance designer", text: "Sold my first AI video spot for more than my monthly salary. The pricing lesson gave me the confidence to quote it.", stars: 5 },

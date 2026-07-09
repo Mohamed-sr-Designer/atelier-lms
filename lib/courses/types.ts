@@ -1,6 +1,6 @@
 // ---- Course data model -------------------------------------------------
 // Every course is a complete learning ecosystem: path → modules → lessons →
-// projects → resources → quizzes → final project → certificate.
+// projects → resources → quizzes → final project → portfolio piece.
 // Durations are stored per-lesson (minutes) and summed by helpers so the
 // 3–5 hour rule is enforced by the data itself, not by hand-written labels.
 

@@ -375,7 +375,7 @@ export default function CourseDetailView({ course }: { course: Course }) {
         </div>
         <div>
           <Reveal>
-            <SectionLabel index="06">{t.course.certLabel}</SectionLabel>
+            <SectionLabel index="06">{t.course.outcomeLabel}</SectionLabel>
           </Reveal>
           <Reveal delay={0.08}>
             <div className="relative mt-8 overflow-hidden rounded-2xl border border-line/15 bg-ink-800 p-8 text-center md:p-10">
@@ -389,16 +389,16 @@ export default function CourseDetailView({ course }: { course: Course }) {
               />
               <div className="relative">
                 <p className="text-[10px] uppercase tracking-ultra text-bone-400">
-                  Atelier — School of Visual Direction
+                  Method — School of Visual Direction
                 </p>
                 <p className="mt-4 font-serif text-2xl italic text-bone-50 md:text-3xl">
-                  {t.course.certTitle}
+                  {t.course.outcomeTitle}
                 </p>
                 <div className="mx-auto mt-5 grid h-12 w-12 place-items-center rounded-full border border-mint/60 font-serif text-lg italic text-mint">
-                  A
+                  M
                 </div>
                 <p className="mx-auto mt-5 max-w-sm text-sm leading-relaxed text-bone-400">
-                  {t.course.certNote}
+                  {t.course.outcomeNote}
                 </p>
               </div>
             </div>

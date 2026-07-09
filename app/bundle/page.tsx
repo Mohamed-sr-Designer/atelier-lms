@@ -7,7 +7,7 @@ import { bundle, bundleCourses } from "@/lib/courses";
 export const metadata: Metadata = {
   title: "The AI Production Stack — AI Photoshoot + AI Video (Save 26%)",
   description:
-    "Both premium AI tracks in one enrollment: AI Photoshoot & Prompt Engineering + AI Video Generation. The complete camera-less campaign pipeline — 6+ hours, 2 certificates, EGP 2,950 instead of 4,000.",
+    "Both premium AI tracks in one enrollment: AI Photoshoot & Prompt Engineering + AI Video Generation. The complete camera-less campaign pipeline — 6+ hours, 2 reviewed final projects, EGP 2,950 instead of 4,000.",
   alternates: { canonical: "/bundle/" },
 };
 

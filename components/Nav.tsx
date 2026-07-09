@@ -70,13 +70,13 @@ export default function Nav() {
           <Link
             href="/"
             className="group flex items-center gap-3"
-            aria-label="Atelier — home"
+            aria-label="Method — home"
           >
             <span className="grid h-9 w-9 place-items-center rounded-full border border-line/20 font-serif text-base italic transition-colors duration-300 group-hover:border-mint/60 group-hover:text-mint">
-              A
+              M
             </span>
             <span className="hidden text-sm tracking-tight text-bone-200 sm:block">
-              Atelier
+              Method
               <span className="text-bone-400"> {t.nav.roleTag}</span>
             </span>
           </Link>

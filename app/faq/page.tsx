@@ -5,9 +5,9 @@ import { site } from "@/lib/site";
 import { dict } from "@/lib/dict";
 
 export const metadata: Metadata = {
-  title: "FAQ — Enrollment, Certificates, Payments & Access",
+  title: "FAQ — Enrollment, Courses, Payments & Access",
   description:
-    "Everything about learning at Atelier: how courses work, InstaPay & Vodafone Cash payments, lifetime access, refunds, certificates and team training.",
+    "Everything about learning at Method: how courses work, InstaPay & Vodafone Cash payments, lifetime access, refunds, final-project reviews and team training.",
   alternates: { canonical: "/faq/" },
 };
 

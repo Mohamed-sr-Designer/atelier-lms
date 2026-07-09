@@ -2,35 +2,27 @@
 
 // ---- Client-side student store ----------------------------------------------
 // The site is a static export (GitHub Pages), so the whole student experience
-// — account, enrollments, lesson progress, quiz scores, certificates — lives
-// in localStorage. One key, one JSON blob, one subscribe channel so every
+// — account, enrollments, lesson progress, quiz scores — lives in
+// localStorage. One key, one JSON blob, one subscribe channel so every
 // component re-renders together (storage events cover other tabs).
 
-import { useCallback, useSyncExternalStore } from "react";
+import { useSyncExternalStore } from "react";
 import { courses, getCourse, lessonCount } from "@/lib/courses";
 
 export type User = { name: string; email: string; joined: string };
-export type Certificate = {
-  id: string; // e.g. "ATL-PS-4F2K9"
-  slug: string;
-  name: string; // student name at time of issue
-  date: string; // ISO
-};
 export type StoreState = {
   user: User | null;
   enrollments: string[]; // course slugs (bundle expands to its courses)
   completed: Record<string, string[]>; // slug -> lesson ids
   quizPassed: Record<string, boolean>; // slug -> passed checkpoint quiz
-  certificates: Certificate[];
 };
 
-const KEY = "atelier-lms";
+const KEY = "atelier-lms"; // storage key kept stable across the Method rename
 const EMPTY: StoreState = {
   user: null,
   enrollments: [],
   completed: {},
   quizPassed: {},
-  certificates: [],
 };
 
 let cache: StoreState = EMPTY;
@@ -109,28 +101,6 @@ export const passQuiz = (slug: string) => {
   write({ ...s, quizPassed: { ...s.quizPassed, [slug]: true } });
 };
 
-const certId = (slug: string) => {
-  const c = getCourse(slug);
-  const tag = (c?.glyph || "XX").replace(/[^A-Za-z]/g, "").toUpperCase();
-  const rand = Math.random().toString(36).slice(2, 7).toUpperCase();
-  return `ATL-${tag}-${rand}`;
-};
-
-export const issueCertificate = (slug: string): Certificate | null => {
-  const s = read();
-  if (!s.user) return null;
-  const existing = s.certificates.find((c) => c.slug === slug);
-  if (existing) return existing;
-  const cert: Certificate = {
-    id: certId(slug),
-    slug,
-    name: s.user.name,
-    date: new Date().toISOString(),
-  };
-  write({ ...s, certificates: [...s.certificates, cert] });
-  return cert;
-};
-
 // ---- derived helpers ---------------------------------------------------------
 
 export const courseProgress = (s: StoreState, slug: string) => {
@@ -143,9 +113,6 @@ export const courseProgress = (s: StoreState, slug: string) => {
 
 export const isEnrolled = (s: StoreState, slug: string) =>
   s.enrollments.includes(slug);
-
-export const certificateReady = (s: StoreState, slug: string) =>
-  courseProgress(s, slug) === 100 && Boolean(s.quizPassed[slug]);
 
 export const enrolledCourses = (s: StoreState) =>
   courses.filter((c) => s.enrollments.includes(c.slug));

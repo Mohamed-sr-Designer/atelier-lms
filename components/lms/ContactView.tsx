@@ -16,7 +16,7 @@ export default function ContactView() {
   const send = (e: React.FormEvent) => {
     e.preventDefault();
     const subject = encodeURIComponent(
-      `[Atelier] ${t.contact.topics[topic]} — ${name || "Student"}`
+      `[Method] ${t.contact.topics[topic]} — ${name || "Student"}`
     );
     const body = encodeURIComponent(`${msg}\n\n— ${name}\n${email}`);
     window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;

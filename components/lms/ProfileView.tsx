@@ -97,7 +97,10 @@ export default function ProfileView() {
               { n: enrolledCourses(store).length, l: t.dash.enrolledLabel },
               { n: lessonsDone, l: t.dash.statsLessons },
               { n: minutesDone, l: t.dash.statsMinutes },
-              { n: store.certificates.length, l: t.dash.statsCerts },
+              {
+                n: Object.values(store.quizPassed).filter(Boolean).length,
+                l: t.dash.statsQuizzes,
+              },
             ].map((s) => (
               <div key={s.l} className="bg-ink-900 p-6 text-center">
                 <p className="font-display text-3xl font-semibold tabular-nums text-bone-50">

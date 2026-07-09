@@ -6,7 +6,7 @@ import AuthView from "@/components/lms/AuthView";
 export const metadata: Metadata = {
   title: "Create your account — start learning free",
   description:
-    "Create your free Atelier account and start the AI Photoshoot course today — no card required.",
+    "Create your free Method account and start the AI Photoshoot course today — no card required.",
   alternates: { canonical: "/register/" },
   robots: { index: false },
 };

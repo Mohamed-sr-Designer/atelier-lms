@@ -39,8 +39,8 @@ export const bundle: Bundle = {
     ar: "كورسات الـ AI الاتنين — خط الإنتاج الكامل من غير كاميرا، باشتراك واحد.",
   },
   desc: {
-    en: "AI Photoshoot & Prompt Engineering + AI Video Generation: direct stills like a photographer, then turn them into finished spots clients approve. The two highest-earning skills we teach, 6+ hours, two certificates.",
-    ar: "التصوير بالذكاء الاصطناعي وهندسة البرومبت + توليد الفيديو: أخرج الصور كأنك مصوّر محترف، وبعدين حوّلها لإعلانات نهائية العميل يوافق عليها. أعلى مهارتين بيكسّبوا عندنا، أكتر من ٦ ساعات، وشهادتين.",
+    en: "AI Photoshoot & Prompt Engineering + AI Video Generation: direct stills like a photographer, then turn them into finished spots clients approve. The two highest-earning skills we teach, 6+ hours, two reviewed final projects.",
+    ar: "التصوير بالذكاء الاصطناعي وهندسة البرومبت + توليد الفيديو: أخرج الصور كأنك مصوّر محترف، وبعدين حوّلها لإعلانات نهائية العميل يوافق عليها. أعلى مهارتين بيكسّبوا عندنا، أكتر من ٦ ساعات، ومشروعان نهائيان بمراجعة.",
   },
   courseSlugs: ["ai-photoshoot", "ai-video-generation"],
   price: 2950,

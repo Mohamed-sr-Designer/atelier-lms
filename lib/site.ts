@@ -1,12 +1,12 @@
-// ---- Atelier — the school of Mohamed Tarek ----------------------------------
+// ---- Method — the school of Mohamed Tarek ----------------------------------
 export const site = {
   // Platform identity
-  name: "Atelier",
-  fullName: "Atelier — The School of Visual Direction",
+  name: "Method",
+  fullName: "Method — The School of Visual Direction",
   title:
-    "Atelier by Mohamed Tarek — Free Photoshop, Illustrator, After Effects & Premiere Courses + Premium AI Production",
+    "Method by Mohamed Tarek — Free Photoshop, Illustrator, After Effects & Premiere Courses + Premium AI Production",
   description:
-    "Atelier is the online design school of art director Mohamed Tarek. The software courses — Photoshop, Illustrator, After Effects, Premiere Pro — are completely free with certificates. The premium AI production tracks (AI photoshoots and AI video) teach the highest-earning skill in design today. 3–5 hours each, projects, quizzes, verified certificates.",
+    "Method is the online design school of art director Mohamed Tarek. The software courses — Photoshop, Illustrator, After Effects, Premiere Pro — are completely free, start to finish. The premium AI production tracks (AI photoshoots and AI video) teach the highest-earning skill in design today. 3–5 hours each, real projects, quizzes and reviewed final projects.",
   url: "https://mohamed-sr-designer.github.io/atelier-lms",
 
   // Instructor
@@ -40,5 +40,5 @@ export const payments = {
     { id: "valu", label: "valU", enabled: false },
   ],
   waEnrollMsg:
-    "Hi Mohamed — I completed payment for my Atelier enrollment. Screenshot attached. Order:",
+    "Hi Mohamed — I completed payment for my Method enrollment. Screenshot attached. Order:",
 };

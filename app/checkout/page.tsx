@@ -5,7 +5,7 @@ import CheckoutView from "@/components/lms/CheckoutView";
 
 export const metadata: Metadata = {
   title: "Checkout",
-  description: "Complete your Atelier enrollment.",
+  description: "Complete your Method enrollment.",
   alternates: { canonical: "/checkout/" },
   robots: { index: false },
 };

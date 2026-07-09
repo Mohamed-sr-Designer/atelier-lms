@@ -2,7 +2,12 @@
 
 import Link from "next/link";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useMotionTemplate,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Media } from "@/components/ui/Media";
@@ -13,6 +18,7 @@ import Counter from "@/components/lms/Counter";
 import PathRail from "@/components/lms/PathRail";
 import FaqList from "@/components/lms/FaqList";
 import GlyphPlate from "@/components/lms/GlyphPlate";
+import FeaturedCourse from "@/components/lms/FeaturedCourse";
 import { useLang } from "@/lib/i18n";
 import { withBase } from "@/lib/base";
 import {
@@ -29,7 +35,7 @@ import {
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-// Rotated sticker chip — the Gen-Z tape/badge language.
+// Rotated sticker chip — the tape/badge language, tuned down to premium.
 function Sticker({
   children,
   tone = "mint",
@@ -60,6 +66,16 @@ function Sticker({
   );
 }
 
+// Portfolio pieces produced with the exact workflows the courses teach.
+const gallery = [
+  { src: "/work/axia/hero.webp", alt: "AXIA campaign key visual — AI photoshoot pipeline" },
+  { src: "/work/fresh-valley/hero.webp", alt: "Fresh Valley identity — Illustrator construction" },
+  { src: "/work/auto/hero.webp", alt: "Automotive key visual — Photoshop compositing" },
+  { src: "/work/ihs/hero.webp", alt: "IHS hospitality campaign — retouch and grade" },
+  { src: "/work/axia/insta-2.webp", alt: "AXIA social set — AI generation finished in Photoshop" },
+  { src: "/work/fresh-valley/marks.webp", alt: "Fresh Valley marks — vector systems" },
+];
+
 export default function HomeView() {
   const { t, lang } = useLang();
   const heroRef = useRef<HTMLDivElement>(null);
@@ -67,10 +83,17 @@ export default function HomeView() {
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const headY = useTransform(scrollYProgress, [0, 1], ["0%", "60%"]);
+  // cinematic depth: the photo drifts and swells, the copy sinks and dissolves
+  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "16%"]);
+  const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
+  const headY = useTransform(scrollYProgress, [0, 1], ["0%", "55%"]);
+  const copyOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const copyBlur = useTransform(scrollYProgress, [0, 0.7], [0, 8]);
+  const copyFilter = useMotionTemplate`blur(${copyBlur}px)`;
 
   const freePs = getCourse("adobe-photoshop")!;
+  const featured = getCourse("ai-photoshoot")!;
+  const gridCourses = courses.filter((c) => c.slug !== featured.slug);
   const freeCourses = courses.filter((c) => c.price === 0);
   const aiCourses = courses.filter((c) => c.price > 0);
 
@@ -86,17 +109,17 @@ export default function HomeView() {
 
   return (
     <>
-      {/* ================================================= HERO — the banner */}
+      {/* ================================================= HERO — cinematic */}
       <section
         ref={heroRef}
         className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden"
       >
-        {/* the landscape portrait — full bleed, parallax */}
+        {/* the landscape portrait — parallax + slow swell */}
         <motion.div
-          style={{ y: imgY }}
+          style={{ y: imgY, scale: imgScale }}
           initial={{ scale: 1.15 }}
           animate={{ scale: 1 }}
-          transition={{ duration: 1.6, ease }}
+          transition={{ duration: 1.8, ease }}
           className="absolute inset-0"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -106,8 +129,10 @@ export default function HomeView() {
             className="h-full w-full object-cover object-[center_30%]"
           />
         </motion.div>
-        {/* treatments */}
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/25 to-ink-900/40" />
+
+        {/* cinematic treatments: grade, vignette, grain, ember, light sweep */}
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/25 to-ink-900/45" />
+        <div aria-hidden className="vignette absolute inset-0" />
         <div aria-hidden className="absolute inset-0 bg-noise opacity-[0.08]" />
         <div
           aria-hidden
@@ -116,6 +141,13 @@ export default function HomeView() {
             background:
               "radial-gradient(70% 50% at 50% 115%, rgb(var(--mint) / 0.22) 0%, transparent 65%)",
           }}
+        />
+        <motion.div
+          aria-hidden
+          initial={{ x: "-160%" }}
+          animate={{ x: "360%" }}
+          transition={{ duration: 9, ease: "easeInOut", repeat: Infinity, repeatDelay: 3 }}
+          className="pointer-events-none absolute inset-y-0 w-1/3 rotate-12 bg-gradient-to-r from-transparent via-bone-50/[0.07] to-transparent mix-blend-screen"
         />
 
         {/* floating stickers */}
@@ -135,8 +167,11 @@ export default function HomeView() {
           </Sticker>
         </div>
 
-        {/* copy over the image */}
-        <div className="container-edge relative z-10 mx-auto w-full max-w-edge pb-10 pt-36">
+        {/* copy over the image — dissolves as you scroll past */}
+        <motion.div
+          style={{ opacity: copyOpacity, filter: copyFilter }}
+          className="container-edge relative z-10 mx-auto w-full max-w-edge pb-10 pt-36"
+        >
           <motion.p
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
@@ -165,7 +200,7 @@ export default function HomeView() {
                 transition={{ duration: 1, ease, delay: 0.58 }}
                 className="block font-display text-[clamp(2.6rem,8.5vw,7.5rem)] font-semibold leading-[0.95] tracking-tightest"
               >
-                <span className="font-serif font-normal italic tracking-normal text-mint glow-mint">
+                <span className="glow-mint font-serif font-normal italic tracking-normal text-mint">
                   {t.home.heroI}
                 </span>{" "}
                 <span className="text-outline">{t.home.heroB}</span>
@@ -192,7 +227,7 @@ export default function HomeView() {
                 <Magnetic>
                   <Link
                     href="/courses/"
-                    className="inline-block rounded-full bg-mint px-8 py-4 text-sm font-semibold text-ink-900 transition-transform duration-300 hover:scale-[1.04]"
+                    className="inline-block rounded-full bg-mint px-8 py-4 text-sm font-semibold text-ink-900 transition-transform duration-300 hover:scale-[1.04] active:scale-95"
                   >
                     {t.home.ctaPrimary}
                   </Link>
@@ -200,7 +235,7 @@ export default function HomeView() {
                 <Magnetic>
                   <Link
                     href="/bundle/"
-                    className="inline-block rounded-full border border-line/30 bg-ink-900/40 px-8 py-4 text-sm text-bone-50 backdrop-blur transition-colors duration-300 hover:border-mint/60 hover:text-mint"
+                    className="inline-block rounded-full border border-line/30 bg-ink-900/40 px-8 py-4 text-sm text-bone-50 backdrop-blur transition-colors duration-300 hover:border-mint/60 hover:text-mint active:scale-95"
                   >
                     {t.home.bundleLabel} →
                   </Link>
@@ -269,11 +304,11 @@ export default function HomeView() {
               ))}
             </div>
           </motion.div>
-        </div>
+        </motion.div>
       </section>
 
       {/* ============================================= TICKER TAPE ============ */}
-      <section aria-hidden className="relative -mx-4 overflow-hidden py-10">
+      <section aria-hidden className="relative -mx-4 overflow-hidden py-12">
         <div className="rotate-[-1.5deg] bg-mint py-3 shadow-[0_0_60px_rgb(var(--mint)/0.35)]">
           <div className="flex w-max animate-marquee items-center gap-6" style={{ animationDuration: "26s" }}>
             {[...t.home.marquee, ...t.home.marquee].map((w, i) => (
@@ -300,8 +335,8 @@ export default function HomeView() {
         </div>
       </section>
 
-      {/* ============================================= THE DEAL (manifesto) === */}
-      <section className="container-edge mx-auto max-w-edge py-20 md:py-28">
+      {/* ============================================= THE DEAL + ECONOMICS === */}
+      <section className="container-edge mx-auto max-w-edge py-24 md:py-36">
         <Reveal>
           <SectionLabel index="01">{t.home.manLabel}</SectionLabel>
         </Reveal>
@@ -333,7 +368,7 @@ export default function HomeView() {
                     <Link
                       key={c.slug}
                       href={`/courses/${c.slug}/`}
-                      className="rounded-full border border-ink-900/20 px-4 py-2 text-xs font-medium transition-colors hover:bg-ink-900 hover:text-bone-50"
+                      className="rounded-full border border-ink-900/20 px-4 py-2 text-xs font-medium transition-all duration-300 hover:-translate-y-0.5 hover:bg-ink-900 hover:text-bone-50"
                     >
                       <span className="me-1.5 font-serif italic">{c.glyph}</span>
                       {c.short[lang]}
@@ -375,7 +410,7 @@ export default function HomeView() {
                   <Link
                     key={c.slug}
                     href={`/courses/${c.slug}/`}
-                    className="group flex items-center justify-between gap-4 rounded-xl border border-line/15 bg-ink-900/60 px-5 py-4 transition-colors hover:border-mint/50"
+                    className="group flex items-center justify-between gap-4 rounded-xl border border-line/15 bg-ink-900/60 px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-mint/50"
                   >
                     <span className="flex items-center gap-3 text-sm font-medium text-bone-50">
                       <span className="font-serif text-lg italic text-mint">{c.glyph}</span>
@@ -403,151 +438,296 @@ export default function HomeView() {
             </motion.div>
           </Reveal>
         </div>
+
+        {/* the economics — value told as a story, not a pricing card */}
+        <div className="mt-24 md:mt-32">
+          <Reveal>
+            <SectionLabel index="02">{t.home.econLabel}</SectionLabel>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.0] tracking-tightest text-bone-50 md:text-6xl">
+              {t.home.econTitleA}{" "}
+              <span className="glow-mint font-serif font-normal italic tracking-normal text-mint">
+                {t.home.econTitleI}
+              </span>
+              {t.home.econTitleB}
+            </h2>
+          </Reveal>
+          <div className="relative mt-14 grid gap-10 md:grid-cols-3 md:gap-6">
+            {/* connecting thread */}
+            <div
+              aria-hidden
+              className="absolute left-0 right-0 top-10 hidden h-px bg-gradient-to-r from-line/10 via-mint/50 to-mint md:block"
+            />
+            {t.home.econ.map((e, i) => (
+              <Reveal key={e.l} delay={i * 0.12}>
+                <div className="relative">
+                  <span
+                    aria-hidden
+                    className={`absolute -top-1 hidden h-2.5 w-2.5 rounded-full md:block ltr:left-0 rtl:right-0 ${
+                      i === 2 ? "bg-mint shadow-[0_0_16px_rgb(var(--mint)/0.8)]" : "bg-bone-500/40"
+                    }`}
+                  />
+                  <p
+                    className={`pt-6 font-display text-5xl font-bold tracking-tightest md:text-6xl ${
+                      i === 2 ? "glow-mint text-mint" : i === 1 ? "text-bone-50" : "text-outline"
+                    }`}
+                    dir="ltr"
+                  >
+                    {e.n}
+                    {e.u && (
+                      <span className="ms-2 text-lg font-semibold text-bone-500">{e.u}</span>
+                    )}
+                  </p>
+                  <p className="mt-3 max-w-xs text-sm leading-relaxed text-bone-400">
+                    {e.l}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </section>
 
+      {/* ============================================= FEATURED COURSE ======== */}
+      <div className="border-y border-line/10 bg-ink-800/40">
+        <FeaturedCourse course={featured} />
+      </div>
+
       {/* ============================================= THE DROPS ============== */}
-      <section className="border-y border-line/10 bg-ink-800/40" id="courses">
-        <div className="container-edge mx-auto max-w-edge py-20 md:py-28">
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <div>
-              <Reveal>
-                <SectionLabel index="02">{t.home.coursesLabel}</SectionLabel>
-              </Reveal>
-              <Reveal delay={0.05}>
-                <h2 className="mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.0] tracking-tightest text-bone-50 md:text-6xl">
-                  {t.home.coursesTitleA}{" "}
-                  <span className="font-serif font-normal italic tracking-normal text-mint glow-mint">
-                    {t.home.coursesTitleI}
-                  </span>
-                  {t.home.coursesTitleB}
-                </h2>
-              </Reveal>
-            </div>
-            <Reveal delay={0.1}>
-              <p className="max-w-xs text-sm leading-relaxed text-bone-400">
-                {t.home.coursesNote}
-              </p>
+      <section className="container-edge mx-auto max-w-edge py-24 md:py-36" id="courses">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <Reveal>
+              <SectionLabel index="03">{t.home.coursesLabel}</SectionLabel>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.0] tracking-tightest text-bone-50 md:text-6xl">
+                {t.home.coursesTitleA}{" "}
+                <span className="glow-mint font-serif font-normal italic tracking-normal text-mint">
+                  {t.home.coursesTitleI}
+                </span>
+                {t.home.coursesTitleB}
+              </h2>
             </Reveal>
           </div>
+          <Reveal delay={0.1}>
+            <p className="max-w-xs text-sm leading-relaxed text-bone-400">
+              {t.home.coursesNote}
+            </p>
+          </Reveal>
+        </div>
 
-          <Stagger className="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-            {courses.map((c, i) => (
-              <StaggerItem key={c.slug}>
-                <motion.div
-                  whileHover={{ rotate: i % 2 === 0 ? -0.8 : 0.8, y: -4 }}
-                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                  className={`relative h-full rounded-2xl ${
-                    c.price > 0
-                      ? "p-1 ring-1 ring-mint/40 [background:radial-gradient(120%_100%_at_90%_110%,rgb(var(--mint)/0.14),transparent_65%)]"
-                      : ""
-                  }`}
-                >
-                  {c.price > 0 && (
-                    <span className="absolute -top-3 z-10 rotate-[-4deg] rounded-full bg-mint px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-ink-900 ltr:left-4 rtl:right-4">
-                      ✦ {t.common.premium}
+        <Stagger className="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+          {gridCourses.map((c, i) => (
+            <StaggerItem key={c.slug}>
+              <motion.div
+                whileHover={{ rotate: i % 2 === 0 ? -0.8 : 0.8, y: -4 }}
+                transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                className={`relative h-full rounded-2xl ${
+                  c.price > 0
+                    ? "p-1 ring-1 ring-mint/40 [background:radial-gradient(120%_100%_at_90%_110%,rgb(var(--mint)/0.14),transparent_65%)]"
+                    : ""
+                }`}
+              >
+                {c.price > 0 && (
+                  <span className="absolute -top-3 z-10 rotate-[-4deg] rounded-full bg-mint px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-ink-900 ltr:left-4 rtl:right-4">
+                    ✦ {t.common.premium}
+                  </span>
+                )}
+                {c.price === 0 && (
+                  <span className="absolute -top-3 z-10 rotate-[3deg] rounded-full border border-line/30 bg-ink-900 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-bone-50 ltr:right-4 rtl:left-4">
+                    {t.common.free} ✦
+                  </span>
+                )}
+                <CourseCard course={c} eager={i < 3} />
+              </motion.div>
+            </StaggerItem>
+          ))}
+          {/* bundle teaser card fills the sixth slot */}
+          <StaggerItem>
+            <Link href="/bundle/" className="group block h-full">
+              <article className="relative flex h-full min-h-[19rem] flex-col justify-between overflow-hidden rounded-2xl border border-mint/30 bg-ink-800 p-7 transition-transform duration-300 group-hover:-translate-y-1">
+                <div
+                  aria-hidden
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "radial-gradient(120% 90% at 85% 110%, rgb(var(--mint) / 0.3) 0%, transparent 65%)",
+                  }}
+                />
+                <div className="relative">
+                  <p className="text-xs uppercase tracking-ultra text-mint">
+                    {t.home.bundleLabel}
+                  </p>
+                  <h3 className="mt-3 text-2xl font-semibold tracking-tight text-bone-50 md:text-3xl">
+                    {t.catalog.bundleCard}
+                  </h3>
+                  <p className="mt-2 text-sm text-bone-400">{t.catalog.bundleCardSub}</p>
+                </div>
+                <div className="relative flex items-end justify-between">
+                  <div className="flex gap-2 font-serif text-3xl italic text-bone-50">
+                    {bundleCourses.map((c) => (
+                      <span key={c.slug} className="opacity-80">
+                        {c.glyph}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-end" dir="ltr">
+                    <span className="block text-sm text-bone-500 line-through">
+                      {fmtPrice(bundle.compareAt, lang)}
                     </span>
-                  )}
-                  {c.price === 0 && (
-                    <span className="absolute -top-3 z-10 rotate-[3deg] rounded-full border border-line/30 bg-ink-900 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-bone-50 ltr:right-4 rtl:left-4">
-                      {t.common.free} ✦
+                    <span className="block font-display text-2xl font-semibold text-mint">
+                      {fmtPrice(bundle.price, lang)}
                     </span>
-                  )}
-                  <CourseCard course={c} eager={i < 3} />
-                </motion.div>
+                  </p>
+                </div>
+              </article>
+            </Link>
+          </StaggerItem>
+        </Stagger>
+      </section>
+
+      {/* ============================================= PROOF / OUTCOMES ======= */}
+      <section className="border-y border-line/10 bg-ink-800/40">
+        <div className="container-edge mx-auto max-w-edge py-24 md:py-36">
+          <Reveal>
+            <SectionLabel index="04">{t.home.outcomesLabel}</SectionLabel>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.0] tracking-tightest text-bone-50 md:text-6xl">
+              {t.home.outcomesTitleA}{" "}
+              <span className="glow-mint font-serif font-normal italic tracking-normal text-mint">
+                {t.home.outcomesTitleI}
+              </span>
+              {t.home.outcomesTitleB}
+            </h2>
+          </Reveal>
+
+          <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+            {t.home.outcomes.map((x, i) => (
+              <Reveal key={x.l} delay={i * 0.06}>
+                <div className="group border-t-2 border-line/15 pt-5 transition-colors duration-500 hover:border-mint">
+                  <p className="text-outline group-hover:glow-mint font-display text-6xl font-bold tracking-tightest transition-all duration-500 md:text-7xl">
+                    <Counter value={x.n} suffix={x.s} />
+                  </p>
+                  <p className="mt-3 text-[11px] uppercase tracking-ultra text-bone-400">
+                    {x.l}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* trust + community strip */}
+          <Reveal delay={0.1}>
+            <div className="mt-14 flex flex-col items-start justify-between gap-6 rounded-2xl border border-line/10 bg-ink-900/60 p-7 md:flex-row md:items-center">
+              <p className="max-w-md text-sm leading-relaxed text-bone-300">
+                {t.home.communityNote}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {t.home.trustChips.map((c) => (
+                  <span
+                    key={c}
+                    className="rounded-full border border-line/20 px-4 py-2 text-xs text-bone-200 transition-colors hover:border-mint/50 hover:text-mint"
+                  >
+                    ✦ {c}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* portfolio gallery — made with the Method */}
+        <div className="overflow-hidden pb-20">
+          <p className="mb-6 text-center text-xs uppercase tracking-ultra text-bone-500">
+            {t.home.galleryLabel}
+          </p>
+          <div className="flex w-max animate-marquee items-stretch gap-5" style={{ animationDuration: "70s" }} dir="ltr">
+            {[...gallery, ...gallery].map((g, i) => (
+              <div
+                key={`${g.src}-${i}`}
+                className="group relative h-56 w-72 shrink-0 overflow-hidden rounded-xl border border-line/10 md:h-64 md:w-96"
+              >
+                <Media
+                  src={g.src}
+                  alt={g.alt}
+                  fill
+                  sizes="384px"
+                  className="object-cover saturate-[0.55] transition-all duration-700 ease-cinema group-hover:scale-105 group-hover:saturate-100"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================= METHOD (journey) ======= */}
+      <section className="container-edge mx-auto max-w-edge py-24 md:py-36">
+        <div className="text-center">
+          <Reveal>
+            <div className="flex justify-center">
+              <SectionLabel index="05">{t.home.pathLabel}</SectionLabel>
+            </div>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mx-auto mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
+              {t.home.pathTitleA}{" "}
+              <span className="glow-mint font-serif font-normal italic tracking-normal text-mint">
+                {t.home.pathTitleI}
+              </span>
+              {t.home.pathTitleB}
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-bone-400">
+              {t.home.pathNote}
+            </p>
+          </Reveal>
+        </div>
+        <PathRail />
+      </section>
+
+      {/* ============================================= WHY ==================== */}
+      <section className="border-y border-line/10 bg-ink-800/40">
+        <div className="container-edge mx-auto max-w-edge py-24 md:py-36">
+          <Reveal>
+            <SectionLabel index="06">{t.home.whyLabel}</SectionLabel>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className="mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
+              {t.home.whyTitleA}{" "}
+              <span className="font-serif font-normal italic tracking-normal text-mint">
+                {t.home.whyTitleI}
+              </span>
+              {t.home.whyTitleB}
+            </h2>
+          </Reveal>
+          <Stagger className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line/10 bg-line/10 sm:grid-cols-2">
+            {t.home.why.map((w, i) => (
+              <StaggerItem
+                key={w.t}
+                className="group bg-ink-900 p-8 transition-colors duration-500 hover:bg-ink-800 md:p-10"
+              >
+                <p className="text-outline-mint font-display text-4xl font-bold md:text-5xl">
+                  {String(i + 1).padStart(2, "0")}
+                </p>
+                <h3 className="mt-4 text-xl font-semibold tracking-tight text-bone-50 md:text-2xl">
+                  {w.t}
+                </h3>
+                <p className="mt-3 text-pretty text-sm leading-relaxed text-bone-400">
+                  {w.d}
+                </p>
               </StaggerItem>
             ))}
           </Stagger>
         </div>
       </section>
 
-      {/* ============================================= BIG NUMBERS ============ */}
-      <section className="container-edge mx-auto max-w-edge py-20 md:py-24">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            { n: stats.graduates, s: "+", l: t.home.stats.graduates },
-            { n: stats.academies, s: "", l: t.home.stats.academies },
-            { n: stats.totalHours, s: "h", l: t.home.stats.hours },
-            { n: stats.totalLessons, s: "", l: t.home.stats.lessons },
-          ].map((x, i) => (
-            <Reveal key={x.l} delay={i * 0.06}>
-              <div className="group border-t-2 border-line/15 pt-5 transition-colors duration-500 hover:border-mint">
-                <p className="text-outline font-display text-6xl font-bold tracking-tightest transition-all duration-500 group-hover:glow-mint md:text-7xl">
-                  <Counter value={x.n} suffix={x.s} />
-                </p>
-                <p className="mt-3 text-[11px] uppercase tracking-ultra text-bone-400">
-                  {x.l}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ============================================= METHOD ================= */}
-      <section className="border-y border-line/10 bg-ink-800/40">
-        <div className="container-edge mx-auto max-w-edge py-24 md:py-32">
-          <div className="text-center">
-            <Reveal>
-              <div className="flex justify-center">
-                <SectionLabel index="03">{t.home.pathLabel}</SectionLabel>
-              </div>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <h2 className="mx-auto mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
-                {t.home.pathTitleA}{" "}
-                <span className="font-serif font-normal italic tracking-normal text-mint glow-mint">
-                  {t.home.pathTitleI}
-                </span>
-                {t.home.pathTitleB}
-              </h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-bone-400">
-                {t.home.pathNote}
-              </p>
-            </Reveal>
-          </div>
-          <PathRail />
-        </div>
-      </section>
-
-      {/* ============================================= WHY ==================== */}
-      <section className="container-edge mx-auto max-w-edge py-24 md:py-32">
-        <Reveal>
-          <SectionLabel index="04">{t.home.whyLabel}</SectionLabel>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <h2 className="mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
-            {t.home.whyTitleA}{" "}
-            <span className="font-serif font-normal italic tracking-normal text-mint">
-              {t.home.whyTitleI}
-            </span>
-            {t.home.whyTitleB}
-          </h2>
-        </Reveal>
-        <Stagger className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line/10 bg-line/10 sm:grid-cols-2">
-          {t.home.why.map((w, i) => (
-            <StaggerItem
-              key={w.t}
-              className="group bg-ink-900 p-8 transition-colors duration-500 hover:bg-ink-800 md:p-10"
-            >
-              <p className="text-outline-mint font-display text-4xl font-bold md:text-5xl">
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <h3 className="mt-4 text-xl font-semibold tracking-tight text-bone-50 md:text-2xl">
-                {w.t}
-              </h3>
-              <p className="mt-3 text-pretty text-sm leading-relaxed text-bone-400">
-                {w.d}
-              </p>
-            </StaggerItem>
-          ))}
-        </Stagger>
-      </section>
-
       {/* ============================================= INSTRUCTOR ============= */}
-      <section className="border-y border-line/10 bg-ink-800/40">
-        <div className="container-edge mx-auto grid max-w-edge items-center gap-12 py-24 md:py-32 lg:grid-cols-12">
+      <section className="container-edge mx-auto max-w-edge py-24 md:py-36">
+        <div className="grid items-center gap-12 lg:grid-cols-12">
           <div className="relative lg:col-span-5">
             <Reveal>
               <motion.div
@@ -562,20 +742,36 @@ export default function HomeView() {
                 />
               </motion.div>
             </Reveal>
-            <div className="absolute -top-4 ltr:-right-3 rtl:-left-3">
-              <Sticker tone="electric" rotate={5}>
-                {t.home.instructorLabel}
-              </Sticker>
-            </div>
+            {/* floating live-work thumbnails — credibility by design */}
+            <Reveal delay={0.15}>
+              <motion.div
+                whileHover={{ rotate: 0, scale: 1.04 }}
+                className="absolute -bottom-8 w-36 rotate-[-5deg] overflow-hidden rounded-lg border border-line/20 shadow-2xl shadow-black/50 md:w-44 ltr:-left-4 rtl:-right-4"
+              >
+                <div className="aspect-[4/5]">
+                  <Media src="/work/axia/hero.webp" alt="AXIA campaign — shipped client work" fill sizes="176px" className="object-cover" />
+                </div>
+              </motion.div>
+            </Reveal>
+            <Reveal delay={0.22}>
+              <motion.div
+                whileHover={{ rotate: 0, scale: 1.04 }}
+                className="absolute -top-8 w-32 rotate-[6deg] overflow-hidden rounded-lg border border-line/20 shadow-2xl shadow-black/50 md:w-40 ltr:-right-3 rtl:-left-3"
+              >
+                <div className="aspect-[4/5]">
+                  <Media src="/work/auto/hero.webp" alt="Automotive key visual — shipped client work" fill sizes="160px" className="object-cover" />
+                </div>
+              </motion.div>
+            </Reveal>
           </div>
           <div className="lg:col-span-7">
             <Reveal>
-              <SectionLabel index="05">{t.home.instructorLabel}</SectionLabel>
+              <SectionLabel index="07">{t.home.instructorLabel}</SectionLabel>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-6 text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
                 {t.home.instructorTitleA}{" "}
-                <span className="font-serif font-normal italic tracking-normal text-mint glow-mint">
+                <span className="glow-mint font-serif font-normal italic tracking-normal text-mint">
                   {t.home.instructorTitleI}
                 </span>
                 {t.home.instructorTitleB}
@@ -586,12 +782,27 @@ export default function HomeView() {
                 {t.home.instructorBio}
               </p>
             </Reveal>
-            <Reveal delay={0.15}>
+            <Reveal delay={0.14}>
+              <p className="mt-8 text-[11px] uppercase tracking-ultra text-bone-500">
+                {t.home.instructorChipsLabel}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {t.home.instructorChips.map((c) => (
+                  <span
+                    key={c}
+                    className="rounded-full border border-line/15 px-4 py-2 text-xs text-bone-300 transition-colors duration-300 hover:border-electric/50 hover:text-electric"
+                  >
+                    {c}
+                  </span>
+                ))}
+              </div>
+            </Reveal>
+            <Reveal delay={0.18}>
               <div className="mt-8">
                 <Magnetic>
                   <Link
                     href="/instructor/"
-                    className="inline-block rounded-full border border-line/25 px-7 py-3.5 text-sm text-bone-50 transition-colors duration-300 hover:border-mint/60 hover:text-mint"
+                    className="inline-block rounded-full border border-line/25 px-7 py-3.5 text-sm text-bone-50 transition-colors duration-300 hover:border-mint/60 hover:text-mint active:scale-95"
                   >
                     {t.home.instructorCta} →
                   </Link>
@@ -600,7 +811,7 @@ export default function HomeView() {
             </Reveal>
           </div>
         </div>
-        <div className="pb-16">
+        <div className="mt-20">
           <p className="mb-6 text-center text-xs uppercase tracking-ultra text-bone-500">
             {t.home.brandsNote}
           </p>
@@ -608,22 +819,84 @@ export default function HomeView() {
         </div>
       </section>
 
-      {/* ============================================= TESTIMONIALS =========== */}
-      <section className="overflow-hidden py-24 md:py-32">
+      {/* ============================================= STORIES ================ */}
+      <section className="overflow-hidden border-t border-line/10 py-24 md:py-36">
         <div className="container-edge mx-auto max-w-edge">
           <Reveal>
-            <SectionLabel index="06">{t.home.testimonialsLabel}</SectionLabel>
+            <SectionLabel index="08">{t.home.testimonialsLabel}</SectionLabel>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
               {t.home.testimonialsTitleA}{" "}
-              <span className="font-serif font-normal italic tracking-normal text-mint glow-mint">
+              <span className="glow-mint font-serif font-normal italic tracking-normal text-mint">
                 {t.home.testimonialsTitleI}
               </span>
               {t.home.testimonialsTitleB}
             </h2>
           </Reveal>
+
+          {/* featured success story with before/after portfolio preview */}
+          <Reveal delay={0.1}>
+            <div className="relative mt-14 overflow-hidden rounded-3xl border border-line/15 bg-ink-800/60">
+              <div
+                aria-hidden
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "radial-gradient(90% 100% at 5% 115%, rgb(var(--mint) / 0.16) 0%, transparent 60%)",
+                }}
+              />
+              <div className="relative grid gap-10 p-8 md:p-12 lg:grid-cols-12">
+                <div className="lg:col-span-7">
+                  <p className="text-xs uppercase tracking-ultra text-mint">
+                    {t.home.storyLabel}
+                  </p>
+                  <blockquote className="mt-5 text-balance font-serif text-2xl italic leading-snug text-bone-50 md:text-3xl">
+                    “{t.home.storyQuote}”
+                  </blockquote>
+                  <div className="mt-7 flex items-center gap-4">
+                    <span className="grid h-12 w-12 place-items-center rounded-full bg-mint/15 font-serif text-lg italic text-mint">
+                      {t.home.storyName.charAt(0)}
+                    </span>
+                    <div>
+                      <p className="text-bone-50">{t.home.storyName}</p>
+                      <p className="text-sm text-bone-500">{t.home.storyRole}</p>
+                    </div>
+                  </div>
+                  <div className="mt-7 flex flex-wrap gap-2">
+                    {t.home.storyChips.map((c) => (
+                      <span
+                        key={c}
+                        className="rounded-full border border-electric/30 bg-electric/5 px-4 py-2 text-xs text-electric"
+                      >
+                        ✦ {c}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                {/* before/after portfolio preview */}
+                <div className="lg:col-span-5">
+                  <div className="group relative overflow-hidden rounded-2xl border border-line/15">
+                    <div className="aspect-[4/3]">
+                      <Media
+                        src="/work/axia/insta-2.webp"
+                        alt="Student final project — AI campaign frame, before and after finishing"
+                        fill
+                        sizes="(min-width: 1024px) 40vw, 100vw"
+                        className="object-cover brightness-[0.6] saturate-0 transition-all duration-1000 ease-cinema group-hover:scale-[1.03] group-hover:brightness-100 group-hover:saturate-100"
+                      />
+                    </div>
+                    <span className="absolute bottom-4 left-4 rounded-full bg-ink-900/80 px-3.5 py-1.5 text-[11px] text-bone-200 backdrop-blur transition-colors duration-500 group-hover:bg-mint group-hover:text-ink-900 rtl:left-auto rtl:right-4">
+                      ✦ {t.home.beforeAfter}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
+
+        {/* marquee rows */}
         <div className="mt-14 grid gap-6" dir="ltr">
           {[
             { rows: rowA, anim: "animate-marquee", dur: "95s", rot: "rotate-[-1deg]" },
@@ -667,7 +940,7 @@ export default function HomeView() {
       </section>
 
       {/* ============================================= THE AI STACK =========== */}
-      <section className="container-edge mx-auto max-w-edge pb-24 md:pb-32">
+      <section className="container-edge mx-auto max-w-edge pb-24 md:pb-36">
         <Reveal>
           <div className="relative overflow-hidden rounded-3xl border border-mint/25 bg-ink-800">
             <span
@@ -703,13 +976,13 @@ export default function HomeView() {
                   <span>
                     {bundleLessons} {t.bundle.totalLessons}
                   </span>
-                  <span>{t.bundle.certNote}</span>
+                  <span>{t.bundle.projectsNote}</span>
                 </div>
                 <div className="mt-8 flex flex-wrap items-center gap-5">
                   <Magnetic>
                     <Link
                       href="/bundle/"
-                      className="inline-block rounded-full bg-mint px-8 py-4 text-sm font-semibold text-ink-900 transition-transform duration-300 hover:scale-[1.04]"
+                      className="inline-block rounded-full bg-mint px-8 py-4 text-sm font-semibold text-ink-900 transition-transform duration-300 hover:scale-[1.04] active:scale-95"
                     >
                       {t.home.bundleCta}
                     </Link>
@@ -743,11 +1016,11 @@ export default function HomeView() {
 
       {/* ============================================= FAQ TEASER ============= */}
       <section className="border-t border-line/10">
-        <div className="container-edge mx-auto max-w-edge py-24 md:py-32">
+        <div className="container-edge mx-auto max-w-edge py-24 md:py-36">
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <Reveal>
-                <SectionLabel index="07">{t.home.faqLabel}</SectionLabel>
+                <SectionLabel index="09">{t.home.faqLabel}</SectionLabel>
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="mt-6 text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tightest text-bone-50 md:text-5xl">
@@ -783,7 +1056,7 @@ export default function HomeView() {
           }}
         />
         <div aria-hidden className="absolute inset-0 bg-noise opacity-[0.05]" />
-        <div className="container-edge relative mx-auto max-w-edge py-28 text-center md:py-40">
+        <div className="container-edge relative mx-auto max-w-edge py-28 text-center md:py-44">
           <Reveal>
             <div className="flex justify-center">
               <SectionLabel index="✦">{t.home.finalLabel}</SectionLabel>
@@ -792,7 +1065,7 @@ export default function HomeView() {
           <Reveal delay={0.05}>
             <h2 className="mx-auto mt-8 max-w-4xl text-balance font-display text-4xl font-semibold leading-[1.0] tracking-tightest md:text-7xl">
               <span className="text-bone-50">{t.home.finalTitleA}</span>{" "}
-              <span className="font-serif font-normal italic tracking-normal text-mint glow-mint">
+              <span className="glow-mint font-serif font-normal italic tracking-normal text-mint">
                 {t.home.finalTitleI}
               </span>
               <span className="text-outline">{t.home.finalTitleB}</span>
@@ -808,7 +1081,7 @@ export default function HomeView() {
               <Magnetic strength={0.5}>
                 <Link
                   href={`/courses/${freePs.slug}/`}
-                  className="inline-block rounded-full bg-mint px-10 py-5 text-base font-semibold text-ink-900 shadow-[0_0_60px_rgb(var(--mint)/0.35)] transition-transform duration-300 hover:scale-[1.05]"
+                  className="inline-block rounded-full bg-mint px-10 py-5 text-base font-semibold text-ink-900 shadow-[0_0_60px_rgb(var(--mint)/0.35)] transition-transform duration-300 hover:scale-[1.05] active:scale-95"
                 >
                   {t.home.finalCta}
                 </Link>

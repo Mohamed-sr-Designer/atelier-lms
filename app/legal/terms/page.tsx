@@ -5,7 +5,7 @@ import LegalView from "@/components/lms/LegalView";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description:
-    "Atelier's terms of service: enrollment, lifetime access, acceptable use, certificates and refunds.",
+    "Method's terms of service: enrollment, lifetime access, acceptable use, completion and refunds.",
   alternates: { canonical: "/legal/terms/" },
 };
 

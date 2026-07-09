@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import QuizPanel from "@/components/lms/QuizPanel";
 import { useLang } from "@/lib/i18n";
@@ -10,7 +10,6 @@ import {
   useStore,
   toggleLesson,
   passQuiz,
-  issueCertificate,
   courseProgress,
   isEnrolled,
 } from "@/lib/store";
@@ -21,7 +20,6 @@ type Tab = "resources" | "final" | "quiz";
 
 export default function LearnView({ course }: { course: Course }) {
   const { t, lang } = useLang();
-  const router = useRouter();
   const params = useSearchParams();
   const store = useStore();
 
@@ -29,7 +27,6 @@ export default function LearnView({ course }: { course: Course }) {
   const done = store.completed[course.slug] || [];
   const progress = courseProgress(store, course.slug);
   const quizPassed = Boolean(store.quizPassed[course.slug]);
-  const hasCert = store.certificates.some((c) => c.slug === course.slug);
 
   const allLessons = useMemo(
     () => course.modules.flatMap((m) => m.lessons.map((l) => ({ ...l, mod: m }))),
@@ -63,11 +60,6 @@ export default function LearnView({ course }: { course: Course }) {
       m.lessons.some((l) => l.id === next.id)
     );
     if (mi !== -1) setOpenModule(mi);
-  };
-
-  const claimCert = () => {
-    const cert = issueCertificate(course.slug);
-    if (cert) router.push("/certificates/");
   };
 
   return (
@@ -213,29 +205,17 @@ export default function LearnView({ course }: { course: Course }) {
             </div>
           </div>
 
-          {/* certificate banner */}
-          {progress === 100 && quizPassed && !hasCert && (
+          {/* course completed banner */}
+          {progress === 100 && quizPassed && (
             <div className="mt-7 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-electric/40 bg-electric/5 p-6">
               <p className="font-serif text-lg italic text-bone-50">
-                {t.success.certTitle}
+                {t.learn.completedTitle}
               </p>
-              <button
-                type="button"
-                onClick={claimCert}
+              <Link
+                href="/courses/"
                 className="rounded-full bg-electric px-6 py-3 text-sm font-medium text-ink-900 transition-transform hover:scale-[1.03]"
               >
-                {t.dash.claimCert}
-              </button>
-            </div>
-          )}
-          {hasCert && (
-            <div className="mt-7 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-electric/30 bg-electric/5 p-6">
-              <p className="text-sm text-bone-200">
-                <span className="me-2 font-serif italic text-electric">A</span>
-                {t.success.certSub}
-              </p>
-              <Link href="/certificates/" className="link-underline text-sm text-electric">
-                {t.success.viewCert}
+                {t.dash.browseCta}
               </Link>
             </div>
           )}

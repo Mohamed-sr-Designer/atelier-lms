@@ -23,7 +23,7 @@ export function generateMetadata({
   if (!c) return {};
   const mins = totalMinutes(c);
   const title = `${c.title.en} | ${Math.round(mins / 60)}h Course`;
-  const description = `${c.tagline.en} ${lessonCount(c)} lessons · ${c.modules.length} modules · practical projects, quizzes, final project & verified certificate. Taught by art director Mohamed Tarek.`;
+  const description = `${c.tagline.en} ${lessonCount(c)} lessons · ${c.modules.length} modules · practical projects, quizzes & a reviewed final project. Taught by art director Mohamed Tarek.`;
   return {
     title,
     description,
@@ -65,7 +65,7 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
         timeRequired: `PT${Math.floor(mins / 60)}H${mins % 60}M`,
         numberOfLessons: lessonCount(c),
         coursePrerequisites: "None — starts from zero",
-        educationalCredentialAwarded: "Atelier Verified Certificate of Completion",
+        educationalCredentialAwarded: "Personally reviewed final portfolio project",
         hasCourseInstance: {
           "@type": "CourseInstance",
           courseMode: "online",

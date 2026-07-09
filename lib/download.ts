@@ -8,7 +8,7 @@ import type { Course, Resource } from "@/lib/courses";
 // without UI changes.
 export function downloadResource(course: Course, r: Resource) {
   const lines = [
-    "ATELIER — SCHOOL OF VISUAL DIRECTION",
+    "METHOD — SCHOOL OF VISUAL DIRECTION",
     "════════════════════════════════════",
     "",
     `Course:   ${course.title.en}`,
@@ -24,7 +24,7 @@ export function downloadResource(course: Course, r: Resource) {
     "",
     `Instructor: Mohamed Tarek`,
     `Support:    wa.me — see the contact page`,
-    `© ${new Date().getFullYear()} Atelier`,
+    `© ${new Date().getFullYear()} Method`,
   ].join("\n");
 
   const blob = new Blob([lines], { type: "text/plain;charset=utf-8" });

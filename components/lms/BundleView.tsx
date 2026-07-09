@@ -63,7 +63,7 @@ export default function BundleView() {
                 {[
                   { l: t.bundle.totalRuntime, v: fmtDuration(mins, lang) },
                   { l: t.bundle.totalLessons, v: String(lessons) },
-                  { l: t.certs.title, v: "×3" },
+                  { l: t.common.projects, v: "×6" },
                 ].map((m) => (
                   <div key={m.l}>
                     <dd className="font-display text-2xl font-semibold text-bone-50 md:text-3xl" dir="ltr">
@@ -98,7 +98,7 @@ export default function BundleView() {
             </Reveal>
             <Reveal delay={0.28}>
               <p className="mt-5 text-xs text-bone-500">
-                {t.bundle.certNote} · {t.course.guarantee}
+                {t.bundle.projectsNote} · {t.course.guarantee}
               </p>
             </Reveal>
           </div>

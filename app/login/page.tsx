@@ -5,7 +5,7 @@ import AuthView from "@/components/lms/AuthView";
 
 export const metadata: Metadata = {
   title: "Log in",
-  description: "Log in to Atelier — your courses, progress and certificates.",
+  description: "Log in to Method — your courses, progress and projects.",
   alternates: { canonical: "/login/" },
   robots: { index: false },
 };

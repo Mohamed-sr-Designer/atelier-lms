@@ -4,7 +4,7 @@ import ProfileView from "@/components/lms/ProfileView";
 
 export const metadata: Metadata = {
   title: "Student Profile",
-  description: "Manage your Atelier student profile.",
+  description: "Manage your Method student profile.",
   alternates: { canonical: "/profile/" },
   robots: { index: false },
 };

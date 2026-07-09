@@ -11,7 +11,6 @@ export default function Footer() {
 
   const platform = [
     { label: t.nav.dashboard, href: "/dashboard/" },
-    { label: t.certs.title, href: "/certificates/" },
     { label: t.downloads.title, href: "/downloads/" },
     { label: t.nav.blog, href: "/blog/" },
     { label: t.nav.faq, href: "/faq/" },
@@ -37,9 +36,9 @@ export default function Footer() {
           <div className="md:col-span-4">
             <div className="flex items-center gap-3">
               <span className="grid h-9 w-9 place-items-center rounded-full border border-line/20 font-serif text-base italic text-bone-200">
-                A
+                M
               </span>
-              <span className="text-bone-50">Atelier</span>
+              <span className="text-bone-50">Method</span>
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-bone-400">
               {t.footer.blurb}
@@ -157,7 +156,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col gap-4 border-t border-line/10 pt-6 text-sm text-bone-500 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} Atelier · {site.instructor}. {t.footer.rights}
+            © {year} Method · {site.instructor}. {t.footer.rights}
           </p>
           <a href="#top" className="link-underline text-bone-400">
             {t.footer.backTop}

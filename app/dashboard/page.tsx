@@ -4,7 +4,7 @@ import DashboardView from "@/components/lms/DashboardView";
 
 export const metadata: Metadata = {
   title: "My Learning — Student Dashboard",
-  description: "Your Atelier courses, progress and certificates.",
+  description: "Your Method courses, progress and projects.",
   alternates: { canonical: "/dashboard/" },
   robots: { index: false },
 };

@@ -80,6 +80,16 @@ h3.font-sans {
   color: rgb(var(--bg));
 }
 
+/* Premium, consistent keyboard focus — Linear/Arc style */
+:focus-visible {
+  outline: 2px solid rgb(var(--mint) / 0.9);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Lenis */
 html.lenis,
 html.lenis body {
@@ -177,6 +187,10 @@ html.modal-open .custom-cursor {
   }
   .glow-mint {
     text-shadow: 0 0 24px rgb(var(--mint) / 0.55), 0 0 80px rgb(var(--mint) / 0.25);
+  }
+  /* Cinematic vignette for full-bleed imagery */
+  .vignette {
+    box-shadow: inset 0 0 180px 60px rgb(0 0 0 / 0.55);
   }
   /* Grid-paper backdrop (reference-style), drawn from the theme line colour */
   .bg-grid {

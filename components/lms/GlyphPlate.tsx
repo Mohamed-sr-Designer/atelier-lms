@@ -45,7 +45,7 @@ export default function GlyphPlate({
         {course.index}
       </span>
       <span className="absolute right-6 top-5 font-serif text-sm italic text-mint/80">
-        Atelier
+        Method
       </span>
 
       {/* the glyph */}
