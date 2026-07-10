@@ -1,11 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLang } from "@/lib/i18n";
-import { login, useStore } from "@/lib/store";
+import { login, loginAs, useStore } from "@/lib/store";
 
 type Mode = "login" | "register";
+type Joining = "student" | "team";
 
 // Open from anywhere: openAuth("register"). The modal closes itself on
 // success — callers just re-render off the store.
@@ -15,9 +17,11 @@ export const openAuth = (mode: Mode = "login") => {
 
 export default function AuthModal() {
   const { t } = useLang();
+  const router = useRouter();
   const store = useStore();
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<Mode>("login");
+  const [joining, setJoining] = useState<Joining>("student");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -140,7 +144,61 @@ export default function AuthModal() {
                 {isRegister ? t.auth.registerSub : t.auth.loginSub}
               </p>
 
-              <form onSubmit={submit} className="mt-7">
+              {/* account type — the sitemap's "account type" step, one tap */}
+              {isRegister && (
+                <div className="mt-6">
+                  <span className="text-xs uppercase tracking-ultra text-bone-500">
+                    {t.auth.accountType}
+                  </span>
+                  <div className="mt-2 grid grid-cols-2 gap-2 rounded-xl border border-line/15 bg-ink-900/60 p-1.5">
+                    {(
+                      [
+                        { id: "student", label: t.auth.typeStudent },
+                        { id: "team", label: t.auth.typeTeam },
+                      ] as { id: Joining; label: string }[]
+                    ).map((o) => (
+                      <button
+                        key={o.id}
+                        type="button"
+                        onClick={() => setJoining(o.id)}
+                        className={`relative rounded-lg px-3 py-2.5 text-sm transition-colors duration-300 ${
+                          joining === o.id
+                            ? "text-white"
+                            : "text-bone-300 hover:text-bone-50"
+                        }`}
+                      >
+                        {joining === o.id && (
+                          <motion.span
+                            layoutId="auth-joining"
+                            className="absolute inset-0 rounded-lg [background:linear-gradient(120deg,rgb(var(--mint)),rgb(var(--electric)))]"
+                            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                          />
+                        )}
+                        <span className="relative">{o.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {isRegister && joining === "team" ? (
+                <div className="mt-6 rounded-2xl border border-electric/30 bg-electric/5 p-6 text-center">
+                  <p className="text-sm leading-relaxed text-bone-300">
+                    {t.auth.teamNote}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      close();
+                      router.push("/training/");
+                    }}
+                    className="btn mt-5 w-full bg-electric py-3.5 text-ink-900"
+                  >
+                    {t.auth.teamCta}
+                  </button>
+                </div>
+              ) : (
+              <form onSubmit={submit} className="mt-6">
                 {isRegister && (
                   <label className="block">
                     <span className="text-xs uppercase tracking-ultra text-bone-500">
@@ -191,6 +249,40 @@ export default function AuthModal() {
                   {isRegister ? t.auth.registerBtn : t.auth.loginBtn}
                 </button>
               </form>
+              )}
+
+              {/* one-tap demo accounts — student is pre-seeded, admin opens the studio */}
+              <div className="mt-6 flex items-center gap-3">
+                <span className="h-px grow bg-line/15" />
+                <span className="text-[10px] uppercase tracking-ultra text-bone-500">
+                  {t.auth.previewLabel}
+                </span>
+                <span className="h-px grow bg-line/15" />
+              </div>
+              <div className="mt-4 grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    loginAs("student");
+                    close();
+                    router.push("/dashboard/");
+                  }}
+                  className="btn btn-ghost px-4 py-3 text-sm"
+                >
+                  ✦ {t.auth.previewStudent}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    loginAs("admin");
+                    close();
+                    router.push("/admin/");
+                  }}
+                  className="btn border border-electric/40 bg-electric/10 px-4 py-3 text-sm text-electric hover:bg-electric/20"
+                >
+                  ⌘ {t.auth.previewAdmin}
+                </button>
+              </div>
 
               <p className="mt-5 text-center text-sm text-bone-400">
                 {isRegister ? t.auth.orLogin : t.auth.orRegister}{" "}

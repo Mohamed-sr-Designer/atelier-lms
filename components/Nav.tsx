@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLang } from "@/lib/i18n";
 import { useStore, logout } from "@/lib/store";
+import { useStudio, mergeCourse } from "@/lib/studio";
 import { withBase } from "@/lib/base";
 import { courses, fmtPrice } from "@/lib/courses";
 import { openAuth } from "@/components/lms/AuthModal";
@@ -18,12 +19,17 @@ export default function Nav() {
   const pathname = usePathname();
   const { t, lang } = useLang();
   const store = useStore();
+  const studio = useStudio();
 
   // Deliberately minimal: Journal, FAQ and Contact live in the footer.
+  // The Studio only appears for the admin role.
   const links = [
     { label: t.nav.courses, href: "/courses" },
     { label: t.nav.instructor, href: "/instructor" },
     { label: t.nav.training, href: "/training" },
+    ...(store.user?.role === "admin"
+      ? [{ label: `⌘ ${t.nav.studio}`, href: "/admin" }]
+      : []),
   ];
 
   const isActive = (href: string) => pathname.startsWith(href);
@@ -119,7 +125,9 @@ export default function Nav() {
                         className="absolute left-1/2 top-full w-[21rem] -translate-x-1/2 pt-4"
                       >
                         <div className="overflow-hidden rounded-xl border border-line/15 bg-ink-800/95 p-2 shadow-2xl backdrop-blur-xl">
-                          {courses.map((c) => (
+                          {courses
+                            .map((c) => mergeCourse(c, studio.courses[c.slug]))
+                            .map((c) => (
                             <Link
                               key={c.slug}
                               href={`/courses/${c.slug}/`}

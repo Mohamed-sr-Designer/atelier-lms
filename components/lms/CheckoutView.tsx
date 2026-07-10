@@ -9,6 +9,7 @@ import GlyphPlate from "@/components/lms/GlyphPlate";
 import { useLang } from "@/lib/i18n";
 import { useStore, enroll } from "@/lib/store";
 import { openAuth } from "@/components/lms/AuthModal";
+import { useStudio, mergeCourse } from "@/lib/studio";
 import { site, payments } from "@/lib/site";
 import {
   bundle,
@@ -23,11 +24,15 @@ export default function CheckoutView() {
   const router = useRouter();
   const params = useSearchParams();
   const store = useStore();
+  const studio = useStudio();
   const [method, setTarek] = useState<"instapay" | "vodafone">("instapay");
   const [copied, setCopied] = useState("");
 
   const isBundle = params.get("bundle") === "1";
-  const course = isBundle ? null : getCourse(params.get("course") || "");
+  const courseStatic = isBundle ? null : getCourse(params.get("course") || "");
+  const course = courseStatic
+    ? mergeCourse(courseStatic, studio.courses[courseStatic.slug])
+    : null;
   const items: Course[] = isBundle ? bundleCourses : course ? [course] : [];
   const total = isBundle ? bundle.price : course?.price ?? 0;
   const compareAt = isBundle ? bundle.compareAt : course?.compareAt;

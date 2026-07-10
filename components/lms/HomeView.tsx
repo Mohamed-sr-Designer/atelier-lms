@@ -121,20 +121,21 @@ export default function HomeView() {
         <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/55 to-ink-900/25" />
         <div aria-hidden className="vignette absolute inset-0" />
         <div aria-hidden className="absolute inset-0 bg-noise opacity-[0.07]" />
+        {/* cinematic light pass — a soft blurred beam with a bright core and a
+            faint accent tint, like a projector sweeping the artwork */}
         <motion.div
           aria-hidden
-          initial={{ x: "-160%" }}
-          animate={{ x: "360%" }}
-          transition={{ duration: 9, ease: "easeInOut", repeat: Infinity, repeatDelay: 3 }}
-          className="pointer-events-none absolute inset-y-0 w-1/3 rotate-12 bg-gradient-to-r from-transparent via-bone-50/[0.06] to-transparent mix-blend-screen"
-        />
+          initial={{ x: "-180%" }}
+          animate={{ x: "320%" }}
+          transition={{ duration: 6.5, ease: [0.45, 0, 0.25, 1], repeat: Infinity, repeatDelay: 2 }}
+          className="pointer-events-none absolute inset-y-[-12%] w-[46%] rotate-12 mix-blend-screen"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-bone-50/[0.14] to-transparent blur-3xl" />
+          <div className="absolute inset-y-0 left-[28%] w-[30%] bg-gradient-to-r from-transparent via-mint/25 to-transparent blur-xl" />
+          <div className="absolute inset-y-0 left-[46%] w-[9%] bg-gradient-to-r from-transparent via-bone-50/25 to-transparent blur-md" />
+        </motion.div>
 
-        {/* offer stickers — loud on purpose */}
-        <div className="absolute right-6 top-24 z-10 hidden md:block lg:right-16 lg:top-28">
-          <Sticker tone="grad" rotate={5}>
-            {t.home.heroStickers[0]}
-          </Sticker>
-        </div>
+        {/* offer sticker — loud on purpose */}
         <div className="absolute left-6 top-[30%] z-10 hidden md:block lg:left-16">
           <Sticker tone="outline" rotate={-5}>
             {t.home.heroStickers[1]}
@@ -205,6 +206,9 @@ export default function HomeView() {
                     {t.home.ctaPrimary}
                   </Link>
                 </Magnetic>
+                <Sticker tone="grad" rotate={-4}>
+                  {t.home.heroStickers[0]}
+                </Sticker>
                 <Magnetic>
                   <Link
                     href="/bundle/"

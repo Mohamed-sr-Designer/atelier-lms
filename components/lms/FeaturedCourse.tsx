@@ -8,6 +8,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import Magnetic from "@/components/ui/Magnetic";
 import GlyphPlate from "@/components/lms/GlyphPlate";
 import { useLang } from "@/lib/i18n";
+import { useLiveCourse } from "@/lib/studio";
 import {
   fmtDuration,
   fmtPrice,
@@ -19,8 +20,9 @@ import {
 // The featured drop — a full editorial spread for one course. The plate tilts
 // toward the pointer (Apple-card style), the curriculum peeks like a magazine
 // index, and the price sits inside the story instead of on a pricing card.
-export default function FeaturedCourse({ course }: { course: Course }) {
+export default function FeaturedCourse({ course: courseStatic }: { course: Course }) {
   const { t, lang } = useLang();
+  const course = useLiveCourse(courseStatic); // studio edits apply live
   const ref = useRef<HTMLDivElement>(null);
 
   // pointer-tracked tilt

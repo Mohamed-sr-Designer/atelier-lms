@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useLang } from "@/lib/i18n";
+import { useLiveCourse } from "@/lib/studio";
 import {
   fmtDuration,
   fmtPrice,
@@ -12,13 +13,16 @@ import {
 import GlyphPlate from "./GlyphPlate";
 
 export default function CourseCard({
-  course,
+  course: courseStatic,
   eager = false,
+  popular = false,
 }: {
   course: Course;
   eager?: boolean;
+  popular?: boolean;
 }) {
   const { t, lang } = useLang();
+  const course = useLiveCourse(courseStatic); // studio edits apply live
   const mins = totalMinutes(course);
 
   return (
@@ -30,6 +34,11 @@ export default function CourseCard({
       <article className="flex h-full flex-col">
         <div className="relative [container-type:inline-size]">
           <GlyphPlate course={course} eager={eager} className="aspect-[4/3]" />
+          {popular && (
+            <span className="absolute right-4 top-4 rounded-full bg-electric px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-ink-900 shadow-[0_6px_20px_rgb(var(--electric)/0.45)]">
+              ★ {t.catalog.popular}
+            </span>
+          )}
           {/* price chip — the offer must read from across the room */}
           <span
             className={`absolute bottom-4 left-4 rounded-full px-4 py-2 text-sm font-bold backdrop-blur-md transition-transform duration-300 group-hover:scale-105 ${

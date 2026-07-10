@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLang } from "@/lib/i18n";
+import { useStudio } from "@/lib/studio";
 
 // Sticky launch-offer ribbon above the nav: a looping marquee plus a live
 // 7-day countdown. The deadline persists per browser so it feels real.
@@ -26,6 +27,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
 export default function OfferBar() {
   const { t } = useLang();
+  const studio = useStudio();
   const [left, setLeft] = useState<number | null>(null);
 
   useEffect(() => {
@@ -34,7 +36,11 @@ export default function OfferBar() {
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, []);
+  }, [studio.offer?.endsAt]);
+
+  // the studio can rewrite the ribbon or switch it off entirely
+  if (studio.offer?.enabled === false) return null;
+  const text = studio.offer?.text?.trim() || t.offer.text;
 
   const d = left !== null ? Math.floor(left / 86400000) : 0;
   const h = left !== null ? Math.floor((left % 86400000) / 3600000) : 0;
@@ -43,7 +49,7 @@ export default function OfferBar() {
 
   const chunk = (
     <span className="mx-8 inline-flex items-center gap-3 whitespace-nowrap">
-      <span className="font-semibold">✦ {t.offer.text}</span>
+      <span className="font-semibold">✦ {text}</span>
       <span className="opacity-80">
         {t.offer.ends}{" "}
         <span className="font-bold tabular-nums" suppressHydrationWarning>
@@ -63,7 +69,7 @@ export default function OfferBar() {
   return (
     <Link
       href="/bundle/"
-      aria-label={`${t.offer.text} — ${t.offer.ends}`}
+      aria-label={`${text} — ${t.offer.ends}`}
       className="fixed inset-x-0 top-0 z-[60] block overflow-hidden bg-gradient-to-r from-mint via-mint to-electric text-[11px] text-white shadow-[0_4px_30px_rgb(var(--mint)/0.35)] md:text-xs"
     >
       <div className="animate-marquee flex w-max items-center py-2">

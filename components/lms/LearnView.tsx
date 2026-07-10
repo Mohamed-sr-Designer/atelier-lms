@@ -16,12 +16,14 @@ import {
   isEnrolled,
 } from "@/lib/store";
 import { downloadResource } from "@/lib/download";
+import { useLiveCourse } from "@/lib/studio";
 import { fmtDuration, lessonCount, type Course } from "@/lib/courses";
 
 type Tab = "resources" | "board" | "final" | "quiz";
 
-export default function LearnView({ course }: { course: Course }) {
+export default function LearnView({ course: courseStatic }: { course: Course }) {
   const { t, lang } = useLang();
+  const course = useLiveCourse(courseStatic); // studio drops appear here too
   const params = useSearchParams();
   const store = useStore();
 

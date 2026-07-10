@@ -103,9 +103,6 @@ export default function GlyphPlate({
       <span className="absolute left-6 top-5 rounded-full bg-ink-900/60 px-2.5 py-1 text-[10px] uppercase tracking-ultra text-bone-200 backdrop-blur">
         {course.index}
       </span>
-      <span className="absolute right-6 top-5 font-serif text-sm italic text-bone-50/90 [text-shadow:0_1px_12px_rgb(0_0_0/0.6)]">
-        Tarek
-      </span>
     </div>
   );
 }

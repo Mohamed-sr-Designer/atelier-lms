@@ -9,9 +9,9 @@ import CourseCard from "@/components/lms/CourseCard";
 import { useLang } from "@/lib/i18n";
 import { bundle, courses, fmtPrice } from "@/lib/courses";
 
-type Filter = "all" | "design" | "motion" | "ai";
+type Filter = "all" | "design" | "motion" | "ai" | "free" | "premium";
 
-const CATEGORY: Record<string, Exclude<Filter, "all">> = {
+const CATEGORY: Record<string, "design" | "motion" | "ai"> = {
   "adobe-photoshop": "design",
   "adobe-illustrator": "design",
   "adobe-after-effects": "motion",
@@ -23,17 +23,46 @@ const CATEGORY: Record<string, Exclude<Filter, "all">> = {
 export default function CatalogView() {
   const { t, lang } = useLang();
   const [filter, setFilter] = useState<Filter>("all");
+  const [q, setQ] = useState("");
 
   const filters: { id: Filter; label: string }[] = [
     { id: "all", label: t.catalog.all },
     { id: "design", label: t.catalog.filterDesign },
     { id: "motion", label: t.catalog.filterMotion },
     { id: "ai", label: t.catalog.filterAi },
+    { id: "free", label: `✦ ${t.catalog.filterFree}` },
+    { id: "premium", label: t.catalog.filterPremium },
   ];
 
-  const shown = courses.filter(
-    (c) => filter === "all" || CATEGORY[c.slug] === filter
-  );
+  const query = q.trim().toLowerCase();
+  const shown = courses.filter((c) => {
+    const byFilter =
+      filter === "all"
+        ? true
+        : filter === "free"
+          ? c.price === 0
+          : filter === "premium"
+            ? c.price > 0
+            : CATEGORY[c.slug] === filter;
+    if (!byFilter) return false;
+    if (!query) return true;
+    const hay = [
+      c.title.en,
+      c.short.en,
+      c.tagline.en,
+      c.level.en,
+      ...c.tools,
+      ...c.outcomes,
+    ]
+      .join(" ")
+      .toLowerCase();
+    return hay.includes(query);
+  });
+
+  // the busiest course wears the Popular badge (sitemap: "Popular courses")
+  const popularSlug = courses.reduce((a, b) =>
+    b.students > a.students ? b : a
+  ).slug;
 
   return (
     <section className="container-edge mx-auto max-w-edge pb-24 pt-32 md:pb-32 md:pt-44">
@@ -57,9 +86,37 @@ export default function CatalogView() {
         </Reveal>
       </div>
 
-      {/* filters */}
+      {/* search + filters */}
       <Reveal delay={0.15}>
-        <div className="mt-12 flex flex-wrap gap-2 border-b border-line/10 pb-6">
+        <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-4 border-b border-line/10 pb-6">
+          <label className="relative block w-full max-w-sm">
+            <span className="sr-only">{t.catalog.searchPh}</span>
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-bone-500"
+              aria-hidden
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            <input
+              type="search"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+              placeholder={t.catalog.searchPh}
+              className="w-full rounded-full border border-line/15 bg-ink-800/60 py-3 pl-11 pr-5 text-sm text-bone-50 placeholder:text-bone-500/70 backdrop-blur focus:border-mint/60 focus:outline-none"
+            />
+          </label>
+          <span className="text-xs tabular-nums text-bone-500" dir="ltr">
+            {shown.length} {t.catalog.results}
+          </span>
+          <div className="flex w-full flex-wrap gap-2">
           {filters.map((f) => (
             <button
               key={f.id}
@@ -81,17 +138,18 @@ export default function CatalogView() {
               <span className="relative">{f.label}</span>
             </button>
           ))}
+          </div>
         </div>
       </Reveal>
 
       {/* grid */}
       <Stagger
-        key={filter}
+        key={`${filter}-${query}`}
         className="mt-12 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3"
       >
         {shown.map((c, i) => (
           <StaggerItem key={c.slug}>
-            <CourseCard course={c} eager={i < 3} />
+            <CourseCard course={c} eager={i < 3} popular={c.slug === popularSlug} />
           </StaggerItem>
         ))}
       </Stagger>

@@ -14,6 +14,7 @@ import LiveViewers from "@/components/lms/LiveViewers";
 import { useLang } from "@/lib/i18n";
 import { withBase } from "@/lib/base";
 import { useStore, isEnrolled } from "@/lib/store";
+import { useLiveCourse } from "@/lib/studio";
 import {
   bundle,
   courses,
@@ -24,8 +25,9 @@ import {
   type Course,
 } from "@/lib/courses";
 
-export default function CourseDetailView({ course }: { course: Course }) {
+export default function CourseDetailView({ course: courseStatic }: { course: Course }) {
   const { t, lang } = useLang();
+  const course = useLiveCourse(courseStatic); // studio edits apply live
   const store = useStore();
   const enrolled = isEnrolled(store, course.slug);
   const mins = totalMinutes(course);
