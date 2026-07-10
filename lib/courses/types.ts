@@ -35,8 +35,14 @@ export type Review = { name: string; role: string; text: string; stars: number }
 export type Course = {
   slug: string;
   index: string; // editorial numeral "01"
-  glyph: string; // tool plate glyph "Ps"
+  glyph: string; // legacy short tag (unused in UI)
   title: Bi;
+  // Plate art: brand gradient + official app icon, a cover video, or an image.
+  icon?: string; // app icon path (rendered over `plate` gradient)
+  tileText?: string; // drawn Adobe-style tile when no icon asset exists
+  plate?: [string, string]; // brand gradient stops
+  coverVideo?: string; // muted looping cover (takes precedence)
+  showcase?: { images?: string[]; videos?: string[] }; // course-page gallery
   short: Bi; // card-length name
   tagline: Bi;
   desc: Bi;

@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...courses.map((c) => page(`/courses/${c.slug}/`, 0.9)),
     page("/bundle/", 0.9),
     page("/instructor/", 0.8),
+    page("/training/", 0.8),
     page("/blog/", 0.7, "weekly"),
     ...posts.map((p) => page(`/blog/${p.slug}/`, 0.6)),
     page("/faq/", 0.7),

@@ -25,6 +25,8 @@ export const aftereffects: Course = {
   },
   price: 0,
   cover: "/work/secure/hero.webp",
+  icon: "/lms/icons/ae.webp",
+  plate: ["#00005B", "#9999FF"],
   outcomes: [
     "Animate with real easing — nothing linear, nothing robotic",
     "Build shape-layer animations and kinetic typography systems",
@@ -167,6 +169,8 @@ export const premiere: Course = {
   },
   price: 0,
   cover: "/work/tilal/building.webp",
+  tileText: "Pr",
+  plate: ["#1D0B33", "#C39BFF"],
   outcomes: [
     "Cut with story logic — rhythm, motivation, breathing room",
     "Edit to music beats and mix VO, music and SFX properly",

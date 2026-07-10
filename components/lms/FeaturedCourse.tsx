@@ -144,7 +144,7 @@ export default function FeaturedCourse({ course }: { course: Course }) {
               <Magnetic>
                 <Link
                   href={`/courses/${course.slug}/`}
-                  className="inline-block rounded-full bg-mint px-8 py-4 text-sm font-semibold text-white transition-transform duration-300 hover:scale-[1.04] active:scale-95"
+                  className="btn btn-primary px-8 py-4"
                 >
                   {t.home.featuredCta}
                 </Link>

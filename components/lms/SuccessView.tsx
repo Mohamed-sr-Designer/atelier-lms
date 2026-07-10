@@ -63,7 +63,7 @@ export default function SuccessView() {
             <Magnetic strength={0.5}>
               <Link
                 href={`/learn/${course.slug}/`}
-                className="inline-block rounded-full bg-mint px-10 py-5 text-base font-medium text-white transition-transform duration-300 hover:scale-[1.05]"
+                className="btn btn-primary px-10 py-5 text-base"
               >
                 {t.success.startCourse}
               </Link>

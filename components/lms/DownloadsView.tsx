@@ -37,7 +37,7 @@ export default function DownloadsView() {
             </p>
             <Link
               href="/courses/"
-              className="mt-6 inline-block rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-white"
+              className="btn btn-primary mt-6 px-7 py-3.5"
             >
               {t.dash.browseCta}
             </Link>

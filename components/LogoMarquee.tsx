@@ -1,7 +1,7 @@
 import { Media } from "@/components/ui/Media";
 
-// Client logos as a slow, continuous marquee right under the hero —
-// the reference-style "worked with" strip. Theme-aware marks.
+// Client logos as a slow, continuous marquee — dark-plate marks only,
+// since the site is dark-only now.
 const logos = Array.from({ length: 36 }, (_, i) =>
   String(i + 1).padStart(2, "0")
 );
@@ -21,24 +21,13 @@ export default function LogoMarquee() {
             key={`${n}-${i}`}
             className="relative block h-14 w-36 shrink-0 opacity-75 transition-opacity duration-300 hover:opacity-100"
           >
-            <span className="hidden h-full w-full dark:block">
-              <Media
-                src={`/logos/dark/${n}.webp`}
-                alt="Client logo"
-                fill
-                sizes="144px"
-                className="object-contain"
-              />
-            </span>
-            <span className="block h-full w-full dark:hidden">
-              <Media
-                src={`/logos/light/${n}.webp`}
-                alt="Client logo"
-                fill
-                sizes="144px"
-                className="object-contain"
-              />
-            </span>
+            <Media
+              src={`/logos/dark/${n}.webp`}
+              alt="Client logo"
+              fill
+              sizes="144px"
+              className="object-contain"
+            />
           </span>
         ))}
       </div>

@@ -141,7 +141,7 @@ export default function LearnView({ course }: { course: Course }) {
                 </p>
                 <Link
                   href={`/checkout/?course=${course.slug}`}
-                  className="mt-6 rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-white"
+                  className="mt-6 btn btn-primary px-7 py-3.5"
                 >
                   {course.price === 0 ? t.common.enrollFree : t.common.enroll}
                 </Link>

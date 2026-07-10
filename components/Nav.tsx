@@ -5,8 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLang } from "@/lib/i18n";
-import { useStore } from "@/lib/store";
+import { useStore, logout } from "@/lib/store";
+import { withBase } from "@/lib/base";
 import { courses, fmtPrice } from "@/lib/courses";
+import { openAuth } from "@/components/lms/AuthModal";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Nav() {
@@ -21,6 +23,7 @@ export default function Nav() {
   const links = [
     { label: t.nav.courses, href: "/courses" },
     { label: t.nav.instructor, href: "/instructor" },
+    { label: t.nav.training, href: "/training" },
   ];
 
   const isActive = (href: string) => pathname.startsWith(href);
@@ -70,9 +73,12 @@ export default function Nav() {
             className="group flex items-center gap-3"
             aria-label="Method — home"
           >
-            <span className="grid h-9 w-9 place-items-center rounded-full border border-line/20 font-serif text-base italic transition-colors duration-300 group-hover:border-mint/60 group-hover:text-mint">
-              M
-            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={withBase("/lms/logo.svg")}
+              alt="Method logo"
+              className="h-10 w-10 rounded-full ring-1 ring-line/25 transition-all duration-300 group-hover:ring-mint/60"
+            />
             <span className="hidden text-sm tracking-tight text-bone-200 sm:block">
               Method
               <span className="text-bone-400"> {t.nav.roleTag}</span>
@@ -131,9 +137,9 @@ export default function Nav() {
                                 </span>
                               </span>
                               <span
-                                className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] ${
+                                className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-bold ${
                                   c.price === 0
-                                    ? "bg-mint/15 text-mint"
+                                    ? "bg-mint text-white"
                                     : "bg-electric/15 text-electric"
                                 }`}
                               >
@@ -175,26 +181,46 @@ export default function Nav() {
           <div className="flex items-center gap-2.5">
             <ThemeToggle />
             {store.user ? (
-              <Link
-                href="/dashboard/"
-                className="hidden items-center gap-2 rounded-full border border-line/20 py-1.5 pl-1.5 pr-4 text-sm text-bone-50 transition-all duration-300 hover:border-mint/50 hover:bg-mint/5 md:flex"
-              >
-                <span className="grid h-7 w-7 place-items-center rounded-full bg-mint/15 font-serif text-xs italic text-mint">
-                  {store.user.name.trim().charAt(0).toUpperCase() || "M"}
-                </span>
-                {t.nav.dashboard}
-              </Link>
-            ) : (
               <>
                 <Link
-                  href="/login/"
+                  href="/dashboard/"
+                  className="hidden items-center gap-2 rounded-full border border-line/20 py-1.5 pl-1.5 pr-4 text-sm text-bone-50 transition-all duration-300 hover:border-mint/50 hover:bg-mint/5 md:flex"
+                >
+                  <span className="grid h-7 w-7 place-items-center rounded-full bg-mint/15 font-serif text-xs italic text-mint">
+                    {store.user.name.trim().charAt(0).toUpperCase() || "M"}
+                  </span>
+                  {t.nav.dashboard}
+                </Link>
+                <button
+                  type="button"
+                  onClick={logout}
+                  aria-label={t.nav.logout}
+                  title={t.nav.logout}
+                  className="hidden h-9 w-9 place-items-center rounded-full border border-line/15 text-bone-400 transition-colors hover:border-mint/50 hover:text-mint md:grid"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                    <polyline points="16 17 21 12 16 7" />
+                    <line x1="21" y1="12" x2="9" y2="12" />
+                  </svg>
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  onClick={() => openAuth("login")}
                   className="hidden text-sm text-bone-200 transition-colors hover:text-bone-50 md:block"
                 >
                   {t.nav.login}
-                </Link>
-                <Link href="/register/" className="btn btn-primary hidden px-5 py-2.5 md:inline-flex">
+                </button>
+                <button
+                  type="button"
+                  onClick={() => openAuth("register")}
+                  className="btn btn-primary hidden px-5 py-2.5 md:inline-flex"
+                >
                   {t.nav.startFree}
-                </Link>
+                </button>
               </>
             )}
             <button
@@ -250,29 +276,47 @@ export default function Nav() {
             </nav>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               {store.user ? (
-                <Link
-                  href="/dashboard/"
-                  onClick={() => setOpen(false)}
-                  className="btn btn-primary px-6 py-3.5"
-                >
-                  {t.nav.dashboard}
-                </Link>
-              ) : (
                 <>
                   <Link
-                    href="/register/"
+                    href="/dashboard/"
                     onClick={() => setOpen(false)}
                     className="btn btn-primary px-6 py-3.5"
                   >
-                    {t.nav.startFree}
+                    {t.nav.dashboard}
                   </Link>
-                  <Link
-                    href="/login/"
-                    onClick={() => setOpen(false)}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      logout();
+                      setOpen(false);
+                    }}
+                    className="btn btn-ghost px-6 py-3.5"
+                  >
+                    {t.nav.logout}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setOpen(false);
+                      openAuth("register");
+                    }}
+                    className="btn btn-primary px-6 py-3.5"
+                  >
+                    {t.nav.startFree}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setOpen(false);
+                      openAuth("login");
+                    }}
                     className="btn btn-ghost px-6 py-3.5"
                   >
                     {t.nav.login}
-                  </Link>
+                  </button>
                 </>
               )}
             </div>

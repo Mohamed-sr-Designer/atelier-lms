@@ -6,6 +6,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import GlyphPlate from "@/components/lms/GlyphPlate";
 import { useLang } from "@/lib/i18n";
 import { useStore, courseProgress, enrolledCourses } from "@/lib/store";
+import { openAuth } from "@/components/lms/AuthModal";
 import { courses, fmtDuration, getCourse, lessonCount } from "@/lib/courses";
 
 export default function DashboardView() {
@@ -19,18 +20,20 @@ export default function DashboardView() {
           {t.checkout.loginFirst}
         </p>
         <div className="mt-8 flex justify-center gap-4">
-          <Link
-            href="/login/?next=%2Fdashboard%2F"
-            className="rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-white"
+          <button
+            type="button"
+            onClick={() => openAuth("login")}
+            className="btn btn-primary px-7 py-3.5"
           >
             {t.auth.loginBtn}
-          </Link>
-          <Link
-            href="/register/?next=%2Fdashboard%2F"
-            className="rounded-full border border-line/20 px-7 py-3.5 text-sm text-bone-50"
+          </button>
+          <button
+            type="button"
+            onClick={() => openAuth("register")}
+            className="btn btn-ghost px-7 py-3.5"
           >
             {t.auth.registerBtn}
-          </Link>
+          </button>
         </div>
       </section>
     );
@@ -162,7 +165,7 @@ export default function DashboardView() {
               </p>
               <Link
                 href="/courses/"
-                className="mt-6 inline-block rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-white"
+                className="btn btn-primary mt-6 px-7 py-3.5"
               >
                 {t.dash.browseCta}
               </Link>

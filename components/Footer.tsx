@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { useLang } from "@/lib/i18n";
+import { withBase } from "@/lib/base";
 import { courses } from "@/lib/courses";
 
 export default function Footer() {
@@ -18,6 +19,7 @@ export default function Footer() {
 
   const school = [
     { label: t.nav.instructor, href: "/instructor/" },
+    { label: t.nav.training, href: "/training/" },
     { label: t.catalog.bundleCard, href: "/bundle/" },
     { label: t.nav.contact, href: "/contact/" },
   ];
@@ -35,9 +37,12 @@ export default function Footer() {
           {/* identity */}
           <div className="md:col-span-4">
             <div className="flex items-center gap-3">
-              <span className="grid h-9 w-9 place-items-center rounded-full border border-line/20 font-serif text-base italic text-bone-200">
-                M
-              </span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={withBase("/lms/logo.svg")}
+                alt="Method logo"
+                className="h-9 w-9 rounded-full ring-1 ring-line/25"
+              />
               <span className="text-bone-50">Method</span>
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-bone-400">

@@ -2,9 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---- Dark (default): cool violet-charcoal, royal magenta + cyan accents ---- */
+/* ---- Dark-only. Two accent themes on the same violet-charcoal stage:
+   "pulse" (default) — royal magenta × cyan
+   "ember"           — molten orange × azure                              ---- */
 :root,
-:root[data-theme="dark"] {
+:root[data-accent="pulse"] {
   --bg: 12 11 16;
   --bg2: 18 17 24;
   --bg3: 25 23 33;
@@ -19,20 +21,9 @@
   --mint: 226 55 199; /* royal magenta (primary accent) */
 }
 
-/* ---- Light: cool paper ---- */
-:root[data-theme="light"] {
-  --bg: 246 245 250;
-  --bg2: 253 252 255;
-  --bg3: 236 234 243;
-  --bg4: 226 223 235;
-  --bg5: 209 205 221;
-  --fg: 22 20 30;
-  --fg2: 55 52 68;
-  --fg3: 104 100 122;
-  --fg4: 134 130 150;
-  --line: 22 20 30;
-  --electric: 13 121 140;
-  --mint: 176 24 152;
+:root[data-accent="ember"] {
+  --electric: 64 178 255; /* azure — orange's complement */
+  --mint: 255 122 26; /* molten orange (primary accent) */
 }
 
 * {

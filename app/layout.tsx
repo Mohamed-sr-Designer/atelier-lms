@@ -9,6 +9,7 @@ import { site } from "@/lib/site";
 import { courses, stats } from "@/lib/courses";
 import { LangProvider } from "@/lib/i18n";
 import SmoothScroll from "@/components/SmoothScroll";
+import AuthModal from "@/components/lms/AuthModal";
 import ScrollProgress from "@/components/ScrollProgress";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Cursor from "@/components/Cursor";
@@ -177,7 +178,7 @@ const jsonLd = {
   ],
 };
 
-const themeScript = `(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();`;
+const themeScript = `(function(){try{var a=localStorage.getItem('accent')||'pulse';document.documentElement.setAttribute('data-accent',a);}catch(e){document.documentElement.setAttribute('data-accent','pulse');}})();`;
 
 export default function RootLayout({
   children,
@@ -187,7 +188,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      data-theme="dark"
+      data-accent="pulse"
       suppressHydrationWarning
       className={`${display.variable} ${sans.variable} ${serif.variable} ${arabic.variable}`}
     >
@@ -207,6 +208,7 @@ export default function RootLayout({
           <ScrollProgress />
           <Cursor />
           <WhatsAppButton />
+          <AuthModal />
           {children}
         </LangProvider>
       </body>

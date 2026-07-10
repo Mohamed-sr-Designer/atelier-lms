@@ -26,7 +26,19 @@ export const aiPhotoshoot: Course = {
   },
   price: 1750,
   compareAt: 2500,
-  cover: "/work/axia/insta-2.webp",
+  cover: "/lms/featured-banner.jpg",
+  showcase: {
+    images: [
+      "/work/axia/banner-her.webp",
+      "/work/axia/insta-2.webp",
+      "/work/tilal/02.webp",
+      "/work/secure/cover.webp",
+      "/work/axia/insta-4.webp",
+      "/work/tilal/10.webp",
+      "/work/secure/wide.webp",
+      "/work/misc/24.webp",
+    ],
+  },
   outcomes: [
     "A repeatable prompt-to-photoshoot workflow",
     "A photographer's vocabulary: light, lens, composition — in prompts",
@@ -147,6 +159,17 @@ export const aiVideo: Course = {
   price: 2250,
   compareAt: 3200,
   cover: "/work/tilal/hero.webp",
+  coverVideo: "/lms/reels/video-1.mp4",
+  showcase: {
+    videos: [
+      "/lms/reels/coffee-ad.mp4",
+      "/lms/reels/reel-c.mp4",
+      "/lms/reels/tilal-aerial.mp4",
+      "/lms/reels/reel-e.mp4",
+      "/lms/reels/space.mp4",
+      "/lms/reels/reel-d.mp4",
+    ],
+  },
   outcomes: [
     "Prompt motion with camera language: pans, pushes, speed",
     "Storyboard a spot before generating a single frame",

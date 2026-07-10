@@ -81,7 +81,7 @@ export default function BundleView() {
                 <Magnetic>
                   <Link
                     href={owned ? "/dashboard/" : "/checkout/?bundle=1"}
-                    className="inline-block rounded-full bg-mint px-9 py-4 text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.04]"
+                    className="btn btn-primary px-9 py-4"
                   >
                     {owned ? t.common.continueLearning : t.bundle.cta}
                   </Link>

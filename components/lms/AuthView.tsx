@@ -140,7 +140,7 @@ export default function AuthView({ mode }: { mode: "login" | "register" }) {
 
             <button
               type="submit"
-              className="mt-8 w-full rounded-full bg-mint py-4 text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.02]"
+              className="btn btn-primary mt-8 w-full py-4"
             >
               {isRegister ? t.auth.registerBtn : t.auth.loginBtn}
             </button>

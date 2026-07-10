@@ -10,7 +10,7 @@ import Magnetic from "@/components/ui/Magnetic";
 import LogoMarquee from "@/components/LogoMarquee";
 import CourseCard from "@/components/lms/CourseCard";
 import Counter from "@/components/lms/Counter";
-import PathRail from "@/components/lms/PathRail";
+import MethodStrip from "@/components/lms/MethodStrip";
 import FeaturedCourse from "@/components/lms/FeaturedCourse";
 import { useLang } from "@/lib/i18n";
 import { withBase } from "@/lib/base";
@@ -28,7 +28,7 @@ import {
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-// Rotated sticker chip.
+// Rotated sticker chip — sized up so offers read instantly.
 function Sticker({
   children,
   tone = "mint",
@@ -36,13 +36,14 @@ function Sticker({
   className = "",
 }: {
   children: React.ReactNode;
-  tone?: "mint" | "electric" | "outline";
+  tone?: "mint" | "electric" | "grad" | "outline";
   rotate?: number;
   className?: string;
 }) {
   const tones = {
     mint: "bg-mint text-white",
     electric: "bg-electric text-ink-900",
+    grad: "text-white [background:linear-gradient(120deg,rgb(var(--mint)),rgb(var(--electric)))] shadow-[0_8px_30px_rgb(var(--mint)/0.4)]",
     outline: "border border-line/40 bg-ink-900/60 text-bone-50 backdrop-blur",
   };
   return (
@@ -52,22 +53,19 @@ function Sticker({
       viewport={{ once: true }}
       whileHover={{ rotate: 0, scale: 1.06 }}
       transition={{ type: "spring", stiffness: 220, damping: 14 }}
-      className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-widest ${tones[tone]} ${className}`}
+      className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold uppercase tracking-widest ${tones[tone]} ${className}`}
     >
       ✦ {children}
     </motion.span>
   );
 }
 
-// Portfolio pieces produced with the exact workflows the courses teach.
-const gallery = [
-  { src: "/work/axia/banner-her.webp", alt: "AXIA gifting campaign banner — AI photoshoot pipeline" },
-  { src: "/work/tilal/02.webp", alt: "Tilal AI film frame — cinematic architecture" },
-  { src: "/work/secure/cover.webp", alt: "Security brand film cover — AI production" },
-  { src: "/work/axia/insta-4.webp", alt: "AXIA social frame — AI generation finished in Photoshop" },
-  { src: "/work/tilal/10.webp", alt: "Tilal community frame — AI film still" },
-  { src: "/work/secure/wide.webp", alt: "Wide cinematic AI still — brand film" },
-  { src: "/work/misc/24.webp", alt: "AI production frame — client campaign" },
+// The floating collage around the AI-stack film.
+const stackFloaters = [
+  { src: "/lms/popup.jpg", alt: "AI campaign popup visual", cls: "-left-6 -top-10 w-28 rotate-[-7deg] md:w-36", d: 0.1 },
+  { src: "/work/tilal/hero.webp", alt: "Tilal AI film hero frame", cls: "-right-8 -top-6 w-32 rotate-[6deg] md:w-44", d: 0.2 },
+  { src: "/work/secure/03.webp", alt: "Cinematic AI still", cls: "-left-10 bottom-6 w-32 rotate-[4deg] md:w-40", d: 0.3 },
+  { src: "/lms/winback.jpg", alt: "WINBACK campaign visual — AI production", cls: "-bottom-10 -right-6 w-28 rotate-[-5deg] md:w-36", d: 0.4 },
 ];
 
 export default function HomeView() {
@@ -77,7 +75,6 @@ export default function HomeView() {
     target: heroRef,
     offset: ["start start", "end start"],
   });
-  // cinematic depth: the photo drifts and swells; the copy simply dissolves
   const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "14%"]);
   const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.07]);
   const copyOpacity = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
@@ -98,12 +95,11 @@ export default function HomeView() {
 
   return (
     <>
-      {/* ================================================= HERO — cinematic */}
+      {/* ================================================= HERO — AI showcase */}
       <section
         ref={heroRef}
         className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden"
       >
-        {/* landscape portrait, raised so the face owns the frame */}
         <motion.div
           style={{ y: imgY, scale: imgScale }}
           initial={{ scale: 1.12 }}
@@ -113,45 +109,37 @@ export default function HomeView() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={withBase("/lms/hero-landscape.jpg")}
-            alt="Mohamed Tarek — art director, standing in his spotlit studio library"
-            className="h-full w-full object-cover object-[center_12%]"
+            src={withBase("/lms/hero-banner.jpg")}
+            alt="AI-produced editorial campaign — a model in a pixel-art world, made with the Method pipeline"
+            className="h-full w-full object-cover object-[center_28%]"
           />
         </motion.div>
 
-        {/* cinematic treatments */}
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/30 to-ink-900/50" />
+        {/* heavier grade for the bright artwork */}
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/55 to-ink-900/25" />
         <div aria-hidden className="vignette absolute inset-0" />
-        <div aria-hidden className="absolute inset-0 bg-noise opacity-[0.08]" />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(70% 50% at 50% 115%, rgb(var(--mint) / 0.2) 0%, transparent 65%)",
-          }}
-        />
+        <div aria-hidden className="absolute inset-0 bg-noise opacity-[0.07]" />
         <motion.div
           aria-hidden
           initial={{ x: "-160%" }}
           animate={{ x: "360%" }}
           transition={{ duration: 9, ease: "easeInOut", repeat: Infinity, repeatDelay: 3 }}
-          className="pointer-events-none absolute inset-y-0 w-1/3 rotate-12 bg-gradient-to-r from-transparent via-bone-50/[0.07] to-transparent mix-blend-screen"
+          className="pointer-events-none absolute inset-y-0 w-1/3 rotate-12 bg-gradient-to-r from-transparent via-bone-50/[0.06] to-transparent mix-blend-screen"
         />
 
-        {/* floating stickers */}
+        {/* offer stickers — loud on purpose */}
         <div className="absolute right-6 top-24 z-10 hidden md:block lg:right-16 lg:top-28">
-          <Sticker tone="mint" rotate={5}>
+          <Sticker tone="grad" rotate={5}>
             {t.home.heroStickers[0]}
           </Sticker>
         </div>
-        <div className="absolute left-6 top-[34%] z-10 hidden md:block lg:left-16">
+        <div className="absolute left-6 top-[30%] z-10 hidden md:block lg:left-16">
           <Sticker tone="outline" rotate={-5}>
             {t.home.heroStickers[1]}
           </Sticker>
         </div>
 
-        {/* copy — static layout (no parallax collisions), dissolves on scroll */}
+        {/* copy */}
         <motion.div
           style={{ opacity: copyOpacity }}
           className="container-edge relative z-10 mx-auto w-full max-w-edge pb-10 pt-32"
@@ -172,7 +160,7 @@ export default function HomeView() {
                 initial={{ y: "110%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1, ease, delay: 0.45 }}
-                className="block font-display text-[clamp(2.5rem,7.5vw,6.5rem)] font-semibold leading-[0.98] tracking-tightest text-bone-50"
+                className="block font-display text-[clamp(2.5rem,7.5vw,6.5rem)] font-semibold leading-[0.98] tracking-tightest text-bone-50 [text-shadow:0_2px_30px_rgb(0_0_0/0.5)]"
               >
                 {t.home.heroA}
               </motion.span>
@@ -184,10 +172,12 @@ export default function HomeView() {
                 transition={{ duration: 1, ease, delay: 0.58 }}
                 className="block pb-2 font-display text-[clamp(2.5rem,7.5vw,6.5rem)] font-semibold leading-[0.98] tracking-tightest"
               >
-                <span className="font-serif font-normal italic tracking-normal text-grad">
+                <span className="text-grad font-serif font-normal italic tracking-normal">
                   {t.home.heroI}
                 </span>{" "}
-                <span className="text-bone-50">{t.home.heroB}</span>
+                <span className="text-bone-50 [text-shadow:0_2px_30px_rgb(0_0_0/0.5)]">
+                  {t.home.heroB}
+                </span>
               </motion.span>
             </span>
           </h1>
@@ -234,21 +224,20 @@ export default function HomeView() {
                 href={`/courses/${freePs.slug}/`}
                 className="group flex items-center gap-4 rounded-2xl border border-mint/40 bg-ink-900/70 p-4 pr-6 backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:rotate-[-1deg]"
               >
-                <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl">
-                  <Media
-                    src={freePs.cover}
-                    alt={freePs.short.en}
-                    fill
-                    sizes="48px"
-                    className="object-cover"
-                  />
+                <span
+                  className="grid h-12 w-12 shrink-0 place-items-center rounded-xl"
+                  style={{ background: "linear-gradient(135deg,#001E36,#31A8FF)" }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={withBase("/lms/icons/ps.webp")} alt="Photoshop icon" className="h-7 w-7" />
                 </span>
                 <span>
                   <span className="block text-[10px] font-semibold uppercase tracking-ultra text-mint">
                     {t.home.heroCardTag}
                   </span>
                   <span className="mt-0.5 block text-sm font-medium text-bone-50">
-                    {freePs.short[lang]} — {fmtPrice(0, lang)}
+                    {freePs.short[lang]} —{" "}
+                    <span className="font-bold text-mint">{fmtPrice(0, lang)}</span>
                   </span>
                 </span>
                 <span className="ms-2 text-mint transition-transform duration-300 group-hover:translate-x-1">
@@ -258,7 +247,7 @@ export default function HomeView() {
             </motion.div>
           </div>
 
-          {/* bottom strip: scroll cue + record */}
+          {/* bottom strip */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -395,7 +384,7 @@ export default function HomeView() {
                           {c.compareAt.toLocaleString("en-US")}
                         </span>
                       ) : null}
-                      <span className="font-display text-lg font-semibold text-mint">
+                      <span className="text-grad font-display text-xl font-bold">
                         {fmtPrice(c.price, lang)}
                       </span>
                     </span>
@@ -413,112 +402,187 @@ export default function HomeView() {
         </div>
       </section>
 
-      {/* ============================================= FEATURED COURSE ======== */}
-      <div className="border-y border-line/10 bg-ink-800/40">
-        <FeaturedCourse course={featured} />
-      </div>
-
       {/* ============================================= THE DROPS ============== */}
-      <section className="container-edge mx-auto max-w-edge py-20 md:py-28" id="courses">
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <section className="border-y border-line/10 bg-ink-800/40" id="courses">
+        <div className="container-edge mx-auto max-w-edge py-20 md:py-28">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <Reveal>
+                <SectionLabel index="02">{t.home.coursesLabel}</SectionLabel>
+              </Reveal>
+              <Reveal delay={0.05}>
+                <h2 className="mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.0] tracking-tightest text-bone-50 md:text-6xl">
+                  {t.home.coursesTitleA}{" "}
+                  <span className="text-grad font-serif font-normal italic tracking-normal">
+                    {t.home.coursesTitleI}
+                  </span>
+                  {t.home.coursesTitleB}
+                </h2>
+              </Reveal>
+            </div>
+            <Reveal delay={0.1}>
+              <p className="max-w-xs text-sm leading-relaxed text-bone-400">
+                {t.home.coursesNote}
+              </p>
+            </Reveal>
+          </div>
+
+          <Stagger className="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+            {gridCourses.map((c, i) => (
+              <StaggerItem key={c.slug}>
+                <motion.div
+                  whileHover={{ rotate: i % 2 === 0 ? -0.8 : 0.8, y: -4 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                  className={`relative h-full rounded-2xl ${
+                    c.price > 0
+                      ? "p-1 ring-1 ring-mint/40 [background:linear-gradient(140deg,rgb(var(--mint)/0.12),transparent_50%,rgb(var(--electric)/0.1))]"
+                      : ""
+                  }`}
+                >
+                  {c.price > 0 && (
+                    <span className="absolute -top-3.5 left-4 z-10 rotate-[-4deg] rounded-full px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-white shadow-[0_6px_24px_rgb(var(--mint)/0.45)] [background:linear-gradient(120deg,rgb(var(--mint)),rgb(var(--electric)))]">
+                      ✦ {t.common.premium}
+                    </span>
+                  )}
+                  {c.price === 0 && (
+                    <span className="absolute -top-3.5 right-4 z-10 rotate-[3deg] rounded-full bg-mint px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-white shadow-[0_6px_24px_rgb(var(--mint)/0.45)]">
+                      {t.common.free} ✦
+                    </span>
+                  )}
+                  <CourseCard course={c} eager={i < 3} />
+                </motion.div>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
+      {/* ============================================= FEATURED COURSE ======== */}
+      <FeaturedCourse course={featured} />
+
+      {/* ============================================= THE AI STACK =========== */}
+      <section className="border-y border-line/10 bg-ink-800/40">
+        <div className="container-edge mx-auto max-w-edge py-24 md:py-32">
+          <div className="relative overflow-hidden rounded-3xl border border-mint/25 bg-ink-900 p-8 md:p-14">
+            <span
+              aria-hidden
+              className="text-grad pointer-events-none absolute -top-8 right-0 font-display text-[9rem] font-bold leading-none opacity-15 md:text-[15rem]"
+            >
+              AI
+            </span>
+            <div
+              aria-hidden
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(130deg, rgb(var(--mint) / 0.16) 0%, transparent 45%, rgb(var(--electric) / 0.12) 100%)",
+              }}
+            />
+            <div aria-hidden className="absolute inset-0 bg-noise opacity-[0.06]" />
+
+            <div className="relative grid items-center gap-14 lg:grid-cols-12">
+              {/* copy + price */}
+              <div className="lg:col-span-5">
+                <Reveal>
+                  <Sticker tone="grad" rotate={-3}>
+                    {t.home.bundleLabel} · {savePct}%−
+                  </Sticker>
+                </Reveal>
+                <Reveal delay={0.06}>
+                  <h2 className="mt-5 text-balance font-display text-3xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-5xl">
+                    {bundle.title[lang]}
+                  </h2>
+                </Reveal>
+                <Reveal delay={0.1}>
+                  <p className="mt-3 font-serif text-lg italic text-mint">
+                    {t.catalog.bundleCardSub}
+                  </p>
+                </Reveal>
+                <Reveal delay={0.14}>
+                  <p className="mt-4 max-w-md text-pretty text-sm leading-relaxed text-bone-400 md:text-base">
+                    {bundle.desc[lang]}
+                  </p>
+                </Reveal>
+                <Reveal delay={0.18}>
+                  <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs uppercase tracking-ultra text-bone-500">
+                    <span dir="ltr">
+                      {fmtDuration(bundleMins, lang)} {t.bundle.totalRuntime}
+                    </span>
+                    <span>
+                      {bundleLessons} {t.bundle.totalLessons}
+                    </span>
+                  </div>
+                </Reveal>
+                <Reveal delay={0.22}>
+                  <div className="mt-8 flex flex-wrap items-center gap-5">
+                    <Magnetic>
+                      <Link href="/bundle/" className="btn btn-primary px-8 py-4">
+                        {t.home.bundleCta}
+                      </Link>
+                    </Magnetic>
+                    <p dir="ltr">
+                      <span className="me-3 text-bone-500 line-through">
+                        {fmtPrice(bundle.compareAt, lang)}
+                      </span>
+                      <span className="text-grad font-display text-4xl font-bold">
+                        {fmtPrice(bundle.price, lang)}
+                      </span>
+                    </p>
+                  </div>
+                </Reveal>
+              </div>
+
+              {/* landscape film + floating collage */}
+              <div className="lg:col-span-7">
+                <Reveal delay={0.15}>
+                  <div className="relative mx-6 my-10 md:mx-10">
+                    <div className="relative overflow-hidden rounded-2xl border border-line/20 shadow-2xl shadow-black/50">
+                      <video
+                        src={withBase("/lms/reels/video-1.mp4")}
+                        aria-label="AI-generated brand film — full pipeline result"
+                        className="aspect-video w-full object-cover"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                      />
+                      <span className="absolute bottom-3 left-3 rounded-full bg-ink-900/75 px-3 py-1 text-[10px] uppercase tracking-widest text-bone-200 backdrop-blur">
+                        ▶ AI film — no camera, no crew
+                      </span>
+                    </div>
+                    {stackFloaters.map((f) => (
+                      <motion.div
+                        key={f.src}
+                        initial={{ opacity: 0, scale: 0.7, rotate: 0 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        whileHover={{ rotate: 0, scale: 1.08, zIndex: 20 }}
+                        transition={{ type: "spring", stiffness: 200, damping: 16, delay: f.d }}
+                        className={`absolute overflow-hidden rounded-xl border border-line/25 shadow-2xl shadow-black/60 ${f.cls}`}
+                      >
+                        <div className="aspect-[4/5]">
+                          <Media src={f.src} alt={f.alt} fill sizes="176px" className="object-cover" />
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </Reveal>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================= METHOD (compact) ======= */}
+      <section className="container-edge mx-auto max-w-edge py-20 md:py-28">
+        <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <Reveal>
-              <SectionLabel index="02">{t.home.coursesLabel}</SectionLabel>
+              <SectionLabel index="03">{t.home.pathLabel}</SectionLabel>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.0] tracking-tightest text-bone-50 md:text-6xl">
-                {t.home.coursesTitleA}{" "}
-                <span className="text-grad font-serif font-normal italic tracking-normal">
-                  {t.home.coursesTitleI}
-                </span>
-                {t.home.coursesTitleB}
-              </h2>
-            </Reveal>
-          </div>
-          <Reveal delay={0.1}>
-            <p className="max-w-xs text-sm leading-relaxed text-bone-400">
-              {t.home.coursesNote}
-            </p>
-          </Reveal>
-        </div>
-
-        <Stagger className="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {gridCourses.map((c, i) => (
-            <StaggerItem key={c.slug}>
-              <motion.div
-                whileHover={{ rotate: i % 2 === 0 ? -0.8 : 0.8, y: -4 }}
-                transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                className={`relative h-full rounded-2xl ${
-                  c.price > 0
-                    ? "p-1 ring-1 ring-mint/40 [background:linear-gradient(140deg,rgb(var(--mint)/0.12),transparent_50%,rgb(var(--electric)/0.1))]"
-                    : ""
-                }`}
-              >
-                {c.price > 0 && (
-                  <span className="absolute -top-3 left-4 z-10 rotate-[-4deg] rounded-full bg-mint px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
-                    ✦ {t.common.premium}
-                  </span>
-                )}
-                {c.price === 0 && (
-                  <span className="absolute -top-3 right-4 z-10 rotate-[3deg] rounded-full border border-line/30 bg-ink-900 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-bone-50">
-                    {t.common.free} ✦
-                  </span>
-                )}
-                <CourseCard course={c} eager={i < 3} />
-              </motion.div>
-            </StaggerItem>
-          ))}
-          {/* bundle teaser card fills the sixth slot */}
-          <StaggerItem>
-            <Link href="/bundle/" className="group block h-full">
-              <article className="relative flex h-full min-h-[19rem] flex-col justify-between overflow-hidden rounded-2xl border border-mint/30 bg-ink-800 p-7 transition-transform duration-300 group-hover:-translate-y-1">
-                <div
-                  aria-hidden
-                  className="absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(140deg, rgb(var(--mint) / 0.25) 0%, transparent 45%, rgb(var(--electric) / 0.2) 100%)",
-                  }}
-                />
-                <div className="relative">
-                  <p className="text-xs uppercase tracking-ultra text-mint">
-                    {t.home.bundleLabel}
-                  </p>
-                  <h3 className="mt-3 text-2xl font-semibold tracking-tight text-bone-50 md:text-3xl">
-                    {t.catalog.bundleCard}
-                  </h3>
-                  <p className="mt-2 text-sm text-bone-400">{t.catalog.bundleCardSub}</p>
-                </div>
-                <div className="relative flex items-end justify-between">
-                  <span className="rounded-full bg-electric/15 px-3 py-1.5 text-xs font-semibold text-electric">
-                    −{savePct}%
-                  </span>
-                  <p className="text-end" dir="ltr">
-                    <span className="block text-sm text-bone-500 line-through">
-                      {fmtPrice(bundle.compareAt, lang)}
-                    </span>
-                    <span className="text-grad block font-display text-2xl font-semibold">
-                      {fmtPrice(bundle.price, lang)}
-                    </span>
-                  </p>
-                </div>
-              </article>
-            </Link>
-          </StaggerItem>
-        </Stagger>
-      </section>
-
-      {/* ============================================= JOURNEY + EXAMPLES ===== */}
-      <section className="border-y border-line/10 bg-ink-800/40">
-        <div className="container-edge mx-auto max-w-edge py-20 md:py-32">
-          <div className="text-center">
-            <Reveal>
-              <div className="flex justify-center">
-                <SectionLabel index="03">{t.home.pathLabel}</SectionLabel>
-              </div>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <h2 className="mx-auto mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
                 {t.home.pathTitleA}{" "}
                 <span className="text-grad font-serif font-normal italic tracking-normal">
                   {t.home.pathTitleI}
@@ -526,62 +590,18 @@ export default function HomeView() {
                 {t.home.pathTitleB}
               </h2>
             </Reveal>
-            <Reveal delay={0.1}>
-              <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-bone-400">
-                {t.home.pathNote}
-              </p>
-            </Reveal>
           </div>
-          <PathRail />
+          <Reveal delay={0.1}>
+            <p className="text-sm text-bone-400">{t.home.pathNote}</p>
+          </Reveal>
         </div>
+        <MethodStrip />
       </section>
 
       {/* ============================================= INSTRUCTOR ============= */}
-      <section className="container-edge mx-auto max-w-edge py-20 md:py-28">
-        <div className="grid items-center gap-12 lg:grid-cols-12">
-          {/* duotone editorial portrait */}
-          <div className="lg:col-span-5">
-            <Reveal>
-              <div className="relative">
-                <div
-                  aria-hidden
-                  className="absolute -inset-3 rounded-[2rem] border border-line/15"
-                />
-                <motion.div
-                  whileHover={{ rotate: -0.8 }}
-                  className="group relative overflow-hidden rounded-3xl"
-                >
-                  <Media
-                    src="/lms/instructor-alt.png"
-                    alt="Mohamed Tarek — art director and Method instructor"
-                    sizes="(min-width: 1024px) 40vw, 100vw"
-                    className="h-auto w-full object-cover saturate-0 transition-all duration-1000 ease-cinema group-hover:saturate-100"
-                  />
-                  {/* magenta→cyan duotone wash */}
-                  <div
-                    aria-hidden
-                    className="absolute inset-0 mix-blend-color transition-opacity duration-1000 group-hover:opacity-0"
-                    style={{
-                      background:
-                        "linear-gradient(160deg, rgb(var(--mint) / 0.55) 0%, rgb(var(--electric) / 0.45) 100%)",
-                    }}
-                  />
-                  <div aria-hidden className="absolute inset-0 bg-noise opacity-[0.08]" />
-                  <div
-                    aria-hidden
-                    className="absolute inset-0 bg-gradient-to-t from-ink-900/70 via-transparent to-transparent"
-                  />
-                  <div className="absolute bottom-5 left-5">
-                    <p className="font-serif text-2xl italic text-bone-50">Mohamed Tarek</p>
-                    <p className="text-[11px] uppercase tracking-ultra text-bone-200/80">
-                      Art Director · Instructor
-                    </p>
-                  </div>
-                </motion.div>
-              </div>
-            </Reveal>
-          </div>
-          <div className="lg:col-span-7">
+      <section className="border-y border-line/10 bg-ink-800/40">
+        <div className="container-edge mx-auto grid max-w-edge items-center gap-12 py-20 md:py-28 lg:grid-cols-12">
+          <div className="lg:col-span-8">
             <Reveal>
               <SectionLabel index="04">{t.home.instructorLabel}</SectionLabel>
             </Reveal>
@@ -615,17 +635,48 @@ export default function HomeView() {
               </div>
             </Reveal>
             <Reveal delay={0.18}>
-              <div className="mt-8">
+              <div className="mt-8 flex flex-wrap gap-4">
                 <Magnetic>
                   <Link href="/instructor/" className="btn btn-ghost px-7 py-3.5">
                     {t.home.instructorCta} →
                   </Link>
                 </Magnetic>
+                <Magnetic>
+                  <Link href="/training/" className="btn btn-ghost px-7 py-3.5">
+                    {t.nav.training} →
+                  </Link>
+                </Magnetic>
               </div>
             </Reveal>
           </div>
+          {/* vertical portrait — clean, no wash */}
+          <div className="lg:col-span-4">
+            <Reveal delay={0.1}>
+              <motion.div
+                whileHover={{ rotate: -0.8 }}
+                className="relative mx-auto max-w-sm overflow-hidden rounded-3xl border border-line/15"
+              >
+                <Media
+                  src="/lms/instructor-portrait.jpg"
+                  alt="Mohamed Tarek — art director and Method instructor"
+                  sizes="(min-width: 1024px) 30vw, 100vw"
+                  className="h-auto w-full object-cover"
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-t from-ink-900/60 via-transparent to-transparent"
+                />
+                <div className="absolute bottom-5 left-5">
+                  <p className="font-serif text-2xl italic text-bone-50">Mohamed Tarek</p>
+                  <p className="text-[11px] uppercase tracking-ultra text-bone-200/80">
+                    Art Director · Instructor
+                  </p>
+                </div>
+              </motion.div>
+            </Reveal>
+          </div>
         </div>
-        <div className="mt-16">
+        <div className="pb-16">
           <p className="mb-6 text-center text-xs uppercase tracking-ultra text-bone-500">
             {t.home.brandsNote}
           </p>
@@ -633,8 +684,8 @@ export default function HomeView() {
         </div>
       </section>
 
-      {/* ============================================= PROOF + STORIES ======== */}
-      <section className="overflow-hidden border-t border-line/10 py-20 md:py-28">
+      {/* ============================================= PROOF + STORY ========== */}
+      <section className="overflow-hidden py-20 md:py-28">
         <div className="container-edge mx-auto max-w-edge">
           <Reveal>
             <SectionLabel index="05">{t.home.outcomesLabel}</SectionLabel>
@@ -649,7 +700,6 @@ export default function HomeView() {
             </h2>
           </Reveal>
 
-          {/* compact outcome counters */}
           <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {t.home.outcomes.map((x, i) => (
               <Reveal key={x.l} delay={i * 0.06}>
@@ -704,16 +754,15 @@ export default function HomeView() {
                     ))}
                   </div>
                 </div>
-                {/* before/after portfolio preview */}
                 <div className="lg:col-span-5">
                   <div className="group relative overflow-hidden rounded-2xl border border-line/15">
                     <div className="aspect-[4/3]">
                       <Media
-                        src="/work/axia/insta-2.webp"
-                        alt="Student final project — AI campaign frame, before and after finishing"
+                        src="/lms/story.jpg"
+                        alt="Graduate portfolio piece — AI campaign hero visual"
                         fill
                         sizes="(min-width: 1024px) 40vw, 100vw"
-                        className="object-cover brightness-[0.6] saturate-0 transition-all duration-1000 ease-cinema group-hover:scale-[1.03] group-hover:brightness-100 group-hover:saturate-100"
+                        className="object-cover brightness-[0.65] saturate-0 transition-all duration-1000 ease-cinema group-hover:scale-[1.03] group-hover:brightness-100 group-hover:saturate-100"
                       />
                     </div>
                     <span className="absolute bottom-4 left-4 rounded-full bg-ink-900/80 px-3.5 py-1.5 text-[11px] text-bone-200 backdrop-blur transition-colors duration-500 group-hover:bg-mint group-hover:text-white">
@@ -776,117 +825,6 @@ export default function HomeView() {
             </div>
           </div>
         </div>
-
-        {/* portfolio gallery — made with the Method */}
-        <div className="mt-14 overflow-hidden">
-          <p className="mb-6 text-center text-xs uppercase tracking-ultra text-bone-500">
-            {t.home.galleryLabel}
-          </p>
-          <div className="flex w-max animate-marquee-rev items-stretch gap-5" style={{ animationDuration: "75s" }} dir="ltr">
-            {[...gallery, ...gallery].map((g, i) => (
-              <div
-                key={`${g.src}-${i}`}
-                className="group relative h-52 w-72 shrink-0 overflow-hidden rounded-xl border border-line/10 md:h-60 md:w-96"
-              >
-                <Media
-                  src={g.src}
-                  alt={g.alt}
-                  fill
-                  sizes="384px"
-                  className="object-cover saturate-[0.6] transition-all duration-700 ease-cinema group-hover:scale-105 group-hover:saturate-100"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================= THE AI STACK =========== */}
-      <section className="container-edge mx-auto max-w-edge py-20 md:py-28">
-        <Reveal>
-          <div className="relative overflow-hidden rounded-3xl border border-mint/25 bg-ink-800">
-            <span
-              aria-hidden
-              className="text-grad pointer-events-none absolute -top-6 right-0 font-display text-[10rem] font-bold leading-none opacity-20 md:text-[15rem]"
-            >
-              AI
-            </span>
-            <div
-              aria-hidden
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(130deg, rgb(var(--mint) / 0.2) 0%, transparent 45%, rgb(var(--electric) / 0.16) 100%)",
-              }}
-            />
-            <div aria-hidden className="absolute inset-0 bg-noise opacity-[0.06]" />
-            <div className="relative grid items-center gap-10 p-8 md:p-14 lg:grid-cols-12">
-              <div className="lg:col-span-7">
-                <Sticker tone="mint" rotate={-3}>
-                  {t.home.bundleLabel} · {savePct}%−
-                </Sticker>
-                <h2 className="mt-5 text-balance font-display text-3xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-5xl">
-                  {bundle.title[lang]}
-                </h2>
-                <p className="mt-4 max-w-xl text-pretty text-sm leading-relaxed text-bone-400 md:text-base">
-                  {bundle.desc[lang]}
-                </p>
-                <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs uppercase tracking-ultra text-bone-500">
-                  <span dir="ltr">
-                    {fmtDuration(bundleMins, lang)} {t.bundle.totalRuntime}
-                  </span>
-                  <span>
-                    {bundleLessons} {t.bundle.totalLessons}
-                  </span>
-                </div>
-                <div className="mt-8 flex flex-wrap items-center gap-5">
-                  <Magnetic>
-                    <Link href="/bundle/" className="btn btn-primary px-8 py-4">
-                      {t.home.bundleCta}
-                    </Link>
-                  </Magnetic>
-                  <p dir="ltr">
-                    <span className="me-3 text-bone-500 line-through">
-                      {fmtPrice(bundle.compareAt, lang)}
-                    </span>
-                    <span className="font-display text-3xl font-semibold text-bone-50">
-                      {fmtPrice(bundle.price, lang)}
-                    </span>
-                  </p>
-                </div>
-              </div>
-              {/* real AI spots — shipped work as the sales argument */}
-              <div className="hidden gap-4 lg:col-span-5 lg:grid lg:grid-cols-2">
-                {[
-                  { src: "/lms/reels/reel-e.mp4", label: "AI brand reel" },
-                  { src: "/lms/reels/tilal-aerial.mp4", label: "AI film — aerial" },
-                ].map((v, i) => (
-                  <motion.div
-                    key={v.src}
-                    whileHover={{ rotate: i === 0 ? -2 : 2, y: -6 }}
-                    className={`relative overflow-hidden rounded-2xl border border-line/15 ${
-                      i === 1 ? "translate-y-6" : ""
-                    }`}
-                  >
-                    <video
-                      src={withBase(v.src)}
-                      aria-label={v.label}
-                      className="aspect-[3/4] h-full w-full object-cover"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                    />
-                    <span className="absolute bottom-3 left-3 rounded-full bg-ink-900/75 px-3 py-1 text-[10px] uppercase tracking-widest text-bone-200 backdrop-blur">
-                      ▶ {v.label}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </Reveal>
       </section>
 
       {/* ============================================= FINAL CTA ============== */}

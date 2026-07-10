@@ -8,6 +8,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import GlyphPlate from "@/components/lms/GlyphPlate";
 import { useLang } from "@/lib/i18n";
 import { useStore, enroll } from "@/lib/store";
+import { openAuth } from "@/components/lms/AuthModal";
 import { site, payments } from "@/lib/site";
 import {
   bundle,
@@ -160,18 +161,20 @@ export default function CheckoutView() {
                 <div className="text-center">
                   <p className="text-bone-300">{t.checkout.loginFirst}</p>
                   <div className="mt-6 flex flex-wrap justify-center gap-4">
-                    <Link
-                      href={`/register/?next=${encodeURIComponent(selfUrl)}`}
-                      className="rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-white"
+                    <button
+                      type="button"
+                      onClick={() => openAuth("register")}
+                      className="btn btn-primary px-7 py-3.5"
                     >
                       {t.auth.registerBtn}
-                    </Link>
-                    <Link
-                      href={`/login/?next=${encodeURIComponent(selfUrl)}`}
-                      className="rounded-full border border-line/20 px-7 py-3.5 text-sm text-bone-50"
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openAuth("login")}
+                      className="btn btn-ghost px-7 py-3.5"
                     >
                       {t.auth.loginBtn}
-                    </Link>
+                    </button>
                   </div>
                 </div>
               ) : isFree ? (
@@ -182,7 +185,7 @@ export default function CheckoutView() {
                   <button
                     type="button"
                     onClick={complete}
-                    className="mt-7 rounded-full bg-mint px-9 py-4 text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.04]"
+                    className="btn btn-primary mt-7 px-9 py-4"
                   >
                     {t.checkout.freeBtn}
                   </button>
@@ -257,7 +260,7 @@ export default function CheckoutView() {
                   <button
                     type="button"
                     onClick={confirmPaid}
-                    className="mt-7 w-full rounded-full bg-mint py-4 text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.02]"
+                    className="btn btn-primary mt-7 w-full py-4"
                   >
                     {t.checkout.confirmBtn}
                   </button>

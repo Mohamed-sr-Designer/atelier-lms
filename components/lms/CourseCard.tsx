@@ -30,17 +30,17 @@ export default function CourseCard({
       <article className="flex h-full flex-col">
         <div className="relative [container-type:inline-size]">
           <GlyphPlate course={course} eager={eager} className="aspect-[4/3]" />
-          {/* price chip */}
+          {/* price chip — the offer must read from across the room */}
           <span
-            className={`absolute bottom-4 left-4 rounded-full px-3.5 py-1.5 text-xs font-medium backdrop-blur-md rtl:left-auto rtl:right-4 ${
+            className={`absolute bottom-4 left-4 rounded-full px-4 py-2 text-sm font-bold backdrop-blur-md transition-transform duration-300 group-hover:scale-105 ${
               course.price === 0
-                ? "bg-mint text-white"
-                : "bg-ink-900/80 text-bone-50 ring-1 ring-line/15"
+                ? "text-white shadow-[0_6px_24px_rgb(var(--mint)/0.5)] [background:linear-gradient(120deg,rgb(var(--mint)),rgb(var(--electric)))]"
+                : "bg-ink-900/85 text-bone-50 ring-1 ring-mint/40"
             }`}
           >
-            {fmtPrice(course.price, lang)}
+            {course.price === 0 ? `✦ ${fmtPrice(0, lang)}` : fmtPrice(course.price, lang)}
             {course.compareAt ? (
-              <span className="ml-1.5 text-bone-400 line-through rtl:ml-0 rtl:mr-1.5">
+              <span className="ml-1.5 text-xs font-medium text-bone-500 line-through">
                 {course.compareAt.toLocaleString("en-US")}
               </span>
             ) : null}

@@ -7,6 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { useLang } from "@/lib/i18n";
 import { useStore, login, logout, enrolledCourses } from "@/lib/store";
+import { openAuth } from "@/components/lms/AuthModal";
 import { getCourse } from "@/lib/courses";
 
 export default function ProfileView() {
@@ -14,6 +15,7 @@ export default function ProfileView() {
   const router = useRouter();
   const store = useStore();
   const [name, setName] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
 
   if (!store.user) {
@@ -23,18 +25,20 @@ export default function ProfileView() {
           {t.checkout.loginFirst}
         </p>
         <div className="mt-8 flex justify-center gap-4">
-          <Link
-            href="/login/?next=%2Fprofile%2F"
-            className="rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-white"
+          <button
+            type="button"
+            onClick={() => openAuth("login")}
+            className="btn btn-primary px-7 py-3.5"
           >
             {t.auth.loginBtn}
-          </Link>
+          </button>
         </div>
       </section>
     );
   }
 
   const displayName = name ?? store.user.name;
+  const displayEmail = email ?? store.user.email;
   const joined = new Date(store.user.joined).toLocaleDateString("en-GB", {
     year: "numeric",
     month: "long",
@@ -53,8 +57,9 @@ export default function ProfileView() {
   const save = (e: React.FormEvent) => {
     e.preventDefault();
     const clean = displayName.trim();
-    if (!clean) return;
-    login(clean, store.user!.email);
+    const cleanEmail = displayEmail.trim();
+    if (!clean || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) return;
+    login(clean, cleanEmail);
     setSaved(true);
     setTimeout(() => setSaved(false), 1800);
   };
@@ -132,10 +137,18 @@ export default function ProfileView() {
               className="mt-2 w-full rounded-lg border border-line/15 bg-ink-900 px-4 py-3.5 text-sm text-bone-50 focus:border-mint/60 focus:outline-none"
             />
           </label>
-          <button
-            type="submit"
-            className="mt-6 rounded-full bg-mint px-7 py-3 text-sm font-medium text-white transition-transform hover:scale-[1.03]"
-          >
+          <label className="mt-5 block">
+            <span className="text-xs uppercase tracking-ultra text-bone-500">
+              {t.auth.email}
+            </span>
+            <input
+              type="email"
+              value={displayEmail}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-2 w-full rounded-lg border border-line/15 bg-ink-900 px-4 py-3.5 text-sm text-bone-50 focus:border-mint/60 focus:outline-none"
+            />
+          </label>
+          <button type="submit" className="btn btn-primary mt-6 px-7 py-3">
             {saved ? t.profile.saved : t.profile.saveBtn}
           </button>
         </form>

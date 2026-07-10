@@ -16,23 +16,27 @@ import { stats } from "@/lib/courses";
 const academies = [
   {
     name: "SOIC — School of Cinema",
+    logo: "/lms/academies/soic.jpg",
     role: "Design & AI Production Instructor",
     desc: "Cinema-focused design education: visual storytelling, key art and AI production for film students.",
     now: true,
   },
   {
     name: "EDUX Academy",
+    logo: "/lms/academies/edux.jpg",
     role: "Graphic Design Instructor",
     desc: "Graphic design tracks taking students from fundamentals to portfolio-ready execution.",
     now: true,
   },
   {
     name: "Teaching Planet Academy",
+    logo: "/lms/academies/teaching.jpg",
     role: "Designer & Instructor",
     desc: "Applied design programs where course material was built from live client briefs.",
   },
   {
     name: "Raya Academy",
+    logo: "/lms/academies/raya.jpg",
     role: "Design Instructor",
     desc: "Corporate-backed training with a focus on production speed and professional workflow.",
   },
@@ -41,22 +45,30 @@ const academies = [
 const ladder = [
   {
     co: "Osolutions — Makkah, KSA",
+    logos: ["/lms/companies/osolutions.jpg"],
     role: "Art Team Lead",
     note: "Leading brand, campaign and motion output for regional clients.",
     now: true,
   },
   {
     co: "Bundle IMS — Kuwait",
+    logos: ["/lms/companies/bundle.jpg"],
     role: "Senior Designer, Automotive & BTL",
     note: "Key visuals and campaign systems for Rolls-Royce, Geely, GWM and AlGhanim.",
   },
   {
     co: "Prepd — Food-tech",
+    logos: ["/lms/companies/prepd.jpg"],
     role: "Brand Designer",
     note: "Full campaign and social systems for a food-tech startup.",
   },
   {
     co: "Pala De 7 · Flowrista · JUMPPEAK",
+    logos: [
+      "/lms/companies/pala7.jpg",
+      "/lms/companies/flowrista.jpg",
+      "/lms/companies/jumppeak.jpg",
+    ],
     role: "Designer & Freelance Art Direction",
     note: "Identity, retail and campaign work across sport, floral and e-commerce.",
   },
@@ -114,7 +126,7 @@ export default function InstructorView() {
                 <Magnetic>
                   <Link
                     href="/courses/"
-                    className="inline-block rounded-full bg-mint px-8 py-4 text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.04]"
+                    className="btn btn-primary px-8 py-4"
                   >
                     {t.home.ctaSecondary} →
                   </Link>
@@ -184,9 +196,17 @@ export default function InstructorView() {
               className="flex h-full flex-col gap-3 rounded-xl border border-line/10 bg-ink-800/60 p-7 transition-colors duration-300 hover:border-mint/30"
             >
               <div className="flex items-start justify-between gap-3">
-                <h3 className="text-xl font-semibold tracking-tight text-bone-50 md:text-2xl">
-                  {a.name}
-                </h3>
+                <div className="flex items-center gap-4">
+                  <Media
+                    src={a.logo}
+                    alt={`${a.name} logo`}
+                    sizes="56px"
+                    className="h-14 w-14 shrink-0 rounded-xl border border-line/15 object-cover"
+                  />
+                  <h3 className="text-xl font-semibold tracking-tight text-bone-50 md:text-2xl">
+                    {a.name}
+                  </h3>
+                </div>
                 {a.now ? (
                   <span className="flex shrink-0 items-center gap-1.5 rounded-full border border-mint/30 bg-mint/5 px-3 py-1 text-xs text-mint">
                     <span className="h-1.5 w-1.5 rounded-full bg-mint" />
@@ -214,19 +234,32 @@ export default function InstructorView() {
           <div className="mt-10 border-t border-line/10">
             {ladder.map((x, i) => (
               <Reveal key={x.co}>
-                <div className="grid gap-3 border-b border-line/10 py-7 md:grid-cols-12 md:items-baseline">
+                <div className="grid gap-3 border-b border-line/10 py-7 md:grid-cols-12 md:items-center">
                   <p className="font-serif text-sm italic text-mint md:col-span-1">
                     {String(i + 1).padStart(2, "0")}
                   </p>
                   <div className="md:col-span-4">
-                    <p className="flex flex-wrap items-center gap-3 text-lg font-semibold tracking-tight text-bone-50">
-                      {x.co}
-                      {x.now && (
-                        <span className="rounded-full border border-mint/30 bg-mint/5 px-2.5 py-0.5 text-[10px] text-mint">
-                          Now
-                        </span>
-                      )}
-                    </p>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="flex -space-x-2">
+                        {x.logos.map((l) => (
+                          <Media
+                            key={l}
+                            src={l}
+                            alt={`${x.co} logo`}
+                            sizes="44px"
+                            className="h-11 w-11 rounded-full border-2 border-ink-900 object-cover"
+                          />
+                        ))}
+                      </span>
+                      <p className="flex flex-wrap items-center gap-3 text-lg font-semibold tracking-tight text-bone-50">
+                        {x.co}
+                        {x.now && (
+                          <span className="rounded-full border border-mint/30 bg-mint/5 px-2.5 py-0.5 text-[10px] text-mint">
+                            Now
+                          </span>
+                        )}
+                      </p>
+                    </div>
                   </div>
                   <p className="text-sm text-bone-300 md:col-span-3">{x.role}</p>
                   <p className="text-sm text-bone-500 md:col-span-4">{x.note}</p>
@@ -286,7 +319,7 @@ export default function InstructorView() {
               <Magnetic strength={0.5}>
                 <Link
                   href="/courses/adobe-photoshop/"
-                  className="inline-block rounded-full bg-mint px-10 py-5 text-base font-medium text-white transition-transform duration-300 hover:scale-[1.05]"
+                  className="btn btn-primary px-10 py-5 text-base"
                 >
                   {t.home.finalCta}
                 </Link>

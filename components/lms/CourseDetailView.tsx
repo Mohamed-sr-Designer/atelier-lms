@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Media } from "@/components/ui/Media";
@@ -10,6 +11,7 @@ import CurriculumIndex from "@/components/lms/CurriculumIndex";
 import FaqList from "@/components/lms/FaqList";
 import CourseCard from "@/components/lms/CourseCard";
 import { useLang } from "@/lib/i18n";
+import { withBase } from "@/lib/base";
 import { useStore, isEnrolled } from "@/lib/store";
 import {
   bundle,
@@ -158,7 +160,7 @@ export default function CourseDetailView({ course }: { course: Course }) {
                     <Magnetic className="mt-6 block">
                       <Link
                         href={ctaHref}
-                        className="block w-full rounded-full bg-mint py-4 text-center text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.02]"
+                        className="btn btn-primary w-full py-4"
                       >
                         {ctaLabel}
                       </Link>
@@ -406,6 +408,71 @@ export default function CourseDetailView({ course }: { course: Course }) {
         </div>
       </section>
 
+      {/* ------------------------------------------------ showcase gallery */}
+      {course.showcase && (
+        <section className="border-t border-line/10 bg-ink-800/40">
+          <div className="container-edge mx-auto max-w-edge py-20 md:py-28">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <Reveal>
+                <SectionLabel index="✦">{t.course.showcaseLabel}</SectionLabel>
+              </Reveal>
+              <Reveal delay={0.05}>
+                <p className="max-w-sm text-sm text-bone-400">{t.course.showcaseNote}</p>
+              </Reveal>
+            </div>
+            {course.showcase.images && (
+              <Stagger className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+                {course.showcase.images.map((src, i) => (
+                  <StaggerItem
+                    key={src}
+                    className={i % 5 === 0 ? "col-span-2 row-span-2" : ""}
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.02, rotate: i % 2 === 0 ? -0.6 : 0.6 }}
+                      className="group relative h-full min-h-[10rem] overflow-hidden rounded-xl border border-line/10"
+                    >
+                      <Media
+                        src={src}
+                        alt={`Made with this course — AI production frame ${i + 1}`}
+                        fill
+                        sizes="(min-width: 768px) 25vw, 50vw"
+                        className="object-cover saturate-[0.75] transition-all duration-700 ease-cinema group-hover:saturate-100"
+                      />
+                    </motion.div>
+                  </StaggerItem>
+                ))}
+              </Stagger>
+            )}
+            {course.showcase.videos && (
+              <Stagger className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {course.showcase.videos.map((src, i) => (
+                  <StaggerItem key={src}>
+                    <motion.div
+                      whileHover={{ scale: 1.02, rotate: i % 2 === 0 ? -0.6 : 0.6 }}
+                      className="relative overflow-hidden rounded-xl border border-line/10"
+                    >
+                      <video
+                        src={withBase(src)}
+                        aria-label={`Made with this course — AI film ${i + 1}`}
+                        className="aspect-video w-full object-cover"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                      />
+                      <span className="absolute bottom-3 left-3 rounded-full bg-ink-900/75 px-3 py-1 text-[10px] uppercase tracking-widest text-bone-200 backdrop-blur">
+                        ▶ AI production
+                      </span>
+                    </motion.div>
+                  </StaggerItem>
+                ))}
+              </Stagger>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* ------------------------------------------------ instructor */}
       <section className="border-y border-line/10 bg-ink-800/40">
         <div className="container-edge mx-auto grid max-w-edge items-center gap-10 py-20 md:grid-cols-12 md:py-24">
@@ -525,7 +592,7 @@ export default function CourseDetailView({ course }: { course: Course }) {
           </div>
           <Link
             href={ctaHref}
-            className="rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-white"
+            className="btn btn-primary px-7 py-3.5"
           >
             {ctaLabel}
           </Link>
