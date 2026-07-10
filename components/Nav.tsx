@@ -184,21 +184,29 @@ export default function Nav() {
               <>
                 <Link
                   href="/dashboard/"
-                  className="hidden items-center gap-2 rounded-full border border-line/20 py-1.5 pl-1.5 pr-4 text-sm text-bone-50 transition-all duration-300 hover:border-mint/50 hover:bg-mint/5 md:flex"
+                  className="hidden items-center rounded-full border border-line/20 px-4 py-2 text-sm text-bone-50 transition-all duration-300 hover:border-mint/50 hover:bg-mint/5 md:flex"
+                >
+                  {t.nav.dashboard}
+                </Link>
+                {/* avatar → account settings */}
+                <Link
+                  href="/profile/"
+                  aria-label={t.nav.account}
+                  title={t.nav.account}
+                  className="hidden rounded-full ring-1 ring-line/25 transition-all duration-300 hover:ring-mint/60 md:block"
                 >
                   {store.user.avatar ? (
                     /* eslint-disable-next-line @next/next/no-img-element */
                     <img
                       src={store.user.avatar}
-                      alt=""
-                      className="h-7 w-7 rounded-full object-cover"
+                      alt={t.nav.account}
+                      className="h-9 w-9 rounded-full object-cover"
                     />
                   ) : (
-                    <span className="grid h-7 w-7 place-items-center rounded-full bg-mint/15 font-serif text-xs italic text-mint">
+                    <span className="grid h-9 w-9 place-items-center rounded-full bg-mint/15 font-serif text-sm italic text-mint">
                       {store.user.name.trim().charAt(0).toUpperCase() || "T"}
                     </span>
                   )}
-                  {t.nav.dashboard}
                 </Link>
                 <button
                   type="button"
@@ -292,6 +300,13 @@ export default function Nav() {
                     className="btn btn-primary px-6 py-3.5"
                   >
                     {t.nav.dashboard}
+                  </Link>
+                  <Link
+                    href="/profile/"
+                    onClick={() => setOpen(false)}
+                    className="btn btn-ghost px-6 py-3.5"
+                  >
+                    {t.nav.account}
                   </Link>
                   <button
                     type="button"

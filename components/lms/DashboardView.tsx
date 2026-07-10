@@ -79,9 +79,21 @@ export default function DashboardView() {
         </h1>
       </Reveal>
       <Reveal delay={0.1}>
-        <p className="mt-4 text-sm text-bone-400 md:text-base">
-          {enrolled.length ? t.dash.sub : t.dash.subEmpty}
-        </p>
+        <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-3">
+          <p className="text-sm text-bone-400 md:text-base">
+            {enrolled.length ? t.dash.sub : t.dash.subEmpty}
+          </p>
+          <Link
+            href="/profile/"
+            className="inline-flex items-center gap-2 rounded-full border border-line/20 px-4 py-2 text-xs text-bone-200 transition-colors hover:border-mint/50 hover:text-mint"
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 21c0-4 3.6-6 8-6s8 2 8 6" />
+            </svg>
+            {t.dash.accountCta}
+          </Link>
+        </div>
       </Reveal>
 
       {/* stats */}

@@ -58,20 +58,20 @@ const ladder = [
     note: "Key visuals and campaign systems for Rolls-Royce, Geely, GWM and AlGhanim.",
   },
   {
-    co: "Prepd — Food-tech",
-    logos: ["/lms/companies/prepd.jpg"],
-    role: "Brand Designer",
-    note: "Full campaign and social systems for a food-tech startup.",
+    co: "JUMPPEAK — E-commerce",
+    logos: ["/lms/companies/jumppeak.jpg"],
+    role: "Designer & Art Direction",
+    note: "Identity, retail and full campaign systems for the JUMPPEAK brand.",
   },
   {
-    co: "Pala De 7 · Flowrista · JUMPPEAK",
+    co: "Pala De 7 · Flowrista · Prepd",
     logos: [
       "/lms/companies/pala7.jpg",
       "/lms/companies/flowrista.jpg",
-      "/lms/companies/jumppeak.jpg",
+      "/lms/companies/prepd.jpg",
     ],
     role: "Designer & Freelance Art Direction",
-    note: "Identity, retail and campaign work across sport, floral and e-commerce.",
+    note: "Identity, retail and campaign work across sport, floral and food-tech.",
   },
 ];
 

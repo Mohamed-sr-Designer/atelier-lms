@@ -29,10 +29,18 @@ export default function Template({ children }: { children: React.ReactNode }) {
         animate={{ opacity: 0 }}
         transition={{ duration: 0.55, ease }}
       />
-      {/* content rises out of the blur */}
+      {/* content rises out of the blur. The residual filter/transform must be
+          cleared once the animation ends — any value other than "none" turns
+          this wrapper into a containing block, which would un-fix the fixed
+          OfferBar and Nav rendered inside each page's SiteShell. */}
       <motion.div
         initial={{ opacity: 0, y: 16, filter: "blur(10px)" }}
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+        animate={{
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          transitionEnd: { filter: "none", transform: "none" },
+        }}
         transition={{ duration: 0.6, ease }}
       >
         {children}
