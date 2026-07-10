@@ -1,12 +1,8 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+// English-only build (the Arabic option was removed by request). The provider
+// keeps the same API shape so components using useLang() stay unchanged.
+import { createContext, useContext } from "react";
 import { dict, type Lang } from "@/lib/dict";
 
 type Ctx = {
@@ -16,44 +12,17 @@ type Ctx = {
   toggle: () => void;
 };
 
-const LangContext = createContext<Ctx>({
+const value: Ctx = {
   lang: "en",
   t: dict.en,
   setLang: () => {},
   toggle: () => {},
-});
+};
+
+const LangContext = createContext<Ctx>(value);
 
 export function LangProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("en");
-
-  // hydrate from storage after mount (SSR renders English)
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem("lang");
-      if (saved === "ar") setLangState("ar");
-    } catch {}
-  }, []);
-
-  useEffect(() => {
-    const el = document.documentElement;
-    el.lang = lang;
-    el.dir = lang === "ar" ? "rtl" : "ltr";
-    try {
-      localStorage.setItem("lang", lang);
-    } catch {}
-  }, [lang]);
-
-  const setLang = useCallback((l: Lang) => setLangState(l), []);
-  const toggle = useCallback(
-    () => setLangState((v) => (v === "en" ? "ar" : "en")),
-    []
-  );
-
-  return (
-    <LangContext.Provider value={{ lang, t: dict[lang], setLang, toggle }}>
-      {children}
-    </LangContext.Provider>
-  );
+  return <LangContext.Provider value={value}>{children}</LangContext.Provider>;
 }
 
 export function useLang() {

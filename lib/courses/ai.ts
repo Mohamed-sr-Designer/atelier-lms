@@ -146,7 +146,7 @@ export const aiVideo: Course = {
   },
   price: 2250,
   compareAt: 3200,
-  cover: "/motion/ai-motion.jpg",
+  cover: "/work/tilal/hero.webp",
   outcomes: [
     "Prompt motion with camera language: pans, pushes, speed",
     "Storyboard a spot before generating a single frame",

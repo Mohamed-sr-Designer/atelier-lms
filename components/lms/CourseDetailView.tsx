@@ -71,7 +71,7 @@ export default function CourseDetailView({ course }: { course: Course }) {
               <div className="mt-8 flex items-center gap-4">
                 <SectionLabel index={course.index}>{course.level[lang]}</SectionLabel>
                 {course.price === 0 && (
-                  <span className="rounded-full bg-mint px-3 py-1 text-[11px] font-medium text-ink-900">
+                  <span className="rounded-full bg-mint px-3 py-1 text-[11px] font-medium text-white">
                     {t.common.free}
                   </span>
                 )}
@@ -158,7 +158,7 @@ export default function CourseDetailView({ course }: { course: Course }) {
                     <Magnetic className="mt-6 block">
                       <Link
                         href={ctaHref}
-                        className="block w-full rounded-full bg-mint py-4 text-center text-sm font-medium text-ink-900 transition-transform duration-300 hover:scale-[1.02]"
+                        className="block w-full rounded-full bg-mint py-4 text-center text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.02]"
                       >
                         {ctaLabel}
                       </Link>
@@ -525,7 +525,7 @@ export default function CourseDetailView({ course }: { course: Course }) {
           </div>
           <Link
             href={ctaHref}
-            className="rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-ink-900"
+            className="rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-white"
           >
             {ctaLabel}
           </Link>

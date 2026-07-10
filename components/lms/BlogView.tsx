@@ -53,10 +53,11 @@ export default function BlogView() {
                 </div>
                 <div className="pt-5">
                   <p className="text-xs text-bone-500">
-                    {new Date(p.date).toLocaleDateString(
-                      lang === "ar" ? "ar-EG" : "en-GB",
-                      { year: "numeric", month: "long", day: "numeric" }
-                    )}{" "}
+                    {new Date(p.date).toLocaleDateString("en-GB", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}{" "}
                     · {p.readMins} {t.blogUi.minsRead}
                   </p>
                   <h2
@@ -64,10 +65,10 @@ export default function BlogView() {
                       i === 0 ? "text-3xl md:text-4xl" : "text-2xl"
                     }`}
                   >
-                    {lang === "ar" ? p.titleAr : p.title}
+                    {p.title}
                   </h2>
                   <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-bone-400 md:text-base">
-                    {lang === "ar" ? p.excerptAr : p.excerpt}
+                    {p.excerpt}
                   </p>
                   <p className="mt-4 text-sm text-mint">
                     {t.blogUi.readMore}

@@ -7,7 +7,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import CourseCard from "@/components/lms/CourseCard";
 import { useLang } from "@/lib/i18n";
-import { bundle, bundleCourses, courses, fmtPrice } from "@/lib/courses";
+import { bundle, courses, fmtPrice } from "@/lib/courses";
 
 type Filter = "all" | "design" | "motion" | "ai";
 
@@ -124,11 +124,6 @@ export default function CatalogView() {
                 </p>
               </div>
               <div className="flex items-center gap-8">
-                <div className="hidden gap-3 font-serif text-4xl italic text-bone-50/80 sm:flex">
-                  {bundleCourses.map((c) => (
-                    <span key={c.slug}>{c.glyph}</span>
-                  ))}
-                </div>
                 <p className="text-end" dir="ltr">
                   <span className="block text-sm text-bone-500 line-through">
                     {fmtPrice(bundle.compareAt, lang)}

@@ -114,7 +114,7 @@ export default function InstructorView() {
                 <Magnetic>
                   <Link
                     href="/courses/"
-                    className="inline-block rounded-full bg-mint px-8 py-4 text-sm font-medium text-ink-900 transition-transform duration-300 hover:scale-[1.04]"
+                    className="inline-block rounded-full bg-mint px-8 py-4 text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.04]"
                   >
                     {t.home.ctaSecondary} →
                   </Link>
@@ -286,7 +286,7 @@ export default function InstructorView() {
               <Magnetic strength={0.5}>
                 <Link
                   href="/courses/adobe-photoshop/"
-                  className="inline-block rounded-full bg-mint px-10 py-5 text-base font-medium text-ink-900 transition-transform duration-300 hover:scale-[1.05]"
+                  className="inline-block rounded-full bg-mint px-10 py-5 text-base font-medium text-white transition-transform duration-300 hover:scale-[1.05]"
                 >
                   {t.home.finalCta}
                 </Link>

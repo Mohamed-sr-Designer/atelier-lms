@@ -34,7 +34,7 @@ export default function NotFound() {
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link
               href="/"
-              className="rounded-full bg-mint px-8 py-4 text-sm font-medium text-ink-900 transition-transform duration-300 hover:scale-[1.04]"
+              className="rounded-full bg-mint px-8 py-4 text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.04]"
             >
               {t.notFound.home}
             </Link>

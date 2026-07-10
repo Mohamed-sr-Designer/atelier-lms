@@ -131,8 +131,10 @@ export default function FeaturedCourse({ course }: { course: Course }) {
                 </div>
               ))}
               <p className="py-3 text-xs text-bone-500">
-                + {course.modules.length - 4 > 0 ? course.modules.length - 4 : 0}{" "}
-                {t.common.modules} · {t.course.curriculumNote}
+                {course.modules.length > 4
+                  ? `+ ${course.modules.length - 4} ${t.common.modules} · `
+                  : ""}
+                {t.course.curriculumNote}
               </p>
             </div>
           </Reveal>
@@ -142,7 +144,7 @@ export default function FeaturedCourse({ course }: { course: Course }) {
               <Magnetic>
                 <Link
                   href={`/courses/${course.slug}/`}
-                  className="inline-block rounded-full bg-mint px-8 py-4 text-sm font-semibold text-ink-900 transition-transform duration-300 hover:scale-[1.04] active:scale-95"
+                  className="inline-block rounded-full bg-mint px-8 py-4 text-sm font-semibold text-white transition-transform duration-300 hover:scale-[1.04] active:scale-95"
                 >
                   {t.home.featuredCta}
                 </Link>

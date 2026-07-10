@@ -25,7 +25,7 @@ export default function ProfileView() {
         <div className="mt-8 flex justify-center gap-4">
           <Link
             href="/login/?next=%2Fprofile%2F"
-            className="rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-ink-900"
+            className="rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-white"
           >
             {t.auth.loginBtn}
           </Link>
@@ -35,10 +35,10 @@ export default function ProfileView() {
   }
 
   const displayName = name ?? store.user.name;
-  const joined = new Date(store.user.joined).toLocaleDateString(
-    lang === "ar" ? "ar-EG" : "en-GB",
-    { year: "numeric", month: "long" }
-  );
+  const joined = new Date(store.user.joined).toLocaleDateString("en-GB", {
+    year: "numeric",
+    month: "long",
+  });
   const lessonsDone = Object.values(store.completed).reduce(
     (n, arr) => n + arr.length,
     0
@@ -134,7 +134,7 @@ export default function ProfileView() {
           </label>
           <button
             type="submit"
-            className="mt-6 rounded-full bg-mint px-7 py-3 text-sm font-medium text-ink-900 transition-transform hover:scale-[1.03]"
+            className="mt-6 rounded-full bg-mint px-7 py-3 text-sm font-medium text-white transition-transform hover:scale-[1.03]"
           >
             {saved ? t.profile.saved : t.profile.saveBtn}
           </button>

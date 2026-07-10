@@ -96,7 +96,7 @@ export default function QuizPanel({
             type="button"
             disabled={!allAnswered}
             onClick={check}
-            className="rounded-full bg-mint px-6 py-3 text-sm font-medium text-ink-900 transition-all duration-300 hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-full bg-mint px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:scale-[1.03] disabled:cursor-not-allowed disabled:opacity-40"
           >
             {t.learn.quizCheck}
           </button>

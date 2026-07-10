@@ -24,7 +24,7 @@ export const photoshop: Course = {
     ar: "المبتدئين ومصممي السوشيال ميديا وكل اللي اتعلم لوحده وعايز Workflow بمستوى الوكالات.",
   },
   price: 0,
-  cover: "/work/axia/hero.webp",
+  cover: "/work/axia/hero-2.webp",
   outcomes: [
     "Cut anything — hair, glass, motion blur — with clean edges",
     "Grade color like a colorist, not a filter user",

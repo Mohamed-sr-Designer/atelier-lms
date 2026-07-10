@@ -60,7 +60,11 @@ export default function CheckoutView() {
         method === "instapay" ? "InstaPay" : "Vodafone Cash"
       })`
     );
-    window.open(`https://wa.me/${site.whatsapp}?text=${msg}`, "_blank");
+    window.open(
+      `https://wa.me/${site.whatsapp}?text=${msg}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
     complete();
   };
 
@@ -158,7 +162,7 @@ export default function CheckoutView() {
                   <div className="mt-6 flex flex-wrap justify-center gap-4">
                     <Link
                       href={`/register/?next=${encodeURIComponent(selfUrl)}`}
-                      className="rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-ink-900"
+                      className="rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-white"
                     >
                       {t.auth.registerBtn}
                     </Link>
@@ -178,7 +182,7 @@ export default function CheckoutView() {
                   <button
                     type="button"
                     onClick={complete}
-                    className="mt-7 rounded-full bg-mint px-9 py-4 text-sm font-medium text-ink-900 transition-transform duration-300 hover:scale-[1.04]"
+                    className="mt-7 rounded-full bg-mint px-9 py-4 text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.04]"
                   >
                     {t.checkout.freeBtn}
                   </button>
@@ -253,7 +257,7 @@ export default function CheckoutView() {
                   <button
                     type="button"
                     onClick={confirmPaid}
-                    className="mt-7 w-full rounded-full bg-mint py-4 text-sm font-medium text-ink-900 transition-transform duration-300 hover:scale-[1.02]"
+                    className="mt-7 w-full rounded-full bg-mint py-4 text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.02]"
                   >
                     {t.checkout.confirmBtn}
                   </button>

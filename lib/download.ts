@@ -30,7 +30,7 @@ export function downloadResource(course: Course, r: Resource) {
   const blob = new Blob([lines], { type: "text/plain;charset=utf-8" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = `atelier-${course.slug}-${r.t
+  a.download = `method-${course.slug}-${r.t
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "")}.txt`;

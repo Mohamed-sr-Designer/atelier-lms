@@ -14,15 +14,13 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const [menu, setMenu] = useState(false); // courses dropdown
   const pathname = usePathname();
-  const { t, lang, toggle } = useLang();
+  const { t, lang } = useLang();
   const store = useStore();
 
+  // Deliberately minimal: Journal, FAQ and Contact live in the footer.
   const links = [
     { label: t.nav.courses, href: "/courses" },
     { label: t.nav.instructor, href: "/instructor" },
-    { label: t.nav.blog, href: "/blog" },
-    { label: t.nav.faq, href: "/faq" },
-    { label: t.nav.contact, href: "/contact" },
   ];
 
   const isActive = (href: string) => pathname.startsWith(href);
@@ -81,7 +79,7 @@ export default function Nav() {
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-7 lg:flex">
+          <nav className="hidden items-center gap-8 lg:flex">
             {links.map((item) =>
               item.href === "/courses" ? (
                 <div
@@ -112,7 +110,7 @@ export default function Nav() {
                         exit={{ opacity: 0, y: 8 }}
                         transition={{ duration: 0.2 }}
                         role="menu"
-                        className="absolute left-1/2 top-full w-[21rem] -translate-x-1/2 pt-4 rtl:left-auto rtl:right-1/2 rtl:translate-x-1/2"
+                        className="absolute left-1/2 top-full w-[21rem] -translate-x-1/2 pt-4"
                       >
                         <div className="overflow-hidden rounded-xl border border-line/15 bg-ink-800/95 p-2 shadow-2xl backdrop-blur-xl">
                           {courses.map((c) => (
@@ -123,9 +121,11 @@ export default function Nav() {
                               className="flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-ink-900"
                             >
                               <span className="flex min-w-0 items-center gap-3">
-                                <span className="w-7 shrink-0 font-serif text-lg italic text-mint">
-                                  {c.glyph}
-                                </span>
+                                <span
+                                  className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+                                    c.price === 0 ? "bg-mint" : "bg-electric"
+                                  }`}
+                                />
                                 <span className="block truncate text-sm text-bone-50">
                                   {c.short[lang]}
                                 </span>
@@ -173,22 +173,14 @@ export default function Nav() {
           </nav>
 
           <div className="flex items-center gap-2.5">
-            <button
-              type="button"
-              onClick={toggle}
-              className="rounded-full border border-line/20 px-3 py-2 text-xs font-medium text-bone-200 transition-colors hover:border-mint/50 hover:text-mint"
-              aria-label="Switch language"
-            >
-              {t.nav.langBtn}
-            </button>
             <ThemeToggle />
             {store.user ? (
               <Link
                 href="/dashboard/"
-                className="hidden items-center gap-2 rounded-full border border-line/20 py-1.5 pl-1.5 pr-4 text-sm text-bone-50 transition-all duration-300 hover:border-mint/50 hover:bg-mint/5 md:flex rtl:pl-4 rtl:pr-1.5"
+                className="hidden items-center gap-2 rounded-full border border-line/20 py-1.5 pl-1.5 pr-4 text-sm text-bone-50 transition-all duration-300 hover:border-mint/50 hover:bg-mint/5 md:flex"
               >
                 <span className="grid h-7 w-7 place-items-center rounded-full bg-mint/15 font-serif text-xs italic text-mint">
-                  {store.user.name.trim().charAt(0).toUpperCase() || "A"}
+                  {store.user.name.trim().charAt(0).toUpperCase() || "M"}
                 </span>
                 {t.nav.dashboard}
               </Link>
@@ -200,10 +192,7 @@ export default function Nav() {
                 >
                   {t.nav.login}
                 </Link>
-                <Link
-                  href="/register/"
-                  className="hidden rounded-full bg-mint px-5 py-2 text-sm font-medium text-ink-900 transition-transform duration-300 hover:scale-[1.04] md:inline-block"
-                >
+                <Link href="/register/" className="btn btn-primary hidden px-5 py-2.5 md:inline-flex">
                   {t.nav.startFree}
                 </Link>
               </>
@@ -251,7 +240,7 @@ export default function Nav() {
                     onClick={() => setOpen(false)}
                     className="font-serif text-4xl text-bone-50"
                   >
-                    <span className="mr-3 align-top text-sm text-bone-400 rtl:ml-3 rtl:mr-0">
+                    <span className="mr-3 align-top text-sm text-bone-400">
                       0{i + 1}
                     </span>
                     {item.label}
@@ -264,7 +253,7 @@ export default function Nav() {
                 <Link
                   href="/dashboard/"
                   onClick={() => setOpen(false)}
-                  className="rounded-full bg-mint px-6 py-3 text-sm font-medium text-ink-900"
+                  className="btn btn-primary px-6 py-3.5"
                 >
                   {t.nav.dashboard}
                 </Link>
@@ -273,14 +262,14 @@ export default function Nav() {
                   <Link
                     href="/register/"
                     onClick={() => setOpen(false)}
-                    className="rounded-full bg-mint px-6 py-3 text-sm font-medium text-ink-900"
+                    className="btn btn-primary px-6 py-3.5"
                   >
                     {t.nav.startFree}
                   </Link>
                   <Link
                     href="/login/"
                     onClick={() => setOpen(false)}
-                    className="rounded-full border border-line/20 px-6 py-3 text-sm text-bone-50"
+                    className="btn btn-ghost px-6 py-3.5"
                   >
                     {t.nav.login}
                   </Link>

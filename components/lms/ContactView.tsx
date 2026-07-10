@@ -57,7 +57,7 @@ export default function ContactView() {
                 href={`https://wa.me/${site.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full bg-mint px-8 py-4 text-sm font-medium text-ink-900 transition-transform duration-300 hover:scale-[1.04]"
+                className="rounded-full bg-mint px-8 py-4 text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.04]"
               >
                 {t.contact.waCta}
               </a>
@@ -147,7 +147,7 @@ export default function ContactView() {
             </label>
             <button
               type="submit"
-              className="mt-8 w-full rounded-full bg-mint py-4 text-sm font-medium text-ink-900 transition-transform duration-300 hover:scale-[1.02]"
+              className="mt-8 w-full rounded-full bg-mint py-4 text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.02]"
             >
               {t.contact.formSend}
             </button>

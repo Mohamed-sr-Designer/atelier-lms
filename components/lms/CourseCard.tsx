@@ -34,7 +34,7 @@ export default function CourseCard({
           <span
             className={`absolute bottom-4 left-4 rounded-full px-3.5 py-1.5 text-xs font-medium backdrop-blur-md rtl:left-auto rtl:right-4 ${
               course.price === 0
-                ? "bg-mint text-ink-900"
+                ? "bg-mint text-white"
                 : "bg-ink-900/80 text-bone-50 ring-1 ring-line/15"
             }`}
           >

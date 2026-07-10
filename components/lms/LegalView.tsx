@@ -30,10 +30,11 @@ export default function LegalView({
       <Reveal delay={0.1}>
         <p className="mt-4 text-xs text-bone-500">
           {t.legal.updated}:{" "}
-          {new Date("2026-07-08").toLocaleDateString(
-            lang === "ar" ? "ar-EG" : "en-GB",
-            { year: "numeric", month: "long", day: "numeric" }
-          )}
+          {new Date("2026-07-10").toLocaleDateString("en-GB", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
         </p>
       </Reveal>
 

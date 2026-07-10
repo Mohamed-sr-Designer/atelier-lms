@@ -4,7 +4,9 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
+import { Media } from "@/components/ui/Media";
 import QuizPanel from "@/components/lms/QuizPanel";
+import NotesBoard from "@/components/lms/NotesBoard";
 import { useLang } from "@/lib/i18n";
 import {
   useStore,
@@ -16,7 +18,7 @@ import {
 import { downloadResource } from "@/lib/download";
 import { fmtDuration, lessonCount, type Course } from "@/lib/courses";
 
-type Tab = "resources" | "final" | "quiz";
+type Tab = "resources" | "board" | "final" | "quiz";
 
 export default function LearnView({ course }: { course: Course }) {
   const { t, lang } = useLang();
@@ -109,16 +111,20 @@ export default function LearnView({ course }: { course: Course }) {
             />
             {canWatch ? (
               <div className="relative flex h-full flex-col items-center justify-center p-8 text-center">
-                <span className="font-serif text-6xl italic text-bone-50/15 md:text-8xl">
-                  {course.glyph}
-                </span>
-                <p className="mt-4 text-xs uppercase tracking-ultra text-mint">
+                <Media
+                  src={course.cover}
+                  alt=""
+                  fill
+                  sizes="100vw"
+                  className="object-cover opacity-20 saturate-[0.6]"
+                />
+                <p className="relative mt-4 text-xs uppercase tracking-ultra text-mint">
                   {t.learn.nowPlaying}
                 </p>
-                <p className="mt-2 max-w-xl text-balance text-lg font-semibold text-bone-50 md:text-2xl">
+                <p className="relative mt-2 max-w-xl text-balance text-lg font-semibold text-bone-50 md:text-2xl">
                   {current.t}
                 </p>
-                <p className="mt-3 rounded-full border border-line/15 px-4 py-1.5 text-xs text-bone-400">
+                <p className="relative mt-3 rounded-full border border-line/15 bg-ink-900/60 px-4 py-1.5 text-xs text-bone-300 backdrop-blur">
                   {t.learn.comingSoon}
                 </p>
               </div>
@@ -135,7 +141,7 @@ export default function LearnView({ course }: { course: Course }) {
                 </p>
                 <Link
                   href={`/checkout/?course=${course.slug}`}
-                  className="mt-6 rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-ink-900"
+                  className="mt-6 rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-white"
                 >
                   {course.price === 0 ? t.common.enrollFree : t.common.enroll}
                 </Link>
@@ -179,7 +185,7 @@ export default function LearnView({ course }: { course: Course }) {
                 className={`rounded-full px-6 py-3 text-sm font-medium transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 ${
                   isDone
                     ? "border border-mint/50 bg-mint/10 text-mint"
-                    : "bg-mint text-ink-900 hover:scale-[1.03]"
+                    : "bg-mint text-white hover:scale-[1.03]"
                 }`}
               >
                 {isDone ? t.learn.markedDone : t.learn.markDone}
@@ -226,6 +232,7 @@ export default function LearnView({ course }: { course: Course }) {
               {(
                 [
                   { id: "resources" as Tab, label: t.learn.resources },
+                  { id: "board" as Tab, label: t.learn.boardTab },
                   { id: "final" as Tab, label: t.learn.finalProjectTab },
                   { id: "quiz" as Tab, label: t.learn.quizTitle },
                 ]
@@ -282,6 +289,8 @@ export default function LearnView({ course }: { course: Course }) {
                   ))}
                 </div>
               )}
+
+              {tab === "board" && <NotesBoard slug={course.slug} />}
 
               {tab === "final" && (
                 <div className="rounded-2xl border border-mint/20 bg-ink-800/60 p-8">
@@ -393,7 +402,7 @@ export default function LearnView({ course }: { course: Course }) {
                                   <span
                                     className={`grid h-5 w-5 shrink-0 place-items-center rounded-full border text-[10px] ${
                                       lessonDone
-                                        ? "border-mint bg-mint text-ink-900"
+                                        ? "border-mint bg-mint text-white"
                                         : accessible
                                           ? "border-line/25 text-transparent"
                                           : "border-line/15 text-bone-500"

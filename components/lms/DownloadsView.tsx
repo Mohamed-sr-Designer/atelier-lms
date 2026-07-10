@@ -37,7 +37,7 @@ export default function DownloadsView() {
             </p>
             <Link
               href="/courses/"
-              className="mt-6 inline-block rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-ink-900"
+              className="mt-6 inline-block rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-white"
             >
               {t.dash.browseCta}
             </Link>
@@ -48,10 +48,8 @@ export default function DownloadsView() {
           {enrolled.map((c) => (
             <div key={c.slug}>
               <Reveal>
-                <div className="flex items-baseline gap-4">
-                  <span className="font-serif text-2xl italic text-mint">
-                    {c.glyph}
-                  </span>
+                <div className="flex items-center gap-4">
+                  <span className="h-2 w-2 rounded-full bg-mint" aria-hidden />
                   <h2 className="text-xl font-semibold tracking-tight text-bone-50 md:text-2xl">
                     {t.downloads.perCourse} {c.short[lang]}
                   </h2>

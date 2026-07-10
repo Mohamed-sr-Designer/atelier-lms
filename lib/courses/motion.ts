@@ -24,7 +24,7 @@ export const aftereffects: Course = {
     ar: "مصممين الجرافيك اللي عايزين مهارات الموشن اللي العملاء بيطلبوها — من غير أي خبرة سابقة في التحريك.",
   },
   price: 0,
-  cover: "/motion/reel-a.jpg",
+  cover: "/work/secure/hero.webp",
   outcomes: [
     "Animate with real easing — nothing linear, nothing robotic",
     "Build shape-layer animations and kinetic typography systems",
@@ -166,7 +166,7 @@ export const premiere: Course = {
     ar: "المصممين والماركترز وصنّاع المحتوى اللي محتاجين مونتاج احترافي للبرندات والسوشيال — بسرعة.",
   },
   price: 0,
-  cover: "/motion/film-2024.jpg",
+  cover: "/work/tilal/building.webp",
   outcomes: [
     "Cut with story logic — rhythm, motivation, breathing room",
     "Edit to music beats and mix VO, music and SFX properly",

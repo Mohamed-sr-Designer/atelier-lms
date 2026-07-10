@@ -31,7 +31,7 @@ export default function PostView({ post }: { post: Post }) {
         </Reveal>
         <Reveal delay={0.05}>
           <h1 className="mt-8 text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
-            {lang === "ar" ? post.titleAr : post.title}
+            {post.title}
           </h1>
         </Reveal>
         <Reveal delay={0.1}>
@@ -44,10 +44,11 @@ export default function PostView({ post }: { post: Post }) {
             </span>
             <span aria-hidden>·</span>
             <span>
-              {new Date(post.date).toLocaleDateString(
-                lang === "ar" ? "ar-EG" : "en-GB",
-                { year: "numeric", month: "long", day: "numeric" }
-              )}
+              {new Date(post.date).toLocaleDateString("en-GB", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
             </span>
             <span aria-hidden>·</span>
             <span>

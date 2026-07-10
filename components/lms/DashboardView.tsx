@@ -21,7 +21,7 @@ export default function DashboardView() {
         <div className="mt-8 flex justify-center gap-4">
           <Link
             href="/login/?next=%2Fdashboard%2F"
-            className="rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-ink-900"
+            className="rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-white"
           >
             {t.auth.loginBtn}
           </Link>
@@ -162,7 +162,7 @@ export default function DashboardView() {
               </p>
               <Link
                 href="/courses/"
-                className="mt-6 inline-block rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-ink-900"
+                className="mt-6 inline-block rounded-full bg-mint px-7 py-3.5 text-sm font-medium text-white"
               >
                 {t.dash.browseCta}
               </Link>

@@ -42,7 +42,7 @@ const arabic = IBM_Plex_Sans_Arabic({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#100F0D",
+  themeColor: "#0C0B10",
   width: "device-width",
   initialScale: 1,
 };
@@ -77,7 +77,6 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    alternateLocale: "ar_EG",
     url: site.url,
     siteName: site.fullName,
     title: site.title,
@@ -173,7 +172,7 @@ const jsonLd = {
       name: site.fullName,
       description: `${stats.totalCourses} design courses · ${stats.totalHours} hours · reviewed final projects`,
       publisher: { "@id": `${site.url}/#organization` },
-      inLanguage: ["en", "ar"],
+      inLanguage: "en",
     },
   ],
 };
