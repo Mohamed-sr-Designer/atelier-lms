@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { useLang } from "@/lib/i18n";
@@ -29,7 +30,7 @@ export default function TrainingView() {
 
   const submitProgram = (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`[Method — Team Program] ${agency}`);
+    const subject = encodeURIComponent(`[Tarek — Team Program] ${agency}`);
     const body = encodeURIComponent(
       [
         `Company / agency: ${agency}`,
@@ -70,6 +71,21 @@ export default function TrainingView() {
             "radial-gradient(60% 55% at 90% 110%, rgb(var(--mint) / 0.13) 0%, transparent 65%)",
         }}
       />
+      {/* drifting accent orbs */}
+      <motion.div
+        aria-hidden
+        animate={{ y: [0, -40, 0], x: [0, 24, 0] }}
+        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute -left-24 top-32 h-72 w-72 rounded-full opacity-25 blur-3xl"
+        style={{ background: "radial-gradient(circle, rgb(var(--mint)) 0%, transparent 70%)" }}
+      />
+      <motion.div
+        aria-hidden
+        animate={{ y: [0, 36, 0], x: [0, -28, 0] }}
+        transition={{ duration: 17, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute -right-20 top-[55%] h-80 w-80 rounded-full opacity-20 blur-3xl"
+        style={{ background: "radial-gradient(circle, rgb(var(--electric)) 0%, transparent 70%)" }}
+      />
       <div className="container-edge relative mx-auto max-w-edge">
         <Reveal>
           <SectionLabel index="✦">{t.training.kicker}</SectionLabel>
@@ -90,6 +106,25 @@ export default function TrainingView() {
             </p>
           </Reveal>
         </div>
+
+        <Reveal delay={0.14}>
+          <div className="mt-8 flex flex-wrap gap-2">
+            {[
+              "Brand & campaign systems",
+              "AI photoshoot pipeline",
+              "AI video production",
+              "Motion & delivery workflow",
+              "Team pricing & positioning",
+            ].map((c) => (
+              <span
+                key={c}
+                className="glass rounded-full px-4 py-2 text-xs text-bone-200 transition-colors hover:border-mint/50 hover:text-mint"
+              >
+                ✦ {c}
+              </span>
+            ))}
+          </div>
+        </Reveal>
 
         <div className="mt-14 grid gap-8 lg:grid-cols-12">
           {/* program request */}

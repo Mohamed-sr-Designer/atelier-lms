@@ -5,7 +5,7 @@ import LegalView from "@/components/lms/LegalView";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "How Method handles your data: browser-local learning records, payment privacy and your rights.",
+    "How Tarek handles your data: browser-local learning records, payment privacy and your rights.",
   alternates: { canonical: "/legal/privacy/" },
 };
 

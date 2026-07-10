@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { useLang } from "@/lib/i18n";
-import { useStore, login, logout, enrolledCourses } from "@/lib/store";
+import { useStore, updateUser, logout, enrolledCourses } from "@/lib/store";
 import { openAuth } from "@/components/lms/AuthModal";
 import { getCourse } from "@/lib/courses";
 
@@ -16,7 +16,38 @@ export default function ProfileView() {
   const store = useStore();
   const [name, setName] = useState<string | null>(null);
   const [email, setEmail] = useState<string | null>(null);
+  const [phone, setPhone] = useState<string | null>(null);
   const [saved, setSaved] = useState(false);
+
+  // downscale the chosen photo to a ~256px data-URL so localStorage stays light
+  const onPhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const img = new Image();
+    img.onload = () => {
+      const size = 256;
+      const cv = document.createElement("canvas");
+      cv.width = size;
+      cv.height = size;
+      const ctx = cv.getContext("2d");
+      if (!ctx) return;
+      const s = Math.min(img.width, img.height);
+      ctx.drawImage(
+        img,
+        (img.width - s) / 2,
+        (img.height - s) / 2,
+        s,
+        s,
+        0,
+        0,
+        size,
+        size
+      );
+      updateUser({ avatar: cv.toDataURL("image/jpeg", 0.85) });
+      URL.revokeObjectURL(img.src);
+    };
+    img.src = URL.createObjectURL(file);
+  };
 
   if (!store.user) {
     return (
@@ -39,6 +70,7 @@ export default function ProfileView() {
 
   const displayName = name ?? store.user.name;
   const displayEmail = email ?? store.user.email;
+  const displayPhone = phone ?? store.user.phone ?? "";
   const joined = new Date(store.user.joined).toLocaleDateString("en-GB", {
     year: "numeric",
     month: "long",
@@ -59,7 +91,7 @@ export default function ProfileView() {
     const clean = displayName.trim();
     const cleanEmail = displayEmail.trim();
     if (!clean || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) return;
-    login(clean, cleanEmail);
+    updateUser({ name: clean, email: cleanEmail, phone: displayPhone.trim() });
     setSaved(true);
     setTimeout(() => setSaved(false), 1800);
   };
@@ -79,9 +111,30 @@ export default function ProfileView() {
       </Reveal>
       <Reveal delay={0.05}>
         <div className="mt-8 flex items-center gap-6">
-          <span className="grid h-20 w-20 place-items-center rounded-full border border-mint/40 bg-mint/10 font-serif text-3xl italic text-mint">
-            {store.user.name.trim().charAt(0).toUpperCase()}
-          </span>
+          {/* avatar + photo upload */}
+          <label className="group relative cursor-pointer" title={t.profile.changePhoto}>
+            {store.user.avatar ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={store.user.avatar}
+                alt={`${store.user.name} — profile photo`}
+                className="h-20 w-20 rounded-full border border-mint/40 object-cover"
+              />
+            ) : (
+              <span className="grid h-20 w-20 place-items-center rounded-full border border-mint/40 bg-mint/10 font-serif text-3xl italic text-mint">
+                {store.user.name.trim().charAt(0).toUpperCase()}
+              </span>
+            )}
+            <span className="absolute inset-0 grid place-items-center rounded-full bg-ink-900/70 text-[10px] font-semibold uppercase tracking-widest text-bone-50 opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
+              ✎ {t.profile.changePhoto}
+            </span>
+            <input
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+              onChange={onPhoto}
+              className="sr-only"
+            />
+          </label>
           <div>
             <h1 className="font-display text-3xl font-semibold tracking-tight text-bone-50 md:text-5xl">
               {store.user.name}
@@ -89,6 +142,7 @@ export default function ProfileView() {
             <p className="mt-1.5 text-sm text-bone-400">
               {store.user.email} · {t.profile.memberSince} {joined}
             </p>
+            <p className="mt-1 text-xs text-bone-500">{t.profile.photoNote}</p>
           </div>
         </div>
       </Reveal>
@@ -146,6 +200,19 @@ export default function ProfileView() {
               value={displayEmail}
               onChange={(e) => setEmail(e.target.value)}
               className="mt-2 w-full rounded-lg border border-line/15 bg-ink-900 px-4 py-3.5 text-sm text-bone-50 focus:border-mint/60 focus:outline-none"
+            />
+          </label>
+          <label className="mt-5 block">
+            <span className="text-xs uppercase tracking-ultra text-bone-500">
+              {t.profile.phone}
+            </span>
+            <input
+              type="tel"
+              dir="ltr"
+              placeholder="+20 1x xxx xxxx"
+              value={displayPhone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="mt-2 w-full rounded-lg border border-line/15 bg-ink-900 px-4 py-3.5 text-sm text-bone-50 placeholder:text-bone-500/60 focus:border-mint/60 focus:outline-none"
             />
           </label>
           <button type="submit" className="btn btn-primary mt-6 px-7 py-3">

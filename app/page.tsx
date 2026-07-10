@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "Method course catalog",
+  name: "Tarek course catalog",
   description: `${stats.totalCourses} design courses, ${stats.totalHours} hours total`,
   itemListElement: courses.map((c, i) => ({
     "@type": "ListItem",

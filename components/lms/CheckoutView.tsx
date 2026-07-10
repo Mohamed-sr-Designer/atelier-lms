@@ -23,7 +23,7 @@ export default function CheckoutView() {
   const router = useRouter();
   const params = useSearchParams();
   const store = useStore();
-  const [method, setMethod] = useState<"instapay" | "vodafone">("instapay");
+  const [method, setTarek] = useState<"instapay" | "vodafone">("instapay");
   const [copied, setCopied] = useState("");
 
   const isBundle = params.get("bundle") === "1";
@@ -213,7 +213,7 @@ export default function CheckoutView() {
                       <button
                         key={m.id}
                         type="button"
-                        onClick={() => setMethod(m.id)}
+                        onClick={() => setTarek(m.id)}
                         className={`rounded-xl border p-5 text-start transition-colors duration-300 ${
                           method === m.id
                             ? "border-mint bg-mint/5"

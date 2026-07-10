@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { Media } from "@/components/ui/Media";
 import Magnetic from "@/components/ui/Magnetic";
-import GlyphPlate from "@/components/lms/GlyphPlate";
 import CourseCard from "@/components/lms/CourseCard";
 import { useLang } from "@/lib/i18n";
+import { withBase } from "@/lib/base";
 import { useStore } from "@/lib/store";
 import {
   bundle,
@@ -103,17 +105,49 @@ export default function BundleView() {
             </Reveal>
           </div>
 
-          {/* stacked plates */}
-          <div className="hidden gap-4 lg:col-span-5 lg:grid lg:grid-cols-3">
-            {bundleCourses.map((c, i) => (
-              <div
-                key={c.slug}
-                className={i === 1 ? "translate-y-8" : ""}
-                style={{ containerType: "inline-size" }}
-              >
-                <GlyphPlate course={c} eager className="aspect-[3/5]" />
+          {/* the film + floating campaign frames */}
+          <div className="hidden lg:col-span-5 lg:block">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+              className="relative mx-8 my-12"
+            >
+              <div className="relative overflow-hidden rounded-2xl border border-line/20 shadow-2xl shadow-black/50">
+                <video
+                  src={withBase("/lms/reels/video-1.mp4")}
+                  aria-label="AI-generated brand film — full pipeline result"
+                  className="aspect-video w-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                />
+                <span className="absolute bottom-3 left-3 rounded-full bg-ink-900/75 px-3 py-1 text-[10px] uppercase tracking-widest text-bone-200 backdrop-blur">
+                  ▶ AI film — no camera, no crew
+                </span>
               </div>
-            ))}
+              {[
+                { src: "/lms/popup.jpg", alt: "AI campaign popup visual", cls: "-left-8 -top-10 w-28 rotate-[-7deg]", d: 0.5 },
+                { src: "/work/tilal/hero.webp", alt: "Tilal AI film frame", cls: "-right-8 -top-8 w-32 rotate-[6deg]", d: 0.6 },
+                { src: "/work/secure/03.webp", alt: "Cinematic AI still", cls: "-bottom-10 -left-6 w-32 rotate-[4deg]", d: 0.7 },
+                { src: "/lms/winback.jpg", alt: "WINBACK campaign visual", cls: "-bottom-8 -right-8 w-28 rotate-[-5deg]", d: 0.8 },
+              ].map((f) => (
+                <motion.div
+                  key={f.src}
+                  initial={{ opacity: 0, scale: 0.6 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  whileHover={{ rotate: 0, scale: 1.08, zIndex: 20 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 16, delay: f.d }}
+                  className={`absolute overflow-hidden rounded-xl border border-line/25 shadow-2xl shadow-black/60 ${f.cls}`}
+                >
+                  <div className="aspect-[4/5]">
+                    <Media src={f.src} alt={f.alt} fill sizes="128px" className="object-cover" />
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </div>
       </section>

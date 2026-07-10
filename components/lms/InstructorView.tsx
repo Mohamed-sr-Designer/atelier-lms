@@ -9,6 +9,7 @@ import LogoMarquee from "@/components/LogoMarquee";
 import Counter from "@/components/lms/Counter";
 import { useLang } from "@/lib/i18n";
 import { site } from "@/lib/site";
+import { withBase } from "@/lib/base";
 import { stats } from "@/lib/courses";
 
 // Authority page: the working record behind the school. Proper nouns stay as
@@ -75,10 +76,10 @@ const ladder = [
 ];
 
 const workGallery = [
-  { src: "/work/axia/hero.webp", alt: "AXIA gifting brand — AI-produced campaign key visual" },
-  { src: "/work/fresh-valley/hero.webp", alt: "Fresh Valley — complete brand identity system" },
-  { src: "/work/auto/hero.webp", alt: "Automotive key visual — Geely campaign" },
-  { src: "/work/ihs/hero.webp", alt: "IHS hospitality — B2B campaign visual" },
+  { src: "/lms/featured-banner.jpg", alt: "AXIA banner — AI photoshoot campaign" },
+  { src: "/work/tilal/hero.webp", alt: "Tilal AI film — hero frame" },
+  { src: "/work/secure/hero.webp", alt: "Security brand film — cinematic AI still" },
+  { src: "/lms/winback.jpg", alt: "WINBACK campaign — AI production visual" },
 ];
 
 export default function InstructorView() {
@@ -86,48 +87,48 @@ export default function InstructorView() {
 
   return (
     <>
-      {/* hero */}
-      <section className="bg-grid relative overflow-hidden pb-20 pt-32 md:pt-44">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(60% 55% at 88% 105%, rgb(var(--mint) / 0.15) 0%, transparent 65%)",
-          }}
+      {/* hero — full-screen cinematic portrait */}
+      <section className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={withBase("/lms/hero-landscape.jpg")}
+          alt="Mohamed Tarek — art director, standing in his spotlit studio library"
+          className="absolute inset-0 h-full w-full object-cover object-[center_18%]"
         />
-        <div className="container-edge relative mx-auto grid max-w-edge items-center gap-14 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <Reveal>
-              <SectionLabel index="✦">{t.home.instructorLabel}</SectionLabel>
-            </Reveal>
-            <Reveal delay={0.06}>
-              <h1 className="mt-7 font-display text-5xl font-semibold leading-[0.98] tracking-tightest text-bone-50 md:text-8xl">
-                Mohamed
-                <br />
-                <span className="font-serif font-normal italic tracking-normal text-mint">
-                  Tarek
-                </span>
-              </h1>
-            </Reveal>
-            <Reveal delay={0.12}>
-              <p className="mt-5 text-lg text-bone-200 md:text-xl">
-                {site.instructorRole} —{" "}
-                <span className="text-bone-400">{site.markets}</span>
-              </p>
-            </Reveal>
-            <Reveal delay={0.16}>
-              <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-bone-400">
-                {t.home.instructorBio}
-              </p>
-            </Reveal>
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/35 to-ink-900/40" />
+        <div aria-hidden className="vignette absolute inset-0" />
+        <div aria-hidden className="absolute inset-0 bg-noise opacity-[0.07]" />
+
+        <div className="container-edge relative z-10 mx-auto w-full max-w-edge pb-14 pt-40">
+          <Reveal>
+            <SectionLabel index="✦">{t.home.instructorLabel}</SectionLabel>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <h1 className="mt-6 font-display text-6xl font-semibold leading-[0.95] tracking-tightest text-bone-50 [text-shadow:0_2px_30px_rgb(0_0_0/0.5)] md:text-9xl">
+              Mohamed{" "}
+              <span className="text-grad font-serif font-normal italic tracking-normal">
+                Tarek
+              </span>
+            </h1>
+          </Reveal>
+          <div className="mt-7 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-xl">
+              <Reveal delay={0.12}>
+                <p className="text-lg text-bone-200 md:text-xl">
+                  {site.instructorRole} —{" "}
+                  <span className="text-bone-400">{site.markets}</span>
+                </p>
+              </Reveal>
+              <Reveal delay={0.16}>
+                <p className="mt-4 text-pretty text-base leading-relaxed text-bone-300">
+                  {t.home.instructorBio}
+                </p>
+              </Reveal>
+            </div>
             <Reveal delay={0.22}>
-              <div className="mt-9 flex flex-wrap gap-4">
+              <div className="flex shrink-0 flex-wrap gap-4">
                 <Magnetic>
-                  <Link
-                    href="/courses/"
-                    className="btn btn-primary px-8 py-4"
-                  >
+                  <Link href="/courses/" className="btn btn-primary px-8 py-4">
                     {t.home.ctaSecondary} →
                   </Link>
                 </Magnetic>
@@ -136,25 +137,11 @@ export default function InstructorView() {
                     href={`https://wa.me/${site.whatsapp}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block rounded-full border border-line/25 px-8 py-4 text-sm text-bone-50 transition-colors duration-300 hover:border-mint/60 hover:text-mint"
+                    className="btn btn-ghost px-8 py-4"
                   >
                     {t.contact.waCta}
                   </a>
                 </Magnetic>
-              </div>
-            </Reveal>
-          </div>
-          <div className="lg:col-span-5">
-            <Reveal delay={0.1}>
-              <div className="relative overflow-hidden rounded-2xl border border-line/15">
-                <Media
-                  src="/lms/instructor-alt.png"
-                  alt="Mohamed Tarek — art director and design instructor, studio portrait"
-                  width={1728}
-                  height={1764}
-                  priority
-                  className="h-auto w-full object-cover"
-                />
               </div>
             </Reveal>
           </div>

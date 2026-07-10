@@ -9,7 +9,13 @@
 import { useSyncExternalStore } from "react";
 import { courses, getCourse, lessonCount } from "@/lib/courses";
 
-export type User = { name: string; email: string; joined: string };
+export type User = {
+  name: string;
+  email: string;
+  joined: string;
+  phone?: string;
+  avatar?: string; // small data-URL, set from the account page
+};
 export type StoreState = {
   user: User | null;
   enrollments: string[]; // course slugs (bundle expands to its courses)
@@ -17,7 +23,7 @@ export type StoreState = {
   quizPassed: Record<string, boolean>; // slug -> passed checkpoint quiz
 };
 
-const KEY = "atelier-lms"; // storage key kept stable across the Method rename
+const KEY = "atelier-lms"; // storage key kept stable across the Tarek rename
 const EMPTY: StoreState = {
   user: null,
   enrollments: [],
@@ -73,8 +79,20 @@ export const login = (name: string, email: string) => {
   const s = read();
   write({
     ...s,
-    user: { name, email, joined: s.user?.joined || new Date().toISOString() },
+    user: {
+      ...s.user,
+      name,
+      email,
+      joined: s.user?.joined || new Date().toISOString(),
+    },
   });
+};
+
+// Patch profile fields (photo, phone, name, email) without touching joined.
+export const updateUser = (patch: Partial<Omit<User, "joined">>) => {
+  const s = read();
+  if (!s.user) return;
+  write({ ...s, user: { ...s.user, ...patch } });
 };
 
 export const logout = () => write({ ...read(), user: null });

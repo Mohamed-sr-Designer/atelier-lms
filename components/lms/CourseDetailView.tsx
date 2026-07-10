@@ -10,6 +10,7 @@ import GlyphPlate from "@/components/lms/GlyphPlate";
 import CurriculumIndex from "@/components/lms/CurriculumIndex";
 import FaqList from "@/components/lms/FaqList";
 import CourseCard from "@/components/lms/CourseCard";
+import LiveViewers from "@/components/lms/LiveViewers";
 import { useLang } from "@/lib/i18n";
 import { withBase } from "@/lib/base";
 import { useStore, isEnrolled } from "@/lib/store";
@@ -124,6 +125,31 @@ export default function CourseDetailView({ course }: { course: Course }) {
                 ))}
               </dl>
             </Reveal>
+
+            {/* live signal + skill ticker — the hero floor */}
+            <Reveal delay={0.3}>
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <LiveViewers />
+                <span className="hidden text-xs text-bone-500 sm:block">
+                  {course.students.toLocaleString("en-US")}+ {t.common.students} ·{" "}
+                  {course.level[lang]}
+                </span>
+              </div>
+            </Reveal>
+            <Reveal delay={0.35}>
+              <div className="relative mt-8 -mx-1 overflow-hidden rounded-xl border border-line/10 bg-ink-900/40 py-3 backdrop-blur" dir="ltr">
+                <div className="animate-marquee flex w-max items-center gap-6" style={{ animationDuration: "34s" }}>
+                  {[...course.outcomes, ...course.outcomes].map((o, i) => (
+                    <span key={i} className="flex items-center gap-6 whitespace-nowrap text-sm">
+                      <span className="text-grad font-semibold">{o}</span>
+                      <span className="text-bone-500">✦</span>
+                    </span>
+                  ))}
+                </div>
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-ink-900 to-transparent" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-ink-900 to-transparent" />
+              </div>
+            </Reveal>
           </div>
 
           {/* sticky enroll card */}
@@ -157,14 +183,9 @@ export default function CourseDetailView({ course }: { course: Course }) {
                       </div>
                     </div>
 
-                    <Magnetic className="mt-6 block">
-                      <Link
-                        href={ctaHref}
-                        className="btn btn-primary w-full py-4"
-                      >
-                        {ctaLabel}
-                      </Link>
-                    </Magnetic>
+                    <Link href={ctaHref} className="btn btn-primary mt-6 w-full px-8 py-4">
+                      {ctaLabel}
+                    </Link>
                     {enrolled && (
                       <p className="mt-3 text-center text-xs text-mint">
                         {t.common.enrolled}
@@ -391,7 +412,7 @@ export default function CourseDetailView({ course }: { course: Course }) {
               />
               <div className="relative">
                 <p className="text-[10px] uppercase tracking-ultra text-bone-400">
-                  Method — School of Visual Direction
+                  Tarek — School of Visual Direction
                 </p>
                 <p className="mt-4 font-serif text-2xl italic text-bone-50 md:text-3xl">
                   {t.course.outcomeTitle}

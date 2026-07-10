@@ -99,8 +99,9 @@ export default function LearnView({ course }: { course: Course }) {
       <div className="mt-8 grid gap-10 lg:grid-cols-12">
         {/* -------------------------------------------------- main column */}
         <div className="lg:col-span-8">
-          {/* player */}
-          <div className="relative aspect-video overflow-hidden rounded-2xl border border-line/15 bg-ink-800">
+          {/* player — glass frame with a living gradient edge */}
+          <div className="relative rounded-2xl p-[1.5px] [background:linear-gradient(120deg,rgb(var(--mint)/0.6),rgb(var(--line)/0.1)_40%,rgb(var(--electric)/0.5))]">
+          <div className="relative aspect-video overflow-hidden rounded-2xl bg-ink-800 shadow-[0_20px_80px_rgb(var(--mint)/0.12)]">
             <div
               aria-hidden
               className="absolute inset-0"
@@ -157,6 +158,7 @@ export default function LearnView({ course }: { course: Course }) {
                 00:00 / {String(current.dur).padStart(2, "0")}:00
               </span>
             </div>
+          </div>
           </div>
           <p className="mt-3 text-xs text-bone-500">{t.learn.playerNote}</p>
 
@@ -333,7 +335,7 @@ export default function LearnView({ course }: { course: Course }) {
 
         {/* -------------------------------------------------- curriculum rail */}
         <aside className="lg:col-span-4">
-          <div className="rounded-2xl border border-line/15 bg-ink-800/50 lg:sticky lg:top-28">
+          <div className="glass rounded-2xl lg:sticky lg:top-28">
             <p className="border-b border-line/10 px-6 py-4 text-xs uppercase tracking-ultra text-bone-500">
               {t.learn.curriculum} — {lessonCount(course)} {t.common.lessons} ·{" "}
               <span dir="ltr">

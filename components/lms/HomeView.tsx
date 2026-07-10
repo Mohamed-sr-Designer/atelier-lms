@@ -85,9 +85,11 @@ export default function HomeView() {
   const freeCourses = courses.filter((c) => c.price === 0);
   const aiCourses = courses.filter((c) => c.price > 0);
 
-  const reviews = courses
-    .flatMap((c) => c.reviews.map((r) => ({ ...r, course: c.short[lang] })))
-    .filter((_, i) => i % 2 === 0);
+  const allReviews = courses.flatMap((c) =>
+    c.reviews.map((r) => ({ ...r, course: c.short[lang] }))
+  );
+  const reviews = allReviews.filter((_, i) => i % 2 === 0);
+  const reviewsB = allReviews.filter((_, i) => i % 2 === 1);
 
   const bundleMins = bundleCourses.reduce((n, c) => n + totalMinutes(c), 0);
   const bundleLessons = bundleCourses.reduce((n, c) => n + lessonCount(c), 0);
@@ -110,7 +112,7 @@ export default function HomeView() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={withBase("/lms/hero-banner.jpg")}
-            alt="AI-produced editorial campaign — a model in a pixel-art world, made with the Method pipeline"
+            alt="AI-produced editorial campaign — a model in a pixel-art world, made with the Tarek pipeline"
             className="h-full w-full object-cover object-[center_28%]"
           />
         </motion.div>
@@ -574,7 +576,7 @@ export default function HomeView() {
         </div>
       </section>
 
-      {/* ============================================= METHOD (compact) ======= */}
+      {/* ============================================= TAREK (compact) ======= */}
       <section className="container-edge mx-auto max-w-edge py-20 md:py-28">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -658,7 +660,7 @@ export default function HomeView() {
               >
                 <Media
                   src="/lms/instructor-portrait.jpg"
-                  alt="Mohamed Tarek — art director and Method instructor"
+                  alt="Mohamed Tarek — art director and Tarek instructor"
                   sizes="(min-width: 1024px) 30vw, 100vw"
                   className="h-auto w-full object-cover"
                 />
@@ -821,6 +823,27 @@ export default function HomeView() {
                     </span>
                   </figcaption>
                 </motion.figure>
+              ))}
+            </div>
+          </div>
+
+          {/* second strip — quick-hit glass quotes, opposite direction */}
+          <div className="relative mt-6 rotate-[0.8deg] overflow-visible">
+            <div className="flex w-max animate-marquee-rev items-center gap-4" style={{ animationDuration: "80s" }}>
+              {[...reviewsB, ...reviewsB].map((r, i) => (
+                <motion.div
+                  key={`${r.name}-b-${i}`}
+                  whileHover={{ y: -4, rotate: -1 }}
+                  className="glass flex shrink-0 items-center gap-3 rounded-full py-2.5 pl-3 pr-5"
+                >
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-mint/30 to-electric/30 font-serif text-xs italic text-bone-50">
+                    {r.name.charAt(0)}
+                  </span>
+                  <span className="max-w-[19rem] truncate text-sm text-bone-200">
+                    “{r.text}”
+                  </span>
+                  <span className="shrink-0 text-xs text-electric">★ {r.stars}.0</span>
+                </motion.div>
               ))}
             </div>
           </div>

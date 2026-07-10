@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: site.title,
-    template: "%s — Method",
+    template: "%s — Tarek",
   },
   description: site.description,
   keywords: [
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     "motion design course",
     "design portfolio course online",
     "Mohamed Tarek",
-    "Method design school",
+    "Tarek design school",
   ],
   authors: [{ name: site.instructor, url: `${site.url}/instructor/` }],
   creator: site.instructor,
@@ -111,8 +111,8 @@ const jsonLd = {
     {
       "@type": ["Organization", "EducationalOrganization"],
       "@id": `${site.url}/#organization`,
-      name: "Method — School of Visual Direction",
-      alternateName: "Method by Mohamed Tarek",
+      name: "Tarek — School of Visual Direction",
+      alternateName: "Tarek by Mohamed Tarek",
       url: site.url,
       logo: `${site.url}/og.jpg`,
       description: site.description,

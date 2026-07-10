@@ -40,10 +40,10 @@ export default function Footer() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={withBase("/lms/logo.svg")}
-                alt="Method logo"
+                alt="Tarek logo"
                 className="h-9 w-9 rounded-full ring-1 ring-line/25"
               />
-              <span className="text-bone-50">Method</span>
+              <span className="text-bone-50">Tarek</span>
             </div>
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-bone-400">
               {t.footer.blurb}
@@ -161,7 +161,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col gap-4 border-t border-line/10 pt-6 text-sm text-bone-500 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {year} Method · {site.instructor}. {t.footer.rights}
+            © {year} Tarek · {site.instructor}. {t.footer.rights}
           </p>
           <a href="#top" className="link-underline text-bone-400">
             {t.footer.backTop}

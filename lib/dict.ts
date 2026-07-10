@@ -21,6 +21,16 @@ const en = {
     roleTag: "· Visual Direction & AI Workflow",
   },
 
+  offer: {
+    text: "Launch offer — the AI Production Stack for EGP 5,200 instead of 6,000",
+    ends: "Offer ends in",
+    cta: "Grab it",
+    days: "d",
+    hours: "h",
+    mins: "m",
+    secs: "s",
+  },
+
   common: {
     enroll: "Enroll now ✦",
     enrollFree: "Start learning free ✦",
@@ -58,7 +68,7 @@ const en = {
   },
 
   home: {
-    kicker: "Method — not another course site",
+    kicker: "Tarek — not another course site",
     heroA: "Own the craft.",
     heroI: "Out-design",
     heroB: "everyone.",
@@ -99,8 +109,8 @@ const en = {
     econTitleB: ", not a course.",
     econ: [
       { n: "50,000+", u: "EGP", l: "what one studio photoshoot day costs a brand" },
-      { n: "1,750", u: "EGP", l: "what the complete AI Photoshoot course costs — once, forever" },
-      { n: "×28", u: "", l: "the gap between them — that margin is the service you'll sell" },
+      { n: "2,800", u: "EGP", l: "what the complete AI Photoshoot course costs — once, forever" },
+      { n: "×17", u: "", l: "the gap between them — that margin is the service you'll sell" },
     ],
     storyLabel: "Featured story",
     storyQuote:
@@ -119,7 +129,7 @@ const en = {
       { n: 21, s: "", l: "days on average to a first paid brief after the AI stack" },
       { n: 96, s: "%", l: "completion rate — 3–5 hour courses actually get finished" },
     ],
-    galleryLabel: "Made with the Method",
+    galleryLabel: "Made with the method",
     communityNote:
       "Every student joins the private WhatsApp room — critiques, gigs and new drops land there first.",
     trustChips: ["7-day money-back", "Personal WhatsApp support", "Lifetime access", "Taught in Arabic"],
@@ -137,7 +147,7 @@ const en = {
       { t: "Checkpoint", d: "Quizzes that test decisions." },
       { t: "Ship", d: "A reviewed piece that gets you hired." },
     ],
-    whyLabel: "Why Method",
+    whyLabel: "Why Tarek",
     whyTitleA: "Courses built like",
     whyTitleI: "campaigns",
     whyTitleB: ".",
@@ -152,7 +162,7 @@ const en = {
     instructorTitleI: "art director",
     instructorTitleB: ".",
     instructorBio:
-      "Mohamed Tarek leads brand, campaign and motion work across Egypt, Saudi Arabia and Kuwait — and has taught 1,200+ students across four academies. Method is his method, distilled: the exact workflows his teams use on paying briefs.",
+      "Mohamed Tarek leads brand, campaign and motion work across Egypt, Saudi Arabia and Kuwait — and has taught 1,200+ students across four academies. This school is his method, distilled: the exact workflows his teams use on paying briefs.",
     instructorCta: "Meet the instructor",
     brandsNote: "Brands his work has served",
     bundleLabel: "The AI stack",
@@ -226,6 +236,7 @@ const en = {
     audienceLabel: "Who it's for",
     toolsLabel: "Tools covered",
     relatedLabel: "Pairs well with",
+    viewingNow: "designers on this page right now",
     showcaseLabel: "Made with this course",
     showcaseNote: "Straight from the exact pipeline you're about to learn — real client output, no cherry-picking.",
   },
@@ -256,7 +267,7 @@ const en = {
     passwordPh: "••••••••",
     loginBtn: "Log in →",
     registerBtn: "Create account →",
-    orRegister: "New to Method?",
+    orRegister: "New to Tarek?",
     orLogin: "Already have an account?",
     registerLink: "Create an account",
     loginLink: "Log in",
@@ -342,7 +353,11 @@ const en = {
     boardDelete: "Delete note",
     boardHint: "Drag notes anywhere — saved automatically.",
     boardPen: "Pen — draw on the board",
-    boardPenHint: "Pen on — draw anywhere. Click the pen again to move notes.",
+    boardPenHint: "Pen on — draw anywhere.",
+    boardErase: "Eraser — remove strokes",
+    boardEraseHint: "Eraser on — drag over a stroke to remove it.",
+    boardHand: "Hand — move around the board",
+    boardHandHint: "Hand on — drag to pan the board.",
     backToDash: "← My learning",
     enrollGate: "Enroll to open the full course",
     enrollGateSub: "The first lessons are free previews — the rest unlocks with enrollment.",
@@ -355,6 +370,9 @@ const en = {
     kicker: "Student profile",
     memberSince: "Learning since",
     editName: "Display name",
+    phone: "Phone (WhatsApp)",
+    changePhoto: "Change photo",
+    photoNote: "JPG or PNG — stored in your browser only.",
     saveBtn: "Save changes",
     saved: "Saved ✓",
     dangerLabel: "Session",
@@ -396,13 +414,13 @@ const en = {
     sub: "Enrollment, payments, courses, tools — if it's not here, WhatsApp me directly.",
     stillCta: "Still curious? Talk to me →",
     items: [
-      { q: "How do courses work at Method?", a: "Every course is 3–5 hours of focused video organized into modules, with drills, real projects, downloadable working files, checkpoint quizzes and a final project. Finish everything and you walk out with a reviewed portfolio piece — the thing that actually gets you hired." },
-      { q: "Why are the courses so short?", a: "Because they're edited like films. Ten-hour courses are ten hours because nobody cut them. Method courses keep only the minutes that change how you work — the rest of your time goes into practice, which is where skill actually forms." },
+      { q: "How do courses work at Tarek?", a: "Every course is 3–5 hours of focused video organized into modules, with drills, real projects, downloadable working files, checkpoint quizzes and a final project. Finish everything and you walk out with a reviewed portfolio piece — the thing that actually gets you hired." },
+      { q: "Why are the courses so short?", a: "Because they're edited like films. Ten-hour courses are ten hours because nobody cut them. Tarek courses keep only the minutes that change how you work — the rest of your time goes into practice, which is where skill actually forms." },
       { q: "How do I pay from Egypt?", a: "InstaPay or Vodafone Cash: transfer, send the screenshot on WhatsApp, and your access is activated personally — usually within minutes. Card gateways (Paymob, Fawry, valU) are arriving soon." },
-      { q: "Which courses are actually free?", a: "All four software courses — Photoshop, Illustrator, After Effects and Premiere Pro — complete with projects, quizzes and reviewed final projects, at EGP 0 forever. The two AI production tracks (EGP 1,750 and 2,250) are the premium courses, because they're the highest-earning skill we teach — and they include the pricing lessons to earn it back fast." },
+      { q: "Which courses are actually free?", a: "All four software courses — Photoshop, Illustrator, After Effects and Premiere Pro — complete with projects, quizzes and reviewed final projects, at EGP 0 forever. The two AI production tracks (EGP 2,800 and 3,200) are the premium courses, because they're the highest-earning skill we teach — and they include the pricing lessons to earn it back fast." },
       { q: "Do I get lifetime access?", a: "Yes. One payment, permanent access, all future updates to that course included." },
       { q: "What if the course isn't for me?", a: "7-day money-back guarantee. One WhatsApp message, no forms, no questions that matter." },
-      { q: "Do I get something to show employers?", a: "Something better than a paper credential: finished, personally-reviewed portfolio projects from every course. Employers and clients hire from work, not certificates — Method is built around that truth." },
+      { q: "Do I get something to show employers?", a: "Something better than a paper credential: finished, personally-reviewed portfolio projects from every course. Employers and clients hire from work, not certificates — Tarek is built around that truth." },
       { q: "Do I need a powerful computer?", a: "No. Every course is taught on mid-range hardware, with performance workarounds (like Premiere proxies) built into the curriculum." },
       { q: "Is the teaching in Arabic or English?", a: "Lessons are taught in Arabic with English tool vocabulary — the way MENA studios actually talk. The platform itself is fully bilingual." },
       { q: "Can I get training for my team or academy?", a: "Yes — corporate and academy programs run separately (on-site in Egypt, online elsewhere). Reach out via the contact page and I'll reply personally." },
@@ -414,7 +432,7 @@ const en = {
     titleA: "Train the",
     titleI: "whole team",
     titleB: ".",
-    sub: "Custom Method programs for agencies, studios and marketing teams — brand, campaign, motion and AI production. On-site in Egypt, live online everywhere else.",
+    sub: "Custom Tarek programs for agencies, studios and marketing teams — brand, campaign, motion and AI production. On-site in Egypt, live online everywhere else.",
     formTitle: "Request a team program",
     agency: "Company / agency name",
     size: "Team size",
@@ -469,7 +487,7 @@ const en = {
     terms: {
       title: "Terms of Service",
       sections: [
-        { h: "The service", p: "Method provides online design education: video lessons, projects, resources, quizzes and final-project reviews. Access to paid courses is granted per person after payment confirmation and is not transferable or shareable." },
+        { h: "The service", p: "Tarek provides online design education: video lessons, projects, resources, quizzes and final-project reviews. Access to paid courses is granted per person after payment confirmation and is not transferable or shareable." },
         { h: "Enrollment & access", p: "Paid enrollments grant lifetime access to the purchased course, including future updates to that course. Free courses may be updated, extended or restructured at any time." },
         { h: "Acceptable use", p: "Course videos, files and resources are licensed to you personally. Redistributing, reselling, screen-recording for sharing, or uploading materials elsewhere terminates access without refund and may carry legal consequences." },
         { h: "Completion", p: "Course completion means all lessons finished, checkpoint quizzes passed and a final project submitted. Final projects receive a personal review from the instructor." },
@@ -481,7 +499,7 @@ const en = {
       title: "Privacy Policy",
       sections: [
         { h: "What this demo stores", p: "This platform currently runs fully in your browser: your account name, email, course progress and quiz results are stored in your browser's local storage only. No server receives, processes or sells this data." },
-        { h: "Payments", p: "Payments run through InstaPay, Vodafone Cash or (soon) licensed gateways. Method never sees or stores card numbers; payment confirmation happens via WhatsApp screenshots you choose to send." },
+        { h: "Payments", p: "Payments run through InstaPay, Vodafone Cash or (soon) licensed gateways. Tarek never sees or stores card numbers; payment confirmation happens via WhatsApp screenshots you choose to send." },
         { h: "Communication", p: "WhatsApp and email conversations are used solely to activate access, provide support and — only with your consent — share course updates." },
         { h: "Analytics", p: "If analytics are enabled, they are aggregate and anonymous: page views and course popularity, never personal learning data tied to your identity." },
         { h: "Your rights", p: "You can clear all locally-stored data anytime from your Profile page, and request deletion of any support-conversation history via WhatsApp or email." },
@@ -499,7 +517,7 @@ const en = {
   },
 
   footer: {
-    blurb: "Method is the online school of art director Mohamed Tarek — short, premium design courses that end in real projects, real skills and a real portfolio.",
+    blurb: "Tarek is the online school of art director Mohamed Tarek — short, premium design courses that end in real projects, real skills and a real portfolio.",
     learnCol: "Learn",
     platformCol: "Platform",
     companyCol: "School",

@@ -61,7 +61,7 @@ export default function Nav() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-cinema ${
+        className={`fixed inset-x-0 top-8 z-50 transition-all duration-500 ease-cinema ${
           scrolled
             ? "border-b border-line/10 bg-ink-900/70 py-3 backdrop-blur-xl"
             : "py-5"
@@ -71,16 +71,16 @@ export default function Nav() {
           <Link
             href="/"
             className="group flex items-center gap-3"
-            aria-label="Method — home"
+            aria-label="Tarek — home"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={withBase("/lms/logo.svg")}
-              alt="Method logo"
+              alt="Tarek logo"
               className="h-10 w-10 rounded-full ring-1 ring-line/25 transition-all duration-300 group-hover:ring-mint/60"
             />
             <span className="hidden text-sm tracking-tight text-bone-200 sm:block">
-              Method
+              Tarek
               <span className="text-bone-400"> {t.nav.roleTag}</span>
             </span>
           </Link>
@@ -186,9 +186,18 @@ export default function Nav() {
                   href="/dashboard/"
                   className="hidden items-center gap-2 rounded-full border border-line/20 py-1.5 pl-1.5 pr-4 text-sm text-bone-50 transition-all duration-300 hover:border-mint/50 hover:bg-mint/5 md:flex"
                 >
-                  <span className="grid h-7 w-7 place-items-center rounded-full bg-mint/15 font-serif text-xs italic text-mint">
-                    {store.user.name.trim().charAt(0).toUpperCase() || "M"}
-                  </span>
+                  {store.user.avatar ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={store.user.avatar}
+                      alt=""
+                      className="h-7 w-7 rounded-full object-cover"
+                    />
+                  ) : (
+                    <span className="grid h-7 w-7 place-items-center rounded-full bg-mint/15 font-serif text-xs italic text-mint">
+                      {store.user.name.trim().charAt(0).toUpperCase() || "T"}
+                    </span>
+                  )}
                   {t.nav.dashboard}
                 </Link>
                 <button

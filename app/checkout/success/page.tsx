@@ -5,7 +5,7 @@ import SuccessView from "@/components/lms/SuccessView";
 
 export const metadata: Metadata = {
   title: "You're in — enrollment confirmed",
-  description: "Your Method enrollment is confirmed. Start your first lesson now.",
+  description: "Your Tarek enrollment is confirmed. Start your first lesson now.",
   alternates: { canonical: "/checkout/success/" },
   robots: { index: false },
 };

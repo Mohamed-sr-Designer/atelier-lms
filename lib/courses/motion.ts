@@ -170,7 +170,7 @@ export const premiere: Course = {
   price: 0,
   cover: "/work/tilal/building.webp",
   tileText: "Pr",
-  plate: ["#1D0B33", "#C39BFF"],
+  plate: ["#2A0634", "#EA77FF"],
   outcomes: [
     "Cut with story logic — rhythm, motivation, breathing room",
     "Edit to music beats and mix VO, music and SFX properly",

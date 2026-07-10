@@ -7,7 +7,7 @@ import { dict } from "@/lib/dict";
 export const metadata: Metadata = {
   title: "FAQ — Enrollment, Courses, Payments & Access",
   description:
-    "Everything about learning at Method: how courses work, InstaPay & Vodafone Cash payments, lifetime access, refunds, final-project reviews and team training.",
+    "Everything about learning at Tarek: how courses work, InstaPay & Vodafone Cash payments, lifetime access, refunds, final-project reviews and team training.",
   alternates: { canonical: "/faq/" },
 };
 

@@ -1,4 +1,4 @@
-# Method — School of Visual Direction
+# Tarek — School of Visual Direction
 
 The online design school of art director **Mohamed Tarek**: a premium,
 conversion-focused LMS built with **Next.js (App Router) · TypeScript ·

@@ -24,8 +24,8 @@ export const aiPhotoshoot: Course = {
     en: "Designers, marketers and creative teams who need premium visuals without production budgets.",
     ar: "المصممين والماركترز والفرق الإبداعية اللي محتاجين Visuals بريميوم من غير ميزانيات إنتاج.",
   },
-  price: 1750,
-  compareAt: 2500,
+  price: 2800,
+  compareAt: 3500,
   cover: "/lms/featured-banner.jpg",
   showcase: {
     images: [
@@ -156,8 +156,8 @@ export const aiVideo: Course = {
     en: "Designers and editors who want to sell AI video — the fastest-growing deliverable in advertising.",
     ar: "المصممين والمونتيرية اللي عايزين يبيعوا فيديو AI — أسرع منتج نموًا في الإعلانات.",
   },
-  price: 2250,
-  compareAt: 3200,
+  price: 3200,
+  compareAt: 4000,
   cover: "/work/tilal/hero.webp",
   coverVideo: "/lms/reels/video-1.mp4",
   showcase: {

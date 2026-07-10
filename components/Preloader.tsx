@@ -46,10 +46,22 @@ export default function Preloader() {
     <AnimatePresence>
       {!done && (
         <motion.div
-          className="fixed inset-0 z-[110] flex flex-col justify-between bg-ink-900 px-6 py-8 md:px-12 md:py-10"
+          className="fixed inset-0 z-[110] flex flex-col justify-between overflow-hidden bg-ink-900 px-6 py-8 md:px-12 md:py-10"
           exit={{ y: "-100%" }}
           transition={{ duration: 0.9, ease }}
         >
+          {/* glass atmosphere */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -left-32 top-1/4 h-96 w-96 rounded-full opacity-25 blur-3xl"
+            style={{ background: "radial-gradient(circle, rgb(var(--mint)) 0%, transparent 70%)" }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-24 bottom-1/4 h-80 w-80 rounded-full opacity-20 blur-3xl"
+            style={{ background: "radial-gradient(circle, rgb(var(--electric)) 0%, transparent 70%)" }}
+          />
+          <div aria-hidden className="pointer-events-none absolute inset-0 bg-noise opacity-[0.06]" />
           {/* top row */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -70,7 +82,7 @@ export default function Preloader() {
                 transition={{ duration: 1, ease, delay: 0.1 }}
                 className="block font-display text-[15vw] font-semibold leading-none tracking-tightest text-bone-50 md:text-[8vw]"
               >
-                METHOD
+                TAREK
               </motion.span>
             </span>
             <motion.span

@@ -58,13 +58,14 @@ export default function GlyphPlate({
               <img
                 src={withBase(course.icon)}
                 alt={`${course.short.en} app icon`}
-                className="w-[38%] max-w-[9rem] drop-shadow-[0_16px_40px_rgba(0,0,0,0.45)] transition-transform duration-700 ease-cinema group-hover/plate:-translate-y-1.5 group-hover/plate:scale-105"
+                className="w-[38%] max-w-[9rem] rounded-[22%] drop-shadow-[0_16px_40px_rgba(0,0,0,0.45)] transition-transform duration-700 ease-cinema group-hover/plate:-translate-y-1.5 group-hover/plate:scale-105"
               />
             ) : (
-              /* drawn Adobe-style tile for apps without an icon asset */
+              /* drawn Adobe-style tile for apps without an icon asset —
+                 solid fill + thin brand border + letters, like the real ones */
               <span
-                className="grid aspect-square w-[38%] max-w-[9rem] place-items-center rounded-[22%] border-[3px] font-display text-4xl font-bold drop-shadow-[0_16px_40px_rgba(0,0,0,0.45)] transition-transform duration-700 ease-cinema group-hover/plate:-translate-y-1.5 group-hover/plate:scale-105 md:text-5xl"
-                style={{ borderColor: brand[1], color: brand[1], background: `${brand[0]}CC` }}
+                className="grid aspect-square w-[38%] max-w-[9rem] place-items-center rounded-[22%] border-2 font-sans text-4xl font-bold drop-shadow-[0_16px_40px_rgba(0,0,0,0.45)] transition-transform duration-700 ease-cinema group-hover/plate:-translate-y-1.5 group-hover/plate:scale-105 md:text-5xl"
+                style={{ borderColor: brand[1], color: brand[1], background: brand[0] }}
               >
                 {course.tileText}
               </span>
@@ -103,7 +104,7 @@ export default function GlyphPlate({
         {course.index}
       </span>
       <span className="absolute right-6 top-5 font-serif text-sm italic text-bone-50/90 [text-shadow:0_1px_12px_rgb(0_0_0/0.6)]">
-        Method
+        Tarek
       </span>
     </div>
   );

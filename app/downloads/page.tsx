@@ -5,7 +5,7 @@ import DownloadsView from "@/components/lms/DownloadsView";
 export const metadata: Metadata = {
   title: "Downloads — your resource vault",
   description:
-    "Working files, cheat sheets and templates from your enrolled Method courses.",
+    "Working files, cheat sheets and templates from your enrolled Tarek courses.",
   alternates: { canonical: "/downloads/" },
   robots: { index: false },
 };
