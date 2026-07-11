@@ -2,37 +2,44 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import CourseCard from "@/components/lms/CourseCard";
-import { useLang } from "@/lib/i18n";
 import type { Course } from "@/lib/courses";
 
 // Horizontal course slider — a scroll-snap track with prev/next arrows and
-// page dots. Reads real scroll position (rAF-throttled) so it stays smooth
-// and the dots track the swipe direction honestly at any viewport.
+// page dots. Steps are measured per CARD (width + gap), so the dots and both
+// arrows stay honest even when only a fraction of a viewport is scrollable.
 export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
-  const { t } = useLang();
   const trackRef = useRef<HTMLDivElement>(null);
   const raf = useRef(0);
   const [page, setPage] = useState(0);
   const [pages, setPages] = useState(1);
 
+  // one card's scroll step (card width + the flex gap)
+  const stepOf = (el: HTMLDivElement) => {
+    const first = el.children[0] as HTMLElement | undefined;
+    const gap = parseFloat(getComputedStyle(el).columnGap || "24") || 24;
+    return first ? first.offsetWidth + gap : el.clientWidth;
+  };
+
   const sync = useCallback(() => {
     const el = trackRef.current;
     if (!el) return;
-    const p = Math.max(1, Math.ceil(el.scrollWidth / el.clientWidth - 0.05));
-    setPages(p);
-    setPage(Math.min(p - 1, Math.round(el.scrollLeft / el.clientWidth)));
+    const step = stepOf(el);
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    const count = maxScroll <= 1 ? 1 : Math.max(1, Math.round(maxScroll / step) + 1);
+    setPages(count);
+    setPage(Math.min(count - 1, Math.round(el.scrollLeft / step)));
   }, []);
 
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
     sync();
-    // rAF-throttle the scroll handler so the dots update without jank
     const onScroll = () => {
       if (raf.current) return;
       raf.current = requestAnimationFrame(() => {
         raf.current = 0;
-        setPage(Math.round(el.scrollLeft / el.clientWidth));
+        const step = stepOf(el);
+        setPage(Math.round(el.scrollLeft / step));
       });
     };
     el.addEventListener("scroll", onScroll, { passive: true });
@@ -47,12 +54,12 @@ export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
   const go = (dir: 1 | -1) => {
     const el = trackRef.current;
     if (!el) return;
-    el.scrollBy({ left: dir * el.clientWidth, behavior: "smooth" });
+    el.scrollBy({ left: dir * stepOf(el), behavior: "smooth" });
   };
   const toPage = (i: number) => {
     const el = trackRef.current;
     if (!el) return;
-    el.scrollTo({ left: i * el.clientWidth, behavior: "smooth" });
+    el.scrollTo({ left: i * stepOf(el), behavior: "smooth" });
   };
 
   const atStart = page <= 0;
@@ -83,21 +90,17 @@ export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
         →
       </button>
 
-      {/* track — pt leaves room for the FREE badge so it isn't clipped by
-          the horizontal scroll container */}
+      {/* track */}
       <div
         ref={trackRef}
-        className="no-scrollbar -mx-1 flex snap-x snap-mandatory gap-6 overflow-x-auto px-1 pb-3 pt-5"
+        className="no-scrollbar -mx-1 flex snap-x snap-mandatory gap-6 overflow-x-auto px-1 pb-3 pt-2"
       >
         {courses.map((c, i) => (
           <div
             key={c.slug}
             className="w-[82%] shrink-0 snap-start sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
           >
-            <div className="group/card relative h-full transition-transform duration-300 hover:-translate-y-1">
-              <span className="absolute -top-3 right-4 z-10 rotate-[3deg] rounded-full bg-mint px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-white shadow-[0_6px_24px_rgb(var(--mint)/0.45)]">
-                {t.common.free} ✦
-              </span>
+            <div className="h-full transition-transform duration-300 hover:-translate-y-1">
               <CourseCard course={c} eager={i < 3} />
             </div>
           </div>

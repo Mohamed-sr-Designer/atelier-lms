@@ -12,6 +12,7 @@ import Counter from "@/components/lms/Counter";
 import MethodStrip from "@/components/lms/MethodStrip";
 import FeaturedCourse from "@/components/lms/FeaturedCourse";
 import FreeCoursesSlider from "@/components/lms/FreeCoursesSlider";
+import WorkedWith from "@/components/lms/WorkedWith";
 import { useLang } from "@/lib/i18n";
 import { withBase } from "@/lib/base";
 import {
@@ -278,7 +279,12 @@ export default function HomeView() {
               ].map((x) => (
                 <div key={x.l} className="text-end">
                   <p className="font-display text-xl font-semibold text-bone-50 md:text-2xl">
-                    <Counter value={x.n} prefix={x.p} suffix={x.s} keepCounting={x.live} />
+                    <Counter value={x.n} prefix={x.p} suffix={x.s} />
+                    {x.live ? (
+                      <span className="ml-1.5 align-middle text-[9px] font-semibold uppercase tracking-widest text-mint">
+                        still counting
+                      </span>
+                    ) : null}
                   </p>
                   <p className="mt-0.5 max-w-[9rem] text-[10px] uppercase tracking-widest text-bone-400">
                     {x.l}
@@ -634,6 +640,12 @@ export default function HomeView() {
                 >
                   {t.nav.training} →
                 </Link>
+              </div>
+            </Reveal>
+            {/* companies & academies he's worked with — under the CTAs */}
+            <Reveal delay={0.22}>
+              <div className="mt-8">
+                <WorkedWith label={t.home.workedWithLabel} />
               </div>
             </Reveal>
           </div>

@@ -159,7 +159,7 @@ export default function InstructorView() {
             ].map((x) => (
               <div key={x.l} className="bg-ink-900 p-8 text-center">
                 <p className="font-display text-4xl font-semibold text-bone-50 md:text-5xl">
-                  <Counter value={x.n} prefix={x.p} suffix={x.s} keepCounting={x.live} />
+                  <Counter value={x.n} prefix={x.p} suffix={x.s} />
                 </p>
                 <p className="mt-2 text-[11px] uppercase tracking-ultra text-bone-500">
                   {x.l}

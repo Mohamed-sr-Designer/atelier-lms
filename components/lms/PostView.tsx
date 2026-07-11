@@ -103,7 +103,7 @@ export default function PostView({ post }: { post: Post }) {
           </Reveal>
         </div>
 
-        {/* related course */}
+        {/* related course — explicit CTA into the course this article covers */}
         {related && (
           <div className="mx-auto mt-16 max-w-2xl">
             <Reveal>
@@ -114,6 +114,19 @@ export default function PostView({ post }: { post: Post }) {
             <Reveal delay={0.05}>
               <div className="mt-6">
                 <CourseCard course={related} />
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="mt-6 flex flex-wrap items-center gap-4 rounded-2xl border border-mint/25 bg-mint/[0.05] p-5">
+                <p className="grow font-serif text-lg italic text-bone-100">
+                  {t.blogUi.courseCtaLead}
+                </p>
+                <Link
+                  href={`/courses/${related.slug}/`}
+                  className="btn btn-primary px-7 py-3.5"
+                >
+                  {t.blogUi.courseCtaBtn}
+                </Link>
               </div>
             </Reveal>
           </div>
