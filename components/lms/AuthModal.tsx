@@ -96,8 +96,11 @@ export default function AuthModal() {
       {open && (
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+          animate={{ opacity: 1, display: "grid" }}
+          // display:none at exit-end is the safety net: even if the fade is
+          // ever interrupted, the backdrop can never linger invisibly and
+          // swallow every click on the page.
+          exit={{ opacity: 0, transitionEnd: { display: "none" } }}
           transition={{ duration: 0.25 }}
           className="fixed inset-0 z-[90] grid place-items-center overflow-y-auto bg-ink-900/60 p-4 backdrop-blur-xl"
           onClick={close}
@@ -157,6 +160,9 @@ export default function AuthModal() {
                         { id: "team", label: t.auth.typeTeam },
                       ] as { id: Joining; label: string }[]
                     ).map((o) => (
+                      // NOTE: no layoutId here — a shared-layout pill inside an
+                      // AnimatePresence overlay can stall the exit animation and
+                      // leave an invisible click-eating backdrop over the site.
                       <button
                         key={o.id}
                         type="button"
@@ -167,13 +173,12 @@ export default function AuthModal() {
                             : "text-bone-300 hover:text-bone-50"
                         }`}
                       >
-                        {joining === o.id && (
-                          <motion.span
-                            layoutId="auth-joining"
-                            className="absolute inset-0 rounded-lg [background:linear-gradient(120deg,rgb(var(--mint)),rgb(var(--electric)))]"
-                            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                          />
-                        )}
+                        <span
+                          aria-hidden
+                          className={`absolute inset-0 rounded-lg transition-opacity duration-300 [background:linear-gradient(120deg,rgb(var(--mint)),rgb(var(--electric)))] ${
+                            joining === o.id ? "opacity-100" : "opacity-0"
+                          }`}
+                        />
                         <span className="relative">{o.label}</span>
                       </button>
                     ))}

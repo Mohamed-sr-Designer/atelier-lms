@@ -21,6 +21,8 @@ export default function TrainingView() {
 
   // program form
   const [agency, setAgency] = useState("");
+  const [pName, setPName] = useState("");
+  const [pRole, setPRole] = useState(t.training.pRoles[0]);
   const [size, setSize] = useState(t.training.sizes[0]);
   const [industry, setIndustry] = useState(t.training.industries[0]);
   const [location, setLocation] = useState(t.training.locations[0]);
@@ -40,6 +42,7 @@ export default function TrainingView() {
     const body = encodeURIComponent(
       [
         `Company / agency: ${agency}`,
+        `Contact person: ${pName} (${pRole})`,
         `Team size: ${size}`,
         `Industry: ${industry}`,
         `Location: ${location}`,
@@ -192,7 +195,7 @@ export default function TrainingView() {
           </Reveal>
 
           {/* single form panel */}
-          <div className="mt-8 max-w-3xl">
+          <div className="mt-8">
             <AnimatePresence mode="wait">
               {lane === "program" ? (
                 <motion.form
@@ -218,6 +221,31 @@ export default function TrainingView() {
                       required
                     />
                   </label>
+
+                  {/* who's reaching out + their title */}
+                  <div className="mt-5 grid gap-5 sm:grid-cols-2">
+                    <label className="block">
+                      <span className={label}>{t.training.pName}</span>
+                      <input
+                        type="text"
+                        value={pName}
+                        onChange={(e) => setPName(e.target.value)}
+                        placeholder={t.training.pNamePh}
+                        className={input}
+                        required
+                      />
+                    </label>
+                    <label className="block">
+                      <span className={label}>{t.training.pRole}</span>
+                      <select value={pRole} onChange={(e) => setPRole(e.target.value)} className={selectCls}>
+                        {t.training.pRoles.map((s) => (
+                          <option key={s} value={s}>
+                            {s}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  </div>
 
                   <div className="mt-5 grid gap-5 sm:grid-cols-2">
                     <label className="block">

@@ -273,8 +273,10 @@ export default function Nav() {
         {open && (
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            animate={{ opacity: 1, display: "flex" }}
+            // same safety net as the auth modal: a stalled exit can never
+            // leave an invisible full-screen layer blocking clicks
+            exit={{ opacity: 0, transitionEnd: { display: "none" } }}
             transition={{ duration: 0.4 }}
             className="fixed inset-0 z-40 flex flex-col justify-center overflow-y-auto bg-ink-900 px-8 py-24 lg:hidden"
           >
