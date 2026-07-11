@@ -90,3 +90,8 @@ export const fmtPrice = (egp: number, lang: "en" | "ar" = "en") =>
     : lang === "ar"
       ? `${egp.toLocaleString("en-US")} ج.م`
       : `EGP ${egp.toLocaleString("en-US")}`;
+
+// Rough EGP→USD for the international audience (approximate 2026 rate).
+export const EGP_PER_USD = 48;
+export const usdOf = (egp: number) => Math.round(egp / EGP_PER_USD);
+export const fmtUsd = (egp: number) => `$${usdOf(egp).toLocaleString("en-US")}`;

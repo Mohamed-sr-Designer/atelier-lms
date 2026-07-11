@@ -21,6 +21,7 @@ import {
   courses,
   fmtDuration,
   fmtPrice,
+  fmtUsd,
   getCourse,
   lessonCount,
   stats,
@@ -400,6 +401,9 @@ export default function HomeView() {
                       <span className="text-grad font-display text-xl font-bold">
                         {fmtPrice(c.price, lang)}
                       </span>
+                      <span className="ms-2 text-xs font-medium text-bone-400">
+                        · {fmtUsd(c.price)}
+                      </span>
                     </span>
                   </Link>
                 ))}
@@ -512,12 +516,17 @@ export default function HomeView() {
                         {t.home.bundleCta}
                       </Link>
                     </Magnetic>
-                    <p dir="ltr">
-                      <span className="me-3 text-bone-500 line-through">
-                        {fmtPrice(bundle.compareAt, lang)}
+                    <p dir="ltr" className="flex flex-col">
+                      <span>
+                        <span className="me-3 text-bone-500 line-through">
+                          {fmtPrice(bundle.compareAt, lang)}
+                        </span>
+                        <span className="text-grad font-display text-4xl font-bold">
+                          {fmtPrice(bundle.price, lang)}
+                        </span>
                       </span>
-                      <span className="text-grad font-display text-4xl font-bold">
-                        {fmtPrice(bundle.price, lang)}
+                      <span className="mt-0.5 text-xs font-medium text-mint">
+                        ≈ {fmtUsd(bundle.price)} USD · save {savePct}%
                       </span>
                     </p>
                   </div>

@@ -25,7 +25,6 @@ export const aiPhotoshoot: Course = {
     ar: "المصممين والماركترز والفرق الإبداعية اللي محتاجين Visuals بريميوم من غير ميزانيات إنتاج.",
   },
   price: 2800,
-  compareAt: 3500,
   cover: "/lms/featured-banner.jpg",
   showcase: {
     images: [
@@ -157,7 +156,6 @@ export const aiVideo: Course = {
     ar: "المصممين والمونتيرية اللي عايزين يبيعوا فيديو AI — أسرع منتج نموًا في الإعلانات.",
   },
   price: 3200,
-  compareAt: 4000,
   cover: "/work/tilal/hero.webp",
   coverVideo: "/lms/reels/video-1.mp4",
   showcase: {

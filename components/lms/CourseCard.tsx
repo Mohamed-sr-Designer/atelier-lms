@@ -6,6 +6,7 @@ import { useLiveCourse } from "@/lib/studio";
 import {
   fmtDuration,
   fmtPrice,
+  fmtUsd,
   lessonCount,
   totalMinutes,
   type Course,
@@ -56,6 +57,11 @@ export default function CourseCard({
             {course.compareAt ? (
               <span className="ml-1.5 text-xs font-medium text-bone-500 line-through">
                 {course.compareAt.toLocaleString("en-US")}
+              </span>
+            ) : null}
+            {course.price > 0 ? (
+              <span className="ml-1.5 text-xs font-medium text-mint/80">
+                · {fmtUsd(course.price)}
               </span>
             ) : null}
           </span>

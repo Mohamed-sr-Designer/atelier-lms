@@ -8,7 +8,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import CourseCard from "@/components/lms/CourseCard";
 import { useLang } from "@/lib/i18n";
 import { useStudio, draftToCourse } from "@/lib/studio";
-import { bundle, courses, fmtPrice } from "@/lib/courses";
+import { bundle, courses, fmtPrice, fmtUsd } from "@/lib/courses";
 
 type Filter = "all" | "design" | "motion" | "ai" | "free" | "premium";
 
@@ -221,6 +221,9 @@ export default function CatalogView() {
                   </span>
                   <span className="block font-display text-3xl font-semibold text-mint">
                     {fmtPrice(bundle.price, lang)}
+                  </span>
+                  <span className="block text-xs font-medium text-bone-400">
+                    ≈ {fmtUsd(bundle.price)} USD
                   </span>
                 </p>
                 <span className="grid h-12 w-12 place-items-center rounded-full border border-mint/40 text-mint transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180">

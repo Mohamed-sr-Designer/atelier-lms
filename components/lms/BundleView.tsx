@@ -15,6 +15,7 @@ import {
   bundleCourses,
   fmtDuration,
   fmtPrice,
+  fmtUsd,
   lessonCount,
   totalMinutes,
 } from "@/lib/courses";
@@ -88,12 +89,17 @@ export default function BundleView() {
                     {owned ? t.common.continueLearning : t.bundle.cta}
                   </Link>
                 </Magnetic>
-                <p dir="ltr">
-                  <span className="me-3 text-bone-500 line-through">
-                    {fmtPrice(bundle.compareAt, lang)}
+                <p dir="ltr" className="flex flex-col">
+                  <span>
+                    <span className="me-3 text-bone-500 line-through">
+                      {fmtPrice(bundle.compareAt, lang)}
+                    </span>
+                    <span className="font-display text-3xl font-semibold text-bone-50">
+                      {fmtPrice(bundle.price, lang)}
+                    </span>
                   </span>
-                  <span className="font-display text-3xl font-semibold text-bone-50">
-                    {fmtPrice(bundle.price, lang)}
+                  <span className="mt-0.5 text-xs font-medium text-mint">
+                    ≈ {fmtUsd(bundle.price)} USD · save {fmtPrice(bundle.compareAt - bundle.price, lang)} ({savePct}%)
                   </span>
                 </p>
               </div>

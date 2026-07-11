@@ -12,6 +12,7 @@ import { useLiveCourse } from "@/lib/studio";
 import {
   fmtDuration,
   fmtPrice,
+  fmtUsd,
   lessonCount,
   totalMinutes,
   type Course,
@@ -99,6 +100,11 @@ export default function FeaturedCourse({
                 <p className="font-display text-3xl font-semibold text-mint">
                   {fmtPrice(course.price, lang)}
                 </p>
+                {course.price > 0 ? (
+                  <p className="mt-0.5 text-xs font-medium text-bone-400">
+                    ≈ {fmtUsd(course.price)} USD
+                  </p>
+                ) : null}
               </div>
             </motion.div>
           </Reveal>

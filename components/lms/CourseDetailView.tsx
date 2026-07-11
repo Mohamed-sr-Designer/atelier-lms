@@ -20,6 +20,7 @@ import {
   courses,
   fmtDuration,
   fmtPrice,
+  fmtUsd,
   lessonCount,
   totalMinutes,
   type Course,
@@ -176,6 +177,10 @@ export default function CourseDetailView({ course: courseStatic }: { course: Cou
                             <span className="ms-2 text-mint">
                               −{Math.round((1 - course.price / course.compareAt) * 100)}%
                             </span>
+                          </p>
+                        ) : course.price > 0 ? (
+                          <p className="mt-1 text-sm text-bone-400">
+                            ≈ {fmtUsd(course.price)} USD
                           </p>
                         ) : (
                           <p className="mt-1 text-sm text-bone-500">
@@ -611,6 +616,8 @@ export default function CourseDetailView({ course: courseStatic }: { course: Cou
               <p className="text-xs text-bone-500 line-through">
                 {fmtPrice(course.compareAt, lang)}
               </p>
+            ) : course.price > 0 ? (
+              <p className="text-xs text-bone-400">≈ {fmtUsd(course.price)} USD</p>
             ) : null}
           </div>
           <Link

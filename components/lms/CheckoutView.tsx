@@ -15,6 +15,7 @@ import {
   bundle,
   bundleCourses,
   fmtPrice,
+  fmtUsd,
   getCourse,
   type Course,
 } from "@/lib/courses";
@@ -145,8 +146,15 @@ export default function CheckoutView() {
                   <span className="text-sm uppercase tracking-ultra text-bone-500">
                     {t.checkout.total}
                   </span>
-                  <span className="font-display text-3xl font-semibold text-bone-50" dir="ltr">
-                    {fmtPrice(total, lang)}
+                  <span className="text-end" dir="ltr">
+                    <span className="block font-display text-3xl font-semibold text-bone-50">
+                      {fmtPrice(total, lang)}
+                    </span>
+                    {total > 0 ? (
+                      <span className="block text-xs font-medium text-bone-400">
+                        ≈ {fmtUsd(total)} USD
+                      </span>
+                    ) : null}
                   </span>
                 </div>
               </div>
