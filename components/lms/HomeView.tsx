@@ -3,15 +3,15 @@
 import Link from "next/link";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
+import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Media } from "@/components/ui/Media";
 import Magnetic from "@/components/ui/Magnetic";
 import LogoMarquee from "@/components/LogoMarquee";
-import CourseCard from "@/components/lms/CourseCard";
 import Counter from "@/components/lms/Counter";
 import MethodStrip from "@/components/lms/MethodStrip";
 import FeaturedCourse from "@/components/lms/FeaturedCourse";
+import FreeCoursesSlider from "@/components/lms/FreeCoursesSlider";
 import { useLang } from "@/lib/i18n";
 import { withBase } from "@/lib/base";
 import {
@@ -81,7 +81,7 @@ export default function HomeView() {
 
   const freePs = getCourse("adobe-photoshop")!;
   const featured = getCourse("ai-photoshoot")!;
-  const gridCourses = courses.filter((c) => c.slug !== featured.slug);
+  const aiVideo = getCourse("ai-video-generation")!;
   const freeCourses = courses.filter((c) => c.price === 0);
   const aiCourses = courses.filter((c) => c.price > 0);
 
@@ -206,9 +206,6 @@ export default function HomeView() {
                     {t.home.ctaPrimary}
                   </Link>
                 </Magnetic>
-                <Sticker tone="grad" rotate={-4}>
-                  {t.home.heroStickers[0]}
-                </Sticker>
                 <Magnetic>
                   <Link
                     href="/bundle/"
@@ -220,12 +217,16 @@ export default function HomeView() {
               </motion.div>
             </div>
 
-            {/* free drop card */}
+            {/* free drop card + "4 free courses" sticker above it */}
             <motion.div
               initial={{ opacity: 0, y: 24, rotate: 3 }}
               animate={{ opacity: 1, y: 0, rotate: 0 }}
               transition={{ duration: 0.8, ease, delay: 1.05 }}
+              className="flex flex-col items-end gap-3"
             >
+              <Sticker tone="grad" rotate={-4}>
+                {t.home.heroStickers[0]}
+              </Sticker>
               <Link
                 href={`/courses/${freePs.slug}/`}
                 className="group flex items-center gap-4 rounded-2xl border border-mint/40 bg-ink-900/70 p-4 pr-6 backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:rotate-[-1deg]"
@@ -433,49 +434,28 @@ export default function HomeView() {
             </Reveal>
           </div>
 
-          <Stagger className="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-            {gridCourses.map((c, i) => (
-              <StaggerItem key={c.slug}>
-                <motion.div
-                  whileHover={{ rotate: i % 2 === 0 ? -0.8 : 0.8, y: -4 }}
-                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
-                  className={`relative h-full rounded-2xl ${
-                    c.price > 0
-                      ? "p-1 ring-1 ring-mint/40 [background:linear-gradient(140deg,rgb(var(--mint)/0.12),transparent_50%,rgb(var(--electric)/0.1))]"
-                      : ""
-                  }`}
-                >
-                  {c.price > 0 && (
-                    <span className="absolute -top-3.5 left-4 z-10 rotate-[-4deg] rounded-full px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-white shadow-[0_6px_24px_rgb(var(--mint)/0.45)] [background:linear-gradient(120deg,rgb(var(--mint)),rgb(var(--electric)))]">
-                      ✦ {t.common.premium}
-                    </span>
-                  )}
-                  {c.price === 0 && (
-                    <span className="absolute -top-3.5 right-4 z-10 rotate-[3deg] rounded-full bg-mint px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-white shadow-[0_6px_24px_rgb(var(--mint)/0.45)]">
-                      {t.common.free} ✦
-                    </span>
-                  )}
-                  <CourseCard course={c} eager={i < 3} />
-                </motion.div>
-              </StaggerItem>
-            ))}
-          </Stagger>
+          {/* the four free software courses, as a swipeable slider */}
+          <FreeCoursesSlider courses={freeCourses} />
         </div>
       </section>
 
-      {/* ============================================= FEATURED COURSE ======== */}
+      {/* ================================= PREMIUM · AI PHOTOSHOOT =========== */}
       <FeaturedCourse course={featured} />
+
+      {/* ================================= PREMIUM · AI VIDEO =============== */}
+      <div className="border-t border-line/10">
+        <FeaturedCourse
+          course={aiVideo}
+          label={t.home.featuredVideoLabel}
+          note={t.home.featuredVideoNote}
+          flip
+        />
+      </div>
 
       {/* ============================================= THE AI STACK =========== */}
       <section className="border-y border-line/10 bg-ink-800/40">
         <div className="container-edge mx-auto max-w-edge py-24 md:py-32">
           <div className="relative overflow-hidden rounded-3xl border border-mint/25 bg-ink-900 p-8 md:p-14">
-            <span
-              aria-hidden
-              className="text-grad pointer-events-none absolute -top-8 right-0 font-display text-[9rem] font-bold leading-none opacity-15 md:text-[15rem]"
-            >
-              AI
-            </span>
             <div
               aria-hidden
               className="absolute inset-0"
@@ -641,17 +621,19 @@ export default function HomeView() {
               </div>
             </Reveal>
             <Reveal delay={0.18}>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Magnetic>
-                  <Link href="/instructor/" className="btn btn-ghost px-7 py-3.5">
-                    {t.home.instructorCta} →
-                  </Link>
-                </Magnetic>
-                <Magnetic>
-                  <Link href="/training/" className="btn btn-ghost px-7 py-3.5">
-                    {t.nav.training} →
-                  </Link>
-                </Magnetic>
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                <Link
+                  href="/instructor/"
+                  className="btn btn-primary w-full justify-center px-7 py-4 text-base"
+                >
+                  {t.home.instructorCta} →
+                </Link>
+                <Link
+                  href="/training/"
+                  className="btn btn-ghost w-full justify-center px-7 py-4 text-base"
+                >
+                  {t.nav.training} →
+                </Link>
               </div>
             </Reveal>
           </div>

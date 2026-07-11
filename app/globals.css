@@ -207,6 +207,14 @@ html.modal-open .custom-cursor {
   .text-pretty {
     text-wrap: pretty;
   }
+  /* Hide the scrollbar on swipeable sliders (still scrolls/keyboard-accessible) */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
   /* Signature gradient type: royal magenta → cyan */
   .text-grad {
     background-image: linear-gradient(100deg, rgb(var(--mint)), rgb(var(--electric)));

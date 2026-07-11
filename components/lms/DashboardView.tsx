@@ -300,7 +300,15 @@ function Board() {
               <Reveal>
                 <SectionLabel index="01">{t.dash.coursesLabel}</SectionLabel>
               </Reveal>
-              <div className="flex gap-1 rounded-full border border-line/15 bg-ink-800/60 p-1">
+              <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  href="/courses/"
+                  className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-[0_6px_20px_rgb(var(--mint)/0.35)] transition-transform duration-300 hover:-translate-y-0.5 [background:linear-gradient(120deg,rgb(var(--mint)),rgb(var(--electric)))]"
+                >
+                  <span className="text-base leading-none">＋</span>
+                  {t.dash.addCourse}
+                </Link>
+                <div className="flex gap-1 rounded-full border border-line/15 bg-ink-800/60 p-1">
                 {(
                   [
                     { id: "active", label: `${t.dash.tabActive} · ${active.length}` },
@@ -325,6 +333,7 @@ function Board() {
                     <span className="relative">{o.label}</span>
                   </button>
                 ))}
+                </div>
               </div>
             </div>
 

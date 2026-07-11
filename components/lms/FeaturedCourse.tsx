@@ -20,7 +20,18 @@ import {
 // The featured drop — a full editorial spread for one course. The plate tilts
 // toward the pointer (Apple-card style), the curriculum peeks like a magazine
 // index, and the price sits inside the story instead of on a pricing card.
-export default function FeaturedCourse({ course: courseStatic }: { course: Course }) {
+// `flip` mirrors the columns so two stacked features read as a spread.
+export default function FeaturedCourse({
+  course: courseStatic,
+  label,
+  note,
+  flip = false,
+}: {
+  course: Course;
+  label?: string;
+  note?: string;
+  flip?: boolean;
+}) {
   const { t, lang } = useLang();
   const course = useLiveCourse(courseStatic); // studio edits apply live
   const ref = useRef<HTMLDivElement>(null);
@@ -48,18 +59,21 @@ export default function FeaturedCourse({ course: courseStatic }: { course: Cours
     <section className="container-edge mx-auto max-w-edge py-24 md:py-36">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <Reveal>
-          <SectionLabel index="✦">{t.home.featuredLabel}</SectionLabel>
+          <SectionLabel index="✦">{label ?? t.home.featuredLabel}</SectionLabel>
         </Reveal>
         <Reveal delay={0.05}>
           <p className="font-serif text-sm italic text-bone-400">
-            {t.home.featuredNote}
+            {note ?? t.home.featuredNote}
           </p>
         </Reveal>
       </div>
 
       <div className="mt-12 grid items-center gap-12 lg:grid-cols-12">
         {/* tilting plate */}
-        <div className="lg:col-span-6" style={{ perspective: 1200 }}>
+        <div
+          className={`lg:col-span-6 ${flip ? "lg:order-2" : ""}`}
+          style={{ perspective: 1200 }}
+        >
           <Reveal>
             <motion.div
               ref={ref}
@@ -91,7 +105,7 @@ export default function FeaturedCourse({ course: courseStatic }: { course: Cours
         </div>
 
         {/* editorial column */}
-        <div className="lg:col-span-6">
+        <div className={`lg:col-span-6 ${flip ? "lg:order-1" : ""}`}>
           <Reveal delay={0.08}>
             <h2 className="text-balance font-display text-3xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-5xl">
               {course.title[lang]}
