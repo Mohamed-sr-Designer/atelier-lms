@@ -16,18 +16,23 @@ export default function CourseCard({
   course: courseStatic,
   eager = false,
   popular = false,
+  href,
+  live = true,
 }: {
   course: Course;
   eager?: boolean;
   popular?: boolean;
+  href?: string; // override link target (drafts point at /preview/)
+  live?: boolean; // apply studio overrides (off for drafts, already live)
 }) {
   const { t, lang } = useLang();
-  const course = useLiveCourse(courseStatic); // studio edits apply live
+  const liveCourse = useLiveCourse(courseStatic);
+  const course = live ? liveCourse : courseStatic; // studio edits apply live
   const mins = totalMinutes(course);
 
   return (
     <Link
-      href={`/courses/${course.slug}/`}
+      href={href ?? `/courses/${course.slug}/`}
       className="group block h-full"
       aria-label={course.title[lang]}
     >

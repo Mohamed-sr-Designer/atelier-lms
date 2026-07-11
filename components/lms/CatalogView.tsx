@@ -7,6 +7,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import CourseCard from "@/components/lms/CourseCard";
 import { useLang } from "@/lib/i18n";
+import { useStudio, draftToCourse } from "@/lib/studio";
 import { bundle, courses, fmtPrice } from "@/lib/courses";
 
 type Filter = "all" | "design" | "motion" | "ai" | "free" | "premium";
@@ -22,6 +23,7 @@ const CATEGORY: Record<string, "design" | "motion" | "ai"> = {
 
 export default function CatalogView() {
   const { t, lang } = useLang();
+  const studio = useStudio();
   const [filter, setFilter] = useState<Filter>("all");
   const [q, setQ] = useState("");
 
@@ -63,6 +65,27 @@ export default function CatalogView() {
   const popularSlug = courses.reduce((a, b) =>
     b.students > a.students ? b : a
   ).slug;
+
+  // studio-created courses (drafts) — shown when the filter allows them
+  const draftCourses = (studio.drafts || [])
+    .map(draftToCourse)
+    .filter((c) => {
+      const byFilter =
+        filter === "all" || filter === "ai"
+          ? filter !== "ai"
+          : filter === "free"
+            ? c.price === 0
+            : filter === "premium"
+              ? c.price > 0
+              : false;
+      const okFilter = filter === "all" ? true : byFilter;
+      if (!okFilter) return false;
+      if (!query) return true;
+      return [c.title.en, c.short.en, c.tagline.en]
+        .join(" ")
+        .toLowerCase()
+        .includes(query);
+    });
 
   return (
     <section className="container-edge mx-auto max-w-edge pb-24 pt-32 md:pb-32 md:pt-44">
@@ -150,6 +173,16 @@ export default function CatalogView() {
         {shown.map((c, i) => (
           <StaggerItem key={c.slug}>
             <CourseCard course={c} eager={i < 3} popular={c.slug === popularSlug} />
+          </StaggerItem>
+        ))}
+        {draftCourses.map((c) => (
+          <StaggerItem key={c.slug}>
+            <div className="relative">
+              <span className="absolute -top-3 left-4 z-10 rounded-full px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-white shadow-[0_6px_20px_rgb(var(--mint)/0.45)] [background:linear-gradient(120deg,rgb(var(--mint)),rgb(var(--electric)))]">
+                New ✦
+              </span>
+              <CourseCard course={c} href={`/preview/?slug=${c.slug}`} live={false} />
+            </div>
           </StaggerItem>
         ))}
       </Stagger>

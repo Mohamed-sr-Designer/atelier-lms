@@ -69,7 +69,7 @@ export default function Preloader() {
             transition={{ duration: 0.6 }}
             className="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-bone-400"
           >
-            <span>{site.name}</span>
+            <span>{site.shortName}</span>
             <span>School of Visual Direction — 2026</span>
           </motion.div>
 

@@ -10,18 +10,19 @@ export default function Footer() {
   const { t, lang } = useLang();
   const year = new Date().getFullYear();
 
+  // Support column — blog, help and ways to reach a human
   const platform = [
-    { label: t.nav.dashboard, href: "/dashboard/" },
-    { label: t.downloads.title, href: "/downloads/" },
     { label: t.nav.blog, href: "/blog/" },
     { label: t.nav.faq, href: "/faq/" },
+    { label: t.nav.contact, href: "/contact/" },
+    { label: t.downloads.title, href: "/downloads/" },
   ];
 
   const school = [
+    { label: t.nav.dashboard, href: "/dashboard/" },
     { label: t.nav.instructor, href: "/instructor/" },
     { label: t.nav.training, href: "/training/" },
     { label: t.catalog.bundleCard, href: "/bundle/" },
-    { label: t.nav.contact, href: "/contact/" },
   ];
 
   const legal = [

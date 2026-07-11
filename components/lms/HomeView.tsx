@@ -272,13 +272,13 @@ export default function HomeView() {
             </p>
             <div className="flex gap-8 md:gap-12">
               {[
-                { n: stats.graduates, s: "+", l: t.home.stats.graduates },
-                { n: stats.academies, s: "", l: t.home.stats.academies },
-                { n: stats.totalHours, s: "h", l: t.home.stats.hours },
+                { n: stats.graduates, p: "+", s: "", l: t.home.stats.graduates, live: true },
+                { n: stats.academies, p: "", s: "", l: t.home.stats.academies, live: false },
+                { n: stats.totalHours, p: "", s: "h", l: t.home.stats.hours, live: false },
               ].map((x) => (
                 <div key={x.l} className="text-end">
                   <p className="font-display text-xl font-semibold text-bone-50 md:text-2xl">
-                    <Counter value={x.n} suffix={x.s} />
+                    <Counter value={x.n} prefix={x.p} suffix={x.s} keepCounting={x.live} />
                   </p>
                   <p className="mt-0.5 max-w-[9rem] text-[10px] uppercase tracking-widest text-bone-400">
                     {x.l}

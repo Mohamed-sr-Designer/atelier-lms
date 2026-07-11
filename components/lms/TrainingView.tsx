@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import LogoMarquee from "@/components/LogoMarquee";
 import { useLang } from "@/lib/i18n";
 import { withBase } from "@/lib/base";
 import { site } from "@/lib/site";
@@ -424,6 +425,14 @@ export default function TrainingView() {
             </AnimatePresence>
           </div>
         </div>
+      </section>
+
+      {/* brands & academies loop */}
+      <section className="pb-24">
+        <p className="mb-6 text-center text-xs uppercase tracking-ultra text-bone-500">
+          {t.home.brandsNote}
+        </p>
+        <LogoMarquee />
       </section>
     </>
   );

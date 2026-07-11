@@ -3,17 +3,23 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView, useReducedMotion } from "framer-motion";
 
-// Animated counter — counts up once when scrolled into view.
+// Animated counter — counts up once when scrolled into view. With
+// `keepCounting`, it never truly stops: after the count-up it keeps ticking
+// up by one every few seconds, so a "still counting" stat reads as alive.
 export default function Counter({
   value,
+  prefix = "",
   suffix = "",
   className = "",
   duration = 1.6,
+  keepCounting = false,
 }: {
   value: number;
+  prefix?: string;
   suffix?: string;
   className?: string;
   duration?: number;
+  keepCounting?: boolean;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "0px 0px -10% 0px" });
@@ -38,8 +44,18 @@ export default function Counter({
     return () => cancelAnimationFrame(raf);
   }, [inView, value, duration, reduce]);
 
+  // keep ticking after the count-up finishes
+  useEffect(() => {
+    if (!keepCounting || !inView || reduce) return;
+    const id = setInterval(() => {
+      setN((c) => (c >= value ? c + 1 : c));
+    }, 4200);
+    return () => clearInterval(id);
+  }, [keepCounting, inView, reduce, value]);
+
   return (
     <span ref={ref} className={`tabular-nums ${className}`} dir="ltr">
+      {prefix}
       {n.toLocaleString("en-US")}
       {suffix}
     </span>

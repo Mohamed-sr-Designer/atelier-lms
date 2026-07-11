@@ -5,16 +5,16 @@ import { site } from "@/lib/site";
 import { posts } from "@/lib/blog";
 
 export const metadata: Metadata = {
-  title: "Journal — Design Education, Career Paths & AI Production",
+  title: "Blog & Support — Guides, How-tos & Answers",
   description:
-    "Honest writing on learning design, tool sequencing and AI production workflows — by art director and instructor Mohamed Tarek.",
+    "Support articles and honest how-tos on learning design, tool sequencing and AI production — by art director and designer Mohamed Tarek.",
   alternates: { canonical: "/blog/" },
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Blog",
-  name: "Tarek Journal",
+  name: "Mohamed Tarek Academy — Blog & Support",
   url: `${site.url}/blog/`,
   publisher: { "@id": `${site.url}/#organization` },
   blogPost: posts.map((p) => ({

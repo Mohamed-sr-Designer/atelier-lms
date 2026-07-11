@@ -65,7 +65,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: site.url },
-          { "@type": "ListItem", position: 2, name: "Journal", item: `${site.url}/blog/` },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${site.url}/blog/` },
           { "@type": "ListItem", position: 3, name: p.title, item: `${site.url}/blog/${p.slug}/` },
         ],
       },

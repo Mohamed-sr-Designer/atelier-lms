@@ -144,8 +144,8 @@ export const aiVideo: Course = {
   },
   short: { en: "AI Video", ar: "فيديو الذكاء الاصطناعي" },
   tagline: {
-    en: "Direct AI like a film crew — and deliver spots clients approve.",
-    ar: "أخرج بالذكاء الاصطناعي كأنه فريق تصوير — وسلّم إعلانات العميل يوافق عليها.",
+    en: "Text prompt in, broadcast-ready spot out — the AI film skill clients pay premium for, no camera, no crew.",
+    ar: "برومبت مكتوب يدخل، إعلان جاهز للبث يخرج — مهارة الفيديو بالـ AI اللي العملاء بيدفعوا فيها بريميوم، من غير كاميرا ولا فريق.",
   },
   desc: {
     en: "The complete AI video pipeline I use for client work: directing motion with prompts, blending generated shots with stock, and cutting it all into a finished spot in Premiere Pro. From a text idea to a deliverable film.",
@@ -187,7 +187,7 @@ export const aiVideo: Course = {
   modules: [
     {
       n: "01",
-      t: "Directing AI Motion",
+      t: "Direct the Camera, in Words",
       lessons: [
         { id: "av-1-1", t: "Prompt engineering for video: motion & camera language", dur: 17, d: "Shot length, movement and lensing — written as direction.", free: true },
         { id: "av-1-2", t: "Gathering references that define look & pace", dur: 16, d: "Build a reference edit before generating anything." },
@@ -196,7 +196,7 @@ export const aiVideo: Course = {
     },
     {
       n: "02",
-      t: "Source & Generate",
+      t: "Generate & Source Shots",
       lessons: [
         { id: "av-2-1", t: "Sourcing & preparing stock to blend", dur: 16, d: "Finding, cleaning and grading stock to sit beside AI shots." },
         { id: "av-2-2", t: "Driving video-gen models to usable shots", dur: 17, d: "Iteration strategy: from mush to on-brand footage." },
@@ -205,7 +205,7 @@ export const aiVideo: Course = {
     },
     {
       n: "03",
-      t: "The Edit",
+      t: "Cut It Like Film",
       lessons: [
         { id: "av-3-1", t: "Assembly & pacing in Premiere Pro", dur: 16, d: "Selects, structure and a rhythm that hides generation limits." },
         { id: "av-3-2", t: "Sound, music & mix", dur: 16, d: "The half of AI video everyone forgets." },
@@ -214,7 +214,7 @@ export const aiVideo: Course = {
     },
     {
       n: "04",
-      t: "Ship It",
+      t: "Master, Price & Ship",
       lessons: [
         { id: "av-4-1", t: "Ratios, captions & platform masters", dur: 16, d: "Every deliverable a campaign actually needs." },
         { id: "av-4-2", t: "Presenting & pricing AI video", dur: 16, d: "Position the work, handle the 'is it AI?' question, price it." },

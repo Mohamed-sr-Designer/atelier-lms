@@ -19,8 +19,23 @@ export type CourseOverride = {
   extraLessons?: { t: string; dur: number; video?: string }[];
 };
 
+// A brand-new course the admin builds from scratch (stored, not static).
+export type DraftLesson = { t: string; dur: number; video?: string };
+export type DraftModule = { t: string; lessons: DraftLesson[] };
+export type DraftCourse = {
+  slug: string;
+  title: string;
+  short: string;
+  tagline: string;
+  price: number;
+  compareAt?: number;
+  cover: string;
+  modules: DraftModule[];
+};
+
 export type Studio = {
   courses: Record<string, CourseOverride>;
+  drafts?: DraftCourse[];
   offer?: {
     text?: string;
     enabled?: boolean; // default true
@@ -29,7 +44,7 @@ export type Studio = {
 };
 
 const KEY = "tarek-studio";
-const EMPTY: Studio = { courses: {} };
+const EMPTY: Studio = { courses: {}, drafts: [] };
 
 let cache: Studio = EMPTY;
 let cacheRaw = "";
@@ -102,6 +117,163 @@ export const setOfferOverride = (patch: NonNullable<Studio["offer"]>) => {
   const s = read();
   write({ ...s, offer: { ...s.offer, ...patch } });
 };
+
+// ---- draft courses (built from scratch in the studio) ------------------------
+
+const slugify = (name: string) =>
+  name
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 48) || `course-${Date.now().toString(36)}`;
+
+export const addDraft = (name: string): string => {
+  const s = read();
+  const drafts = s.drafts || [];
+  let slug = slugify(name);
+  // keep slugs unique across drafts
+  let n = 2;
+  while (drafts.some((d) => d.slug === slug)) slug = `${slugify(name)}-${n++}`;
+  const draft: DraftCourse = {
+    slug,
+    title: name.trim(),
+    short: name.trim(),
+    tagline: "A new course from the studio.",
+    price: 0,
+    cover: "/lms/featured-banner.jpg",
+    modules: [{ t: "Module 01", lessons: [] }],
+  };
+  write({ ...s, drafts: [...drafts, draft] });
+  return slug;
+};
+
+export const updateDraft = (
+  slug: string,
+  patch: Partial<Omit<DraftCourse, "slug" | "modules">>
+) => {
+  const s = read();
+  write({
+    ...s,
+    drafts: (s.drafts || []).map((d) =>
+      d.slug === slug ? { ...d, ...patch } : d
+    ),
+  });
+};
+
+export const addDraftModule = (slug: string, title: string) => {
+  const s = read();
+  write({
+    ...s,
+    drafts: (s.drafts || []).map((d) =>
+      d.slug === slug
+        ? { ...d, modules: [...d.modules, { t: title, lessons: [] }] }
+        : d
+    ),
+  });
+};
+
+export const addDraftLesson = (
+  slug: string,
+  moduleIndex: number,
+  lesson: DraftLesson
+) => {
+  const s = read();
+  write({
+    ...s,
+    drafts: (s.drafts || []).map((d) =>
+      d.slug === slug
+        ? {
+            ...d,
+            modules: d.modules.map((m, i) =>
+              i === moduleIndex ? { ...m, lessons: [...m.lessons, lesson] } : m
+            ),
+          }
+        : d
+    ),
+  });
+};
+
+export const removeDraftLesson = (
+  slug: string,
+  moduleIndex: number,
+  lessonIndex: number
+) => {
+  const s = read();
+  write({
+    ...s,
+    drafts: (s.drafts || []).map((d) =>
+      d.slug === slug
+        ? {
+            ...d,
+            modules: d.modules.map((m, i) =>
+              i === moduleIndex
+                ? { ...m, lessons: m.lessons.filter((_, li) => li !== lessonIndex) }
+                : m
+            ),
+          }
+        : d
+    ),
+  });
+};
+
+export const removeDraft = (slug: string) => {
+  const s = read();
+  write({ ...s, drafts: (s.drafts || []).filter((d) => d.slug !== slug) });
+};
+
+// Turn a draft into a full Course object so it renders through the same
+// CourseCard / detail components as the static catalogue.
+export const draftToCourse = (d: DraftCourse): Course => {
+  const modules = (d.modules.length ? d.modules : [{ t: "Module 01", lessons: [] }]).map(
+    (m, mi) => ({
+      n: String(mi + 1).padStart(2, "0"),
+      t: m.t,
+      lessons: m.lessons.map((l, li) => ({
+        id: `${d.slug}-${mi + 1}-${li + 1}`,
+        t: l.t,
+        dur: l.dur,
+        d: l.video ? "Video lesson" : "Lesson",
+        free: mi === 0 && li === 0,
+      })),
+    })
+  );
+  const bi = (en: string) => ({ en, ar: en });
+  return {
+    slug: d.slug,
+    index: "NEW",
+    glyph: "★",
+    title: bi(d.title),
+    short: bi(d.short || d.title),
+    tagline: bi(d.tagline),
+    desc: bi(d.tagline),
+    level: bi("Zero → Professional"),
+    audience: bi("Anyone who wants to learn this, hands-on."),
+    price: d.price,
+    compareAt: d.compareAt,
+    cover: d.cover || "/lms/featured-banner.jpg",
+    outcomes: modules.flatMap((m) => m.lessons.map((l) => l.t)).slice(0, 6),
+    tools: [],
+    path: [],
+    modules,
+    quiz: [],
+    projects: [],
+    resources: [],
+    finalProject: {
+      t: "Final project",
+      d: "Apply everything from this course in one deliverable.",
+      deliverables: ["Your finished project"],
+    },
+    faq: [],
+    reviews: [],
+    rating: 5,
+    ratingCount: 0,
+    students: 0,
+  };
+};
+
+export const findDraft = (studio: Studio, slug: string) =>
+  (studio.drafts || []).find((d) => d.slug === slug);
 
 export const resetStudio = () => {
   try {

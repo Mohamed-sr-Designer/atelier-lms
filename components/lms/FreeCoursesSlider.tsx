@@ -1,41 +1,48 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import CourseCard from "@/components/lms/CourseCard";
 import { useLang } from "@/lib/i18n";
 import type { Course } from "@/lib/courses";
 
 // Horizontal course slider — a scroll-snap track with prev/next arrows and
-// page dots. Works off real scroll position so the dots stay honest at any
-// viewport (1 card on mobile, 2 on tablet, 3 on desktop).
+// page dots. Reads real scroll position (rAF-throttled) so it stays smooth
+// and the dots track the swipe direction honestly at any viewport.
 export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
   const { t } = useLang();
   const trackRef = useRef<HTMLDivElement>(null);
+  const raf = useRef(0);
   const [page, setPage] = useState(0);
   const [pages, setPages] = useState(1);
 
-  const measure = useCallback(() => {
+  const sync = useCallback(() => {
     const el = trackRef.current;
     if (!el) return;
     const p = Math.max(1, Math.ceil(el.scrollWidth / el.clientWidth - 0.05));
     setPages(p);
-    setPage(Math.round(el.scrollLeft / el.clientWidth));
+    setPage(Math.min(p - 1, Math.round(el.scrollLeft / el.clientWidth)));
   }, []);
 
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
-    measure();
-    const onScroll = () =>
-      setPage(Math.round(el.scrollLeft / el.clientWidth));
+    sync();
+    // rAF-throttle the scroll handler so the dots update without jank
+    const onScroll = () => {
+      if (raf.current) return;
+      raf.current = requestAnimationFrame(() => {
+        raf.current = 0;
+        setPage(Math.round(el.scrollLeft / el.clientWidth));
+      });
+    };
     el.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", measure);
+    window.addEventListener("resize", sync);
     return () => {
       el.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", measure);
+      window.removeEventListener("resize", sync);
+      if (raf.current) cancelAnimationFrame(raf.current);
     };
-  }, [measure]);
+  }, [sync]);
 
   const go = (dir: 1 | -1) => {
     const el = trackRef.current;
@@ -51,17 +58,18 @@ export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
   const atStart = page <= 0;
   const atEnd = page >= pages - 1;
 
+  const arrowBase =
+    "grid h-12 w-12 place-items-center rounded-full border border-line/20 bg-ink-900/80 text-lg text-bone-50 backdrop-blur-xl transition-all duration-300 hover:border-mint/60 hover:text-mint disabled:cursor-not-allowed disabled:opacity-30";
+
   return (
     <div className="relative mt-14">
-      {/* arrows (desktop) */}
+      {/* desktop arrows */}
       <button
         type="button"
         aria-label="Previous"
         onClick={() => go(-1)}
         disabled={atStart}
-        className={`absolute -left-5 top-[38%] z-20 hidden h-12 w-12 place-items-center rounded-full border border-line/20 bg-ink-900/80 text-bone-50 backdrop-blur-xl transition-all duration-300 hover:border-mint/60 hover:text-mint md:grid ${
-          atStart ? "cursor-not-allowed opacity-30" : "opacity-100"
-        }`}
+        className={`absolute -left-5 top-[42%] z-20 hidden md:grid ${arrowBase}`}
       >
         ←
       </button>
@@ -70,50 +78,40 @@ export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
         aria-label="Next"
         onClick={() => go(1)}
         disabled={atEnd}
-        className={`absolute -right-5 top-[38%] z-20 hidden h-12 w-12 place-items-center rounded-full border border-line/20 bg-ink-900/80 text-bone-50 backdrop-blur-xl transition-all duration-300 hover:border-mint/60 hover:text-mint md:grid ${
-          atEnd ? "cursor-not-allowed opacity-30" : "opacity-100"
-        }`}
+        className={`absolute -right-5 top-[42%] z-20 hidden md:grid ${arrowBase}`}
       >
         →
       </button>
 
-      {/* track */}
+      {/* track — pt leaves room for the FREE badge so it isn't clipped by
+          the horizontal scroll container */}
       <div
         ref={trackRef}
-        className="no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-2"
+        className="no-scrollbar -mx-1 flex snap-x snap-mandatory gap-6 overflow-x-auto px-1 pb-3 pt-5"
       >
         {courses.map((c, i) => (
           <div
             key={c.slug}
-            className="w-[85%] shrink-0 snap-start sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
+            className="w-[82%] shrink-0 snap-start sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
-              whileHover={{ y: -4 }}
-              className="relative h-full"
-            >
-              <span className="absolute -top-3.5 right-4 z-10 rotate-[3deg] rounded-full bg-mint px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-white shadow-[0_6px_24px_rgb(var(--mint)/0.45)]">
+            <div className="group/card relative h-full transition-transform duration-300 hover:-translate-y-1">
+              <span className="absolute -top-3 right-4 z-10 rotate-[3deg] rounded-full bg-mint px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-white shadow-[0_6px_24px_rgb(var(--mint)/0.45)]">
                 {t.common.free} ✦
               </span>
               <CourseCard course={c} eager={i < 3} />
-            </motion.div>
+            </div>
           </div>
         ))}
       </div>
 
-      {/* controls row: mobile arrows + dots */}
+      {/* controls: mobile arrows + directional dots */}
       <div className="mt-8 flex items-center justify-center gap-5">
         <button
           type="button"
           aria-label="Previous"
           onClick={() => go(-1)}
           disabled={atStart}
-          className={`grid h-9 w-9 place-items-center rounded-full border border-line/20 text-bone-50 transition-colors hover:border-mint/60 hover:text-mint md:hidden ${
-            atStart ? "opacity-30" : ""
-          }`}
+          className="grid h-9 w-9 place-items-center rounded-full border border-line/20 text-bone-50 transition-colors hover:border-mint/60 hover:text-mint disabled:opacity-30 md:hidden"
         >
           ←
         </button>
@@ -123,6 +121,7 @@ export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
               key={i}
               type="button"
               aria-label={`Go to slide ${i + 1}`}
+              aria-current={i === page}
               onClick={() => toPage(i)}
               className={`h-2 rounded-full transition-all duration-300 ${
                 i === page
@@ -137,9 +136,7 @@ export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
           aria-label="Next"
           onClick={() => go(1)}
           disabled={atEnd}
-          className={`grid h-9 w-9 place-items-center rounded-full border border-line/20 text-bone-50 transition-colors hover:border-mint/60 hover:text-mint md:hidden ${
-            atEnd ? "opacity-30" : ""
-          }`}
+          className="grid h-9 w-9 place-items-center rounded-full border border-line/20 text-bone-50 transition-colors hover:border-mint/60 hover:text-mint disabled:opacity-30 md:hidden"
         >
           →
         </button>

@@ -1,19 +1,20 @@
 // ---- Tarek — the school of Mohamed Tarek ----------------------------------
 export const site = {
   // Platform identity
-  name: "Tarek",
-  fullName: "Tarek — The School of Visual Direction",
+  name: "Mohamed Tarek Academy",
+  shortName: "Tarek",
+  fullName: "Mohamed Tarek Academy — School of Visual Direction",
   title:
-    "Tarek by Mohamed Tarek — Free Photoshop, Illustrator, After Effects & Premiere Courses + Premium AI Production",
+    "Mohamed Tarek — Art Director & Design Academy | Free Adobe Courses + Premium AI Production",
   description:
-    "Tarek is the online design school of art director Mohamed Tarek. The software courses — Photoshop, Illustrator, After Effects, Premiere Pro — are completely free, start to finish. The premium AI production tracks (AI photoshoots and AI video) teach the highest-earning skill in design today. 3–5 hours each, real projects, quizzes and reviewed final projects.",
+    "Mohamed Tarek is an art director and designer running an online design academy. His software courses — Photoshop, Illustrator, After Effects, Premiere Pro — are completely free, start to finish. The premium AI production tracks (AI photoshoots and AI video) teach the highest-earning skill in design today. Real projects, quizzes and reviewed final projects.",
   url: "https://mohamed-sr-designer.github.io/atelier-lms",
 
   // Instructor
   instructor: "Mohamed Tarek",
-  instructorRole: "Art Director & Team Lead",
+  instructorRole: "Art Director, Designer & Founder",
   instructorBio:
-    "Art director and design instructor with 9+ years across Egypt, Saudi Arabia and Kuwait — leading brand, campaign and motion work by day, and teaching across four academies with 1,200+ graduates.",
+    "Mohamed Tarek is an art director and graphic designer leading brand, campaign and motion work across Egypt, Saudi Arabia and Kuwait — and the founder of Mohamed Tarek Academy, teaching design and AI production to 1,200+ students across four academies.",
 
   email: "mohamed.tarek.ahmed1@gmail.com",
   phoneDisplay: "+20 10 1145 8929",

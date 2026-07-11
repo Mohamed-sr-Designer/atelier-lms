@@ -58,10 +58,10 @@ const ladder = [
     note: "Key visuals and campaign systems for Rolls-Royce, Geely, GWM and AlGhanim.",
   },
   {
-    co: "JUMPPEAK — E-commerce",
+    co: "JUMPPEAK — Medical",
     logos: ["/lms/companies/jumppeak.jpg"],
-    role: "Designer & Art Direction",
-    note: "Identity, retail and full campaign systems for the JUMPPEAK brand.",
+    role: "Senior Designer",
+    note: "Brand, campaign and content systems for a medical brand.",
   },
   {
     co: "Pala De 7 · Flowrista · Prepd",
@@ -151,19 +151,24 @@ export default function InstructorView() {
       {/* record */}
       <section className="border-y border-line/10 bg-ink-800/40">
         <div className="container-edge mx-auto max-w-edge py-16 md:py-20">
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-line/10 bg-line/10 sm:grid-cols-4">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-line/10 bg-line/10 sm:grid-cols-3">
             {[
-              { n: 9, s: "+", l: "years in the industry" },
-              { n: stats.graduates, s: "+", l: t.home.stats.graduates },
-              { n: stats.academies, s: "", l: t.home.stats.academies },
-              { n: stats.totalLessons, s: "", l: t.home.stats.lessons },
+              { n: stats.graduates, p: "+", s: "", l: t.home.stats.graduates, live: true },
+              { n: stats.academies, p: "", s: "", l: t.home.stats.academies, live: false },
+              { n: stats.totalLessons, p: "", s: "", l: t.home.stats.lessons, live: false },
             ].map((x) => (
               <div key={x.l} className="bg-ink-900 p-8 text-center">
                 <p className="font-display text-4xl font-semibold text-bone-50 md:text-5xl">
-                  <Counter value={x.n} suffix={x.s} />
+                  <Counter value={x.n} prefix={x.p} suffix={x.s} keepCounting={x.live} />
                 </p>
                 <p className="mt-2 text-[11px] uppercase tracking-ultra text-bone-500">
                   {x.l}
+                  {x.live ? (
+                    <span className="ml-2 inline-flex items-center gap-1 text-mint">
+                      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-mint" />
+                      still counting
+                    </span>
+                  ) : null}
                 </p>
               </div>
             ))}
