@@ -1,9 +1,9 @@
 // ---- Tarek — the school of Mohamed Tarek ----------------------------------
 export const site = {
-  // Platform identity
-  name: "Mohamed Tarek Academy",
+  // Platform identity — the academy carries the founder's name.
+  name: "Mohamed Tarek",
   shortName: "Tarek",
-  fullName: "Mohamed Tarek Academy — School of Visual Direction",
+  fullName: "Mohamed Tarek — School of Visual Direction",
   title:
     "Mohamed Tarek — Art Director & Design Academy | Free Adobe Courses + Premium AI Production",
   description:
@@ -23,6 +23,8 @@ export const site = {
   whatsapp: "201228748098",
   linkedin: "https://www.linkedin.com/in/mohamedrk/",
   linkedinHandle: "/in/mohamedrk",
+  instagram: "https://www.instagram.com/mohamedtarek.design", // TODO: real handle
+  facebook: "https://www.facebook.com/mohamedtarek.design", // TODO: real handle
   github: "https://github.com/Mohamed-sr-Designer",
   location: "Egypt",
   markets: "Egypt · Saudi Arabia · Kuwait",

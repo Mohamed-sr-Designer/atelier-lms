@@ -9,7 +9,6 @@ import GlyphPlate from "@/components/lms/GlyphPlate";
 import CurriculumIndex from "@/components/lms/CurriculumIndex";
 import FaqList from "@/components/lms/FaqList";
 import CourseCard from "@/components/lms/CourseCard";
-import LiveViewers from "@/components/lms/LiveViewers";
 import { useLang } from "@/lib/i18n";
 import { withBase } from "@/lib/base";
 import { useStore, isEnrolled } from "@/lib/store";
@@ -128,11 +127,10 @@ export default function CourseDetailView({ course: courseStatic }: { course: Cou
               </dl>
             </Reveal>
 
-            {/* live signal + skill ticker — the hero floor */}
+            {/* skill ticker — the hero floor */}
             <Reveal delay={0.3}>
               <div className="mt-8 flex flex-wrap items-center gap-4">
-                <LiveViewers />
-                <span className="hidden text-xs text-bone-500 sm:block">
+                <span className="text-xs text-bone-500">
                   {course.students.toLocaleString("en-US")}+ {t.common.students} ·{" "}
                   {course.level[lang]}
                 </span>

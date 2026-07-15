@@ -19,8 +19,8 @@ export const courses: Course[] = [
 export const getCourse = (slug: string) =>
   courses.find((c) => c.slug === slug);
 
-// ---- The AI Production Stack -------------------------------------------------
-// Both premium AI tracks: the complete camera-less campaign pipeline.
+// ---- Bundles ------------------------------------------------------------------
+// Multi-course packs, each priced under the sum of its parts.
 export type Bundle = {
   slug: string;
   title: Bi;
@@ -31,25 +31,65 @@ export type Bundle = {
   compareAt: number; // sum of the parts
 };
 
-export const bundle: Bundle = {
-  slug: "ai-production-stack",
-  title: { en: "The AI Production Stack", ar: "باقة إنتاج الـ AI الكاملة" },
-  tagline: {
-    en: "Both AI courses — the full camera-less pipeline, one enrollment.",
-    ar: "كورسات الـ AI الاتنين — خط الإنتاج الكامل من غير كاميرا، باشتراك واحد.",
+export const bundles: Bundle[] = [
+  {
+    slug: "ai-production-stack",
+    title: { en: "The AI Production Stack", ar: "حزمة إنتاج الذكاء الاصطناعي" },
+    tagline: {
+      en: "Both AI courses — the full camera-less pipeline, one enrollment.",
+      ar: "دورتا الذكاء الاصطناعي معًا — خط الإنتاج الكامل دون كاميرا، باشتراك واحد.",
+    },
+    desc: {
+      en: "AI Photoshoot & Prompt Engineering + AI Video Generation: direct stills like a photographer, then turn them into finished spots clients approve. The two highest-earning skills we teach, 6+ hours, two reviewed final projects.",
+      ar: "التصوير بالذكاء الاصطناعي وهندسة الأوامر + توليد الفيديو بالذكاء الاصطناعي: أخرِج الصور كمصوّر محترف ثم حوّلها إلى إعلانات نهائية يعتمدها العميل. أعلى مهارتين ربحًا نُدرّسهما، أكثر من ست ساعات، ومشروعان نهائيان بمراجعة شخصية.",
+    },
+    courseSlugs: ["ai-photoshoot", "ai-video-generation"],
+    price: 6000,
+    compareAt: 7000, // 3,300 + 3,700
   },
-  desc: {
-    en: "AI Photoshoot & Prompt Engineering + AI Video Generation: direct stills like a photographer, then turn them into finished spots clients approve. The two highest-earning skills we teach, 6+ hours, two reviewed final projects.",
-    ar: "التصوير بالذكاء الاصطناعي وهندسة البرومبت + توليد الفيديو: أخرج الصور كأنك مصوّر محترف، وبعدين حوّلها لإعلانات نهائية العميل يوافق عليها. أعلى مهارتين بيكسّبوا عندنا، أكتر من ٦ ساعات، ومشروعان نهائيان بمراجعة.",
+  {
+    slug: "editors-suite",
+    title: { en: "The Editor's Suite", ar: "حزمة المونتير المحترف" },
+    tagline: {
+      en: "After Effects + Premiere Pro — motion and editing, one enrollment.",
+      ar: "أفتر إفكتس + بريمير برو — الموشن والمونتاج معًا باشتراك واحد.",
+    },
+    desc: {
+      en: "The complete motion-and-edit pipeline: animate in After Effects, cut and finish in Premiere Pro. Everything a working editor ships, taught from real client reels — two reviewed final projects.",
+      ar: "خط الموشن والمونتاج الكامل: حرّك في أفتر إفكتس، واقطع وسلّم في بريمير برو. كل ما يسلّمه المونتير المحترف، مُدرَّس من أعمال حقيقية لعملاء — ومشروعان نهائيان بمراجعة.",
+    },
+    courseSlugs: ["adobe-after-effects", "adobe-premiere-pro"],
+    price: 4250,
+    compareAt: 4850, // 2,800 + 2,050
   },
-  courseSlugs: ["ai-photoshoot", "ai-video-generation"],
-  price: 6000,
-  compareAt: 7000, // 3,300 + 3,700
-};
+  {
+    slug: "motion-ai-master",
+    title: { en: "The Motion + AI Master Pack", ar: "الحزمة الكبرى: موشن + فيديو AI" },
+    tagline: {
+      en: "After Effects + Premiere + AI Video — the full film pipeline.",
+      ar: "أفتر إفكتس + بريمير + فيديو الذكاء الاصطناعي — خط إنتاج الفيلم الكامل.",
+    },
+    desc: {
+      en: "The heaviest pack we sell: animate in After Effects, generate and direct AI footage, and cut it all into finished spots in Premiere Pro. Three courses, three reviewed final projects — the complete modern video skill set.",
+      ar: "أضخم حزمة لدينا: حرّك في أفتر إفكتس، وولّد وأخرِج لقطات الذكاء الاصطناعي، ثم اصنع منها إعلانات نهائية في بريمير برو. ثلاث دورات وثلاثة مشاريع نهائية بمراجعة — عدّة الفيديو الحديثة كاملة.",
+    },
+    courseSlugs: ["adobe-after-effects", "adobe-premiere-pro", "ai-video-generation"],
+    price: 6450,
+    compareAt: 8550, // 2,800 + 2,050 + 3,700
+  },
+];
 
-export const bundleCourses = bundle.courseSlugs
-  .map((s) => getCourse(s))
-  .filter((c): c is Course => Boolean(c));
+export const getBundle = (slug: string) =>
+  bundles.find((b) => b.slug === slug);
+
+export const coursesOfBundle = (b: Bundle) =>
+  b.courseSlugs
+    .map((s) => getCourse(s))
+    .filter((c): c is Course => Boolean(c));
+
+// Back-compat: the flagship bundle most surfaces reference directly.
+export const bundle = bundles[0];
+export const bundleCourses = coursesOfBundle(bundle);
 
 // ---- Aggregates for hero counters & schema ---------------------------------
 export const stats = {

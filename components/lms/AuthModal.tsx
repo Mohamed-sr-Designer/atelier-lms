@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLang } from "@/lib/i18n";
-import { login, loginAs, useStore } from "@/lib/store";
+import { login, loginAs, updateUser, useStore } from "@/lib/store";
 
 type Mode = "login" | "register";
 
@@ -22,6 +22,7 @@ export default function AuthModal() {
   const [mode, setMode] = useState<Mode>("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
 
@@ -73,6 +74,11 @@ export default function AuthModal() {
       setErr(t.auth.errName);
       return;
     }
+    const cleanPhone = phone.trim();
+    if (isRegister && cleanPhone.replace(/\D/g, "").length < 8) {
+      setErr(t.auth.errPhone);
+      return;
+    }
     if (!finalName) {
       finalName = cleanEmail
         .split("@")[0]
@@ -80,10 +86,25 @@ export default function AuthModal() {
         .replace(/\b\w/g, (c) => c.toUpperCase());
     }
     login(finalName, cleanEmail);
+    if (cleanPhone) updateUser({ phone: cleanPhone });
     setName("");
     setEmail("");
+    setPhone("");
     setPassword("");
     close();
+  };
+
+  // Demo social sign-in: on a static site there's no OAuth server, so each
+  // provider connects instantly with a demo identity in this browser.
+  const socialLogin = (provider: "google" | "facebook" | "instagram") => {
+    const ids = {
+      google: { n: "Google Student", e: "student.google@gmail.com" },
+      facebook: { n: "Facebook Student", e: "student.facebook@fb.com" },
+      instagram: { n: "Instagram Student", e: "student.ig@instagram.com" },
+    } as const;
+    login(ids[provider].n, ids[provider].e);
+    close();
+    router.push("/dashboard/");
   };
 
   const input =
@@ -175,6 +196,23 @@ export default function AuthModal() {
                     required
                   />
                 </label>
+                {isRegister && (
+                  <label className="mt-5 block">
+                    <span className="text-xs uppercase tracking-ultra text-bone-500">
+                      {t.auth.phone}
+                    </span>
+                    <input
+                      type="tel"
+                      dir="ltr"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder={t.auth.phonePh}
+                      className={input}
+                      autoComplete="tel"
+                      required
+                    />
+                  </label>
+                )}
                 <label className="mt-5 block">
                   <span className="text-xs uppercase tracking-ultra text-bone-500">
                     {t.auth.password}
@@ -196,6 +234,65 @@ export default function AuthModal() {
                   {isRegister ? t.auth.registerBtn : t.auth.loginBtn}
                 </button>
               </form>
+
+              {/* social sign-in (demo — instant connect in this browser) */}
+              <div className="mt-5 flex items-center gap-3">
+                <span className="h-px grow bg-line/15" />
+                <span className="text-[10px] uppercase tracking-ultra text-bone-500">
+                  {t.auth.socialLabel}
+                </span>
+                <span className="h-px grow bg-line/15" />
+              </div>
+              <div className="mt-3 grid grid-cols-3 gap-3">
+                <button
+                  type="button"
+                  onClick={() => socialLogin("google")}
+                  aria-label="Continue with Google"
+                  className="glass flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold text-bone-100 transition-colors hover:border-mint/50"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden>
+                    <path fill="#EA4335" d="M12 5.04c1.62 0 3.06.56 4.2 1.64l3.12-3.12C17.45 1.8 14.97.75 12 .75 7.31.75 3.26 3.44 1.28 7.35l3.66 2.84C5.9 7.31 8.7 5.04 12 5.04Z" />
+                    <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47a5.55 5.55 0 0 1-2.4 3.58l3.72 2.89c2.17-2.01 3.7-4.98 3.7-8.71Z" />
+                    <path fill="#FBBC05" d="M4.94 14.31a6.9 6.9 0 0 1 0-4.12L1.28 7.35a11.24 11.24 0 0 0 0 10.05l3.66-2.84Z" />
+                    <path fill="#34A853" d="M12 23.25c3.04 0 5.6-1 7.46-2.72l-3.72-2.89c-1.03.7-2.36 1.1-3.74 1.1-3.3 0-6.1-2.27-7.06-5.34l-3.66 2.84c1.98 3.91 6.03 6.6 10.72 6.6Z" />
+                  </svg>
+                  Google
+                </button>
+                <button
+                  type="button"
+                  onClick={() => socialLogin("facebook")}
+                  aria-label="Continue with Facebook"
+                  className="glass flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold text-bone-100 transition-colors hover:border-mint/50"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#1877F2" aria-hidden>
+                    <path d="M24 12a12 12 0 1 0-13.88 11.85v-8.38H7.08V12h3.04V9.36c0-3 1.79-4.67 4.53-4.67 1.31 0 2.68.24 2.68.24v2.95h-1.51c-1.49 0-1.95.92-1.95 1.87V12h3.32l-.53 3.47h-2.79v8.38A12 12 0 0 0 24 12Z" />
+                  </svg>
+                  Facebook
+                </button>
+                <button
+                  type="button"
+                  onClick={() => socialLogin("instagram")}
+                  aria-label="Continue with Instagram"
+                  className="glass flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold text-bone-100 transition-colors hover:border-mint/50"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="url(#igGrad)" strokeWidth="2" aria-hidden>
+                    <defs>
+                      <linearGradient id="igGrad" x1="0" y1="1" x2="1" y2="0">
+                        <stop offset="0%" stopColor="#FD5949" />
+                        <stop offset="50%" stopColor="#D6249F" />
+                        <stop offset="100%" stopColor="#285AEB" />
+                      </linearGradient>
+                    </defs>
+                    <rect x="2" y="2" width="20" height="20" rx="5" />
+                    <circle cx="12" cy="12" r="4.5" />
+                    <circle cx="17.5" cy="6.5" r="1" fill="url(#igGrad)" stroke="none" />
+                  </svg>
+                  Instagram
+                </button>
+              </div>
+              <p className="mt-2 text-center text-[10px] text-bone-500">
+                {t.auth.socialNote}
+              </p>
 
               {/* one-tap demo accounts — student is pre-seeded, admin opens the studio */}
               <div className="mt-6 flex items-center gap-3">

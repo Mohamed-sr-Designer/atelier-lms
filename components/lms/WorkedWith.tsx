@@ -6,17 +6,12 @@ import { Media } from "@/components/ui/Media";
 // The companies and academies Mohamed Tarek has worked at / taught for.
 // Rendered as an overlapping avatar stack (there are a lot of them) that gently
 // fans apart on hover, with a trailing "+N" count and the current name.
+// A short, curated set — the full record lives on the instructor page.
 const places = [
   { name: "Osolutions", logo: "/lms/companies/osolutions.jpg" },
-  { name: "Bundle IMS", logo: "/lms/companies/bundle.jpg" },
   { name: "JUMPPEAK", logo: "/lms/companies/jumppeak.jpg" },
-  { name: "Pala De 7", logo: "/lms/companies/pala7.jpg" },
-  { name: "Flowrista", logo: "/lms/companies/flowrista.jpg" },
-  { name: "Prepd", logo: "/lms/companies/prepd.jpg" },
   { name: "SOIC", logo: "/lms/academies/soic.jpg" },
-  { name: "EDUX", logo: "/lms/academies/edux.jpg" },
-  { name: "Teaching Planet", logo: "/lms/academies/teaching.jpg" },
-  { name: "Raya Academy", logo: "/lms/academies/raya.jpg" },
+  { name: "Pala De 7", logo: "/lms/companies/pala7.jpg" },
 ];
 
 export default function WorkedWith({ label }: { label?: string }) {
@@ -50,9 +45,9 @@ export default function WorkedWith({ label }: { label?: string }) {
               </motion.span>
             ))}
           </div>
-          {/* count chip */}
+          {/* the rest live on the instructor page */}
           <span className="ml-3 grid h-11 shrink-0 place-items-center rounded-full border border-mint/30 bg-mint/5 px-4 text-sm font-semibold text-mint">
-            +{places.length}
+            +6
           </span>
         </div>
       </div>

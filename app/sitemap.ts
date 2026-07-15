@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page("/courses/", 0.9, "weekly"),
     ...courses.map((c) => page(`/courses/${c.slug}/`, 0.9)),
     page("/bundle/", 0.9),
+    page("/offers/", 0.9),
     page("/instructor/", 0.8),
     page("/training/", 0.8),
     page("/blog/", 0.7, "weekly"),

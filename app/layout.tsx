@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: site.title,
-    template: "%s — Mohamed Tarek Academy",
+    template: "%s — Mohamed Tarek",
   },
   description: site.description,
   keywords: [
@@ -76,6 +76,14 @@ export const metadata: Metadata = {
     "Mohamed Tarek art director",
     "Mohamed Tarek Academy",
     "Mohamed Tarek design courses",
+    "محمد طارق مصمم جرافيك",
+    "محمد طارق مدير فني",
+    "كورس فوتوشوب مجاني",
+    "كورس اليستريتور مجاني",
+    "كورس بريمير برو",
+    "كورس افتر افكتس",
+    "كورسات تصميم بالذكاء الاصطناعي",
+    "تعلم التصميم الجرافيكي",
   ],
   authors: [{ name: site.instructor, url: `${site.url}/instructor/` }],
   creator: site.instructor,
@@ -116,8 +124,8 @@ const jsonLd = {
     {
       "@type": ["Organization", "EducationalOrganization"],
       "@id": `${site.url}/#organization`,
-      name: "Mohamed Tarek Academy",
-      alternateName: ["Tarek", "Mohamed Tarek Design School", "Mohamed Tarek — School of Visual Direction"],
+      name: "Mohamed Tarek",
+      alternateName: ["Tarek", "Mohamed Tarek Academy", "Mohamed Tarek — School of Visual Direction", "محمد طارق"],
       url: site.url,
       logo: `${site.url}/og.jpg`,
       description: site.description,
@@ -180,7 +188,7 @@ const jsonLd = {
       name: site.fullName,
       description: `${stats.totalCourses} design courses · ${stats.totalHours} hours · reviewed final projects`,
       publisher: { "@id": `${site.url}/#organization` },
-      inLanguage: "en",
+      inLanguage: ["en", "ar"],
     },
   ],
 };

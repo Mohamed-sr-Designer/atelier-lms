@@ -7,6 +7,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Media } from "@/components/ui/Media";
 import Magnetic from "@/components/ui/Magnetic";
 import CourseCard from "@/components/lms/CourseCard";
+import PromptFixer from "@/components/lms/PromptFixer";
 import { useLang } from "@/lib/i18n";
 import { withBase } from "@/lib/base";
 import { useStore } from "@/lib/store";
@@ -178,6 +179,9 @@ export default function BundleView() {
           </Stagger>
         </div>
       </section>
+
+      {/* free track — the prompt fixer */}
+      <PromptFixer />
     </>
   );
 }

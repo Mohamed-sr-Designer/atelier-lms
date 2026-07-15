@@ -12,10 +12,10 @@ import { openAuth } from "@/components/lms/AuthModal";
 import { useStudio, mergeCourse } from "@/lib/studio";
 import { site, payments } from "@/lib/site";
 import {
-  bundle,
-  bundleCourses,
+  coursesOfBundle,
   fmtPrice,
   fmtUsd,
+  getBundle,
   getCourse,
   type Course,
 } from "@/lib/courses";
@@ -29,14 +29,23 @@ export default function CheckoutView() {
   const [method, setTarek] = useState<"instapay" | "vodafone">("instapay");
   const [copied, setCopied] = useState("");
 
-  const isBundle = params.get("bundle") === "1";
+  // ?bundle=1 (legacy, AI stack) or ?bundle=<slug> for any pack
+  const bundleParam = params.get("bundle");
+  const activeBundle = bundleParam
+    ? getBundle(bundleParam === "1" ? "ai-production-stack" : bundleParam)
+    : undefined;
+  const isBundle = Boolean(activeBundle);
   const courseStatic = isBundle ? null : getCourse(params.get("course") || "");
   const course = courseStatic
     ? mergeCourse(courseStatic, studio.courses[courseStatic.slug])
     : null;
-  const items: Course[] = isBundle ? bundleCourses : course ? [course] : [];
-  const total = isBundle ? bundle.price : course?.price ?? 0;
-  const compareAt = isBundle ? bundle.compareAt : course?.compareAt;
+  const items: Course[] = activeBundle
+    ? coursesOfBundle(activeBundle)
+    : course
+      ? [course]
+      : [];
+  const total = activeBundle ? activeBundle.price : course?.price ?? 0;
+  const compareAt = activeBundle ? activeBundle.compareAt : course?.compareAt;
   const isFree = total === 0;
 
   if (items.length === 0) {
@@ -50,11 +59,13 @@ export default function CheckoutView() {
     );
   }
 
-  const orderName = isBundle ? bundle.title[lang] : course!.short[lang];
+  const orderName = activeBundle
+    ? activeBundle.title[lang]
+    : course!.short[lang];
 
   const complete = () => {
-    enroll(isBundle ? bundle.courseSlugs : course!.slug);
-    const target = isBundle ? bundleCourses[0].slug : course!.slug;
+    enroll(activeBundle ? activeBundle.courseSlugs : course!.slug);
+    const target = activeBundle ? activeBundle.courseSlugs[0] : course!.slug;
     router.push(`/checkout/success/?course=${target}${isBundle ? "&bundle=1" : ""}`);
   };
 
@@ -156,7 +167,13 @@ export default function CheckoutView() {
                 </div>
               </div>
               <Link
-                href={isBundle ? "/bundle/" : `/courses/${course!.slug}/`}
+                href={
+                  activeBundle
+                    ? activeBundle.slug === "ai-production-stack"
+                      ? "/bundle/"
+                      : "/offers/"
+                    : `/courses/${course!.slug}/`
+                }
                 className="link-underline mt-6 inline-block text-xs text-bone-400"
               >
                 ← {t.checkout.backTo}

@@ -11,6 +11,7 @@ import { withBase } from "@/lib/base";
 import { courses, fmtPrice } from "@/lib/courses";
 import { openAuth } from "@/components/lms/AuthModal";
 import ThemeToggle from "@/components/ThemeToggle";
+import LangToggle from "@/components/LangToggle";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,6 +26,7 @@ export default function Nav() {
   // The Studio only appears for the admin role.
   const links = [
     { label: t.nav.courses, href: "/courses" },
+    { label: `✦ ${t.nav.offers}`, href: "/offers" },
     { label: t.nav.instructor, href: "/instructor" },
     { label: t.nav.training, href: "/training" },
     ...(store.user?.role === "admin"
@@ -86,7 +88,7 @@ export default function Nav() {
               className="h-10 w-10 rounded-full ring-1 ring-line/25 transition-all duration-300 group-hover:ring-mint/60"
             />
             <span className="hidden text-sm tracking-tight text-bone-200 sm:block">
-              Tarek
+              Mohamed Tarek
               <span className="text-bone-400"> {t.nav.roleTag}</span>
             </span>
           </Link>
@@ -187,6 +189,7 @@ export default function Nav() {
           </nav>
 
           <div className="flex items-center gap-2.5">
+            <LangToggle />
             <ThemeToggle />
             {store.user ? (
               <>

@@ -95,7 +95,7 @@ export const posts: Post[] = [
       },
       {
         h: "Phase 4 — the AI layer on top",
-        p: "AI photoshoots and AI video are multipliers, not shortcuts. They multiply the taste and craft you built in phases 1–3. A prompt engineer who can't retouch ships broken images; a designer who can do both replaces a production studio. That's why my AI Photoshoot course is free — it proves the method, and it shows you exactly why craft still matters.",
+        p: "AI photoshoots and AI video are multipliers, not shortcuts. They multiply the taste and craft you built in phases 1–3. A prompt engineer who can't retouch ships broken images; a designer who can do both replaces a production studio. That's why the AI tracks are priced against one freelance job — the first paid brief covers the course several times over.",
       },
     ],
     faq: [
@@ -144,7 +144,7 @@ export const posts: Post[] = [
       },
       {
         h: "Stages 4 & 5 — Photoshop finishing and delivery",
-        p: "Every frame gets a retouch pass (hands, edges, artifacts), then one unified grade across the set, then proper delivery masters. The AI got us 80% in minutes; the craft closes the 20% that separates a demo from an invoice. I teach this exact pipeline — free — in the AI Photoshoot & Prompt Engineering course.",
+        p: "Every frame gets a retouch pass (hands, edges, artifacts), then one unified grade across the set, then proper delivery masters. The AI got us 80% in minutes; the craft closes the 20% that separates a demo from an invoice. I teach this exact pipeline, end to end, in the AI Photoshoot & Prompt Engineering course.",
       },
     ],
     faq: [
@@ -467,7 +467,7 @@ export const posts: Post[] = [
       },
       {
         h: "The sequence to learn it in",
-        p: "Craft first, AI second. Learn Photoshop fundamentals — free, in full — so you can judge and finish anything a model gives you. Then add the AI Photoshoot pipeline on top as a multiplier. That's the whole business model here: the software courses are free because they prove why craft still matters, and the premium AI tracks are where that craft turns into the highest-earning skill in design today.",
+        p: "Craft first, AI second. Learn Photoshop fundamentals — free, in full — so you can judge and finish anything a model gives you. Then add the AI Photoshoot pipeline on top as a multiplier. That's the whole model here: Photoshop and Illustrator are free because craft is the foundation, and the premium AI tracks are where that craft turns into the highest-earning skill in design today.",
       },
     ],
     faq: [
@@ -482,6 +482,149 @@ export const posts: Post[] = [
       {
         q: "Why do designers who use both AI and Photoshop earn more?",
         a: "Because the combined skill delivers a full campaign in a day — replacing a photographer, studio and retouch team. That end-to-end capability is what clients pay premium budgets for.",
+      },
+    ],
+  },
+  {
+    slug: "hire-graphic-designer-2026-guide",
+    title: "How to Hire a Graphic Designer in 2026: The Global Guide",
+    titleAr: "كيف توظّف مصمم جرافيك في 2026: الدليل العالمي",
+    excerpt:
+      "Portfolio signals, rates by region, red flags and the one test brief that filters 90% of applicants — from an art director who hires designers.",
+    excerptAr:
+      "علامات البورتفوليو، والأسعار حسب المنطقة، وإشارات الخطر، واختبار واحد يصفّي ٩٠٪ من المتقدمين — من مدير فني يوظّف المصممين.",
+    date: "2026-07-12",
+    readMins: 8,
+    tag: "Hiring",
+    cover: "/work/axia/hero.webp",
+    relatedCourse: "ai-photoshoot",
+    body: [
+      {
+        p: "I've hired designers for agencies in Egypt, Kuwait and Saudi Arabia, and I've been the freelance designer hired by clients from Europe to the Gulf. Both sides of that table taught me the same thing: most companies hire graphic designers on the wrong signals. Here's the playbook that actually works — wherever in the world you're hiring.",
+      },
+      {
+        h: "Read the portfolio like an art director",
+        p: "Ignore the prettiest image. Look for range across real deliverables (a campaign, a social system, a retouch job — not just posters), consistency inside each project, and evidence of process: before/after frames, grids, versioning. A designer who shows how they think is worth three who only show final renders. And check for AI fluency — in 2026, a designer who can direct AI photoshoots and finish them in Photoshop replaces an entire production line.",
+      },
+      {
+        h: "What designers cost, region by region",
+        p: "Rates vary wildly by market: senior freelance designers run $40–$100+/hour in the US and Western Europe, $20–$50 in Eastern Europe and Latin America, and $10–$35 across MENA and South Asia — with the top MENA talent matching European quality at half the rate, which is why global brands increasingly hire remotely from Cairo, Amman and Riyadh. Fixed-scope pricing (per campaign, per identity) usually beats hourly for both sides.",
+      },
+      {
+        h: "The test brief that filters 90%",
+        p: "Skip the unpaid spec work — it repels the best people. Instead, run a paid micro-brief: one social visual from a real (past) campaign brief, 48 hours, your brand assets. You'll see communication, speed, file hygiene and taste in one shot. Red flags: no questions asked before starting, files delivered flat, and a portfolio that suddenly doesn't match the delivered quality.",
+      },
+      {
+        h: "Or grow one instead",
+        p: "The hiring market is tight because the skill bar moved: brands now want designers who do both craft and AI production. If you have a junior with taste, training them up costs less than a senior hire — it's exactly the gap my courses exist to close, from Photoshop fundamentals to full AI campaign pipelines.",
+      },
+    ],
+    faq: [
+      {
+        q: "How much does it cost to hire a freelance graphic designer?",
+        a: "Globally: $40–$100+/hour in the US and Western Europe, $20–$50 in Eastern Europe and Latin America, $10–$35 in MENA and South Asia. Fixed project pricing (per campaign or identity) is usually more predictable than hourly for both sides.",
+      },
+      {
+        q: "What should I look for in a graphic designer's portfolio?",
+        a: "Range across real deliverables, consistency within each project, visible process (grids, versions, before/after) and — in 2026 — AI production fluency: the ability to direct AI imagery and finish it professionally in Photoshop.",
+      },
+      {
+        q: "Is it better to hire a designer or a design agency?",
+        a: "For ongoing brand and social work, a skilled freelance designer is faster and 3–10x cheaper. Agencies win for large multi-channel launches that need strategy, media and production teams under one roof.",
+      },
+    ],
+  },
+  {
+    slug: "ai-design-services-cost-guide",
+    title: "AI Design Services in 2026: What They Cost and When to Use Them",
+    titleAr: "خدمات التصميم بالذكاء الاصطناعي في 2026: التكلفة ومتى تستخدمها",
+    excerpt:
+      "AI photoshoots at 10% of studio cost, AI video without a crew — what brands actually pay, what quality to expect, and where humans still decide.",
+    excerptAr:
+      "جلسات تصوير بالذكاء الاصطناعي بعُشر تكلفة الاستوديو، وفيديو بلا طاقم — ما تدفعه العلامات فعلًا، والجودة المتوقعة، وأين ما زال القرار بشريًا.",
+    date: "2026-07-12",
+    readMins: 7,
+    tag: "AI Design",
+    cover: "/work/axia/insta-2.webp",
+    relatedCourse: "ai-photoshoot",
+    body: [
+      {
+        p: "Every month, more of my client work ships without a camera ever being switched on. Product campaigns, lifestyle sets, even 30-second spots — directed, generated, retouched, delivered. If you're a brand wondering what AI design services actually cost and whether the quality is real, here's the honest picture from inside the pipeline.",
+      },
+      {
+        h: "The economics brands care about",
+        p: "A traditional product photoshoot day runs $2,000–$10,000+ once you count studio, photographer, lighting and retouch. An AI photoshoot producing a comparable 6–10 frame campaign set typically costs 10–20% of that, and delivers in days instead of weeks. AI video is even more dramatic: a finished 30-second social spot without crew, location or actors — at a fraction of production quotes.",
+      },
+      {
+        h: "Where the quality really comes from",
+        p: "Not from the model — from the direction. Client-grade AI work is art direction applied to a very fast, tasteless camera: locked references, photography-language prompts, ruthless curation, then real Photoshop retouching and one unified grade across the set. That last 20% of craft is the difference between 'AI slop' and an image a brand approves. It's why serious AI design services are run by designers, not by prompt hobbyists.",
+      },
+      {
+        h: "When NOT to use AI",
+        p: "Founder portraits and real-people testimonials, exact product engineering shots where every seam must be true, and anything requiring legal accuracy (labels, claims). Hybrid pipelines — real product photography composited into AI scenes — cover most of those gaps.",
+      },
+      {
+        h: "Buy it or build it",
+        p: "Brands have two options: commission AI production from a designer who's mastered the pipeline, or train an in-house designer to run it. The second pays back permanently — it's the exact skill set the AI Photoshoot and AI Video courses teach, and the same pipeline my team uses on paying briefs across Egypt, Saudi Arabia and Kuwait.",
+      },
+    ],
+    faq: [
+      {
+        q: "How much do AI design services cost?",
+        a: "Typically 10–20% of traditional production: an AI photoshoot campaign set costs a few hundred dollars instead of the $2,000–$10,000+ of a studio day, and AI video spots come in at a fraction of crew-based production quotes.",
+      },
+      {
+        q: "Is AI-generated design good enough for real brands?",
+        a: "Yes — when it's directed and finished by a professional. Locked references, photography-language prompts, curation and Photoshop retouching produce campaign sets that clients approve over studio quotes.",
+      },
+      {
+        q: "What can't AI design do yet?",
+        a: "Truthful portraits of real people, engineering-accurate product shots and legally binding visuals. Hybrid workflows — real photography composited into AI scenes — handle most of these cases.",
+      },
+    ],
+  },
+  {
+    slug: "remote-designers-mena-global-brands",
+    title: "Why Global Brands Hire Remote Designers from MENA (And How to Find Great Ones)",
+    titleAr: "لماذا توظّف العلامات العالمية مصممين عن بُعد من الشرق الأوسط (وكيف تجد الممتازين)",
+    excerpt:
+      "European quality at half the rate, overlapping time zones, and bilingual campaign instincts — the case for MENA design talent, with a hiring checklist.",
+    excerptAr:
+      "جودة أوروبية بنصف السعر، ومناطق زمنية متقاربة، وحس حملات ثنائي اللغة — لماذا مواهب التصميم في المنطقة تكسب عالميًا، مع قائمة توظيف عملية.",
+    date: "2026-07-12",
+    readMins: 6,
+    tag: "Hiring",
+    cover: "/work/tilal/hero.webp",
+    relatedCourse: "ai-video-generation",
+    body: [
+      {
+        p: "Over nine years leading design teams between Cairo, Kuwait and Makkah, I've watched the same shift accelerate: global brands quietly moving their design production to MENA talent. Not to cut corners — because the math and the quality both work. Here's why, and how to hire well if you're on the buying side.",
+      },
+      {
+        h: "The arbitrage that isn't a compromise",
+        p: "Top designers in Cairo, Amman, Riyadh and Dubai deliver European-standard campaign work at 30–60% of Western European rates. They grew up on the same tools, the same references and — increasingly — the same AI production pipelines. Time zones overlap with all of Europe and half of Asia, so feedback loops run same-day instead of overnight.",
+      },
+      {
+        h: "The bilingual advantage nobody prices in",
+        p: "MENA designers ship campaigns in Arabic and English natively — typography, layout direction (RTL and LTR) and cultural nuance included. For any brand touching the Gulf's fast-growing markets, that's not a nice-to-have; it's the difference between a translated campaign and a designed one.",
+      },
+      {
+        h: "How to hire well from the region",
+        p: "Same rules as anywhere, sharpened: judge portfolios on shipped client work (ask which brands, which market), run one paid micro-brief, and test AI-pipeline fluency — directing an AI photoshoot and finishing it in Photoshop is the region's fastest-growing superpower. Payment is easy now too: Wise, Payoneer and direct transfer all work smoothly with Egyptian and Gulf freelancers.",
+      },
+    ],
+    faq: [
+      {
+        q: "Why do global brands hire designers from the Middle East?",
+        a: "European-standard quality at 30–60% of Western rates, same-day time-zone overlap with Europe, native Arabic + English campaign capability, and rapidly growing AI-production skills.",
+      },
+      {
+        q: "How do I pay a remote designer in Egypt or the Gulf?",
+        a: "Wise, Payoneer and international bank transfer are all standard. Most established freelancers invoice in USD or EUR with fixed project pricing.",
+      },
+      {
+        q: "How do I verify a remote designer's skill before hiring?",
+        a: "Ask for shipped client work with context, run one paid 48-hour micro-brief with your real brand assets, and check for AI production fluency — direction, curation and Photoshop finishing, not just prompting.",
       },
     ],
   },

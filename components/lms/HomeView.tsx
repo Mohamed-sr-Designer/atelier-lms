@@ -14,6 +14,7 @@ import FeaturedCourse from "@/components/lms/FeaturedCourse";
 import FreeCoursesSlider from "@/components/lms/FreeCoursesSlider";
 import WorkedWith from "@/components/lms/WorkedWith";
 import Aurora from "@/components/ui/Aurora";
+import GiftReveal from "@/components/ui/GiftReveal";
 import { useLang } from "@/lib/i18n";
 import { withBase } from "@/lib/base";
 import {
@@ -86,7 +87,8 @@ export default function HomeView() {
   const featured = getCourse("ai-photoshoot")!;
   const aiVideo = getCourse("ai-video-generation")!;
   const freeCourses = courses.filter((c) => c.price === 0);
-  const aiCourses = courses.filter((c) => c.price > 0);
+  const softwareCourses = courses.filter((c) => !c.slug.startsWith("ai-"));
+  const aiCourses = courses.filter((c) => c.slug.startsWith("ai-"));
 
   const allReviews = courses.flatMap((c) =>
     c.reviews.map((r) => ({ ...r, course: c.short[lang] }))
@@ -359,7 +361,7 @@ export default function HomeView() {
                           }}
                         >
                           {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={withBase(c.icon)} alt={`${c.short.en} icon`} className="h-5 w-5" />
+                          <img src={withBase(c.icon)} alt={`${c.short.en} icon`} className="h-5 w-5 rounded-[24%]" />
                         </span>
                       ) : null}
                       {c.short[lang]}
@@ -459,7 +461,7 @@ export default function HomeView() {
           </div>
 
           {/* the four free software courses, as a swipeable slider */}
-          <FreeCoursesSlider courses={freeCourses} />
+          <FreeCoursesSlider courses={softwareCourses} />
         </div>
       </section>
 
@@ -480,6 +482,7 @@ export default function HomeView() {
       <section className="relative border-y border-line/10 bg-ink-800/40">
         <Aurora className="opacity-40" />
         <div className="container-edge relative mx-auto max-w-edge py-24 md:py-32">
+          <GiftReveal tag={t.home.giftTag} hint={t.home.giftHint}>
           <div className="glass-sheen relative overflow-hidden rounded-3xl border border-mint/25 bg-ink-900 p-8 md:p-14">
             <div
               aria-hidden
@@ -587,6 +590,7 @@ export default function HomeView() {
               </div>
             </div>
           </div>
+          </GiftReveal>
         </div>
       </section>
 
@@ -786,12 +790,9 @@ export default function HomeView() {
                         alt="Graduate portfolio piece — AI campaign hero visual"
                         fill
                         sizes="(min-width: 1024px) 40vw, 100vw"
-                        className="object-cover brightness-[0.65] saturate-0 transition-all duration-1000 ease-cinema group-hover:scale-[1.03] group-hover:brightness-100 group-hover:saturate-100"
+                        className="object-cover transition-transform duration-1000 ease-cinema group-hover:scale-[1.03]"
                       />
                     </div>
-                    <span className="absolute bottom-4 left-4 rounded-full bg-ink-900/80 px-3.5 py-1.5 text-[11px] text-bone-200 backdrop-blur transition-colors duration-500 group-hover:bg-mint group-hover:text-white">
-                      ✦ {t.home.beforeAfter}
-                    </span>
                   </div>
                 </div>
               </div>

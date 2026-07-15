@@ -170,7 +170,7 @@ export const premiere: Course = {
   price: 2050,
   cover: "/work/tilal/building.webp",
   icon: "/lms/icons/premiere.webp",
-  plate: ["#2A0634", "#EA77FF"],
+  plate: ["#00005B", "#9999FF"],
   outcomes: [
     "Cut with story logic — rhythm, motivation, breathing room",
     "Edit to music beats and mix VO, music and SFX properly",
