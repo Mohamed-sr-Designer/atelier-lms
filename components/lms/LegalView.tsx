@@ -10,7 +10,7 @@ export default function LegalView({
 }: {
   kind: "terms" | "privacy" | "refunds";
 }) {
-  const { t, lang } = useLang();
+  const { t } = useLang();
   const doc = t.legal[kind];
   const others = (["terms", "privacy", "refunds"] as const).filter(
     (k) => k !== kind

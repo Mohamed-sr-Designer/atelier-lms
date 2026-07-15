@@ -16,18 +16,22 @@ export default function Template({ children }: { children: React.ReactNode }) {
       {/* accent sweep */}
       <motion.div
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[82] h-[3px] w-full origin-left bg-gradient-to-r from-mint to-electric"
+        className="pointer-events-none fixed left-0 top-0 z-[82] h-[3px] w-full origin-left bg-gradient-to-r from-mint via-electric to-mint"
         initial={{ scaleX: 0, opacity: 1 }}
         animate={{ scaleX: 1, opacity: 0 }}
         transition={{ duration: 0.7, ease }}
       />
-      {/* frosted veil that melts away */}
+      {/* frosted veil that melts away, with a faint accent wash */}
       <motion.div
         aria-hidden
-        className="pointer-events-none fixed inset-0 z-[81] bg-ink-900/30 backdrop-blur-xl"
+        className="pointer-events-none fixed inset-0 z-[81] bg-ink-900/30 backdrop-blur-2xl"
         initial={{ opacity: 1 }}
         animate={{ opacity: 0 }}
-        transition={{ duration: 0.55, ease }}
+        transition={{ duration: 0.6, ease }}
+        style={{
+          backgroundImage:
+            "radial-gradient(60% 50% at 20% 0%, rgb(var(--mint) / 0.12) 0%, transparent 60%), radial-gradient(50% 50% at 90% 100%, rgb(var(--electric) / 0.1) 0%, transparent 60%)",
+        }}
       />
       {/* content rises out of the blur. The residual filter/transform must be
           cleared once the animation ends — any value other than "none" turns

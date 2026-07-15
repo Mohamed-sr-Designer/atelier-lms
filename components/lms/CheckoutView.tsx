@@ -51,9 +51,6 @@ export default function CheckoutView() {
   }
 
   const orderName = isBundle ? bundle.title[lang] : course!.short[lang];
-  const selfUrl = isBundle
-    ? "/checkout/?bundle=1"
-    : `/checkout/?course=${course!.slug}`;
 
   const complete = () => {
     enroll(isBundle ? bundle.courseSlugs : course!.slug);

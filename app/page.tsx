@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import SiteShell from "@/components/SiteShell";
 import HomeView from "@/components/lms/HomeView";
 import { site } from "@/lib/site";
-import { courses, stats, totalMinutes } from "@/lib/courses";
+import { courses, stats } from "@/lib/courses";
 
 export const metadata: Metadata = {
   title: site.title,

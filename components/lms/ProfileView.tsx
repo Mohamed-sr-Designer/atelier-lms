@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
@@ -11,7 +10,7 @@ import { openAuth } from "@/components/lms/AuthModal";
 import { getCourse } from "@/lib/courses";
 
 export default function ProfileView() {
-  const { t, lang } = useLang();
+  const { t } = useLang();
   const router = useRouter();
   const store = useStore();
   const [name, setName] = useState<string | null>(null);

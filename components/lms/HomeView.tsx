@@ -13,6 +13,7 @@ import MethodStrip from "@/components/lms/MethodStrip";
 import FeaturedCourse from "@/components/lms/FeaturedCourse";
 import FreeCoursesSlider from "@/components/lms/FreeCoursesSlider";
 import WorkedWith from "@/components/lms/WorkedWith";
+import Aurora from "@/components/ui/Aurora";
 import { useLang } from "@/lib/i18n";
 import { withBase } from "@/lib/base";
 import {
@@ -463,9 +464,10 @@ export default function HomeView() {
       </div>
 
       {/* ============================================= THE AI STACK =========== */}
-      <section className="border-y border-line/10 bg-ink-800/40">
-        <div className="container-edge mx-auto max-w-edge py-24 md:py-32">
-          <div className="relative overflow-hidden rounded-3xl border border-mint/25 bg-ink-900 p-8 md:p-14">
+      <section className="relative border-y border-line/10 bg-ink-800/40">
+        <Aurora className="opacity-40" />
+        <div className="container-edge relative mx-auto max-w-edge py-24 md:py-32">
+          <div className="glass-sheen relative overflow-hidden rounded-3xl border border-mint/25 bg-ink-900 p-8 md:p-14">
             <div
               aria-hidden
               className="absolute inset-0"
@@ -859,14 +861,7 @@ export default function HomeView() {
 
       {/* ============================================= FINAL CTA ============== */}
       <section className="bg-grid relative overflow-hidden border-t border-line/10">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(60% 70% at 50% 115%, rgb(var(--mint) / 0.2) 0%, transparent 70%)",
-          }}
-        />
+        <Aurora className="opacity-70" />
         <div aria-hidden className="absolute inset-0 bg-noise opacity-[0.05]" />
         <div className="container-edge relative mx-auto max-w-edge py-24 text-center md:py-36">
           <Reveal>

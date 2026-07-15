@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Media } from "@/components/ui/Media";
-import Magnetic from "@/components/ui/Magnetic";
 import GlyphPlate from "@/components/lms/GlyphPlate";
 import CurriculumIndex from "@/components/lms/CurriculumIndex";
 import FaqList from "@/components/lms/FaqList";

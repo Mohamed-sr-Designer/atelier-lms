@@ -10,7 +10,7 @@ import { getCourse } from "@/lib/courses";
 import type { Post } from "@/lib/blog";
 
 export default function PostView({ post }: { post: Post }) {
-  const { t, lang } = useLang();
+  const { t } = useLang();
   const related = getCourse(post.relatedCourse);
 
   return (

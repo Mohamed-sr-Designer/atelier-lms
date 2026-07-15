@@ -58,10 +58,25 @@ const config: Config = {
           from: { transform: "translateX(-50%)" },
           to: { transform: "translateX(0)" },
         },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        aurora: {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)", opacity: "0.5" },
+          "50%": { transform: "translate(4%, -6%) scale(1.15)", opacity: "0.8" },
+        },
+        shimmer: {
+          "100%": { transform: "translateX(100%)" },
+        },
       },
       animation: {
         marquee: "marquee 38s linear infinite",
         "marquee-rev": "marqueeReverse 50s linear infinite",
+        float: "float 6s ease-in-out infinite",
+        "float-slow": "float 9s ease-in-out infinite",
+        aurora: "aurora 18s ease-in-out infinite",
+        shimmer: "shimmer 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite",
       },
     },
   },

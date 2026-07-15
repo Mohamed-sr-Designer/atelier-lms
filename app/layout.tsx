@@ -12,6 +12,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import AuthModal from "@/components/lms/AuthModal";
 import ScrollProgress from "@/components/ScrollProgress";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import BackToTop from "@/components/BackToTop";
 import Cursor from "@/components/Cursor";
 import Preloader from "@/components/Preloader";
 import "./globals.css";
@@ -213,6 +214,7 @@ export default function RootLayout({
           <ScrollProgress />
           <Cursor />
           <WhatsAppButton />
+          <BackToTop />
           <AuthModal />
           {children}
         </LangProvider>

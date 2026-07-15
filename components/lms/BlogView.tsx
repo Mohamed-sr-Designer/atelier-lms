@@ -8,7 +8,7 @@ import { useLang } from "@/lib/i18n";
 import { posts } from "@/lib/blog";
 
 export default function BlogView() {
-  const { t, lang } = useLang();
+  const { t } = useLang();
 
   return (
     <section className="container-edge mx-auto max-w-edge pb-28 pt-32 md:pt-44">
