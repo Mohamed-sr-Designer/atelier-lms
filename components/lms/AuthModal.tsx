@@ -7,7 +7,6 @@ import { useLang } from "@/lib/i18n";
 import { login, loginAs, useStore } from "@/lib/store";
 
 type Mode = "login" | "register";
-type Joining = "student" | "team";
 
 // Open from anywhere: openAuth("register"). The modal closes itself on
 // success — callers just re-render off the store.
@@ -21,7 +20,6 @@ export default function AuthModal() {
   const store = useStore();
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<Mode>("login");
-  const [joining, setJoining] = useState<Joining>("student");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -147,62 +145,6 @@ export default function AuthModal() {
                 {isRegister ? t.auth.registerSub : t.auth.loginSub}
               </p>
 
-              {/* account type — the sitemap's "account type" step, one tap */}
-              {isRegister && (
-                <div className="mt-6">
-                  <span className="text-xs uppercase tracking-ultra text-bone-500">
-                    {t.auth.accountType}
-                  </span>
-                  <div className="mt-2 grid grid-cols-2 gap-2 rounded-xl border border-line/15 bg-ink-900/60 p-1.5">
-                    {(
-                      [
-                        { id: "student", label: t.auth.typeStudent },
-                        { id: "team", label: t.auth.typeTeam },
-                      ] as { id: Joining; label: string }[]
-                    ).map((o) => (
-                      // NOTE: no layoutId here — a shared-layout pill inside an
-                      // AnimatePresence overlay can stall the exit animation and
-                      // leave an invisible click-eating backdrop over the site.
-                      <button
-                        key={o.id}
-                        type="button"
-                        onClick={() => setJoining(o.id)}
-                        className={`relative rounded-lg px-3 py-2.5 text-sm transition-colors duration-300 ${
-                          joining === o.id
-                            ? "text-white"
-                            : "text-bone-300 hover:text-bone-50"
-                        }`}
-                      >
-                        <span
-                          aria-hidden
-                          className={`absolute inset-0 rounded-lg transition-opacity duration-300 [background:linear-gradient(120deg,rgb(var(--mint)),rgb(var(--electric)))] ${
-                            joining === o.id ? "opacity-100" : "opacity-0"
-                          }`}
-                        />
-                        <span className="relative">{o.label}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {isRegister && joining === "team" ? (
-                <div className="mt-6 rounded-2xl border border-electric/30 bg-electric/5 p-6 text-center">
-                  <p className="text-sm leading-relaxed text-bone-300">
-                    {t.auth.teamNote}
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      close();
-                      router.push("/training/");
-                    }}
-                    className="btn mt-5 w-full bg-electric py-3.5 text-ink-900"
-                  >
-                    {t.auth.teamCta}
-                  </button>
-                </div>
-              ) : (
               <form onSubmit={submit} className="mt-6">
                 {isRegister && (
                   <label className="block">
@@ -254,7 +196,6 @@ export default function AuthModal() {
                   {isRegister ? t.auth.registerBtn : t.auth.loginBtn}
                 </button>
               </form>
-              )}
 
               {/* one-tap demo accounts — student is pre-seeded, admin opens the studio */}
               <div className="mt-6 flex items-center gap-3">
@@ -299,6 +240,22 @@ export default function AuthModal() {
                   {isRegister ? t.auth.loginLink : t.auth.registerLink}
                 </button>
               </p>
+
+              {/* agencies & teams don't need an account — straight to training */}
+              <p className="mt-3 text-center text-sm text-bone-400">
+                {t.auth.teamPrompt}{" "}
+                <button
+                  type="button"
+                  onClick={() => {
+                    close();
+                    router.push("/training/");
+                  }}
+                  className="link-underline text-electric"
+                >
+                  {t.auth.teamLink}
+                </button>
+              </p>
+
               <p className="mt-5 border-t border-line/10 pt-4 text-center text-[11px] leading-relaxed text-bone-500">
                 {t.auth.demoNote}
               </p>

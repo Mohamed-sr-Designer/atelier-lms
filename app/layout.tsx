@@ -13,6 +13,7 @@ import AuthModal from "@/components/lms/AuthModal";
 import ScrollProgress from "@/components/ScrollProgress";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BackToTop from "@/components/BackToTop";
+import PromoPopup from "@/components/lms/PromoPopup";
 import Cursor from "@/components/Cursor";
 import Preloader from "@/components/Preloader";
 import "./globals.css";
@@ -215,6 +216,7 @@ export default function RootLayout({
           <Cursor />
           <WhatsAppButton />
           <BackToTop />
+          <PromoPopup />
           <AuthModal />
           {children}
         </LangProvider>

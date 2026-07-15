@@ -43,8 +43,8 @@ export const bundle: Bundle = {
     ar: "التصوير بالذكاء الاصطناعي وهندسة البرومبت + توليد الفيديو: أخرج الصور كأنك مصوّر محترف، وبعدين حوّلها لإعلانات نهائية العميل يوافق عليها. أعلى مهارتين بيكسّبوا عندنا، أكتر من ٦ ساعات، ومشروعان نهائيان بمراجعة.",
   },
   courseSlugs: ["ai-photoshoot", "ai-video-generation"],
-  price: 5200,
-  compareAt: 6000, // 2,800 + 3,200
+  price: 6000,
+  compareAt: 7000, // 3,300 + 3,700
 };
 
 export const bundleCourses = bundle.courseSlugs

@@ -342,13 +342,26 @@ export default function HomeView() {
                 <p className="font-display text-7xl font-bold tracking-tightest md:text-8xl" dir="ltr">
                   EGP 0
                 </p>
-                <div className="mt-5 flex flex-wrap gap-2">
+                <div className="mt-5 flex flex-wrap gap-2.5">
                   {freeCourses.map((c) => (
                     <Link
                       key={c.slug}
                       href={`/courses/${c.slug}/`}
-                      className="rounded-full border border-ink-900/20 px-4 py-2 text-xs font-medium transition-all duration-300 hover:-translate-y-0.5 hover:bg-ink-900 hover:text-bone-50"
+                      className="group/pill flex items-center gap-2.5 rounded-full border border-ink-900/15 bg-ink-900/[0.03] py-1.5 pl-1.5 pr-4 text-xs font-medium transition-all duration-300 hover:-translate-y-0.5 hover:border-ink-900/30 hover:bg-ink-900 hover:text-bone-50"
                     >
+                      {c.icon ? (
+                        <span
+                          className="grid h-8 w-8 shrink-0 place-items-center rounded-[26%]"
+                          style={{
+                            background: c.plate
+                              ? `linear-gradient(135deg, ${c.plate[0]}, ${c.plate[1]})`
+                              : "#111",
+                          }}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={withBase(c.icon)} alt={`${c.short.en} icon`} className="h-5 w-5" />
+                        </span>
+                      ) : null}
                       {c.short[lang]}
                     </Link>
                   ))}
