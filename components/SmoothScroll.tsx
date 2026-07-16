@@ -5,9 +5,12 @@ import Lenis from "lenis";
 
 export default function SmoothScroll() {
   useEffect(() => {
+    // Touch devices scroll natively (Lenis leaves them alone anyway) — skip
+    // the permanent rAF loop there; CSS scroll-behavior covers anchor links.
     if (
       typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      (window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        window.matchMedia("(pointer: coarse)").matches)
     ) {
       return;
     }

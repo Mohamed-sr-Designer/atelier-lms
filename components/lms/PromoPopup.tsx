@@ -106,13 +106,16 @@ function ScratchCode({ code, hint }: { code: string; hint: string }) {
   );
 }
 
-// Bottom-left promo: the three offers as a stacked DECK of cards (no slider).
-// The cards sit on top of each other with a fanned edge; tapping the deck
-// sends the top card to the back with a spring. Appears once per session.
+// Center-screen promo: the three offers as a stacked DECK of cards (no
+// slider). Tapping the deck sends the top card to the back with a spring.
+// Appears once per session in the middle of the screen; closing collapses
+// it to a small gift icon (bottom-left) that reopens it anytime.
+type PopupState = "hidden" | "open" | "mini";
+
 export default function PromoPopup() {
   const { t, lang } = useLang();
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  const [state, setState] = useState<PopupState>("hidden");
   const [order, setOrder] = useState<number[]>(bundles.map((_, i) => i));
   const [code, setCode] = useState("MT-····");
 
@@ -133,13 +136,17 @@ export default function PromoPopup() {
     try {
       seen = sessionStorage.getItem(SEEN_KEY) === "1";
     } catch {}
-    if (seen) return;
+    if (seen) {
+      // already shown this session — keep the mini icon available
+      setState((s) => (s === "hidden" ? "mini" : s));
+      return;
+    }
 
     const reveal = () => {
       try {
         sessionStorage.setItem(SEEN_KEY, "1");
       } catch {}
-      setOpen(true);
+      setState("open");
       cleanup();
     };
     const timer = setTimeout(reveal, 22000);
@@ -158,18 +165,60 @@ export default function PromoPopup() {
   const shuffle = () =>
     setOrder(([top, ...rest]) => [...rest, top]);
 
+  if (muted) return null;
+
   return (
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          initial={{ opacity: 0, y: 40, scale: 0.94, filter: "blur(12px)" }}
-          animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-          exit={{ opacity: 0, y: 30, scale: 0.95, filter: "blur(8px)" }}
-          transition={{ type: "spring", stiffness: 160, damping: 20 }}
-          className="fixed bottom-5 left-5 right-5 z-[70] mx-auto w-auto max-w-sm sm:left-6 sm:right-auto sm:w-full"
-          role="dialog"
-          aria-label={t.promo.tag}
-        >
+    <>
+      {/* minimized gift icon — reopens the offers */}
+      <AnimatePresence>
+        {state === "mini" && (
+          <motion.button
+            type="button"
+            onClick={() => setState("open")}
+            aria-label={t.promo.seeAll}
+            title={t.promo.seeAll}
+            initial={{ opacity: 0, scale: 0.5, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.5, transitionEnd: { display: "none" } }}
+            transition={{ type: "spring", stiffness: 260, damping: 18 }}
+            whileHover={{ y: -3, scale: 1.08 }}
+            className="glass-strong fixed bottom-5 left-5 z-[65] grid place-items-center rounded-full p-3 text-2xl leading-none md:bottom-8 md:left-8"
+          >
+            🎁
+            <span
+              aria-hidden
+              className="absolute -right-0.5 -top-0.5 h-3 w-3 rounded-full bg-mint shadow-[0_0_10px_rgb(var(--mint)/0.9)]"
+            />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      {/* the centered offers dialog */}
+      <AnimatePresence>
+        {state === "open" && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, transitionEnd: { display: "none" } }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[75] grid place-items-center overflow-y-auto p-4"
+            role="dialog"
+            aria-label={t.promo.tag}
+          >
+            {/* dimmed backdrop — click to minimize */}
+            <button
+              type="button"
+              aria-label={t.promo.dismiss}
+              onClick={() => setState("mini")}
+              className="absolute inset-0 bg-ink-900/60 backdrop-blur-sm"
+            />
+            <motion.div
+              initial={{ opacity: 0, y: 40, scale: 0.92, filter: "blur(12px)" }}
+              animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: 24, scale: 0.94 }}
+              transition={{ type: "spring", stiffness: 170, damping: 20 }}
+              className="relative w-full max-w-sm"
+            >
           {/* the deck */}
           <div className="relative" style={{ paddingTop: 18 }}>
             {order.map((bi, depth) => {
@@ -218,7 +267,7 @@ export default function PromoPopup() {
                           type="button"
                           onClick={(e) => {
                             e.stopPropagation();
-                            setOpen(false);
+                            setState("mini");
                           }}
                           aria-label="Close"
                           className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-ink-900/60 text-bone-300 backdrop-blur transition-colors hover:text-mint"
@@ -263,14 +312,14 @@ export default function PromoPopup() {
                       <div className="mt-4 flex items-center gap-3">
                         <Link
                           href={`/checkout/?bundle=${b.slug}`}
-                          onClick={() => setOpen(false)}
+                          onClick={() => setState("mini")}
                           className="btn btn-primary grow py-3 text-sm"
                         >
                           {t.promo.cta}
                         </Link>
                         <Link
                           href="/offers/"
-                          onClick={() => setOpen(false)}
+                          onClick={() => setState("mini")}
                           className="shrink-0 text-xs text-bone-400 underline decoration-line/40 underline-offset-4 transition-colors hover:text-mint"
                         >
                           {t.promo.seeAll}
@@ -282,8 +331,10 @@ export default function PromoPopup() {
               );
             })}
           </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

@@ -1,11 +1,11 @@
 // A soft, slow-drifting aurora backdrop — two blurred accent blobs behind a
 // section. Purely decorative (aria-hidden), CSS-animated so it costs nothing
-// on the main thread.
+// on the main thread. Hidden below md: 120px blurs are a phone-GPU tax.
 export default function Aurora({ className = "" }: { className?: string }) {
   return (
     <div
       aria-hidden
-      className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
+      className={`pointer-events-none absolute inset-0 hidden overflow-hidden md:block ${className}`}
     >
       <div
         className="animate-aurora absolute -left-[10%] top-[-20%] h-[55%] w-[55%] rounded-full opacity-50 blur-[120px]"

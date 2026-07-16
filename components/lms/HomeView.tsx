@@ -132,15 +132,15 @@ export default function HomeView() {
           initial={{ x: "-180%" }}
           animate={{ x: "320%" }}
           transition={{ duration: 6.5, ease: [0.45, 0, 0.25, 1], repeat: Infinity, repeatDelay: 2 }}
-          className="pointer-events-none absolute inset-y-[-12%] w-[46%] rotate-12 mix-blend-screen"
+          className="pointer-events-none absolute inset-y-[-12%] hidden w-[46%] rotate-12 mix-blend-screen md:block"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-bone-50/[0.14] to-transparent blur-3xl" />
           <div className="absolute inset-y-0 left-[28%] w-[30%] bg-gradient-to-r from-transparent via-mint/25 to-transparent blur-xl" />
           <div className="absolute inset-y-0 left-[46%] w-[9%] bg-gradient-to-r from-transparent via-bone-50/25 to-transparent blur-md" />
         </motion.div>
 
-        {/* offer sticker — loud on purpose */}
-        <div className="absolute left-6 top-[30%] z-10 hidden md:block lg:left-16">
+        {/* offer sticker — loud on purpose; needs lg room or it hits the kicker */}
+        <div className="absolute left-6 top-[30%] z-10 hidden lg:left-16 lg:block">
           <Sticker tone="outline" rotate={-5}>
             {t.home.heroStickers[1]}
           </Sticker>

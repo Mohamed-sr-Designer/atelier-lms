@@ -143,12 +143,12 @@ export default function GiftReveal({
             </span>
           </motion.span>
 
-          {/* drifting sparkles */}
+          {/* drifting sparkles — desktop only, six looping tweens is phone tax */}
           {SPARKS.map((s, i) => (
             <motion.span
               key={i}
               aria-hidden
-              className="absolute text-mint/80"
+              className="absolute hidden text-mint/80 md:block"
               style={{ left: s.x, top: s.y, fontSize: i % 2 ? 11 : 15 }}
               animate={{ opacity: [0.15, 0.9, 0.15], scale: [0.8, 1.15, 0.8], y: [0, -7, 0] }}
               transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut", delay: s.d }}
@@ -157,14 +157,14 @@ export default function GiftReveal({
             </motion.span>
           ))}
 
-          {/* elegant tag */}
+          {/* elegant tag — stacks into two centered lines on small screens */}
           <motion.span
-            className="glass absolute bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-6 py-3"
+            className="glass absolute bottom-7 left-1/2 flex w-max max-w-[88%] -translate-x-1/2 flex-col items-center gap-0.5 rounded-3xl px-5 py-2.5 text-center md:max-w-none md:flex-row md:gap-0 md:whitespace-nowrap md:rounded-full md:px-6 md:py-3"
             animate={{ y: [0, -4, 0] }}
             transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
           >
             <span className="font-serif text-sm italic text-bone-100">{tag}</span>
-            <span className="mx-2 text-bone-500">—</span>
+            <span className="mx-2 hidden text-bone-500 md:inline">—</span>
             <span className="text-xs font-semibold uppercase tracking-widest text-mint">
               {hint}
             </span>

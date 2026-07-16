@@ -305,6 +305,39 @@ html.modal-open .custom-cursor {
   }
 }
 
+/* Touch devices skip Lenis — CSS handles smooth anchor scrolling instead */
+@media (pointer: coarse) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ---- Phone performance: backdrop-filter forces a per-frame readback of
+   everything behind the panel — the single biggest scroll-jank source on
+   mobile GPUs. Below md we trade the live frost for a more opaque panel
+   (same premium look on a dark stage) and disable hover-only sheens. ---- */
+@media (max-width: 767px) {
+  .glass,
+  .glass-strong,
+  .btn-ghost,
+  [class*="backdrop-blur"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .glass {
+    background: rgb(var(--bg2) / 0.88);
+  }
+  .glass-strong {
+    background: rgb(var(--bg2) / 0.94);
+  }
+  .btn-ghost {
+    background: rgb(var(--bg2) / 0.75);
+  }
+  .glass-sheen::after {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
