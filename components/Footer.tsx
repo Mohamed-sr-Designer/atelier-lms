@@ -176,21 +176,6 @@ export default function Footer() {
                 <span className="h-4 w-4 rounded-full bg-[#EB001B]" />
                 <span className="-ml-1.5 h-4 w-4 rounded-full bg-[#F79E1B] opacity-90" />
               </span>
-              {[
-                { n: "InstaPay", c: "text-[#7A4FE0]" },
-                { n: "Vodafone Cash", c: "text-[#E60000]" },
-                { n: "Orange Cash", c: "text-[#FF7900]" },
-                { n: "valU", c: "text-[#2EC4B6]" },
-                { n: "Aman", c: "text-[#1B9C4F]" },
-                { n: "Telda", c: "text-bone-100" },
-              ].map((p) => (
-                <span
-                  key={p.n}
-                  className={`flex h-8 items-center rounded-md border border-line/15 bg-ink-800 px-3 text-xs font-bold tracking-tight ${p.c}`}
-                >
-                  {p.n}
-                </span>
-              ))}
             </div>
           </div>
           <div>

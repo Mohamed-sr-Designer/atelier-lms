@@ -149,14 +149,14 @@ export default function TrainingView() {
           aria-hidden
           animate={{ y: [0, -40, 0], x: [0, 24, 0] }}
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-          className="pointer-events-none absolute -left-24 top-24 hidden h-72 w-72 rounded-full opacity-25 blur-3xl md:block"
+          className="fx-heavy pointer-events-none absolute -left-24 top-24 hidden h-72 w-72 rounded-full opacity-25 blur-3xl md:block"
           style={{ background: "radial-gradient(circle, rgb(var(--mint)) 0%, transparent 70%)" }}
         />
         <motion.div
           aria-hidden
           animate={{ y: [0, 36, 0], x: [0, -28, 0] }}
           transition={{ duration: 17, repeat: Infinity, ease: "easeInOut" }}
-          className="pointer-events-none absolute -right-20 bottom-10 hidden h-80 w-80 rounded-full opacity-20 blur-3xl md:block"
+          className="fx-heavy pointer-events-none absolute -right-20 bottom-10 hidden h-80 w-80 rounded-full opacity-20 blur-3xl md:block"
           style={{ background: "radial-gradient(circle, rgb(var(--electric)) 0%, transparent 70%)" }}
         />
 

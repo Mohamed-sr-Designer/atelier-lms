@@ -217,7 +217,7 @@ export default function PromoPopup() {
               animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
               exit={{ opacity: 0, y: 24, scale: 0.94 }}
               transition={{ type: "spring", stiffness: 170, damping: 20 }}
-              className="relative w-full max-w-sm"
+              className="relative w-full max-w-md"
             >
           {/* the deck */}
           <div className="relative" style={{ paddingTop: 18 }}>
@@ -244,7 +244,7 @@ export default function PromoPopup() {
                 >
                   {/* art header */}
                   <div
-                    className="glass-sheen relative h-28 cursor-pointer overflow-hidden"
+                    className="glass-sheen relative h-32 cursor-pointer overflow-hidden md:h-36"
                     onClick={isTop ? shuffle : undefined}
                     title={t.promo.shuffleHint}
                   >
@@ -284,7 +284,7 @@ export default function PromoPopup() {
                   {isTop && (
                     <div className="relative p-5">
                       <div className="flex items-start justify-between gap-3">
-                        <h3 className="font-display text-lg font-semibold leading-tight tracking-tight text-bone-50">
+                        <h3 className="font-display text-xl font-semibold leading-tight tracking-tight text-bone-50">
                           {b.title[lang]}
                         </h3>
                         <span
@@ -298,7 +298,7 @@ export default function PromoPopup() {
                         {b.tagline[lang]}
                       </p>
                       <div className="mt-3 flex items-baseline gap-3" dir="ltr">
-                        <span className="text-grad font-display text-2xl font-bold">
+                        <span className="text-grad font-display text-3xl font-bold">
                           {fmtPrice(b.price, lang)}
                         </span>
                         <span className="text-sm text-bone-500 line-through">

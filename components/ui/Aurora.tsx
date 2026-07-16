@@ -5,7 +5,7 @@ export default function Aurora({ className = "" }: { className?: string }) {
   return (
     <div
       aria-hidden
-      className={`pointer-events-none absolute inset-0 hidden overflow-hidden md:block ${className}`}
+      className={`fx-heavy pointer-events-none absolute inset-0 hidden overflow-hidden md:block ${className}`}
     >
       <div
         className="animate-aurora absolute -left-[10%] top-[-20%] h-[55%] w-[55%] rounded-full opacity-50 blur-[120px]"

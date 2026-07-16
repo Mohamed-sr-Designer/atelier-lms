@@ -132,7 +132,7 @@ export default function HomeView() {
           initial={{ x: "-180%" }}
           animate={{ x: "320%" }}
           transition={{ duration: 6.5, ease: [0.45, 0, 0.25, 1], repeat: Infinity, repeatDelay: 2 }}
-          className="pointer-events-none absolute inset-y-[-12%] hidden w-[46%] rotate-12 mix-blend-screen md:block"
+          className="fx-heavy pointer-events-none absolute inset-y-[-12%] hidden w-[46%] rotate-12 mix-blend-screen md:block"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-bone-50/[0.14] to-transparent blur-3xl" />
           <div className="absolute inset-y-0 left-[28%] w-[30%] bg-gradient-to-r from-transparent via-mint/25 to-transparent blur-xl" />
@@ -593,12 +593,99 @@ export default function HomeView() {
         </div>
       </section>
 
+      {/* ============================== WHY HERE — the honest comparison ====== */}
+      <section className="relative overflow-hidden">
+        <div className="container-edge mx-auto max-w-edge py-20 md:py-28">
+          <Reveal>
+            <SectionLabel index="03">{t.home.whyMeLabel}</SectionLabel>
+          </Reveal>
+          <div className="mt-6 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <Reveal delay={0.05}>
+              <h2 className="max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
+                {t.home.whyMeTitleA}{" "}
+                <span className="text-grad font-serif font-normal italic tracking-normal">
+                  {t.home.whyMeTitleI}
+                </span>
+                {t.home.whyMeTitleB}
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="max-w-sm text-sm leading-relaxed text-bone-400">
+                {t.home.whyMeSub}
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="mt-14 grid gap-6 lg:grid-cols-2">
+            {/* the market */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+              transition={{ duration: 0.6, ease }}
+              className="rounded-3xl border border-line/10 bg-ink-800/30 p-7 md:p-9"
+            >
+              <p className="text-[11px] uppercase tracking-ultra text-bone-500">
+                {t.home.themCol}
+              </p>
+              <ul className="mt-6 space-y-4">
+                {t.home.whyMeRows.map((row) => (
+                  <li
+                    key={row.them}
+                    className="flex items-start gap-3 text-sm leading-relaxed text-bone-500"
+                  >
+                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-line/10 text-[10px] text-bone-500">
+                      ✕
+                    </span>
+                    {row.them}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* here */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+              transition={{ duration: 0.6, ease, delay: 0.12 }}
+              className="glass-sheen relative overflow-hidden rounded-3xl border border-mint/30 bg-ink-800/70 p-7 shadow-[0_30px_90px_-40px_rgb(var(--mint)/0.35)] md:p-9"
+            >
+              <p className="text-[11px] uppercase tracking-ultra text-mint">
+                {t.home.meCol}
+              </p>
+              <ul className="mt-6 space-y-4">
+                {t.home.whyMeRows.map((row) => (
+                  <li
+                    key={row.me}
+                    className="flex items-start gap-3 text-sm leading-relaxed text-bone-100"
+                  >
+                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-mint/15 text-[10px] font-bold text-mint">
+                      ✓
+                    </span>
+                    {row.me}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-line/10 pt-6">
+                <Link href="/courses/" className="btn btn-primary px-6 py-3.5 text-sm">
+                  {t.home.whyMeCta}
+                </Link>
+                <p className="font-serif text-sm italic text-bone-400">
+                  {t.home.whyMeNote}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* ============================================= INSTRUCTOR ============= */}
       <section className="border-y border-line/10 bg-ink-800/40">
         <div className="container-edge mx-auto grid max-w-edge items-center gap-12 py-20 md:py-28 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <Reveal>
-              <SectionLabel index="03">{t.home.instructorLabel}</SectionLabel>
+              <SectionLabel index="04">{t.home.instructorLabel}</SectionLabel>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-6 text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
@@ -691,7 +778,7 @@ export default function HomeView() {
       <section className="overflow-hidden py-20 md:py-28">
         <div className="container-edge mx-auto max-w-edge">
           <Reveal>
-            <SectionLabel index="04">{t.home.outcomesLabel}</SectionLabel>
+            <SectionLabel index="05">{t.home.outcomesLabel}</SectionLabel>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
@@ -853,6 +940,32 @@ export default function HomeView() {
         <Aurora className="opacity-70" />
         <div aria-hidden className="absolute inset-0 bg-noise opacity-[0.05]" />
         <div className="container-edge relative mx-auto max-w-edge py-24 text-center md:py-36">
+          {/* objections — clear the last doubts right before the ask */}
+          <div className="mx-auto mb-20 max-w-4xl">
+            <Reveal>
+              <p className="text-center text-[11px] uppercase tracking-ultra text-bone-500">
+                {t.home.objLabel}
+              </p>
+            </Reveal>
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              {t.home.objections.map((o, i) => (
+                <motion.div
+                  key={o.q}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, ease, delay: i * 0.06 }}
+                  className="glass rounded-2xl p-6 text-start"
+                >
+                  <p className="font-display text-base font-semibold text-bone-50">
+                    {o.q}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-bone-400">{o.a}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
           <Reveal>
             <div className="flex justify-center">
               <SectionLabel index="✦">{t.home.finalLabel}</SectionLabel>

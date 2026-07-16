@@ -193,7 +193,9 @@ const jsonLd = {
   ],
 };
 
-const themeScript = `(function(){try{var a=localStorage.getItem('accent')||'pulse';document.documentElement.setAttribute('data-accent',a);}catch(e){document.documentElement.setAttribute('data-accent','pulse');}})();`;
+// Accent restore + weak-device detection, inline so both land before first
+// paint. The lite heuristic mirrors lib/perf.ts — keep the two in sync.
+const themeScript = `(function(){try{var a=localStorage.getItem('accent')||'pulse';document.documentElement.setAttribute('data-accent',a);}catch(e){document.documentElement.setAttribute('data-accent','pulse');}try{var m=navigator.deviceMemory||8,c=navigator.hardwareConcurrency||8;if(m<=4||c<=4)document.documentElement.classList.add('lite');}catch(e){}})();`;
 
 export default function RootLayout({
   children,

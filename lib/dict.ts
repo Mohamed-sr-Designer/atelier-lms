@@ -267,6 +267,65 @@ const en = {
     finalSub: "Start Photoshop Mastery right now — the complete course, final project included. No card, no trial, no catch.",
     finalCta: "Start free now ✦",
     finalAlt: "or browse all courses",
+
+    // -- "why here, not anyone else" comparison ---------------------------
+    whyMeLabel: "The difference",
+    whyMeTitleA: "Any course teaches",
+    whyMeTitleI: "the tool.",
+    whyMeTitleB: " Here you leave with paid work.",
+    whyMeSub:
+      "Compare before you enroll anywhere — including here. This is exactly what you get on each side.",
+    themCol: "A typical course",
+    meCol: "With Mohamed Tarek",
+    whyMeRows: [
+      {
+        them: "Recorded theory and stock-photo exercises",
+        me: "Real client briefs — the same files real brands approved",
+      },
+      {
+        them: "A certificate nobody ever checks",
+        me: "A finished portfolio project, reviewed by me personally",
+      },
+      {
+        them: "Watch alone; questions go nowhere",
+        me: "A direct WhatsApp line to the instructor",
+      },
+      {
+        them: "Taught by a full-time teacher",
+        me: "Taught by an art director still shipping for real brands",
+      },
+      {
+        them: "Pay first, then find out",
+        me: "Two complete courses free — judge the teaching before paying a pound",
+      },
+      {
+        them: "Priced like a subscription you forget",
+        me: "Priced against one freelance job — brief #1 pays it back",
+      },
+    ],
+    whyMeCta: "Test me on the free courses first →",
+    whyMeNote: "If the free ones don't convince you, don't buy the paid ones. Fair?",
+
+    // -- objection handling (above the final CTA) -------------------------
+    objLabel: "Still thinking? Fair.",
+    objections: [
+      {
+        q: "I'm a total beginner — will I keep up?",
+        a: "Every track starts from zero. Photoshop and Illustrator are free and complete — start there. No card, no catch.",
+      },
+      {
+        q: "Why would two full courses be free?",
+        a: "Because it's the honest way to prove the teaching. Watch them, judge the quality, then decide if the paid tracks are worth it.",
+      },
+      {
+        q: "I don't have time for this.",
+        a: "Each course is 3–5 focused hours cut into short lessons with zero filler. A week of evenings finishes a track.",
+      },
+      {
+        q: "And if I can't find clients after?",
+        a: "Your final project is a real brief, personally reviewed — that's the portfolio piece that gets replies. The pricing lessons show you how to quote it.",
+      },
+    ],
   },
 
   catalog: {
@@ -1015,6 +1074,64 @@ const ar: typeof en = {
     finalSub: "ابدأ إتقان فوتوشوب الآن — الدورة كاملة بمشروعها النهائي. بلا بطاقة، بلا فترة تجربة، بلا شروط.",
     finalCta: "ابدأ مجانًا الآن ✦",
     finalAlt: "أو تصفّح كل الدورات",
+
+    // -- "لماذا هنا وليس أي مكان آخر" ---------------------------------------
+    whyMeLabel: "الفرق",
+    whyMeTitleA: "أي دورة تعلّمك",
+    whyMeTitleI: "الأداة.",
+    whyMeTitleB: " هنا تخرج بعملٍ مدفوع.",
+    whyMeSub: "قارن قبل أن تسجّل في أي مكان — بما في ذلك هنا. هذا بالضبط ما تحصل عليه في كل جانب.",
+    themCol: "دورة تقليدية",
+    meCol: "مع محمد طارق",
+    whyMeRows: [
+      {
+        them: "نظريات مسجّلة وتمارين على صور جاهزة",
+        me: "ملفات عملاء حقيقية — نفس الأعمال التي اعتمدتها علامات فعلية",
+      },
+      {
+        them: "شهادة لا يتحقق منها أحد",
+        me: "مشروع كامل في معرض أعمالك، أراجعه بنفسي شخصيًا",
+      },
+      {
+        them: "تشاهد وحدك وأسئلتك بلا إجابة",
+        me: "خط واتساب مباشر مع المدرّب",
+      },
+      {
+        them: "يدرّسها معلّم متفرّغ للتدريس",
+        me: "يدرّسها مدير فني ما زال يسلّم أعمالًا لعلامات حقيقية",
+      },
+      {
+        them: "ادفع أولًا ثم اكتشف",
+        me: "دورتان كاملتان مجانًا — احكم على التدريس قبل أن تدفع جنيهًا",
+      },
+      {
+        them: "سعر كاشتراك تنساه",
+        me: "سعر يعادل مشروعًا مستقلًا واحدًا — أول عمل يسترد ثمنه",
+      },
+    ],
+    whyMeCta: "اختبرني في الدورات المجانية أولًا ←",
+    whyMeNote: "إن لم تقنعك الدورات المجانية، لا تشترِ المدفوعة. عادل؟",
+
+    // -- معالجة الاعتراضات (قبل الدعوة الأخيرة) -----------------------------
+    objLabel: "ما زلت تفكر؟ من حقك.",
+    objections: [
+      {
+        q: "أنا مبتدئ تمامًا — هل سأستوعب؟",
+        a: "كل مسار يبدأ من الصفر. فوتوشوب وإليستريتور مجانيان وكاملان — ابدأ منهما. بلا بطاقة، بلا شروط.",
+      },
+      {
+        q: "لماذا دورتان كاملتان مجانًا؟",
+        a: "لأنها الطريقة الأصدق لإثبات جودة التدريس. شاهدهما واحكم بنفسك، ثم قرر إن كانت المسارات المدفوعة تستحق.",
+      },
+      {
+        q: "لا أملك وقتًا لهذا.",
+        a: "كل دورة من ٣ إلى ٥ ساعات مركّزة مقسّمة لدروس قصيرة بلا حشو. أسبوع من الأمسيات ينهي مسارًا كاملًا.",
+      },
+      {
+        q: "وإن لم أجد عملاء بعدها؟",
+        a: "مشروعك النهائي مبني على ملف حقيقي ويُراجع شخصيًا — هذه هي القطعة التي تجلب الردود. ودروس التسعير تريك كيف تحدد سعرك.",
+      },
+    ],
   },
 
   catalog: {

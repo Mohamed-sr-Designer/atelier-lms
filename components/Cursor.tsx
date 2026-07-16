@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { isLiteDevice } from "@/lib/perf";
 
 export default function Cursor() {
   const [enabled, setEnabled] = useState(false);
@@ -14,7 +15,9 @@ export default function Cursor() {
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine)").matches;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!fine || reduce) return;
+    // weak machines get the native cursor — the spring follower is exactly
+    // what makes the mouse feel laggy there
+    if (!fine || reduce || isLiteDevice()) return;
     setEnabled(true);
     document.documentElement.classList.add("cursor-ready");
 

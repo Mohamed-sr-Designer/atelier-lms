@@ -143,7 +143,7 @@ export default function GiftReveal({
             <motion.span
               key={i}
               aria-hidden
-              className="absolute hidden text-mint/80 md:block"
+              className="fx-heavy absolute hidden text-mint/80 md:block"
               style={{ left: s.x, top: s.y, fontSize: i % 2 ? 11 : 15 }}
               animate={{ opacity: [0.15, 0.9, 0.15], scale: [0.8, 1.15, 0.8], y: [0, -7, 0] }}
               transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut", delay: s.d }}
