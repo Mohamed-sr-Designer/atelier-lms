@@ -210,7 +210,7 @@ export default function PromoPopup() {
               type="button"
               aria-label={t.promo.dismiss}
               onClick={() => setState("mini")}
-              className="absolute inset-0 bg-ink-900/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-ink-900/75 backdrop-blur-sm md:bg-ink-900/60"
             />
             <motion.div
               initial={{ opacity: 0, y: 40, scale: 0.92, filter: "blur(12px)" }}

@@ -108,7 +108,7 @@ export default function AuthModal() {
   };
 
   const input =
-    "mt-2 w-full rounded-xl border border-line/15 bg-ink-900/70 px-4 py-3.5 text-sm text-bone-50 placeholder:text-bone-500/60 backdrop-blur focus:border-mint/60 focus:outline-none";
+    "mt-1.5 w-full rounded-xl border border-line/15 bg-ink-900/70 px-4 py-3 text-sm text-bone-50 placeholder:text-bone-500/60 backdrop-blur focus:border-mint/60 focus:outline-none";
 
   return (
     <AnimatePresence>
@@ -121,7 +121,7 @@ export default function AuthModal() {
           // swallow every click on the page.
           exit={{ opacity: 0, transitionEnd: { display: "none" } }}
           transition={{ duration: 0.25 }}
-          className="fixed inset-0 z-[90] grid place-items-center overflow-y-auto bg-ink-900/60 p-4 backdrop-blur-xl"
+          className="fixed inset-0 z-[90] grid place-items-center overflow-y-auto bg-ink-900/80 p-4 backdrop-blur-xl md:bg-ink-900/60"
           onClick={close}
           role="dialog"
           aria-modal="true"
@@ -133,7 +133,9 @@ export default function AuthModal() {
             exit={{ opacity: 0, y: 20, scale: 0.97 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-md overflow-hidden rounded-3xl border border-line/20 bg-ink-800/60 p-8 shadow-2xl shadow-black/50 backdrop-blur-2xl md:p-10"
+            className={`relative w-full overflow-hidden rounded-3xl border border-line/20 bg-ink-800/95 p-7 shadow-2xl shadow-black/50 backdrop-blur-2xl md:bg-ink-800/60 md:p-9 ${
+              isRegister ? "max-w-md sm:max-w-xl" : "max-w-md"
+            }`}
           >
             {/* glass sheen */}
             <div
@@ -159,84 +161,87 @@ export default function AuthModal() {
               <p className="text-xs uppercase tracking-ultra text-mint">
                 {isRegister ? t.nav.startFree : t.nav.login}
               </p>
-              <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-bone-50">
+              <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight text-bone-50">
                 {isRegister ? t.auth.registerTitle : t.auth.loginTitle}
               </h2>
-              <p className="mt-2 text-sm text-bone-400">
+              <p className="mt-1.5 text-sm text-bone-400">
                 {isRegister ? t.auth.registerSub : t.auth.loginSub}
               </p>
 
-              <form onSubmit={submit} className="mt-6">
-                {isRegister && (
+              {/* register lays the fields out two-up so the modal stays short */}
+              <form onSubmit={submit} className="mt-5">
+                <div className={`grid gap-4 ${isRegister ? "sm:grid-cols-2" : ""}`}>
+                  {isRegister && (
+                    <label className="block">
+                      <span className="text-xs uppercase tracking-ultra text-bone-500">
+                        {t.auth.name}
+                      </span>
+                      <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder={t.auth.namePh}
+                        className={input}
+                        autoComplete="name"
+                      />
+                    </label>
+                  )}
                   <label className="block">
                     <span className="text-xs uppercase tracking-ultra text-bone-500">
-                      {t.auth.name}
+                      {t.auth.email}
                     </span>
                     <input
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder={t.auth.namePh}
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder={t.auth.emailPh}
                       className={input}
-                      autoComplete="name"
-                    />
-                  </label>
-                )}
-                <label className={`block ${isRegister ? "mt-5" : ""}`}>
-                  <span className="text-xs uppercase tracking-ultra text-bone-500">
-                    {t.auth.email}
-                  </span>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder={t.auth.emailPh}
-                    className={input}
-                    autoComplete="email"
-                    required
-                  />
-                </label>
-                {isRegister && (
-                  <label className="mt-5 block">
-                    <span className="text-xs uppercase tracking-ultra text-bone-500">
-                      {t.auth.phone}
-                    </span>
-                    <input
-                      type="tel"
-                      dir="ltr"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      placeholder={t.auth.phonePh}
-                      className={input}
-                      autoComplete="tel"
+                      autoComplete="email"
                       required
                     />
                   </label>
-                )}
-                <label className="mt-5 block">
-                  <span className="text-xs uppercase tracking-ultra text-bone-500">
-                    {t.auth.password}
-                  </span>
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder={t.auth.passwordPh}
-                    className={input}
-                    autoComplete={isRegister ? "new-password" : "current-password"}
-                    required
-                  />
-                </label>
+                  {isRegister && (
+                    <label className="block">
+                      <span className="text-xs uppercase tracking-ultra text-bone-500">
+                        {t.auth.phone}
+                      </span>
+                      <input
+                        type="tel"
+                        dir="ltr"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder={t.auth.phonePh}
+                        className={input}
+                        autoComplete="tel"
+                        required
+                      />
+                    </label>
+                  )}
+                  <label className="block">
+                    <span className="text-xs uppercase tracking-ultra text-bone-500">
+                      {t.auth.password}
+                    </span>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder={t.auth.passwordPh}
+                      className={input}
+                      autoComplete={isRegister ? "new-password" : "current-password"}
+                      required
+                    />
+                  </label>
+                </div>
 
-                {err && <p className="mt-4 text-sm text-mint">{err}</p>}
+                {err && <p className="mt-3 text-sm text-mint">{err}</p>}
 
-                <button type="submit" className="btn btn-primary mt-7 w-full py-4">
+                <button type="submit" className="btn btn-primary mt-5 w-full py-3.5">
                   {isRegister ? t.auth.registerBtn : t.auth.loginBtn}
                 </button>
               </form>
 
               {/* social sign-in (demo — instant connect in this browser) */}
-              <div className="mt-5 flex items-center gap-3">
+              <div className="mt-4 flex items-center gap-3">
                 <span className="h-px grow bg-line/15" />
                 <span className="text-[10px] uppercase tracking-ultra text-bone-500">
                   {t.auth.socialLabel}
@@ -295,14 +300,14 @@ export default function AuthModal() {
               </p>
 
               {/* one-tap demo accounts — student is pre-seeded, admin opens the studio */}
-              <div className="mt-6 flex items-center gap-3">
+              <div className="mt-4 flex items-center gap-3">
                 <span className="h-px grow bg-line/15" />
                 <span className="text-[10px] uppercase tracking-ultra text-bone-500">
                   {t.auth.previewLabel}
                 </span>
                 <span className="h-px grow bg-line/15" />
               </div>
-              <div className="mt-4 grid grid-cols-2 gap-3">
+              <div className="mt-3 grid grid-cols-2 gap-3">
                 <button
                   type="button"
                   onClick={() => {
@@ -327,33 +332,35 @@ export default function AuthModal() {
                 </button>
               </div>
 
-              <p className="mt-5 text-center text-sm text-bone-400">
-                {isRegister ? t.auth.orLogin : t.auth.orRegister}{" "}
-                <button
-                  type="button"
-                  onClick={() => setMode(isRegister ? "login" : "register")}
-                  className="link-underline text-mint"
-                >
-                  {isRegister ? t.auth.loginLink : t.auth.registerLink}
-                </button>
-              </p>
+              {/* switch mode + team link, one tight block */}
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-sm text-bone-400">
+                <span>
+                  {isRegister ? t.auth.orLogin : t.auth.orRegister}{" "}
+                  <button
+                    type="button"
+                    onClick={() => setMode(isRegister ? "login" : "register")}
+                    className="link-underline text-mint"
+                  >
+                    {isRegister ? t.auth.loginLink : t.auth.registerLink}
+                  </button>
+                </span>
+                <span className="text-bone-600">·</span>
+                <span>
+                  {t.auth.teamPrompt}{" "}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      close();
+                      router.push("/training/");
+                    }}
+                    className="link-underline text-electric"
+                  >
+                    {t.auth.teamLink}
+                  </button>
+                </span>
+              </div>
 
-              {/* agencies & teams don't need an account — straight to training */}
-              <p className="mt-3 text-center text-sm text-bone-400">
-                {t.auth.teamPrompt}{" "}
-                <button
-                  type="button"
-                  onClick={() => {
-                    close();
-                    router.push("/training/");
-                  }}
-                  className="link-underline text-electric"
-                >
-                  {t.auth.teamLink}
-                </button>
-              </p>
-
-              <p className="mt-5 border-t border-line/10 pt-4 text-center text-[11px] leading-relaxed text-bone-500">
+              <p className="mt-4 border-t border-line/10 pt-3 text-center text-[11px] leading-relaxed text-bone-500">
                 {t.auth.demoNote}
               </p>
             </div>
