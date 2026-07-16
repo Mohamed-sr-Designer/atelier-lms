@@ -17,8 +17,6 @@ import {
   totalMinutes,
 } from "@/lib/courses";
 
-const ease = [0.16, 1, 0.3, 1] as const;
-
 // The big offers page: every bundle as a full-width animated glass card —
 // what's inside, the math, and one loud CTA each.
 export default function OffersView() {

@@ -70,26 +70,6 @@ export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
 
   return (
     <div className="relative mt-14">
-      {/* desktop arrows */}
-      <button
-        type="button"
-        aria-label="Previous"
-        onClick={() => go(-1)}
-        disabled={atStart}
-        className={`absolute -left-5 top-[42%] z-20 hidden md:grid ${arrowBase}`}
-      >
-        ←
-      </button>
-      <button
-        type="button"
-        aria-label="Next"
-        onClick={() => go(1)}
-        disabled={atEnd}
-        className={`absolute -right-5 top-[42%] z-20 hidden md:grid ${arrowBase}`}
-      >
-        →
-      </button>
-
       {/* track */}
       <div
         ref={trackRef}
@@ -107,14 +87,14 @@ export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
         ))}
       </div>
 
-      {/* controls: mobile arrows + directional dots */}
-      <div className="mt-8 flex items-center justify-center gap-5">
+      {/* controls — arrows + dots, centered well below the track */}
+      <div className="mt-12 flex items-center justify-center gap-6">
         <button
           type="button"
           aria-label="Previous"
           onClick={() => go(-1)}
           disabled={atStart}
-          className="grid h-9 w-9 place-items-center rounded-full border border-line/20 text-bone-50 transition-colors hover:border-mint/60 hover:text-mint disabled:opacity-30 md:hidden"
+          className={arrowBase}
         >
           ←
         </button>
@@ -139,7 +119,7 @@ export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
           aria-label="Next"
           onClick={() => go(1)}
           disabled={atEnd}
-          className="grid h-9 w-9 place-items-center rounded-full border border-line/20 text-bone-50 transition-colors hover:border-mint/60 hover:text-mint disabled:opacity-30 md:hidden"
+          className={arrowBase}
         >
           →
         </button>

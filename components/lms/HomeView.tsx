@@ -9,7 +9,6 @@ import { Media } from "@/components/ui/Media";
 import Magnetic from "@/components/ui/Magnetic";
 import LogoMarquee from "@/components/LogoMarquee";
 import Counter from "@/components/lms/Counter";
-import MethodStrip from "@/components/lms/MethodStrip";
 import FeaturedCourse from "@/components/lms/FeaturedCourse";
 import FreeCoursesSlider from "@/components/lms/FreeCoursesSlider";
 import WorkedWith from "@/components/lms/WorkedWith";
@@ -594,36 +593,12 @@ export default function HomeView() {
         </div>
       </section>
 
-      {/* ============================================= TAREK (compact) ======= */}
-      <section className="container-edge mx-auto max-w-edge py-20 md:py-28">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <Reveal>
-              <SectionLabel index="03">{t.home.pathLabel}</SectionLabel>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <h2 className="mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.0] tracking-tightest text-bone-50 md:text-6xl">
-                {t.home.pathTitleA}{" "}
-                <span className="text-grad font-serif font-normal italic tracking-normal">
-                  {t.home.pathTitleI}
-                </span>
-                {t.home.pathTitleB}
-              </h2>
-            </Reveal>
-          </div>
-          <Reveal delay={0.1}>
-            <p className="text-sm text-bone-400">{t.home.pathNote}</p>
-          </Reveal>
-        </div>
-        <MethodStrip />
-      </section>
-
       {/* ============================================= INSTRUCTOR ============= */}
       <section className="border-y border-line/10 bg-ink-800/40">
         <div className="container-edge mx-auto grid max-w-edge items-center gap-12 py-20 md:py-28 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <Reveal>
-              <SectionLabel index="04">{t.home.instructorLabel}</SectionLabel>
+              <SectionLabel index="03">{t.home.instructorLabel}</SectionLabel>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-6 text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
@@ -716,7 +691,7 @@ export default function HomeView() {
       <section className="overflow-hidden py-20 md:py-28">
         <div className="container-edge mx-auto max-w-edge">
           <Reveal>
-            <SectionLabel index="05">{t.home.outcomesLabel}</SectionLabel>
+            <SectionLabel index="04">{t.home.outcomesLabel}</SectionLabel>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">

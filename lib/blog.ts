@@ -163,47 +163,51 @@ export const posts: Post[] = [
     ],
   },
   {
-    slug: "figma-vs-photoshop-beginners",
-    title: "Figma vs Photoshop: Which Should a New Designer Learn?",
-    titleAr: "فيجما ولا فوتوشوب: مبتدئ التصميم يتعلم إيه الأول؟",
+    slug: "figma-vs-adobe-xd-vs-vibe-coding",
+    title: "Figma vs Adobe XD vs Vibe Coding: What's the Difference in 2026?",
+    titleAr: "فيجما وأدوبي XD والـ Vibe Coding: ما الفرق في 2026؟",
     excerpt:
-      "They're not competitors — they're different careers. A simple decision framework from someone who teaches both.",
+      "One is the industry standard, one is on life support, and one skips the design file entirely. Where each fits — and what designers should actually learn.",
     excerptAr:
-      "مش منافسين — دول مسارين مهنيين مختلفين. إطار قرار بسيط من حد بيدرّس الاتنين.",
-    date: "2026-06-05",
-    readMins: 5,
+      "واحد معيار الصناعة، وواحد على أجهزة الإنعاش، وواحد يتخطى ملف التصميم كليًا. أين يناسب كل منها — وماذا يتعلم المصمم فعلًا.",
+    date: "2026-07-12",
+    readMins: 6,
     tag: "Learning Paths",
     cover: "/web/fresh-valley.webp",
     relatedCourse: "adobe-photoshop",
     body: [
       {
-        p: "Every week a student asks me to settle the Figma vs Photoshop debate. Here's the truth the debate misses: they don't compete. They serve two different careers that happen to share the word 'designer'.",
+        p: "Three names keep coming up when designers ask about interface work in 2026: Figma, Adobe XD, and the new one — vibe coding. They're not three versions of the same thing. One is the industry standard, one is effectively retired, and one skips the design file entirely. Here's the honest map.",
       },
       {
-        h: "The one-question framework",
-        p: "Ask yourself what you want to make: images or interfaces. If the answer is campaigns, social content, ads, retouched visuals — that's the image world, and it runs on Photoshop. If the answer is apps, websites, products people click through — that's the interface world, and it runs on Figma. Neither is a subset of the other.",
+        h: "Figma — the industry standard, full stop",
+        p: "Figma won the interface-design war: real-time collaboration, auto layout, components, dev mode, and a plugin economy. If a team anywhere in the world designs an app or a website today, the file is almost certainly a Figma file. For UI/UX roles it isn't optional — it's the baseline, the way Photoshop is the baseline for image work.",
       },
       {
-        h: "Where the money differs",
-        p: "Photoshop skills monetize faster at entry level (social design and retouch briefs are everywhere, especially in the MENA agency market). Figma skills have a higher ceiling in product companies and remote roles. Graphic designers who add Figma make the single most in-demand career transition of the moment — and their visual instincts transfer on day one, which is why designers coming from the graphic side pick it up faster than anyone.",
+        h: "Adobe XD — on life support",
+        p: "Adobe stopped meaningfully developing XD after the failed Figma acquisition; it survives in maintenance mode inside some legacy enterprise workflows. Learning XD in 2026 is learning a tool the market has already left. If you find an old course or a team still on it, the skills transfer to Figma in a week — but don't start there.",
       },
       {
-        h: "The honest recommendation",
-        p: "If you're at absolute zero: Photoshop first for fundamentals and fast employability, Figma second as your growth multiplier. If you already have graphic foundations and feel drawn to products: go straight to Figma — your visual instincts transfer on day one.",
+        h: "Vibe coding — skipping the design file",
+        p: "Vibe coding is the new lane: describing what you want in plain language and letting AI coding tools (Cursor, Claude, v0 and friends) generate the working interface directly — no mockup stage at all. It's astonishingly fast for landing pages, internal tools and prototypes. What it doesn't replace is taste: the AI will happily generate a generic layout unless someone with design judgment directs it. Sound familiar? It's the same rule as AI photoshoots — the tool is fast, the direction is the skill.",
+      },
+      {
+        h: "So what should a designer learn?",
+        p: "Craft first, always: Photoshop and Illustrator fundamentals build the visual judgment every other tool depends on. Then Figma if products are your lane. Then treat vibe coding like we treat AI production here — a multiplier on top of taste, not a replacement for it. Designers who can direct both images and interfaces with AI are the most leveraged people in the industry right now.",
       },
     ],
     faq: [
       {
-        q: "Is Figma harder to learn than Photoshop?",
-        a: "No — Figma's core is smaller and more logical. The challenge is unlearning manual-positioning habits; auto layout thinking is the real skill jump.",
+        q: "Is Adobe XD dead in 2026?",
+        a: "Effectively yes — Adobe moved it to maintenance mode and its market share has collapsed to Figma. Skills transfer to Figma quickly, but new learners shouldn't start with XD.",
       },
       {
-        q: "Can Figma replace Photoshop?",
-        a: "No. Figma is for interfaces and product design; it cannot retouch, composite or grade images. Professional designers commonly use both for different jobs.",
+        q: "What is vibe coding?",
+        a: "Building working interfaces by describing them in natural language to AI coding tools (Cursor, Claude, v0), skipping the traditional mockup stage. Fast for prototypes and simple sites; it still needs design judgment to avoid generic output.",
       },
       {
-        q: "Do UI designers earn more than graphic designers?",
-        a: "On average yes, especially in product companies and remote markets — but senior brand/campaign designers out-earn junior UI designers. Sequence and seniority matter more than the tool.",
+        q: "Will vibe coding replace Figma and designers?",
+        a: "No — it shifts the designer's job toward direction and taste. Complex products still need designed systems in Figma, and AI-generated interfaces still need someone with visual judgment steering them.",
       },
     ],
   },

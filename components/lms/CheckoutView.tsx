@@ -10,6 +10,7 @@ import { useLang } from "@/lib/i18n";
 import { useStore, enroll } from "@/lib/store";
 import { openAuth } from "@/components/lms/AuthModal";
 import { useStudio, mergeCourse } from "@/lib/studio";
+import { isValidCode, promoDiscount } from "@/lib/promo";
 import { site, payments } from "@/lib/site";
 import {
   coursesOfBundle,
@@ -28,6 +29,8 @@ export default function CheckoutView() {
   const studio = useStudio();
   const [method, setTarek] = useState<"instapay" | "vodafone">("instapay");
   const [copied, setCopied] = useState("");
+  const [promoInput, setPromoInput] = useState("");
+  const [promoState, setPromoState] = useState<"idle" | "ok" | "bad">("idle");
 
   // ?bundle=1 (legacy, AI stack) or ?bundle=<slug> for any pack
   const bundleParam = params.get("bundle");
@@ -44,9 +47,16 @@ export default function CheckoutView() {
     : course
       ? [course]
       : [];
-  const total = activeBundle ? activeBundle.price : course?.price ?? 0;
+  const baseTotal = activeBundle ? activeBundle.price : course?.price ?? 0;
   const compareAt = activeBundle ? activeBundle.compareAt : course?.compareAt;
-  const isFree = total === 0;
+  const promoOff = promoState === "ok" ? promoDiscount(baseTotal) : 0;
+  const total = baseTotal - promoOff;
+  const isFree = baseTotal === 0;
+
+  const applyPromo = () => {
+    if (!promoInput.trim()) return;
+    setPromoState(isValidCode(promoInput) ? "ok" : "bad");
+  };
 
   if (items.length === 0) {
     return (
@@ -73,7 +83,7 @@ export default function CheckoutView() {
     const msg = encodeURIComponent(
       `${payments.waEnrollMsg} ${orderName} — ${fmtPrice(total, "en")} (${
         method === "instapay" ? "InstaPay" : "Vodafone Cash"
-      })`
+      })${promoState === "ok" ? ` — promo ${promoInput.trim()} applied` : ""}`
     );
     window.open(
       `https://wa.me/${site.whatsapp}?text=${msg}`,
@@ -147,9 +157,50 @@ export default function CheckoutView() {
                 {compareAt ? (
                   <div className="mt-2 flex justify-between text-sm text-mint">
                     <span>{t.bundle.save}</span>
-                    <span dir="ltr">−{fmtPrice(compareAt - total, lang)}</span>
+                    <span dir="ltr">−{fmtPrice(compareAt - baseTotal, lang)}</span>
                   </div>
                 ) : null}
+
+                {/* promo code */}
+                {!isFree && (
+                  <div className="mt-4">
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={promoInput}
+                        onChange={(e) => {
+                          setPromoInput(e.target.value.toUpperCase());
+                          setPromoState("idle");
+                        }}
+                        placeholder={t.checkout.promoPh}
+                        aria-label={t.checkout.promoLabel}
+                        disabled={promoState === "ok"}
+                        dir="ltr"
+                        className="min-w-0 grow rounded-lg border border-line/15 bg-ink-900 px-3.5 py-2.5 font-mono text-sm tracking-wider text-bone-50 placeholder:text-bone-500/50 focus:border-mint/60 focus:outline-none disabled:opacity-60"
+                      />
+                      <button
+                        type="button"
+                        onClick={applyPromo}
+                        disabled={promoState === "ok"}
+                        className="shrink-0 rounded-lg border border-mint/40 bg-mint/10 px-4 text-xs font-semibold text-mint transition-colors hover:bg-mint/20 disabled:opacity-60"
+                      >
+                        {promoState === "ok" ? "✓" : t.checkout.promoApply}
+                      </button>
+                    </div>
+                    {promoState === "ok" && (
+                      <div className="mt-2 flex justify-between text-sm text-mint">
+                        <span>{t.checkout.promoOff} ✦</span>
+                        <span dir="ltr">−{fmtPrice(promoOff, lang)}</span>
+                      </div>
+                    )}
+                    {promoState === "bad" && (
+                      <p className="mt-2 text-xs text-red-400/90">
+                        {t.checkout.promoInvalid}
+                      </p>
+                    )}
+                  </div>
+                )}
+
                 <div className="mt-3 flex items-baseline justify-between">
                   <span className="text-sm uppercase tracking-ultra text-bone-500">
                     {t.checkout.total}

@@ -9,67 +9,123 @@ import { useLang } from "@/lib/i18n";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-type Check = {
-  key: "lens" | "light" | "comp" | "palette" | "constraints" | "subject";
-  test: RegExp;
-  add: string;
-};
+type TipKey =
+  | "lens"
+  | "light"
+  | "comp"
+  | "palette"
+  | "constraints"
+  | "subject"
+  | "human";
 
 // The director's checklist, encoded. Each check looks for photographic
-// language in the prompt; anything missing gets appended as real direction.
-const CHECKS: Check[] = [
-  {
-    key: "lens",
-    test: /\b\d{2,3}\s?mm\b|lens|focal|wide[- ]angle|telephoto|macro/i,
-    add: "85mm lens",
-  },
-  {
-    key: "light",
-    test: /light|lit\b|shadow|golden hour|window|softbox|backlit|dusk|overcast/i,
-    add: "soft window light from camera left, gentle fill",
-  },
-  {
-    key: "comp",
-    test: /composition|negative space|rule of thirds|close[- ]up|crop|centered|framing|top[- ]down/i,
-    add: "negative space top-right for a headline, rule-of-thirds placement",
-  },
-  {
-    key: "palette",
-    test: /palette|color world|muted|warm|cool tones|amber|pastel|monochrome|grade/i,
-    add: "warm muted amber palette",
-  },
-  {
-    key: "constraints",
-    test: /no text|no logo|without|--no|avoid|clean background|shallow depth/i,
-    add: "shallow depth of field, no text, no logos",
-  },
-  {
-    key: "subject",
-    test: /.{18,}/,
-    add: "",
-  },
+// language; anything missing gets appended as real direction.
+const CHECKS: { key: Exclude<TipKey, "human">; test: RegExp; add: string }[] = [
+  { key: "lens", test: /\b\d{2,3}\s?mm\b|lens|focal|wide[- ]angle|telephoto|macro/i, add: "85mm lens" },
+  { key: "light", test: /light|lit\b|shadow|golden hour|window|softbox|backlit|dusk|overcast/i, add: "soft window light from camera left, gentle fill" },
+  { key: "comp", test: /composition|negative space|rule of thirds|close[- ]up|crop|centered|framing|top[- ]down/i, add: "negative space top-right for a headline, rule-of-thirds placement" },
+  { key: "palette", test: /palette|color world|muted|warm|cool tones|amber|pastel|monochrome|grade/i, add: "warm muted amber palette" },
+  { key: "constraints", test: /no text|no logo|without|--no|avoid|clean background|shallow depth/i, add: "shallow depth of field, no text, no logos" },
 ];
+
+// A person in the prompt means the fixer must ask for casting details first —
+// nationality, age and place stop the model drifting to generic faces.
+const HUMAN_RE =
+  /\b(man|woman|men|women|person|people|model|girl|boy|guy|lady|human|portrait|face|bride|groom|kid|child|male|female)\b|(رجل|امرأة|فتاة|شاب|شابة|طفل|طفلة|موديل|إنسان|إنسانة|بنت|ولد|عروس|عريس|وجه|شخص)/i;
+
+// Best-effort grammar & spelling tidy (client-side): spacing, casing and the
+// misspellings that actually show up in prompts.
+const TYPOS: [RegExp, string][] = [
+  [/\bteh\b/gi, "the"],
+  [/\brecieve\b/gi, "receive"],
+  [/\bseperate\b/gi, "separate"],
+  [/\blense\b/gi, "lens"],
+  [/\bbackround\b/gi, "background"],
+  [/\bbackgorund\b/gi, "background"],
+  [/\bportait\b/gi, "portrait"],
+  [/\bfoto\b/gi, "photo"],
+  [/\bpicutre\b/gi, "picture"],
+  [/\bpcture\b/gi, "picture"],
+  [/\bwich\b/gi, "which"],
+  [/\bwiht\b/gi, "with"],
+  [/\bwoman standing infront\b/gi, "woman standing in front"],
+  [/\binfront\b/gi, "in front"],
+  [/\balot\b/gi, "a lot"],
+];
+
+function tidyGrammar(raw: string): { text: string; changed: boolean } {
+  let text = raw.replace(/\s+/g, " ").trim().replace(/[.\s]+$/, "");
+  const before = text;
+  for (const [re, to] of TYPOS) text = text.replace(re, to);
+  // sentence-case the first letter (latin only; Arabic has no case)
+  text = text.replace(/^[a-z]/, (c) => c.toUpperCase());
+  // collapse duplicated words ("the the")
+  text = text.replace(/\b(\w+)\s+\1\b/gi, "$1");
+  return { text, changed: text !== before };
+}
+
+const wordCount = (s: string) =>
+  s.trim().split(/\s+/).filter(Boolean).length;
 
 export default function PromptFixer() {
   const { t } = useLang();
   const [input, setInput] = useState("");
   const [fixed, setFixed] = useState("");
-  const [missing, setMissing] = useState<Check["key"][]>([]);
+  const [tips, setTips] = useState<TipKey[]>([]);
+  const [grammarFixed, setGrammarFixed] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [ran, setRan] = useState(false);
+  const [stage, setStage] = useState<"idle" | "short" | "askHuman" | "done">("idle");
+  // human casting details
+  const [nat, setNat] = useState("");
+  const [age, setAge] = useState("");
+  const [place, setPlace] = useState("");
+
+  const compose = (cleaned: string, human?: { nat: string; age: string; place: string }) => {
+    const gaps = CHECKS.filter((c) => !c.test.test(cleaned));
+    let core = cleaned;
+    const extraTips: TipKey[] = gaps.map((g) => g.key);
+    if (human) {
+      const casting = [
+        human.nat && `${human.nat}`,
+        human.age && `${human.age}-year-old`,
+      ]
+        .filter(Boolean)
+        .join(" ");
+      core = `${cleaned} — ${casting}${human.place ? `, in ${human.place}` : ""}`;
+      extraTips.unshift("human");
+    }
+    const additions = gaps.map((g) => g.add);
+    setFixed(additions.length ? `${core} — ${additions.join(", ")}` : core);
+    setTips(extraTips);
+    setStage("done");
+    setCopied(false);
+  };
 
   const fix = (e: React.FormEvent) => {
     e.preventDefault();
-    const raw = input.trim().replace(/[.\s]+$/, "");
-    if (!raw) return;
-    const gaps = CHECKS.filter((c) => !c.test.test(raw)).map((c) => c.key);
-    const additions = CHECKS.filter(
-      (c) => gaps.includes(c.key) && c.add
-    ).map((c) => c.add);
-    setMissing(gaps);
-    setFixed(additions.length ? `${raw} — ${additions.join(", ")}` : raw);
-    setRan(true);
-    setCopied(false);
+    const { text: cleaned, changed } = tidyGrammar(input);
+    if (!cleaned) return;
+    setGrammarFixed(changed);
+    // too short to direct — ask for a real description first
+    if (wordCount(cleaned) < 8) {
+      setStage("short");
+      setFixed("");
+      setTips([]);
+      return;
+    }
+    // a person in frame → casting questions before the fix
+    if (HUMAN_RE.test(cleaned) && !(nat && age && place)) {
+      setStage("askHuman");
+      return;
+    }
+    compose(cleaned, HUMAN_RE.test(cleaned) ? { nat, age, place } : undefined);
+  };
+
+  const applyHuman = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!nat.trim() || !age.trim() || !place.trim()) return;
+    const { text: cleaned } = tidyGrammar(input);
+    compose(cleaned, { nat: nat.trim(), age: age.trim(), place: place.trim() });
   };
 
   const copy = () => {
@@ -79,6 +135,9 @@ export default function PromptFixer() {
     setCopied(true);
     setTimeout(() => setCopied(false), 1600);
   };
+
+  const inputCls =
+    "mt-2 w-full rounded-lg border border-line/15 bg-ink-900/70 px-3.5 py-3 text-sm text-bone-50 placeholder:text-bone-500/60 focus:border-mint/60 focus:outline-none";
 
   return (
     <section className="relative overflow-hidden border-t border-line/10 py-20 md:py-28">
@@ -116,16 +175,101 @@ export default function PromptFixer() {
               {t.promptFixer.fixBtn}
             </button>
 
-            <AnimatePresence>
-              {ran && (
+            <AnimatePresence mode="wait">
+              {/* too short — coach, don't guess */}
+              {stage === "short" && (
                 <motion.div
-                  initial={{ opacity: 0, y: 16, height: 0 }}
-                  animate={{ opacity: 1, y: 0, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.5, ease }}
-                  className="overflow-hidden"
+                  key="short"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4, ease }}
+                  className="mt-6 flex items-start gap-3 rounded-2xl border border-electric/30 bg-electric/[0.06] p-5"
                 >
-                  {/* the directed version */}
+                  <span className="text-lg text-electric">✎</span>
+                  <p className="text-sm leading-relaxed text-bone-200">
+                    {t.promptFixer.tooShort}
+                  </p>
+                </motion.div>
+              )}
+
+              {/* person detected — casting questions first */}
+              {stage === "askHuman" && (
+                <motion.div
+                  key="human"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4, ease }}
+                  className="mt-6 rounded-2xl border border-mint/30 bg-mint/[0.05] p-5 md:p-6"
+                >
+                  <p className="font-display text-lg font-semibold text-bone-50">
+                    {t.promptFixer.humanTitle}
+                  </p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-bone-400">
+                    {t.promptFixer.humanNote}
+                  </p>
+                  <div className="mt-4 grid gap-4 sm:grid-cols-3">
+                    <label className="block">
+                      <span className="text-[11px] uppercase tracking-ultra text-bone-500">
+                        {t.promptFixer.natLabel}
+                      </span>
+                      <input
+                        type="text"
+                        value={nat}
+                        onChange={(e) => setNat(e.target.value)}
+                        placeholder={t.promptFixer.natPh}
+                        className={inputCls}
+                        dir="auto"
+                      />
+                    </label>
+                    <label className="block">
+                      <span className="text-[11px] uppercase tracking-ultra text-bone-500">
+                        {t.promptFixer.ageLabel}
+                      </span>
+                      <input
+                        type="text"
+                        value={age}
+                        onChange={(e) => setAge(e.target.value)}
+                        placeholder={t.promptFixer.agePh}
+                        className={inputCls}
+                        dir="ltr"
+                      />
+                    </label>
+                    <label className="block">
+                      <span className="text-[11px] uppercase tracking-ultra text-bone-500">
+                        {t.promptFixer.placeLabel}
+                      </span>
+                      <input
+                        type="text"
+                        value={place}
+                        onChange={(e) => setPlace(e.target.value)}
+                        placeholder={t.promptFixer.placePh}
+                        className={inputCls}
+                        dir="auto"
+                      />
+                    </label>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={applyHuman}
+                    disabled={!nat.trim() || !age.trim() || !place.trim()}
+                    className="btn btn-primary mt-5 px-7 py-3 text-sm disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    {t.promptFixer.humanApply}
+                  </button>
+                </motion.div>
+              )}
+
+              {/* the directed result */}
+              {stage === "done" && (
+                <motion.div
+                  key="done"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5, ease }}
+                >
                   <div className="mt-7 rounded-2xl border border-mint/30 bg-mint/[0.05] p-5">
                     <div className="flex items-center justify-between gap-3">
                       <p className="text-[11px] uppercase tracking-ultra text-mint">
@@ -144,14 +288,23 @@ export default function PromptFixer() {
                     </p>
                   </div>
 
-                  {/* what was missing */}
-                  {missing.filter((k) => k !== "subject" || missing.length === CHECKS.length).length > 0 && (
+                  {(tips.length > 0 || grammarFixed) && (
                     <div className="mt-5">
                       <p className="text-[11px] uppercase tracking-ultra text-bone-500">
                         {t.promptFixer.tipsLabel}
                       </p>
                       <ul className="mt-3 space-y-2.5">
-                        {missing.map((k) => (
+                        {grammarFixed && (
+                          <motion.li
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="flex items-start gap-3 text-sm leading-relaxed text-bone-300"
+                          >
+                            <span className="mt-0.5 text-electric">✓</span>
+                            {t.promptFixer.grammarTip}
+                          </motion.li>
+                        )}
+                        {tips.map((k) => (
                           <motion.li
                             key={k}
                             initial={{ opacity: 0, x: -10 }}
@@ -163,9 +316,6 @@ export default function PromptFixer() {
                             {t.promptFixer.tips[k]}
                           </motion.li>
                         ))}
-                        {missing.length === 0 && (
-                          <li className="text-sm text-mint">✓ {t.promptFixer.upsell}</li>
-                        )}
                       </ul>
                     </div>
                   )}

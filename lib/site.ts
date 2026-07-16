@@ -2,10 +2,10 @@
 export const site = {
   // Platform identity — the academy carries the founder's name.
   name: "Mohamed Tarek",
-  shortName: "Tarek",
+  shortName: "Mohamed Tarek",
   fullName: "Mohamed Tarek — School of Visual Direction",
   title:
-    "Mohamed Tarek — Art Director & Design Academy | Free Adobe Courses + Premium AI Production",
+    "Mohamed Tarek — Art Director & Design Academy | Free Photoshop & Illustrator + Pro Motion & AI Production",
   description:
     "Mohamed Tarek is an art director and designer running an online design academy. His software courses — Photoshop, Illustrator, After Effects, Premiere Pro — are completely free, start to finish. The premium AI production tracks (AI photoshoots and AI video) teach the highest-earning skill in design today. Real projects, quizzes and reviewed final projects.",
   url: "https://mohamed-sr-designer.github.io/atelier-lms",
@@ -43,5 +43,5 @@ export const payments = {
     { id: "valu", label: "valU", enabled: false },
   ],
   waEnrollMsg:
-    "Hi Mohamed — I completed payment for my Tarek enrollment. Screenshot attached. Order:",
+    "Hi Mohamed — I completed payment for my Mohamed Tarek enrollment. Screenshot attached. Order:",
 };

@@ -80,9 +80,9 @@ export default function Preloader() {
                 initial={{ y: "110%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1, ease, delay: 0.1 }}
-                className="block font-display text-[15vw] font-semibold leading-none tracking-tightest text-bone-50 md:text-[8vw]"
+                className="block font-display text-[11vw] font-semibold leading-none tracking-tightest text-bone-50 md:text-[6.5vw]"
               >
-                TAREK
+                MOHAMED TAREK
               </motion.span>
             </span>
             <motion.span
@@ -91,7 +91,7 @@ export default function Preloader() {
               transition={{ delay: 0.5, duration: 0.6 }}
               className="mt-2 font-serif text-lg italic text-mint md:text-2xl"
             >
-              by {site.instructor} · Zero → Professional Workflow
+              Zero → Professional Workflow
             </motion.span>
           </div>
 

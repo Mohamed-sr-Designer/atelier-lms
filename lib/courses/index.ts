@@ -44,7 +44,7 @@ export const bundles: Bundle[] = [
       ar: "التصوير بالذكاء الاصطناعي وهندسة الأوامر + توليد الفيديو بالذكاء الاصطناعي: أخرِج الصور كمصوّر محترف ثم حوّلها إلى إعلانات نهائية يعتمدها العميل. أعلى مهارتين ربحًا نُدرّسهما، أكثر من ست ساعات، ومشروعان نهائيان بمراجعة شخصية.",
     },
     courseSlugs: ["ai-photoshoot", "ai-video-generation"],
-    price: 6000,
+    price: 5700,
     compareAt: 7000, // 3,300 + 3,700
   },
   {
@@ -59,23 +59,23 @@ export const bundles: Bundle[] = [
       ar: "خط الموشن والمونتاج الكامل: حرّك في أفتر إفكتس، واقطع وسلّم في بريمير برو. كل ما يسلّمه المونتير المحترف، مُدرَّس من أعمال حقيقية لعملاء — ومشروعان نهائيان بمراجعة.",
     },
     courseSlugs: ["adobe-after-effects", "adobe-premiere-pro"],
-    price: 4250,
+    price: 3950,
     compareAt: 4850, // 2,800 + 2,050
   },
   {
     slug: "motion-ai-master",
-    title: { en: "The Motion + AI Master Pack", ar: "الحزمة الكبرى: موشن + فيديو AI" },
+    title: { en: "The Motion + AI Master Pack", ar: "الحزمة الكبرى: موشن + ذكاء اصطناعي" },
     tagline: {
-      en: "After Effects + Premiere + AI Video — the full film pipeline.",
-      ar: "أفتر إفكتس + بريمير + فيديو الذكاء الاصطناعي — خط إنتاج الفيلم الكامل.",
+      en: "After Effects + Premiere + AI Photoshoot + AI Video — everything that moves and sells.",
+      ar: "أفتر إفكتس + بريمير + التصوير والفيديو بالذكاء الاصطناعي — كل ما يتحرك ويبيع.",
     },
     desc: {
-      en: "The heaviest pack we sell: animate in After Effects, generate and direct AI footage, and cut it all into finished spots in Premiere Pro. Three courses, three reviewed final projects — the complete modern video skill set.",
-      ar: "أضخم حزمة لدينا: حرّك في أفتر إفكتس، وولّد وأخرِج لقطات الذكاء الاصطناعي، ثم اصنع منها إعلانات نهائية في بريمير برو. ثلاث دورات وثلاثة مشاريع نهائية بمراجعة — عدّة الفيديو الحديثة كاملة.",
+      en: "The everything pack: animate in After Effects, direct AI photoshoots, generate AI footage, and cut it all into finished spots in Premiere Pro. Four courses, four reviewed final projects — the complete modern production skill set.",
+      ar: "حزمة كل شيء: حرّك في أفتر إفكتس، وأخرِج جلسات تصوير بالذكاء الاصطناعي، وولّد لقطات فيديو، ثم اصنع منها إعلانات نهائية في بريمير برو. أربع دورات وأربعة مشاريع نهائية بمراجعة — عدّة الإنتاج الحديثة كاملة.",
     },
-    courseSlugs: ["adobe-after-effects", "adobe-premiere-pro", "ai-video-generation"],
-    price: 6450,
-    compareAt: 8550, // 2,800 + 2,050 + 3,700
+    courseSlugs: ["adobe-after-effects", "adobe-premiere-pro", "ai-photoshoot", "ai-video-generation"],
+    price: 8825,
+    compareAt: 11850, // 2,800 + 2,050 + 3,300 + 3,700
   },
 ];
 

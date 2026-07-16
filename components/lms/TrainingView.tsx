@@ -39,7 +39,7 @@ export default function TrainingView() {
 
   const submitProgram = (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`[Tarek — Team Program] ${agency}`);
+    const subject = encodeURIComponent(`[Mohamed Tarek — Team Program] ${agency}`);
     const body = encodeURIComponent(
       [
         `Company / agency: ${agency}`,
