@@ -103,7 +103,7 @@ const en = {
   },
 
   offer: {
-    text: "Launch offer — the AI Production Stack for EGP 5,700 instead of 7,000",
+    text: "Launch offer — the AI Production Stack for EGP 3,950 instead of 5,000",
     ends: "Offer ends in",
     cta: "Grab it",
     days: "d",
@@ -192,7 +192,7 @@ const en = {
     econTitleB: ", not one course.",
     econ: [
       { n: "8,000+", u: "EGP", l: "what one freelance motion, edit or AI brief pays — routinely more" },
-      { n: "2,050", u: "EGP", l: "the complete Premiere Pro course — once, forever" },
+      { n: "1,050", u: "EGP", l: "the complete Premiere Pro course — once, forever" },
       { n: "brief #1", u: "", l: "pays the course back. Everything after that is profit." },
     ],
     storyLabel: "Featured story",
@@ -267,6 +267,17 @@ const en = {
     finalSub: "Start Photoshop Mastery right now — the complete course, final project included. No card, no trial, no catch.",
     finalCta: "Start free now ✦",
     finalAlt: "or browse all courses",
+
+    // -- market-rate anchor: what ONE freelance job pays -------------------
+    marketLabel: "For scale — what one freelance job pays in the market",
+    marketItems: [
+      { job: "Logo / identity design", rate: "EGP 2,000–6,000" },
+      { job: "Product photoshoot", rate: "EGP 5,000–15,000" },
+      { job: "Video edit", rate: "EGP 2,500–8,000" },
+      { job: "Motion graphics spot", rate: "EGP 4,000–12,000" },
+    ],
+    marketPunch:
+      "Every course here costs less than the smallest number on this list. One job in, you're already ahead.",
 
     // -- "why here, not anyone else" comparison ---------------------------
     whyMeLabel: "The difference",
@@ -617,8 +628,8 @@ const en = {
     items: [
       { q: "How do courses work at Mohamed Tarek?", a: "Every course is 3–5 hours of focused video organized into modules, with drills, real projects, downloadable working files, checkpoint quizzes and a final project. Finish everything and you walk out with a reviewed portfolio piece — the thing that actually gets you hired." },
       { q: "Why are the courses so short?", a: "Because they're edited like films. Ten-hour courses are ten hours because nobody cut them. Mohamed Tarek courses keep only the minutes that change how you work — the rest of your time goes into practice, which is where skill actually forms." },
-      { q: "How do I pay from Egypt?", a: "InstaPay or Vodafone Cash: transfer, send the screenshot on WhatsApp, and your access is activated personally — usually within minutes. Card gateways (Paymob, Fawry, valU) are arriving soon." },
-      { q: "Which courses are free, and how are the rest priced?", a: "Photoshop and Illustrator — the two foundations — are completely free, forever: full courses with projects, quizzes and reviewed final projects. After Effects (EGP 2,800), Premiere Pro (EGP 2,050) and the two AI tracks (EGP 3,300 and 3,700) are paid — each a symbolic fraction of what a single freelance motion, edit or AI brief pays. The goal is that your first paid job covers the course several times over." },
+      { q: "How do I pay?", a: "Visa or Mastercard at checkout. Pay, screenshot the confirmation on WhatsApp if anything looks off, and your access is activated personally — usually within minutes." },
+      { q: "Which courses are free, and how are the rest priced?", a: "Photoshop and Illustrator — the two foundations — are completely free, forever: full courses with projects, quizzes and reviewed final projects. After Effects (EGP 1,800), Premiere Pro (EGP 1,050) and the two AI tracks (EGP 2,300 and 2,700) are paid — each a fraction of what a single freelance motion, edit or AI brief pays in the market. The goal is that your first paid job covers the course several times over." },
       { q: "Do I get lifetime access?", a: "Yes. One payment, permanent access, all future updates to that course included." },
       { q: "What if the course isn't for me?", a: "7-day money-back guarantee. One WhatsApp message, no forms, no questions that matter." },
       { q: "Do I get something to show employers?", a: "Something better than a paper credential: finished, personally-reviewed portfolio projects from every course. Employers and clients hire from work, not certificates — this school is built around that truth." },
@@ -910,7 +921,7 @@ const ar: typeof en = {
   },
 
   offer: {
-    text: "عرض الإطلاق — حزمة إنتاج الذكاء الاصطناعي بـ 5,700 ج.م بدلًا من 7,000",
+    text: "عرض الإطلاق — حزمة إنتاج الذكاء الاصطناعي بـ 3,950 ج.م بدلًا من 5,000",
     ends: "ينتهي العرض خلال",
     cta: "احصل عليه",
     days: "ي",
@@ -999,7 +1010,7 @@ const ar: typeof en = {
     econTitleB: "، لا دورة واحدة.",
     econ: [
       { n: "+8,000", u: "ج.م", l: "ما يدفعه مشروع موشن أو مونتاج أو ذكاء اصطناعي واحد — وغالبًا أكثر" },
-      { n: "2,050", u: "ج.م", l: "دورة بريمير برو الكاملة — مرة واحدة، للأبد" },
+      { n: "1,050", u: "ج.م", l: "دورة بريمير برو الكاملة — مرة واحدة، للأبد" },
       { n: "مشروعك الأول", u: "", l: "يسدّد ثمن الدورة. وكل ما بعده ربح صافٍ." },
     ],
     storyLabel: "قصة مميزة",
@@ -1074,6 +1085,16 @@ const ar: typeof en = {
     finalSub: "ابدأ إتقان فوتوشوب الآن — الدورة كاملة بمشروعها النهائي. بلا بطاقة، بلا فترة تجربة، بلا شروط.",
     finalCta: "ابدأ مجانًا الآن ✦",
     finalAlt: "أو تصفّح كل الدورات",
+
+    // -- مرساة السوق: ما يدفعه مشروع فريلانس واحد ----------------------------
+    marketLabel: "للمقارنة — ما يدفعه السوق في مشروع فريلانس واحد",
+    marketItems: [
+      { job: "تصميم شعار / هوية", rate: "2,000–6,000 ج.م" },
+      { job: "جلسة تصوير منتجات", rate: "5,000–15,000 ج.م" },
+      { job: "مونتاج فيديو", rate: "2,500–8,000 ج.م" },
+      { job: "إعلان موشن جرافيك", rate: "4,000–12,000 ج.م" },
+    ],
+    marketPunch: "كل دورة هنا تكلف أقل من أصغر رقم في هذه القائمة. مشروع واحد وأنت كسبان.",
 
     // -- "لماذا هنا وليس أي مكان آخر" ---------------------------------------
     whyMeLabel: "الفرق",
@@ -1423,8 +1444,8 @@ const ar: typeof en = {
     items: [
       { q: "كيف تعمل الدورات هنا؟", a: "كل دورة من 3 إلى 5 ساعات فيديو مركّز منظم في وحدات، مع تدريبات ومشاريع حقيقية وملفات عمل قابلة للتنزيل واختبارات نقاط تفتيش ومشروع نهائي. أكمل كل شيء وستخرج بعمل بورتفوليو مُراجَع — الشيء الذي يوظّفك فعلًا." },
       { q: "لماذا الدورات قصيرة هكذا؟", a: "لأنها تُمنتَج كالأفلام. دورات العشر ساعات طولها عشر ساعات لأن أحدًا لم يقصّها. دوراتنا تُبقي فقط الدقائق التي تغيّر طريقة عملك — وبقية وقتك يذهب للتمرين، حيث تتكوّن المهارة فعلًا." },
-      { q: "كيف أدفع من مصر؟", a: "إنستا باي أو فودافون كاش: حوّل، أرسل اللقطة على واتساب، ويُفعَّل وصولك شخصيًا — عادة خلال دقائق. بوابات البطاقات (باي موب، فوري، فاليو) قادمة قريبًا." },
-      { q: "أي الدورات مجانية، وكيف تُسعَّر البقية؟", a: "فوتوشوب وإليستريتور — الأساسان — مجانيتان تمامًا وللأبد: دورات كاملة بمشاريع واختبارات ومشاريع نهائية بمراجعة. أفتر إفكتس (2,800 ج.م) وبريمير برو (2,050 ج.م) ومسارا الذكاء الاصطناعي (3,300 و3,700 ج.م) مدفوعة — كل منها جزء رمزي مما يدفعه مشروع موشن أو مونتاج أو ذكاء اصطناعي واحد. الهدف أن يغطي أول عمل مدفوع لك ثمن الدورة عدة مرات." },
+      { q: "كيف أدفع؟", a: "فيزا أو ماستركارد عند الدفع. ادفع، وإن بدا أي شيء غير واضح أرسل لقطة التأكيد على واتساب، ويُفعَّل وصولك شخصيًا — عادة خلال دقائق." },
+      { q: "أي الدورات مجانية، وكيف تُسعَّر البقية؟", a: "فوتوشوب وإليستريتور — الأساسان — مجانيتان تمامًا وللأبد: دورات كاملة بمشاريع واختبارات ومشاريع نهائية بمراجعة. أفتر إفكتس (1,800 ج.م) وبريمير برو (1,050 ج.م) ومسارا الذكاء الاصطناعي (2,300 و2,700 ج.م) مدفوعة — كل منها جزء بسيط مما يدفعه السوق في مشروع موشن أو مونتاج أو ذكاء اصطناعي واحد. الهدف أن يغطي أول عمل مدفوع لك ثمن الدورة عدة مرات." },
       { q: "هل أحصل على وصول مدى الحياة؟", a: "نعم. دفعة واحدة، وصول دائم، وكل تحديثات تلك الدورة مشمولة." },
       { q: "ماذا لو لم تناسبني الدورة؟", a: "ضمان استرداد خلال 7 أيام. رسالة واتساب واحدة، بلا نماذج، بلا أسئلة تُذكر." },
       { q: "هل أحصل على ما أعرضه لأصحاب العمل؟", a: "ما هو أفضل من شهادة ورقية: مشاريع بورتفوليو مكتملة ومُراجَعة شخصيًا من كل دورة. أصحاب العمل والعملاء يوظّفون من الأعمال لا الشهادات — وهذه المدرسة مبنية على هذه الحقيقة." },

@@ -137,7 +137,7 @@ export const photoshop: Course = {
   ],
   reviews: [
     { name: "نور السيد", role: "ديزاينر سوشيال ميديا — القاهرة", text: "بصراحة كنت فاكر نفسي عارف فوتوشوب، من أول درس الماسكات اكتشفت اني كنت شغال غلط ٣ سنين. وده كله ببلاش؟ لسه مش مصدقة.", stars: 5 },
-    { name: "Omar Farouk", role: "Freelance retoucher", text: "I take many courses before but this one is different. He show you the why, not only the how. My cutouts look clean now and my client noticed.", stars: 5 },
+    { name: "Omar Farouk", role: "Freelance retoucher", text: "I take many courses before but this one is different. He show you the why, not only the how. My cutouts look clean now and my client noticed.", stars: 4.5 },
     { name: "Sara M.", role: "Marketing designer", text: "el course da free?? msh ma32oul. el masking module bas yestahel floos. kont 3amla cutouts shaklaha stickers, delwa2ty clean awy", stars: 5 },
   ],
   rating: 4.9,
@@ -272,9 +272,9 @@ export const illustrator: Course = {
     { q: "Does it cover AI features?", a: "Where they help real workflows, yes — but the core is the vector craft that AI tools still can't replace: construction, correction and taste." },
   ],
   reviews: [
-    { name: "يوسف عادل", role: "جونيور ديزاينر — إسكندرية", text: "درس الجريد غيّر نظرتي لأي لوجو في الشارع. أول مرة أفهم \"ليه\" مش بس \"إزاي\". محدش شرحهالي كده قبل كده.", stars: 5 },
+    { name: "يوسف عادل", role: "جونيور ديزاينر — إسكندرية", text: "درس الجريد غيّر نظرتي لأي لوجو في الشارع. أول مرة أفهم \"ليه\" مش بس \"إزاي\". محدش شرحهالي كده قبل كده.", stars: 4 },
     { name: "Mariam Hassan", role: "Freelancer", text: "I sell my first logo 3 weeks after I finish the course. The brand sheet template make me look more senior than I am, haha. Thank you!", stars: 5 },
-    { name: "عبدالله القحطاني", role: "مصمم مبتدئ — الرياض", text: "ما توقعت مستوى الشرح كذا والله. رسمت أول شعار لي وعميلي وافق من أول مرة. يستاهل كل ريال — ترى وهو مجاني بعد 😂", stars: 5 },
+    { name: "عبدالله القحطاني", role: "مصمم مبتدئ — الرياض", text: "ما توقعت مستوى الشرح كذا والله. رسمت أول شعار لي وعميلي وافق من أول مرة. يستاهل كل ريال — ترى وهو مجاني بعد 😂", stars: 4.5 },
   ],
   rating: 4.8,
   ratingCount: 92,

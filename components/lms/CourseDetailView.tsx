@@ -559,14 +559,18 @@ export default function CourseDetailView({ course: courseStatic }: { course: Cou
               key={r.name}
               className="flex h-full flex-col rounded-xl border border-line/10 bg-ink-800/60 p-7"
             >
-              <p className="text-electric" aria-label={`${r.stars} stars`}>
-                {"★".repeat(r.stars)}
-                <span className="text-bone-500/40">{"★".repeat(5 - r.stars)}</span>
+              <p className="text-electric" aria-label={`${r.stars} stars`} dir="ltr">
+                {"★".repeat(Math.floor(r.stars))}
+                {r.stars % 1 !== 0 && <span className="text-sm align-middle">½</span>}
+                <span className="text-bone-500/40">
+                  {"★".repeat(5 - Math.ceil(r.stars))}
+                </span>
               </p>
-              <blockquote className="mt-4 grow text-sm leading-relaxed text-bone-200">
+              {/* dir=auto: Arabic reviews read RTL, English/Franco LTR */}
+              <blockquote dir="auto" className="mt-4 grow text-sm leading-relaxed text-bone-200">
                 “{r.text}”
               </blockquote>
-              <footer className="mt-5 border-t border-line/10 pt-4 text-xs">
+              <footer className="mt-5 border-t border-line/10 pt-4 text-xs" dir="auto">
                 <p className="text-bone-50">{r.name}</p>
                 <p className="mt-0.5 text-bone-500">{r.role}</p>
               </footer>

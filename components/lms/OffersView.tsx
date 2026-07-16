@@ -257,6 +257,29 @@ export default function OffersView() {
                 </tbody>
               </table>
             </div>
+            {/* market anchor under the table — same rates strip as home */}
+            <div className="glass mt-10 rounded-3xl p-6 md:p-8">
+              <p className="text-[11px] uppercase tracking-ultra text-bone-500">
+                {t.home.marketLabel}
+              </p>
+              <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {t.home.marketItems.map((m) => (
+                  <div
+                    key={m.job}
+                    className="rounded-xl border border-line/10 bg-ink-900/50 px-4 py-3.5"
+                  >
+                    <p className="text-xs text-bone-400">{m.job}</p>
+                    <p className="mt-1 font-display text-lg font-semibold text-bone-50" dir="ltr">
+                      {m.rate}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-5 font-serif text-sm italic text-mint md:text-base">
+                {t.home.marketPunch}
+              </p>
+            </div>
+
             <p className="mt-6 text-center text-xs text-bone-500">
               {t.offersPage.codeNote}
             </p>
