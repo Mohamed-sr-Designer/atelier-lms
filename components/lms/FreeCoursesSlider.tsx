@@ -7,6 +7,8 @@ import type { Course } from "@/lib/courses";
 // Horizontal course slider — a scroll-snap track with prev/next arrows and
 // page dots. Steps are measured per CARD (width + gap), so the dots and both
 // arrows stay honest even when only a fraction of a viewport is scrollable.
+// RTL: Chrome reports scrollLeft as 0 → -max there, so all the page math
+// runs on |scrollLeft| and programmatic scrolls flip their sign.
 export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const raf = useRef(0);
@@ -19,6 +21,8 @@ export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
     const gap = parseFloat(getComputedStyle(el).columnGap || "24") || 24;
     return first ? first.offsetWidth + gap : el.clientWidth;
   };
+  const dirSign = (el: HTMLDivElement) =>
+    getComputedStyle(el).direction === "rtl" ? -1 : 1;
 
   const sync = useCallback(() => {
     const el = trackRef.current;
@@ -27,7 +31,7 @@ export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
     const maxScroll = el.scrollWidth - el.clientWidth;
     const count = maxScroll <= 1 ? 1 : Math.max(1, Math.round(maxScroll / step) + 1);
     setPages(count);
-    setPage(Math.min(count - 1, Math.round(el.scrollLeft / step)));
+    setPage(Math.min(count - 1, Math.round(Math.abs(el.scrollLeft) / step)));
   }, []);
 
   useEffect(() => {
@@ -39,7 +43,7 @@ export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
       raf.current = requestAnimationFrame(() => {
         raf.current = 0;
         const step = stepOf(el);
-        setPage(Math.round(el.scrollLeft / step));
+        setPage(Math.round(Math.abs(el.scrollLeft) / step));
       });
     };
     el.addEventListener("scroll", onScroll, { passive: true });
@@ -54,12 +58,12 @@ export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
   const go = (dir: 1 | -1) => {
     const el = trackRef.current;
     if (!el) return;
-    el.scrollBy({ left: dir * stepOf(el), behavior: "smooth" });
+    el.scrollBy({ left: dir * stepOf(el) * dirSign(el), behavior: "smooth" });
   };
   const toPage = (i: number) => {
     const el = trackRef.current;
     if (!el) return;
-    el.scrollTo({ left: i * stepOf(el), behavior: "smooth" });
+    el.scrollTo({ left: i * stepOf(el) * dirSign(el), behavior: "smooth" });
   };
 
   const atStart = page <= 0;
@@ -96,7 +100,8 @@ export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
           disabled={atStart}
           className={arrowBase}
         >
-          ←
+          {/* mirrored in RTL: "back" points toward the start edge */}
+          <span className="inline-block rtl:-scale-x-100">←</span>
         </button>
         <div className="flex items-center gap-2">
           {Array.from({ length: pages }).map((_, i) => (
@@ -121,7 +126,7 @@ export default function FreeCoursesSlider({ courses }: { courses: Course[] }) {
           disabled={atEnd}
           className={arrowBase}
         >
-          →
+          <span className="inline-block rtl:-scale-x-100">→</span>
         </button>
       </div>
     </div>

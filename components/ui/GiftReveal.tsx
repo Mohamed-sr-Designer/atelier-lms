@@ -37,9 +37,9 @@ export default function GiftReveal({
   const unwrap = () => {
     if (open) return;
     setOpen(true);
-    // unmount after the out-choreography finishes — deterministic, no
-    // AnimatePresence to get stuck
-    setTimeout(() => setGone(true), 800);
+    // unmount after the fade finishes — deterministic, no AnimatePresence
+    // to get stuck
+    setTimeout(() => setGone(true), 650);
   };
 
   return (
@@ -61,8 +61,9 @@ export default function GiftReveal({
           type="button"
           onClick={unwrap}
           aria-label={hint}
-          animate={open ? { opacity: 0 } : { opacity: 1 }}
-          transition={{ duration: 0.55, ease, delay: open ? 0.15 : 0 }}
+          // one simple move: the whole wrap fades up and out as a single unit
+          animate={open ? { opacity: 0, scale: 1.02 } : { opacity: 1, scale: 1 }}
+          transition={{ duration: 0.55, ease }}
           className={`group absolute inset-0 z-20 overflow-hidden rounded-3xl ${
             open ? "pointer-events-none" : "cursor-pointer"
           }`}
@@ -83,10 +84,8 @@ export default function GiftReveal({
           <span aria-hidden className="bg-noise absolute inset-0 rounded-3xl opacity-[0.05]" />
 
           {/* satin ribbons — vertical + horizontal, travelling sheen */}
-          <motion.span
+          <span
             aria-hidden
-            animate={open ? { y: "-115%" } : { y: "0%" }}
-            transition={{ duration: 0.6, ease }}
             className="absolute inset-y-0 left-1/2 w-14 -translate-x-1/2 overflow-hidden"
           >
             <span className="absolute inset-0 [background:linear-gradient(180deg,rgb(var(--mint)/0.9),rgb(var(--electric)/0.9))] shadow-[0_0_50px_rgb(var(--mint)/0.45)]" />
@@ -96,11 +95,9 @@ export default function GiftReveal({
               animate={{ top: ["-15%", "115%"] }}
               transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
             />
-          </motion.span>
-          <motion.span
+          </span>
+          <span
             aria-hidden
-            animate={open ? { x: "115%" } : { x: "0%" }}
-            transition={{ duration: 0.6, ease }}
             className="absolute inset-x-0 top-1/2 h-14 -translate-y-1/2 overflow-hidden"
           >
             <span className="absolute inset-0 [background:linear-gradient(90deg,rgb(var(--electric)/0.9),rgb(var(--mint)/0.9))] shadow-[0_0_50px_rgb(var(--electric)/0.4)]" />
@@ -110,17 +107,15 @@ export default function GiftReveal({
               animate={{ left: ["-15%", "115%"] }}
               transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
             />
-          </motion.span>
+          </span>
 
           {/* rotating conic seal with serif monogram */}
-          <motion.span
+          <span
             aria-hidden
-            animate={open ? { scale: 0, rotate: 45 } : { scale: 1, rotate: 0 }}
-            transition={{ duration: 0.45, ease }}
             className="absolute left-1/2 top-1/2 grid -translate-x-1/2 -translate-y-1/2 place-items-center"
           >
             <motion.span
-              className="absolute h-32 w-32 rounded-full opacity-80"
+              className="absolute h-28 w-28 rounded-full opacity-80"
               style={{
                 background:
                   "conic-gradient(from 0deg, rgb(var(--mint)), rgb(var(--electric)), transparent 55%, rgb(var(--mint)))",
@@ -131,17 +126,17 @@ export default function GiftReveal({
               animate={{ rotate: 360 }}
               transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
             />
-            <span className="glass-strong grid h-24 w-24 place-items-center rounded-full transition-transform duration-500 group-hover:scale-110">
-              <span className="flex flex-col items-center">
-                <span className="text-grad font-serif text-3xl font-semibold italic leading-none">
+            <span className="glass-strong grid h-[5.25rem] w-[5.25rem] place-items-center rounded-full transition-transform duration-500 group-hover:scale-110">
+              <span className="flex flex-col items-center gap-1">
+                <span className="text-grad font-serif text-2xl font-semibold italic leading-none">
                   MT
                 </span>
-                <span className="mt-1 text-[9px] uppercase tracking-[0.3em] text-bone-400">
+                <span className="text-[8px] uppercase tracking-[0.28em] text-bone-400">
                   ✦ gift ✦
                 </span>
               </span>
             </span>
-          </motion.span>
+          </span>
 
           {/* drifting sparkles — desktop only, six looping tweens is phone tax */}
           {SPARKS.map((s, i) => (
@@ -159,13 +154,15 @@ export default function GiftReveal({
 
           {/* elegant tag — stacks into two centered lines on small screens */}
           <motion.span
-            className="glass absolute bottom-7 left-1/2 flex w-max max-w-[88%] -translate-x-1/2 flex-col items-center gap-0.5 rounded-3xl px-5 py-2.5 text-center md:max-w-none md:flex-row md:gap-0 md:whitespace-nowrap md:rounded-full md:px-6 md:py-3"
+            className="glass absolute bottom-7 left-1/2 flex w-max max-w-[88%] -translate-x-1/2 flex-col items-center gap-1 rounded-3xl px-7 py-3 text-center md:max-w-none md:flex-row md:gap-3 md:whitespace-nowrap md:rounded-full md:py-3.5"
             animate={{ y: [0, -4, 0] }}
             transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
           >
-            <span className="font-serif text-sm italic text-bone-100">{tag}</span>
-            <span className="mx-2 hidden text-bone-500 md:inline">—</span>
-            <span className="text-xs font-semibold uppercase tracking-widest text-mint">
+            <span className="font-serif text-[15px] italic leading-snug text-bone-100">
+              {tag}
+            </span>
+            <span className="hidden text-bone-500 md:inline">—</span>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-mint">
               {hint}
             </span>
           </motion.span>

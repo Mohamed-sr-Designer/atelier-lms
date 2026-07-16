@@ -233,7 +233,9 @@ export default function PromoPopup() {
                     rotate: depth === 0 ? 0 : depth === 1 ? -2.5 : 2.5,
                     zIndex: 30 - depth,
                   }}
-                  transition={{ type: "spring", stiffness: 260, damping: 24 }}
+                  // gentle spring — the shuffle should read as a card being
+                  // dealt, not a snap
+                  transition={{ type: "spring", stiffness: 105, damping: 17 }}
                   className={`glass-strong overflow-hidden rounded-3xl ${
                     isTop ? "relative" : "absolute inset-x-0 top-[18px]"
                   }`}
