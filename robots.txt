@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://mohamed-sr-designer.github.io/atelier-lms/sitemap.xml
