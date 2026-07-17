@@ -268,16 +268,29 @@ const en = {
     finalCta: "Start free now ✦",
     finalAlt: "or browse all courses",
 
-    // -- market-rate anchor: what ONE freelance job pays -------------------
-    marketLabel: "For scale — what one freelance job pays in the market",
-    marketItems: [
-      { job: "Logo / identity design", rate: "EGP 2,000–6,000" },
-      { job: "Product photoshoot", rate: "EGP 5,000–15,000" },
-      { job: "Video edit", rate: "EGP 2,500–8,000" },
-      { job: "Motion graphics spot", rate: "EGP 4,000–12,000" },
+    // -- why take this at all — outcomes first, right after the hero -------
+    rtbLabel: "What you get out of it",
+    rtbTitleA: "Not lessons.",
+    rtbTitleI: "A skill",
+    rtbTitleB: " that pays.",
+    rtbItems: [
+      {
+        t: "Skills clients pay for",
+        d: "The exact software and AI pipeline agencies bill every day — taught from real briefs, not theory.",
+      },
+      {
+        t: "A portfolio piece per course",
+        d: "Every course ends in a real project I review personally. That finished piece is what gets you hired — not a certificate.",
+      },
+      {
+        t: "Earn it back on job #1",
+        d: "Each paid course costs less than one freelance brief pays. Finish the course, take one job, you're already in profit.",
+      },
+      {
+        t: "Judge it free first",
+        d: "Photoshop and Illustrator are complete and free — no card, no trial. Watch how I teach, then decide if the paid tracks deserve you.",
+      },
     ],
-    marketPunch:
-      "Every course here costs less than the smallest number on this list. One job in, you're already ahead.",
 
     // -- "why here, not anyone else" comparison ---------------------------
     whyMeLabel: "The difference",
@@ -352,7 +365,7 @@ const en = {
     filterAi: "AI Production",
     bundleCard: "The AI Production Stack",
     bundleCardSub: "AI Photoshoot + AI Video — one enrollment, one pipeline",
-    empty: "No courses in this filter yet.",
+    empty: "No courses match this filter. Clear it or try a different search.",
     searchPh: "Search courses, tools, skills…",
     filterFree: "Free",
     filterPremium: "Premium",
@@ -463,7 +476,7 @@ const en = {
     promoPh: "MT-XXXX",
     promoApply: "Apply",
     promoApplied: "Code applied ✓",
-    promoInvalid: "That code isn't valid for this browser.",
+    promoInvalid: "That code isn't valid here — codes are personal, one per browser. Scratch yours in the gift popup.",
     promoOff: "Promo discount",
     confirmBtn: "I've paid — confirm on WhatsApp ✦",
     freeBtn: "Enroll free — instant access ✦",
@@ -1086,15 +1099,29 @@ const ar: typeof en = {
     finalCta: "ابدأ مجانًا الآن ✦",
     finalAlt: "أو تصفّح كل الدورات",
 
-    // -- مرساة السوق: ما يدفعه مشروع فريلانس واحد ----------------------------
-    marketLabel: "للمقارنة — ما يدفعه السوق في مشروع فريلانس واحد",
-    marketItems: [
-      { job: "تصميم شعار / هوية", rate: "2,000–6,000 ج.م" },
-      { job: "جلسة تصوير منتجات", rate: "5,000–15,000 ج.م" },
-      { job: "مونتاج فيديو", rate: "2,500–8,000 ج.م" },
-      { job: "إعلان موشن جرافيك", rate: "4,000–12,000 ج.م" },
+    // -- لماذا تأخذ الدورة أصلًا — النتائج أولًا بعد البانر مباشرة -----------
+    rtbLabel: "ما الذي ستخرج به",
+    rtbTitleA: "ليست دروسًا.",
+    rtbTitleI: "مهارة",
+    rtbTitleB: " تُدفع مقابلها.",
+    rtbItems: [
+      {
+        t: "مهارات يدفع العملاء مقابلها",
+        d: "نفس البرامج وخط إنتاج الذكاء الاصطناعي الذي تفوتر به الوكالات كل يوم — تدريس من مشاريع حقيقية، لا نظريات.",
+      },
+      {
+        t: "قطعة بورتفوليو من كل دورة",
+        d: "كل دورة تنتهي بمشروع حقيقي أراجعه بنفسي. هذه القطعة المكتملة هي ما يوظّفك — لا الشهادة.",
+      },
+      {
+        t: "استرد ثمنها من أول عمل",
+        d: "كل دورة مدفوعة تكلف أقل مما يدفعه مشروع فريلانس واحد. أنهِ الدورة، خذ عملًا واحدًا، وأنت رابح بالفعل.",
+      },
+      {
+        t: "احكم بنفسك مجانًا أولًا",
+        d: "فوتوشوب وإليستريتور كاملتان ومجانيتان — بلا بطاقة ولا فترة تجربة. شاهد طريقة التدريس، ثم قرر إن كانت المسارات المدفوعة تستحقك.",
+      },
     ],
-    marketPunch: "كل دورة هنا تكلف أقل من أصغر رقم في هذه القائمة. مشروع واحد وأنت كسبان.",
 
     // -- "لماذا هنا وليس أي مكان آخر" ---------------------------------------
     whyMeLabel: "الفرق",
@@ -1168,7 +1195,7 @@ const ar: typeof en = {
     filterAi: "إنتاج الذكاء الاصطناعي",
     bundleCard: "حزمة إنتاج الذكاء الاصطناعي",
     bundleCardSub: "التصوير + الفيديو بالذكاء الاصطناعي — اشتراك واحد، خط إنتاج واحد",
-    empty: "لا توجد دورات بهذا التصفية بعد.",
+    empty: "لا توجد دورات تطابق هذه التصفية. امسحها أو جرّب بحثًا مختلفًا.",
     searchPh: "ابحث عن دورة أو أداة أو مهارة…",
     filterFree: "مجاني",
     filterPremium: "مدفوع",
@@ -1279,7 +1306,7 @@ const ar: typeof en = {
     promoPh: "MT-XXXX",
     promoApply: "تطبيق",
     promoApplied: "تم تطبيق الكود ✓",
-    promoInvalid: "هذا الكود غير صالح لهذا المتصفح.",
+    promoInvalid: "هذا الكود غير صالح هنا — الأكواد شخصية، واحد لكل متصفح. اكشط كودك من نافذة الهدية.",
     promoOff: "خصم الكود",
     confirmBtn: "دفعت — أكّد عبر واتساب ✦",
     freeBtn: "اشترك مجانًا — وصول فوري ✦",

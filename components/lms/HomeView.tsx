@@ -315,10 +315,227 @@ export default function HomeView() {
         </div>
       </section>
 
+      {/* ================================= WHY BOTHER — outcomes first ======== */}
+      <section className="container-edge mx-auto max-w-edge py-20 md:py-28">
+        <Reveal>
+          <SectionLabel index="01">{t.home.rtbLabel}</SectionLabel>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h2 className="mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.0] tracking-tightest text-bone-50 md:text-6xl">
+            {t.home.rtbTitleA}{" "}
+            <span className="text-grad font-serif font-normal italic tracking-normal">
+              {t.home.rtbTitleI}
+            </span>
+            {t.home.rtbTitleB}
+          </h2>
+        </Reveal>
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {t.home.rtbItems.map((b, i) => (
+            <motion.div
+              key={b.t}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+              transition={{ duration: 0.6, ease, delay: i * 0.08 }}
+              className="glass glass-sheen flex flex-col rounded-2xl p-6"
+            >
+              <span className="font-display text-sm font-semibold text-mint" dir="ltr">
+                0{i + 1}
+              </span>
+              <p className="mt-3 font-display text-lg font-semibold leading-snug text-bone-50">
+                {b.t}
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-bone-400">{b.d}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ============================== WHY HERE — the honest comparison ====== */}
+      <section className="relative overflow-hidden">
+        <div className="container-edge mx-auto max-w-edge py-20 md:py-28">
+          <Reveal>
+            <SectionLabel index="02">{t.home.whyMeLabel}</SectionLabel>
+          </Reveal>
+          <div className="mt-6 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <Reveal delay={0.05}>
+              <h2 className="max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
+                {t.home.whyMeTitleA}{" "}
+                <span className="text-grad font-serif font-normal italic tracking-normal">
+                  {t.home.whyMeTitleI}
+                </span>
+                {t.home.whyMeTitleB}
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="max-w-sm text-sm leading-relaxed text-bone-400">
+                {t.home.whyMeSub}
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="mt-14 grid gap-6 lg:grid-cols-2">
+            {/* the market */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+              transition={{ duration: 0.6, ease }}
+              className="rounded-3xl border border-line/10 bg-ink-800/30 p-7 md:p-9"
+            >
+              <p className="text-[11px] uppercase tracking-ultra text-bone-500">
+                {t.home.themCol}
+              </p>
+              <ul className="mt-6 space-y-4">
+                {t.home.whyMeRows.map((row) => (
+                  <li
+                    key={row.them}
+                    className="flex items-start gap-3 text-sm leading-relaxed text-bone-500"
+                  >
+                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-line/10 text-[10px] text-bone-500">
+                      ✕
+                    </span>
+                    {row.them}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* here */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+              transition={{ duration: 0.6, ease, delay: 0.12 }}
+              className="glass-sheen relative overflow-hidden rounded-3xl border border-mint/30 bg-ink-800/70 p-7 shadow-[0_30px_90px_-40px_rgb(var(--mint)/0.35)] md:p-9"
+            >
+              <p className="text-[11px] uppercase tracking-ultra text-mint">
+                {t.home.meCol}
+              </p>
+              <ul className="mt-6 space-y-4">
+                {t.home.whyMeRows.map((row) => (
+                  <li
+                    key={row.me}
+                    className="flex items-start gap-3 text-sm leading-relaxed text-bone-100"
+                  >
+                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-mint/15 text-[10px] font-bold text-mint">
+                      ✓
+                    </span>
+                    {row.me}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-line/10 pt-6">
+                <Link href="/courses/" className="btn btn-primary px-6 py-3.5 text-sm">
+                  {t.home.whyMeCta}
+                </Link>
+                <p className="font-serif text-sm italic text-bone-400">
+                  {t.home.whyMeNote}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================= INSTRUCTOR ============= */}
+      <section className="border-y border-line/10 bg-ink-800/40">
+        <div className="container-edge mx-auto grid max-w-edge items-center gap-12 py-20 md:py-28 lg:grid-cols-12">
+          <div className="lg:col-span-8">
+            <Reveal>
+              <SectionLabel index="03">{t.home.instructorLabel}</SectionLabel>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h2 className="mt-6 text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
+                {t.home.instructorTitleA}{" "}
+                <span className="text-grad font-serif font-normal italic tracking-normal">
+                  {t.home.instructorTitleI}
+                </span>
+                {t.home.instructorTitleB}
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-bone-400 md:text-lg">
+                {t.home.instructorBio}
+              </p>
+            </Reveal>
+            <Reveal delay={0.14}>
+              <p className="mt-8 text-[11px] uppercase tracking-ultra text-bone-500">
+                {t.home.instructorChipsLabel}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {t.home.instructorChips.map((c) => (
+                  <span
+                    key={c}
+                    className="rounded-full border border-line/15 px-4 py-2 text-xs text-bone-300 transition-colors duration-300 hover:border-electric/50 hover:text-electric"
+                  >
+                    {c}
+                  </span>
+                ))}
+              </div>
+            </Reveal>
+            <Reveal delay={0.18}>
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                <Link
+                  href="/instructor/"
+                  className="btn btn-primary w-full justify-center px-7 py-4 text-base"
+                >
+                  {t.home.instructorCta} →
+                </Link>
+                <Link
+                  href="/training/"
+                  className="btn btn-ghost w-full justify-center px-7 py-4 text-base"
+                >
+                  {t.nav.training} →
+                </Link>
+              </div>
+            </Reveal>
+            {/* companies & academies he's worked with — under the CTAs */}
+            <Reveal delay={0.22}>
+              <div className="mt-8">
+                <WorkedWith label={t.home.workedWithLabel} />
+              </div>
+            </Reveal>
+          </div>
+          {/* vertical portrait — clean, no wash */}
+          <div className="lg:col-span-4">
+            <Reveal delay={0.1}>
+              <motion.div
+                whileHover={{ rotate: -0.8 }}
+                className="relative mx-auto max-w-sm overflow-hidden rounded-3xl border border-line/15"
+              >
+                <Media
+                  src="/lms/instructor-portrait.jpg"
+                  alt="Mohamed Tarek — art director and Tarek instructor"
+                  sizes="(min-width: 1024px) 30vw, 100vw"
+                  className="h-auto w-full object-cover"
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-t from-ink-900/60 via-transparent to-transparent"
+                />
+                <div className="absolute bottom-5 left-5">
+                  <p className="font-serif text-2xl italic text-bone-50">Mohamed Tarek</p>
+                  <p className="text-[11px] uppercase tracking-ultra text-bone-200/80">
+                    Art Director · Instructor
+                  </p>
+                </div>
+              </motion.div>
+            </Reveal>
+          </div>
+        </div>
+        <div className="pb-16">
+          <p className="mb-6 text-center text-xs uppercase tracking-ultra text-bone-500">
+            {t.home.brandsNote}
+          </p>
+          <LogoMarquee />
+        </div>
+      </section>
+
       {/* ============================================= THE DEAL =============== */}
       <section className="container-edge mx-auto max-w-edge py-20 md:py-28">
         <Reveal>
-          <SectionLabel index="01">{t.home.manLabel}</SectionLabel>
+          <SectionLabel index="04">{t.home.manLabel}</SectionLabel>
         </Reveal>
         <div className="mt-10 grid gap-5 lg:grid-cols-2">
           {/* FREE — inverted light card */}
@@ -432,31 +649,6 @@ export default function HomeView() {
             </motion.div>
           </Reveal>
         </div>
-
-        {/* market-rate anchor — the price only reads cheap next to real rates */}
-        <Reveal delay={0.1}>
-          <div className="glass mt-6 rounded-3xl p-6 md:p-8">
-            <p className="text-[11px] uppercase tracking-ultra text-bone-500">
-              {t.home.marketLabel}
-            </p>
-            <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {t.home.marketItems.map((m) => (
-                <div
-                  key={m.job}
-                  className="rounded-xl border border-line/10 bg-ink-900/50 px-4 py-3.5"
-                >
-                  <p className="text-xs text-bone-400">{m.job}</p>
-                  <p className="mt-1 font-display text-lg font-semibold text-bone-50" dir="ltr">
-                    {m.rate}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-5 font-serif text-sm italic text-mint md:text-base">
-              {t.home.marketPunch}
-            </p>
-          </div>
-        </Reveal>
       </section>
 
       {/* ============================================= THE DROPS ============== */}
@@ -465,7 +657,7 @@ export default function HomeView() {
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div>
               <Reveal>
-                <SectionLabel index="02">{t.home.coursesLabel}</SectionLabel>
+                <SectionLabel index="05">{t.home.coursesLabel}</SectionLabel>
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.0] tracking-tightest text-bone-50 md:text-6xl">
@@ -486,187 +678,6 @@ export default function HomeView() {
 
           {/* the four free software courses, as a swipeable slider */}
           <FreeCoursesSlider courses={softwareCourses} />
-        </div>
-      </section>
-
-      {/* ============================== WHY HERE — the honest comparison ====== */}
-      <section className="relative overflow-hidden">
-        <div className="container-edge mx-auto max-w-edge py-20 md:py-28">
-          <Reveal>
-            <SectionLabel index="03">{t.home.whyMeLabel}</SectionLabel>
-          </Reveal>
-          <div className="mt-6 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <Reveal delay={0.05}>
-              <h2 className="max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
-                {t.home.whyMeTitleA}{" "}
-                <span className="text-grad font-serif font-normal italic tracking-normal">
-                  {t.home.whyMeTitleI}
-                </span>
-                {t.home.whyMeTitleB}
-              </h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="max-w-sm text-sm leading-relaxed text-bone-400">
-                {t.home.whyMeSub}
-              </p>
-            </Reveal>
-          </div>
-
-          <div className="mt-14 grid gap-6 lg:grid-cols-2">
-            {/* the market */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-              transition={{ duration: 0.6, ease }}
-              className="rounded-3xl border border-line/10 bg-ink-800/30 p-7 md:p-9"
-            >
-              <p className="text-[11px] uppercase tracking-ultra text-bone-500">
-                {t.home.themCol}
-              </p>
-              <ul className="mt-6 space-y-4">
-                {t.home.whyMeRows.map((row) => (
-                  <li
-                    key={row.them}
-                    className="flex items-start gap-3 text-sm leading-relaxed text-bone-500"
-                  >
-                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-line/10 text-[10px] text-bone-500">
-                      ✕
-                    </span>
-                    {row.them}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-
-            {/* here */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "0px 0px -10% 0px" }}
-              transition={{ duration: 0.6, ease, delay: 0.12 }}
-              className="glass-sheen relative overflow-hidden rounded-3xl border border-mint/30 bg-ink-800/70 p-7 shadow-[0_30px_90px_-40px_rgb(var(--mint)/0.35)] md:p-9"
-            >
-              <p className="text-[11px] uppercase tracking-ultra text-mint">
-                {t.home.meCol}
-              </p>
-              <ul className="mt-6 space-y-4">
-                {t.home.whyMeRows.map((row) => (
-                  <li
-                    key={row.me}
-                    className="flex items-start gap-3 text-sm leading-relaxed text-bone-100"
-                  >
-                    <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-mint/15 text-[10px] font-bold text-mint">
-                      ✓
-                    </span>
-                    {row.me}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-line/10 pt-6">
-                <Link href="/courses/" className="btn btn-primary px-6 py-3.5 text-sm">
-                  {t.home.whyMeCta}
-                </Link>
-                <p className="font-serif text-sm italic text-bone-400">
-                  {t.home.whyMeNote}
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================= INSTRUCTOR ============= */}
-      <section className="border-y border-line/10 bg-ink-800/40">
-        <div className="container-edge mx-auto grid max-w-edge items-center gap-12 py-20 md:py-28 lg:grid-cols-12">
-          <div className="lg:col-span-8">
-            <Reveal>
-              <SectionLabel index="04">{t.home.instructorLabel}</SectionLabel>
-            </Reveal>
-            <Reveal delay={0.05}>
-              <h2 className="mt-6 text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
-                {t.home.instructorTitleA}{" "}
-                <span className="text-grad font-serif font-normal italic tracking-normal">
-                  {t.home.instructorTitleI}
-                </span>
-                {t.home.instructorTitleB}
-              </h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="mt-6 max-w-xl text-pretty text-base leading-relaxed text-bone-400 md:text-lg">
-                {t.home.instructorBio}
-              </p>
-            </Reveal>
-            <Reveal delay={0.14}>
-              <p className="mt-8 text-[11px] uppercase tracking-ultra text-bone-500">
-                {t.home.instructorChipsLabel}
-              </p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {t.home.instructorChips.map((c) => (
-                  <span
-                    key={c}
-                    className="rounded-full border border-line/15 px-4 py-2 text-xs text-bone-300 transition-colors duration-300 hover:border-electric/50 hover:text-electric"
-                  >
-                    {c}
-                  </span>
-                ))}
-              </div>
-            </Reveal>
-            <Reveal delay={0.18}>
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                <Link
-                  href="/instructor/"
-                  className="btn btn-primary w-full justify-center px-7 py-4 text-base"
-                >
-                  {t.home.instructorCta} →
-                </Link>
-                <Link
-                  href="/training/"
-                  className="btn btn-ghost w-full justify-center px-7 py-4 text-base"
-                >
-                  {t.nav.training} →
-                </Link>
-              </div>
-            </Reveal>
-            {/* companies & academies he's worked with — under the CTAs */}
-            <Reveal delay={0.22}>
-              <div className="mt-8">
-                <WorkedWith label={t.home.workedWithLabel} />
-              </div>
-            </Reveal>
-          </div>
-          {/* vertical portrait — clean, no wash */}
-          <div className="lg:col-span-4">
-            <Reveal delay={0.1}>
-              <motion.div
-                whileHover={{ rotate: -0.8 }}
-                className="relative mx-auto max-w-sm overflow-hidden rounded-3xl border border-line/15"
-              >
-                <Media
-                  src="/lms/instructor-portrait.jpg"
-                  alt="Mohamed Tarek — art director and Tarek instructor"
-                  sizes="(min-width: 1024px) 30vw, 100vw"
-                  className="h-auto w-full object-cover"
-                />
-                <div
-                  aria-hidden
-                  className="absolute inset-0 bg-gradient-to-t from-ink-900/60 via-transparent to-transparent"
-                />
-                <div className="absolute bottom-5 left-5">
-                  <p className="font-serif text-2xl italic text-bone-50">Mohamed Tarek</p>
-                  <p className="text-[11px] uppercase tracking-ultra text-bone-200/80">
-                    Art Director · Instructor
-                  </p>
-                </div>
-              </motion.div>
-            </Reveal>
-          </div>
-        </div>
-        <div className="pb-16">
-          <p className="mb-6 text-center text-xs uppercase tracking-ultra text-bone-500">
-            {t.home.brandsNote}
-          </p>
-          <LogoMarquee />
         </div>
       </section>
 
@@ -803,7 +814,7 @@ export default function HomeView() {
       <section className="overflow-hidden py-20 md:py-28">
         <div className="container-edge mx-auto max-w-edge">
           <Reveal>
-            <SectionLabel index="05">{t.home.outcomesLabel}</SectionLabel>
+            <SectionLabel index="06">{t.home.outcomesLabel}</SectionLabel>
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="mt-6 max-w-3xl text-balance font-display text-4xl font-semibold leading-[1.02] tracking-tightest text-bone-50 md:text-6xl">
