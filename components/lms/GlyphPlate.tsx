@@ -99,10 +99,6 @@ export default function GlyphPlate({
       {/* hairline frame */}
       <div aria-hidden className="absolute inset-3 rounded-xl border border-line/15" />
 
-      {/* editorial chrome */}
-      <span className="absolute left-6 top-5 rounded-full bg-ink-900/60 px-2.5 py-1 text-[10px] uppercase tracking-ultra text-bone-200 backdrop-blur">
-        {course.index}
-      </span>
     </div>
   );
 }

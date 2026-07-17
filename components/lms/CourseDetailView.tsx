@@ -73,7 +73,7 @@ export default function CourseDetailView({ course: courseStatic }: { course: Cou
             </Reveal>
             <Reveal delay={0.05}>
               <div className="mt-8 flex items-center gap-4">
-                <SectionLabel index={course.index}>{course.level[lang]}</SectionLabel>
+                <SectionLabel index="✦">{course.level[lang]}</SectionLabel>
                 {course.price === 0 && (
                   <span className="rounded-full bg-mint px-3 py-1 text-[11px] font-medium text-white">
                     {t.common.free}
