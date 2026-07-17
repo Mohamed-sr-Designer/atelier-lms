@@ -4,7 +4,7 @@ import ContactView from "@/components/lms/ContactView";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact — Talk to the Instructor Directly",
+  title: "Contact | Talk to the Instructor Directly",
   description:
     "Enrollment help, team and academy training, or questions about your learning path — WhatsApp or email Mohamed Tarek directly, same-day replies.",
   alternates: { canonical: "/contact/" },

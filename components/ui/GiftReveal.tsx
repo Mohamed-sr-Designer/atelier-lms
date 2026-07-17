@@ -161,7 +161,7 @@ export default function GiftReveal({
             <span className="font-serif text-[15px] italic leading-snug text-bone-100">
               {tag}
             </span>
-            <span className="hidden text-bone-500 md:inline">—</span>
+            <span className="hidden text-bone-500 md:inline">·</span>
             <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-mint">
               {hint}
             </span>

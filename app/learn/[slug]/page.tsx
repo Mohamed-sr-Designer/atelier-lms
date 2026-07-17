@@ -16,7 +16,7 @@ export function generateMetadata({
 }): Metadata {
   const c = getCourse(params.slug);
   return {
-    title: c ? `Learning — ${c.short.en}` : "Learning",
+    title: c ? `Learning | ${c.short.en}` : "Learning",
     robots: { index: false },
   };
 }

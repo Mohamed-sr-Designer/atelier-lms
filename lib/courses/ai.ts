@@ -1,23 +1,23 @@
 import type { Course } from "./types";
 
 // ---- 06 · AI Photoshoot & Prompt Engineering (premium flagship) -------------
-// Expanded from the original portfolio course track — same DNA, full ecosystem.
+// Expanded from the original portfolio course track, same DNA, full ecosystem.
 export const aiPhotoshoot: Course = {
   slug: "ai-photoshoot",
   index: "06",
   glyph: "A·i",
   title: {
-    en: "AI Photoshoot & Prompt Engineering — Campaigns Without a Camera",
-    ar: "جلسة تصوير بالذكاء الاصطناعي وهندسة البرومبت — حملات من غير كاميرا",
+    en: "AI Photoshoot & Prompt Engineering, Campaigns Without a Camera",
+    ar: "جلسة تصوير بالذكاء الاصطناعي وهندسة البرومبت، حملات من غير كاميرا",
   },
   short: { en: "AI Photoshoot", ar: "التصوير بالذكاء الاصطناعي" },
   tagline: {
-    en: "Direct full campaign photoshoots with AI — the skill clients pay premium for.",
-    ar: "أخرج جلسات تصوير حملات كاملة بالذكاء الاصطناعي — المهارة اللي العملاء بيدفعوا فيها بريميوم.",
+    en: "Direct full campaign photoshoots with AI, the skill clients pay premium for.",
+    ar: "أخرج جلسات تصوير حملات كاملة بالذكاء الاصطناعي، المهارة اللي العملاء بيدفعوا فيها بريميوم.",
   },
   desc: {
-    en: "The course that built real campaigns: prompt engineering with a photographer's vocabulary, generating and curating hero frames, then finishing in Photoshop to a standard clients sign. This is the exact pipeline behind paid client work — taught end to end, including how to price it.",
-    ar: "الكورس اللي اتبنت بيه حملات حقيقية: هندسة برومبت بمفردات المصور المحترف، توليد واختيار اللقطات البطلة، وبعدين التشطيب في فوتوشوب لمستوى العميل يمضي عليه. ده نفس خط الإنتاج ورا شغل عملاء مدفوع — متشرح من الأول للآخر، وبتتعلم تسعّره كمان.",
+    en: "The course that built real campaigns: prompt engineering with a photographer's vocabulary, generating and curating hero frames, then finishing in Photoshop to a standard clients sign. This is the exact pipeline behind paid client work, taught end to end, including how to price it.",
+    ar: "الكورس اللي اتبنت بيه حملات حقيقية: هندسة برومبت بمفردات المصور المحترف، توليد واختيار اللقطات البطلة، وبعدين التشطيب في فوتوشوب لمستوى العميل يمضي عليه. ده نفس خط الإنتاج ورا شغل عملاء مدفوع، متشرح من الأول للآخر، وبتتعلم تسعّره كمان.",
   },
   level: { en: "Zero → Professional", ar: "من الصفر → للاحتراف" },
   audience: {
@@ -40,7 +40,7 @@ export const aiPhotoshoot: Course = {
   },
   outcomes: [
     "A repeatable prompt-to-photoshoot workflow",
-    "A photographer's vocabulary: light, lens, composition — in prompts",
+    "A photographer's vocabulary: light, lens, composition, in prompts",
     "Curation instincts: picking hero frames from hundreds",
     "Retouch & grading that makes AI output read premium",
     "A campaign-ready set delivered like a studio would",
@@ -67,18 +67,18 @@ export const aiPhotoshoot: Course = {
       t: "Prompt Engineering",
       lessons: [
         { id: "ap-2-1", t: "Prompt structure: subject · scene · lens · light · mood · constraints", dur: 13, d: "The six-slot formula behind every controlled generation.", free: true },
-        { id: "ap-2-2", t: "Building the shot: framing & lens language", dur: 13, d: "85mm portrait vs 24mm environmental — say it, get it." },
-        { id: "ap-2-3", t: "Style control & set consistency", dur: 13, d: "Same look across 12 frames — the campaign requirement." },
-        { id: "ap-2-4", t: "Negative prompts & failure modes", dur: 12, d: "Hands, text, artifacts — diagnose and fix systematically." },
+        { id: "ap-2-2", t: "Building the shot: framing & lens language", dur: 13, d: "85mm portrait vs 24mm environmental, say it, get it." },
+        { id: "ap-2-3", t: "Style control & set consistency", dur: 13, d: "Same look across 12 frames, the campaign requirement." },
+        { id: "ap-2-4", t: "Negative prompts & failure modes", dur: 12, d: "Hands, text, artifacts, diagnose and fix systematically." },
       ],
     },
     {
       n: "03",
       t: "Generate & Curate",
       lessons: [
-        { id: "ap-3-1", t: "Batching variations & selecting hero frames", dur: 13, d: "Generate wide, choose narrow — a curator's process." },
+        { id: "ap-3-1", t: "Batching variations & selecting hero frames", dur: 13, d: "Generate wide, choose narrow, a curator's process." },
         { id: "ap-3-2", t: "Upscaling & detail passes", dur: 13, d: "From preview quality to print-capable files." },
-        { id: "ap-3-3", t: "Character & product consistency", dur: 13, d: "The same face, the same bottle — across a whole set." },
+        { id: "ap-3-3", t: "Character & product consistency", dur: 13, d: "The same face, the same bottle, across a whole set." },
       ],
     },
     {
@@ -88,7 +88,7 @@ export const aiPhotoshoot: Course = {
         { id: "ap-4-1", t: "Retouch & compositing in Photoshop", dur: 13, d: "Fixing hands, edges and details AI gets wrong." },
         { id: "ap-4-2", t: "Color grading the set", dur: 13, d: "One consistent, premium grade across every frame." },
         { id: "ap-4-3", t: "Delivering a campaign set", dur: 13, d: "Exports, ratios and a clean client handoff." },
-        { id: "ap-4-4", t: "Final project walkthrough: full AI campaign", dur: 12, d: "I produce a complete branded shoot live — brief to delivery." },
+        { id: "ap-4-4", t: "Final project walkthrough: full AI campaign", dur: 12, d: "I produce a complete branded shoot live, brief to delivery." },
       ],
     },
   ],
@@ -101,7 +101,7 @@ export const aiPhotoshoot: Course = {
     { q: "A moodboard's job in AI production is…", opts: ["Decoration", "Steering generations toward one art direction", "Client billing", "File storage"], a: 1 },
   ],
   projects: [
-    { t: "One Product, Three Worlds", d: "Shoot the same product in studio, lifestyle and cinematic settings — one consistent brand look." },
+    { t: "One Product, Three Worlds", d: "Shoot the same product in studio, lifestyle and cinematic settings, one consistent brand look." },
     { t: "The Casting Call", d: "Create one consistent character across 6 different scenes and poses." },
     { t: "Fix the Fails", d: "Take 5 provided broken generations and rescue them in Photoshop." },
   ],
@@ -117,15 +117,15 @@ export const aiPhotoshoot: Course = {
     deliverables: ["6 finished campaign frames", "Your reusable prompt system", "Moodboard + art direction note", "Social crops of the hero frame"],
   },
   faq: [
-    { q: "Why is this course priced premium?", a: "Because it's the money skill. AI photoshoots replace studio budgets — one approved client brief covers the course several times over. The course includes the pricing and positioning lessons to make that happen, and the software craft courses on the platform are free so your budget goes where the earning is." },
-    { q: "Which AI tool does it use?", a: "The method is tool-agnostic — prompts are taught as photography direction, which transfers across Midjourney, Freepik, Firefly and whatever ships next." },
-    { q: "Do I need Photoshop?", a: "For Module 04, yes — any recent version. Modules 01–03 need only a generation tool." },
+    { q: "Why is this course priced premium?", a: "Because it's the money skill. AI photoshoots replace studio budgets, one approved client brief covers the course several times over. The course includes the pricing and positioning lessons to make that happen, and the software craft courses on the platform are free so your budget goes where the earning is." },
+    { q: "Which AI tool does it use?", a: "The method is tool-agnostic, prompts are taught as photography direction, which transfers across Midjourney, Freepik, Firefly and whatever ships next." },
+    { q: "Do I need Photoshop?", a: "For Module 04, yes, any recent version. Modules 01–03 need only a generation tool." },
     { q: "Is AI imagery actually used in real campaigns?", a: "The cover of this course is from a real client campaign produced exactly this way. That's the standard the course teaches to." },
   ],
   reviews: [
     { name: "رنا شريف", role: "براند ديزاينر", text: "عرضت على كلاينت فوتوشوت AI أسبوع واحد بعد درس البرومبت. وافقوا عليه بدل عرض الاستوديو. الكورس دفع تمن نفسه من أول شغلانة.", stars: 5 },
     { name: "Amr Hany", role: "Marketer", text: "el 6-slot formula ba2et f dema8y zay esmy. awel AI brief closed ✅ el course organized gedan w mafish 7ashw wala kalam faady", stars: 4 },
-    { name: "نورة الحربي", role: "صاحبة براند — الرياض", text: "أخذت الكورس لمشروعي الخاص. صرت أسوّي صور منتجات باحتراف بدون استوديو ولا مصوّر. وفّرت آلاف الريالات من أول شهر.", stars: 5 },
+    { name: "نورة الحربي", role: "صاحبة براند، الرياض", text: "أخذت الكورس لمشروعي الخاص. صرت أسوّي صور منتجات باحتراف بدون استوديو ولا مصوّر. وفّرت آلاف الريالات من أول شهر.", stars: 5 },
   ],
   rating: 4.9,
   ratingCount: 260,
@@ -138,13 +138,13 @@ export const aiVideo: Course = {
   index: "07",
   glyph: "A·v",
   title: {
-    en: "AI Video Generation — From Prompt to Finished Cut",
-    ar: "توليد الفيديو بالذكاء الاصطناعي — من البرومبت للمونتاج النهائي",
+    en: "AI Video Generation, From Prompt to Finished Cut",
+    ar: "توليد الفيديو بالذكاء الاصطناعي، من البرومبت للمونتاج النهائي",
   },
   short: { en: "AI Video", ar: "فيديو الذكاء الاصطناعي" },
   tagline: {
-    en: "Text prompt in, broadcast-ready spot out — the AI film skill clients pay premium for, no camera, no crew.",
-    ar: "برومبت مكتوب يدخل، إعلان جاهز للبث يخرج — مهارة الفيديو بالـ AI اللي العملاء بيدفعوا فيها بريميوم، من غير كاميرا ولا فريق.",
+    en: "Text prompt in, broadcast-ready spot out, the AI film skill clients pay premium for, no camera, no crew.",
+    ar: "برومبت مكتوب يدخل، إعلان جاهز للبث يخرج، مهارة الفيديو بالـ AI اللي العملاء بيدفعوا فيها بريميوم، من غير كاميرا ولا فريق.",
   },
   desc: {
     en: "The complete AI video pipeline I use for client work: directing motion with prompts, blending generated shots with stock, and cutting it all into a finished spot in Premiere Pro. From a text idea to a deliverable film.",
@@ -152,8 +152,8 @@ export const aiVideo: Course = {
   },
   level: { en: "Zero → Professional", ar: "من الصفر → للاحتراف" },
   audience: {
-    en: "Designers and editors who want to sell AI video — the fastest-growing deliverable in advertising.",
-    ar: "المصممين والمونتيرية اللي عايزين يبيعوا فيديو AI — أسرع منتج نموًا في الإعلانات.",
+    en: "Designers and editors who want to sell AI video, the fastest-growing deliverable in advertising.",
+    ar: "المصممين والمونتيرية اللي عايزين يبيعوا فيديو AI، أسرع منتج نموًا في الإعلانات.",
   },
   price: 2700,
   cover: "/work/tilal/hero.webp",
@@ -187,7 +187,7 @@ export const aiVideo: Course = {
       n: "01",
       t: "Direct the Camera, in Words",
       lessons: [
-        { id: "av-1-1", t: "Prompt engineering for video: motion & camera language", dur: 17, d: "Shot length, movement and lensing — written as direction.", free: true },
+        { id: "av-1-1", t: "Prompt engineering for video: motion & camera language", dur: 17, d: "Shot length, movement and lensing, written as direction.", free: true },
         { id: "av-1-2", t: "Gathering references that define look & pace", dur: 16, d: "Build a reference edit before generating anything." },
         { id: "av-1-3", t: "Storyboarding a 30-second spot", dur: 16, d: "Beats, shots and the generation shot-list." },
       ],
@@ -216,7 +216,7 @@ export const aiVideo: Course = {
       lessons: [
         { id: "av-4-1", t: "Ratios, captions & platform masters", dur: 16, d: "Every deliverable a campaign actually needs." },
         { id: "av-4-2", t: "Presenting & pricing AI video", dur: 16, d: "Position the work, handle the 'is it AI?' question, price it." },
-        { id: "av-4-3", t: "Final project walkthrough: finished AI spot", dur: 17, d: "I produce a complete 30-second spot live — brief to master." },
+        { id: "av-4-3", t: "Final project walkthrough: finished AI spot", dur: 17, d: "I produce a complete 30-second spot live, brief to master." },
       ],
     },
   ],
@@ -225,12 +225,12 @@ export const aiVideo: Course = {
     { q: "Before generating shots for a spot, professionals build…", opts: ["A logo", "A storyboard and shot list", "A caption file", "A thumbnail"], a: 1 },
     { q: "AI shots and stock footage sit together convincingly when…", opts: ["Both are 4K", "They share one grade and consistent motion pacing", "AI shots come first", "You add transitions"], a: 1 },
     { q: "The most commonly neglected half of AI video is…", opts: ["Resolution", "Sound design and mix", "Watermarks", "File naming"], a: 1 },
-    { q: "A generated shot is almost right but drifts at the end. You…", opts: ["Regenerate 50 times", "Cut before the drift — editing hides limits", "Slow it to 10%", "Add text over it"], a: 1 },
+    { q: "A generated shot is almost right but drifts at the end. You…", opts: ["Regenerate 50 times", "Cut before the drift, editing hides limits", "Slow it to 10%", "Add text over it"], a: 1 },
     { q: "When a client asks 'is this AI?', the professional answer is…", opts: ["Deny it", "Explain the directed pipeline and where craft was applied", "Change the subject", "Refund them"], a: 1 },
   ],
   projects: [
     { t: "Reference Cut", d: "Build a 20-second reference edit from existing films that defines your spot's look and pace." },
-    { t: "Hybrid Sequence", d: "Cut a 15-second sequence mixing 2 AI shots with 2 stock shots — invisible seams." },
+    { t: "Hybrid Sequence", d: "Cut a 15-second sequence mixing 2 AI shots with 2 stock shots, invisible seams." },
     { t: "Still to Motion", d: "Animate 3 frames from an AI photoshoot into usable video shots." },
   ],
   resources: [
@@ -241,14 +241,14 @@ export const aiVideo: Course = {
   ],
   finalProject: {
     t: "30-Second AI Brand Spot",
-    d: "Produce a complete branded spot: storyboard, generated + stock footage, edit, sound, grade and platform masters — the full pipeline, solo.",
+    d: "Produce a complete branded spot: storyboard, generated + stock footage, edit, sound, grade and platform masters, the full pipeline, solo.",
     deliverables: ["30s master + 9:16 vertical", "Storyboard and shot list", "Project file with organized timeline", "One-slide pipeline explanation for clients"],
   },
   faq: [
-    { q: "Which AI video tools does the course use?", a: "The direction method is model-agnostic and demonstrated across current leaders (Seedance, Kling, Runway). When models change — and they will — the directing skills transfer." },
-    { q: "Do I need editing experience?", a: "No — Module 03 teaches the exact Premiere skills the pipeline needs. If you want deeper editing craft, the Premiere Pro course pairs perfectly." },
+    { q: "Which AI video tools does the course use?", a: "The direction method is model-agnostic and demonstrated across current leaders (Seedance, Kling, Runway). When models change, and they will, the directing skills transfer." },
+    { q: "Do I need editing experience?", a: "No, Module 03 teaches the exact Premiere skills the pipeline needs. If you want deeper editing craft, the Premiere Pro course pairs perfectly." },
     { q: "How do subscriptions/credits work cost-wise?", a: "Module 04 includes the real economics: what a spot costs in credits, how to budget generations, and how to price the work so margins stay healthy." },
-    { q: "What do I walk away with?", a: "A finished 30-second AI spot — reviewed personally — plus the storyboard system, the Premiere template and the client-presentation deck. A sellable service, not a watch history." },
+    { q: "What do I walk away with?", a: "A finished 30-second AI spot, reviewed personally, plus the storyboard system, the Premiere template and the client-presentation deck. A sellable service, not a watch history." },
   ],
   reviews: [
     { name: "Khaled Emad", role: "Freelance designer", text: "I sell my first AI video for more than my month salary. I was scared to put high price but the pricing lesson give me the confidence.", stars: 4.5 },

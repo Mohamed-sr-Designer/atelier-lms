@@ -3,7 +3,7 @@ import SiteShell from "@/components/SiteShell";
 import AdminCoursesView from "@/components/lms/AdminCoursesView";
 
 export const metadata: Metadata = {
-  title: "Studio — Course Editor",
+  title: "Studio | Course Editor",
   description: "Edit prices, covers and lessons across every course.",
   alternates: { canonical: "/admin/courses/" },
   robots: { index: false },

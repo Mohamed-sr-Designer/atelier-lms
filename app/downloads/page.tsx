@@ -3,7 +3,7 @@ import SiteShell from "@/components/SiteShell";
 import DownloadsView from "@/components/lms/DownloadsView";
 
 export const metadata: Metadata = {
-  title: "Downloads — your resource vault",
+  title: "Downloads | your resource vault",
   description:
     "Working files, cheat sheets and templates from your enrolled Tarek courses.",
   alternates: { canonical: "/downloads/" },

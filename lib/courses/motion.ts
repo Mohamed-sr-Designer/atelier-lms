@@ -6,29 +6,29 @@ export const aftereffects: Course = {
   index: "03",
   glyph: "Ae",
   title: {
-    en: "After Effects in Motion — Animation, Kinetic Type & Brand Motion",
-    ar: "أفتر إفكتس — موشن جرافيك وكاينتك تايبوجرافي وموشن برندات",
+    en: "After Effects in Motion, Animation, Kinetic Type & Brand Motion",
+    ar: "أفتر إفكتس، موشن جرافيك وكاينتك تايبوجرافي وموشن برندات",
   },
   short: { en: "Adobe After Effects", ar: "أدوبي أفتر إفكتس" },
   tagline: {
-    en: "Make design move — from your first keyframe to logo reveals that sell.",
-    ar: "خلّي التصميم يتحرك — من أول Keyframe لحد Logo Reveal يتباع.",
+    en: "Make design move, from your first keyframe to logo reveals that sell.",
+    ar: "خلّي التصميم يتحرك، من أول Keyframe لحد Logo Reveal يتباع.",
   },
   desc: {
-    en: "Motion design from absolute zero: keyframes, easing, shape layers, kinetic type and brand motion — built on the same reels I deliver to clients. You'll animate something real in the first hour.",
-    ar: "موشن ديزاين من الصفر تمامًا: Keyframes وEasing وShape Layers وKinetic Type وموشن للبرندات — مبني على نفس الشغل اللي بسلّمه لعملاء حقيقيين. هتحرّك حاجة حقيقية في أول ساعة.",
+    en: "Motion design from absolute zero: keyframes, easing, shape layers, kinetic type and brand motion, built on the same reels I deliver to clients. You'll animate something real in the first hour.",
+    ar: "موشن ديزاين من الصفر تمامًا: Keyframes وEasing وShape Layers وKinetic Type وموشن للبرندات، مبني على نفس الشغل اللي بسلّمه لعملاء حقيقيين. هتحرّك حاجة حقيقية في أول ساعة.",
   },
   level: { en: "Zero → Professional", ar: "من الصفر → للاحتراف" },
   audience: {
-    en: "Graphic designers who want the motion skills clients keep asking for — no prior animation experience needed.",
-    ar: "مصممين الجرافيك اللي عايزين مهارات الموشن اللي العملاء بيطلبوها — من غير أي خبرة سابقة في التحريك.",
+    en: "Graphic designers who want the motion skills clients keep asking for, no prior animation experience needed.",
+    ar: "مصممين الجرافيك اللي عايزين مهارات الموشن اللي العملاء بيطلبوها، من غير أي خبرة سابقة في التحريك.",
   },
   price: 1800,
   cover: "/work/secure/hero.webp",
   icon: "/lms/icons/ae.webp",
   plate: ["#00005B", "#9999FF"],
   outcomes: [
-    "Animate with real easing — nothing linear, nothing robotic",
+    "Animate with real easing, nothing linear, nothing robotic",
     "Build shape-layer animations and kinetic typography systems",
     "Design logo reveals with professional timing grammar",
     "Structure precomps so complex projects stay editable",
@@ -47,10 +47,10 @@ export const aftereffects: Course = {
       n: "01",
       t: "Motion Foundations",
       lessons: [
-        { id: "ae-1-1", t: "Compositions, layers & the AE mental model", dur: 12, d: "How AE thinks — and how not to fight it.", free: true },
-        { id: "ae-1-2", t: "Keyframes: your first animation", dur: 13, d: "Position, scale, rotation, opacity — animated properly.", free: true },
+        { id: "ae-1-1", t: "Compositions, layers & the AE mental model", dur: 12, d: "How AE thinks, and how not to fight it.", free: true },
+        { id: "ae-1-2", t: "Keyframes: your first animation", dur: 13, d: "Position, scale, rotation, opacity, animated properly.", free: true },
         { id: "ae-1-3", t: "Easing & the graph editor", dur: 14, d: "The single skill that separates amateurs from professionals." },
-        { id: "ae-1-4", t: "Anchor points & transform discipline", dur: 11, d: "Why your rotations look wrong — and the 10-second fix." },
+        { id: "ae-1-4", t: "Anchor points & transform discipline", dur: 11, d: "Why your rotations look wrong, and the 10-second fix." },
       ],
     },
     {
@@ -67,7 +67,7 @@ export const aftereffects: Course = {
       n: "03",
       t: "Shape Layers & Kinetic Type",
       lessons: [
-        { id: "ae-3-1", t: "Shape layers deep dive", dur: 13, d: "Fills, strokes, paths — the vector engine inside AE." },
+        { id: "ae-3-1", t: "Shape layers deep dive", dur: 13, d: "Fills, strokes, paths, the vector engine inside AE." },
         { id: "ae-3-2", t: "Trim paths & repeaters", dur: 12, d: "The two operators behind most motion graphics you admire." },
         { id: "ae-3-3", t: "Kinetic typography systems", dur: 13, d: "Word-by-word builds with rhythm and hierarchy." },
         { id: "ae-3-4", t: "Text animators", dur: 12, d: "Per-character animation without hand-keyframing letters." },
@@ -79,7 +79,7 @@ export const aftereffects: Course = {
       lessons: [
         { id: "ae-4-1", t: "Masks & track mattes", dur: 13, d: "Reveal anything through anything." },
         { id: "ae-4-2", t: "Precomp architecture", dur: 12, d: "Structure projects so revisions take minutes, not nights." },
-        { id: "ae-4-3", t: "The essential effects stack", dur: 12, d: "Glow, blur, displacement — used with restraint." },
+        { id: "ae-4-3", t: "The essential effects stack", dur: 12, d: "Glow, blur, displacement, used with restraint." },
         { id: "ae-4-4", t: "3D layers & cameras, the useful 20%", dur: 13, d: "Parallax and depth without the 3D rabbit hole." },
       ],
     },
@@ -97,7 +97,7 @@ export const aftereffects: Course = {
       n: "06",
       t: "Pipeline & Delivery",
       lessons: [
-        { id: "ae-6-1", t: "Expressions starter kit", dur: 13, d: "Wiggle, loopOut, time — copy-paste power without coding fear." },
+        { id: "ae-6-1", t: "Expressions starter kit", dur: 13, d: "Wiggle, loopOut, time, copy-paste power without coding fear." },
         { id: "ae-6-2", t: "Render settings & codecs demystified", dur: 12, d: "ProRes vs H.264 and what to send where." },
         { id: "ae-6-3", t: "Lottie & social exports", dur: 11, d: "Motion for apps, web and every aspect ratio." },
         { id: "ae-6-4", t: "Final project walkthrough: brand motion reel", dur: 14, d: "I build a 15-second brand animation live, start to render." },
@@ -115,7 +115,7 @@ export const aftereffects: Course = {
   projects: [
     { t: "Ease Everything", d: "Take one linear animation and re-time it into three moods: snappy UI, elegant luxury, playful bounce." },
     { t: "Kinetic Quote", d: "Animate a 10-word quote with rhythm, hierarchy and one signature moment." },
-    { t: "Logo Reveal", d: "Design and animate a 5-second reveal for a provided logo — including sound." },
+    { t: "Logo Reveal", d: "Design and animate a 5-second reveal for a provided logo, including sound." },
   ],
   resources: [
     { t: "Project files for every module", type: "AEP", note: "Open, dissect, break, rebuild." },
@@ -125,17 +125,17 @@ export const aftereffects: Course = {
   ],
   finalProject: {
     t: "15-Second Brand Motion Reel",
-    d: "Animate a complete brand moment for a fictional identity: logo reveal, kinetic type statement and a looping brand pattern — with sound.",
+    d: "Animate a complete brand moment for a fictional identity: logo reveal, kinetic type statement and a looping brand pattern, with sound.",
     deliverables: ["ProRes master + H.264 social cut", "Project file with clean precomp structure", "9:16 vertical adaptation", "One-line motion rationale"],
   },
   faq: [
     { q: "Is After Effects hard to learn?", a: "The interface is dense but the core is small: keyframes, easing, and structure. This course sequences that core so you're animating in lesson two, not week two." },
     { q: "Do I need to know Photoshop or Illustrator first?", a: "Helpful but not required. Any vector or layered artwork works, and the course includes ready-made design files for every exercise." },
     { q: "Can my laptop run AE?", a: "If it runs Photoshop comfortably it will handle everything in this course. Heavy 3D and simulations are deliberately out of scope." },
-    { q: "Will this get me motion clients?", a: "Logo reveals, kinetic type and social motion are the three most-requested paid motion tasks — the course is built around exactly those." },
+    { q: "Will this get me motion clients?", a: "Logo reveals, kinetic type and social motion are the three most-requested paid motion tasks, the course is built around exactly those." },
   ],
   reviews: [
-    { name: "أحمد سمير", role: "جرافيك ديزاينر — الجيزة", text: "فتحت أفتر إفكتس ٥ مرات وقفلته ٥ مرات. درس الـ easing خلّى الدنيا تنوّر أخيرًا. دلوقتي بسلّم موشن مع كل هوية بعملها.", stars: 5 },
+    { name: "أحمد سمير", role: "جرافيك ديزاينر، الجيزة", text: "فتحت أفتر إفكتس ٥ مرات وقفلته ٥ مرات. درس الـ easing خلّى الدنيا تنوّر أخيرًا. دلوقتي بسلّم موشن مع كل هوية بعملها.", stars: 5 },
     { name: "Hassan T.", role: "Freelance editor", text: "kont 5ayef men AE awy bas el course matratteb b tari2a t5aleek tefham mesh te7faz. el precomp lesson saved me f client revision نفس الأسبوع", stars: 4.5 },
     { name: "Lina Mostafa", role: "Social media manager", text: "Best 1,800 I spend this year. One freelance job return the money, like he say in the course. Now motion is my main service.", stars: 5 },
   ],
@@ -150,13 +150,13 @@ export const premiere: Course = {
   index: "04",
   glyph: "Pr",
   title: {
-    en: "Premiere Pro Editing — Cut, Sound, Color & Delivery",
-    ar: "مونتاج بريمير برو — قص وصوت وألوان وتسليم",
+    en: "Premiere Pro Editing, Cut, Sound, Color & Delivery",
+    ar: "مونتاج بريمير برو، قص وصوت وألوان وتسليم",
   },
   short: { en: "Adobe Premiere Pro", ar: "أدوبي بريمير برو" },
   tagline: {
-    en: "Edit stories, not clips — a complete editor's workflow in 4 hours.",
-    ar: "اعمل مونتاج لقصص مش مجرد لقطات — Workflow مونتير كامل في ٤ ساعات.",
+    en: "Edit stories, not clips, a complete editor's workflow in 4 hours.",
+    ar: "اعمل مونتاج لقصص مش مجرد لقطات، Workflow مونتير كامل في ٤ ساعات.",
   },
   desc: {
     en: "The complete editing craft: story-driven cutting, sound that carries emotion, color that looks graded not filtered, and delivery for every platform. Built from real brand edits, trimmed of everything you won't use.",
@@ -164,15 +164,15 @@ export const premiere: Course = {
   },
   level: { en: "Zero → Professional", ar: "من الصفر → للاحتراف" },
   audience: {
-    en: "Designers, marketers and creators who need professional edits for brands and social — fast.",
-    ar: "المصممين والماركترز وصنّاع المحتوى اللي محتاجين مونتاج احترافي للبرندات والسوشيال — بسرعة.",
+    en: "Designers, marketers and creators who need professional edits for brands and social، fast.",
+    ar: "المصممين والماركترز وصنّاع المحتوى اللي محتاجين مونتاج احترافي للبرندات والسوشيال، بسرعة.",
   },
   price: 1050,
   cover: "/work/tilal/building.webp",
   icon: "/lms/icons/premiere.webp",
   plate: ["#00005B", "#9999FF"],
   outcomes: [
-    "Cut with story logic — rhythm, motivation, breathing room",
+    "Cut with story logic, rhythm, motivation, breathing room",
     "Edit to music beats and mix VO, music and SFX properly",
     "Grade with Lumetri: correction first, look second",
     "Build titles and captions with the Essential Graphics panel",
@@ -192,8 +192,8 @@ export const premiere: Course = {
       t: "Edit Foundations",
       lessons: [
         { id: "pr-1-1", t: "Project setup & media management", dur: 12, d: "The folder structure that prevents 90% of editing pain.", free: true },
-        { id: "pr-1-2", t: "Timeline surgery: tools & shortcuts", dur: 12, d: "Ripple, roll, slip, slide — with the shortcuts that matter.", free: true },
-        { id: "pr-1-3", t: "Cuts that tell stories", dur: 12, d: "Why you cut, not just where — motivation and continuity." },
+        { id: "pr-1-2", t: "Timeline surgery: tools & shortcuts", dur: 12, d: "Ripple, roll, slip, slide, with the shortcuts that matter.", free: true },
+        { id: "pr-1-3", t: "Cuts that tell stories", dur: 12, d: "Why you cut, not just where, motivation and continuity." },
         { id: "pr-1-4", t: "J-cuts, L-cuts & pacing", dur: 12, d: "The invisible techniques behind every professional edit." },
       ],
     },
@@ -204,7 +204,7 @@ export const premiere: Course = {
         { id: "pr-2-1", t: "Audio cleanup essentials", dur: 12, d: "DeNoise, EQ and making location audio usable." },
         { id: "pr-2-2", t: "Editing to the beat", dur: 12, d: "Music-driven cutting for reels and brand films." },
         { id: "pr-2-3", t: "Voiceover & ducking", dur: 12, d: "Auto-ducking done right, plus manual finesse." },
-        { id: "pr-2-4", t: "Mix levels for platforms", dur: 12, d: "LUFS targets for social, web and broadcast — simply explained." },
+        { id: "pr-2-4", t: "Mix levels for platforms", dur: 12, d: "LUFS targets for social, web and broadcast, simply explained." },
       ],
     },
     {
@@ -223,7 +223,7 @@ export const premiere: Course = {
       lessons: [
         { id: "pr-4-1", t: "Essential Graphics & titles", dur: 12, d: "Branded titles and lower thirds, reusable as templates." },
         { id: "pr-4-2", t: "Speed ramps & time remapping", dur: 12, d: "The smooth ramps every brand reel uses." },
-        { id: "pr-4-3", t: "Transitions with intent", dur: 12, d: "When to cut, when to move — and building clean transitions." },
+        { id: "pr-4-3", t: "Transitions with intent", dur: 12, d: "When to cut, when to move, and building clean transitions." },
         { id: "pr-4-4", t: "Captions & accessibility", dur: 12, d: "Auto-captions, styling and why they double watch time." },
       ],
     },
@@ -231,10 +231,10 @@ export const premiere: Course = {
       n: "05",
       t: "Delivery & Pipeline",
       lessons: [
-        { id: "pr-5-1", t: "Export recipes per platform", dur: 12, d: "Instagram, TikTok, YouTube, client masters — exact settings." },
+        { id: "pr-5-1", t: "Export recipes per platform", dur: 12, d: "Instagram, TikTok, YouTube, client masters, exact settings." },
         { id: "pr-5-2", t: "Proxies & performance", dur: 12, d: "Edit 4K smoothly on modest machines." },
         { id: "pr-5-3", t: "Project organization at scale", dur: 12, d: "Versioning, archiving and handing off to other editors." },
-        { id: "pr-5-4", t: "Final project walkthrough: 60-second brand edit", dur: 12, d: "I cut a complete brand film live — selects to master." },
+        { id: "pr-5-4", t: "Final project walkthrough: 60-second brand edit", dur: 12, d: "I cut a complete brand film live, selects to master." },
       ],
     },
   ],
@@ -247,7 +247,7 @@ export const premiere: Course = {
     { q: "Slip tool changes…", opts: ["Clip position on the timeline", "Which part of the source plays, keeping duration", "Playback speed", "Audio pitch"], a: 1 },
   ],
   projects: [
-    { t: "The Rhythm Cut", d: "Cut a 30-second montage to a provided track — every edit motivated by the music." },
+    { t: "The Rhythm Cut", d: "Cut a 30-second montage to a provided track, every edit motivated by the music." },
     { t: "Interview Rescue", d: "Clean, cut and duck a messy interview into a tight 45-second story." },
     { t: "Shot Match Lab", d: "Match three mismatched clips into one coherent graded scene." },
   ],
@@ -264,12 +264,12 @@ export const premiere: Course = {
   },
   faq: [
     { q: "Premiere or CapCut?", a: "CapCut is fine for quick phone edits. Premiere is where paid work happens: client revisions, team handoffs, proper color and audio. This course makes the jump painless." },
-    { q: "Do I need footage to practice?", a: "No — the course includes a licensed practice pack with 4K footage, music and voiceover for every module." },
+    { q: "Do I need footage to practice?", a: "No, the course includes a licensed practice pack with 4K footage, music and voiceover for every module." },
     { q: "Will my laptop handle it?", a: "The proxies lesson exists exactly for this. You'll edit 4K smoothly on mid-range hardware." },
-    { q: "Does it cover vertical video?", a: "Throughout — every project ships a 9:16 adaptation, because that's where your clients' audiences are." },
+    { q: "Does it cover vertical video?", a: "Throughout, every project ships a 9:16 adaptation, because that's where your clients' audiences are." },
   ],
   reviews: [
-    { name: "ريم العتيبي", role: "صانعة محتوى — جدة", text: "درس المونتاج على الإيقاع رفع مستوى الريلز حقتي بشكل ما توقعته. الكورسات عندنا أغلى بثلاث مرات وما توصل نص الجودة ذي.", stars: 4.5 },
+    { name: "ريم العتيبي", role: "صانعة محتوى، جدة", text: "درس المونتاج على الإيقاع رفع مستوى الريلز حقتي بشكل ما توقعته. الكورسات عندنا أغلى بثلاث مرات وما توصل نص الجودة ذي.", stars: 4.5 },
     { name: "دينا أشرف", role: "ماركتينج ليد", text: "اتنين من التيم خدوا الكورس وبطّلنا نطلّع المونتاج برّه خالص. رجّع تمنه في شهر واحد بالظبط.", stars: 5 },
     { name: "Ali Ragab", role: "Photographer", text: "The color module alone is worth the price. My videos finally match my photos. Easy to follow, no boring talk, every lesson is short and clear.", stars: 3.5 },
   ],

@@ -3,12 +3,12 @@
 import type { Course, Resource } from "@/lib/courses";
 
 // Client-generated resource downloads. Video lessons are publishing module by
-// module; resource packs ship as branded manifests so the download flow —
-// button, file, naming — works end to end today and swaps to real archives
+// module; resource packs ship as branded manifests so the download flow,
+// button, file, naming, works end to end today and swaps to real archives
 // without UI changes.
 export function downloadResource(course: Course, r: Resource) {
   const lines = [
-    "TAREK — SCHOOL OF VISUAL DIRECTION",
+    "TAREK · SCHOOL OF VISUAL DIRECTION",
     "════════════════════════════════════",
     "",
     `Course:   ${course.title.en}`,
@@ -19,11 +19,11 @@ export function downloadResource(course: Course, r: Resource) {
     "",
     "────────────────────────────────────",
     "This resource pack is being finalized alongside the lesson videos.",
-    "You'll be notified on WhatsApp the moment it ships — your enrollment",
+    "You'll be notified on WhatsApp the moment it ships, your enrollment",
     "already includes it, forever.",
     "",
     `Instructor: Mohamed Tarek`,
-    `Support:    wa.me — see the contact page`,
+    `Support:    wa.me, see the contact page`,
     `© ${new Date().getFullYear()} Tarek`,
   ].join("\n");
 

@@ -5,7 +5,7 @@ import { totalMinutes, lessonCount, type Course, type Bi } from "./types";
 
 export * from "./types";
 
-// The business model: software craft is FREE (the funnel — nobody gatekeeps
+// The business model: software craft is FREE (the funnel, nobody gatekeeps
 // tools in 2026), AI production is PREMIUM (the money skill clients pay for).
 export const courses: Course[] = [
   photoshop,
@@ -36,8 +36,8 @@ export const bundles: Bundle[] = [
     slug: "ai-production-stack",
     title: { en: "The AI Production Stack", ar: "حزمة إنتاج الذكاء الاصطناعي" },
     tagline: {
-      en: "Both AI courses — the full camera-less pipeline, one enrollment.",
-      ar: "دورتا الذكاء الاصطناعي معًا — خط الإنتاج الكامل دون كاميرا، باشتراك واحد.",
+      en: "Both AI courses, the full camera-less pipeline, one enrollment.",
+      ar: "دورتا الذكاء الاصطناعي معًا، خط الإنتاج الكامل دون كاميرا، باشتراك واحد.",
     },
     desc: {
       en: "AI Photoshoot & Prompt Engineering + AI Video Generation: direct stills like a photographer, then turn them into finished spots clients approve. The two highest-earning skills we teach, 6+ hours, two reviewed final projects.",
@@ -51,12 +51,12 @@ export const bundles: Bundle[] = [
     slug: "editors-suite",
     title: { en: "The Editor's Suite", ar: "حزمة المونتير المحترف" },
     tagline: {
-      en: "After Effects + Premiere Pro — motion and editing, one enrollment.",
-      ar: "أفتر إفكتس + بريمير برو — الموشن والمونتاج معًا باشتراك واحد.",
+      en: "After Effects + Premiere Pro, motion and editing, one enrollment.",
+      ar: "أفتر إفكتس + بريمير برو، الموشن والمونتاج معًا باشتراك واحد.",
     },
     desc: {
-      en: "The complete motion-and-edit pipeline: animate in After Effects, cut and finish in Premiere Pro. Everything a working editor ships, taught from real client reels — two reviewed final projects.",
-      ar: "خط الموشن والمونتاج الكامل: حرّك في أفتر إفكتس، واقطع وسلّم في بريمير برو. كل ما يسلّمه المونتير المحترف، مُدرَّس من أعمال حقيقية لعملاء — ومشروعان نهائيان بمراجعة.",
+      en: "The complete motion-and-edit pipeline: animate in After Effects, cut and finish in Premiere Pro. Everything a working editor ships, taught from real client reels, two reviewed final projects.",
+      ar: "خط الموشن والمونتاج الكامل: حرّك في أفتر إفكتس، واقطع وسلّم في بريمير برو. كل ما يسلّمه المونتير المحترف، مُدرَّس من أعمال حقيقية لعملاء، ومشروعان نهائيان بمراجعة.",
     },
     courseSlugs: ["adobe-after-effects", "adobe-premiere-pro"],
     price: 2400,
@@ -66,12 +66,12 @@ export const bundles: Bundle[] = [
     slug: "motion-ai-master",
     title: { en: "The Motion + AI Master Pack", ar: "الحزمة الكبرى: موشن + ذكاء اصطناعي" },
     tagline: {
-      en: "After Effects + Premiere + AI Photoshoot + AI Video — everything that moves and sells.",
-      ar: "أفتر إفكتس + بريمير + التصوير والفيديو بالذكاء الاصطناعي — كل ما يتحرك ويبيع.",
+      en: "After Effects + Premiere + AI Photoshoot + AI Video, everything that moves and sells.",
+      ar: "أفتر إفكتس + بريمير + التصوير والفيديو بالذكاء الاصطناعي، كل ما يتحرك ويبيع.",
     },
     desc: {
-      en: "The everything pack: animate in After Effects, direct AI photoshoots, generate AI footage, and cut it all into finished spots in Premiere Pro. Four courses, four reviewed final projects — the complete modern production skill set.",
-      ar: "حزمة كل شيء: حرّك في أفتر إفكتس، وأخرِج جلسات تصوير بالذكاء الاصطناعي، وولّد لقطات فيديو، ثم اصنع منها إعلانات نهائية في بريمير برو. أربع دورات وأربعة مشاريع نهائية بمراجعة — عدّة الإنتاج الحديثة كاملة.",
+      en: "The everything pack: animate in After Effects, direct AI photoshoots, generate AI footage, and cut it all into finished spots in Premiere Pro. Four courses, four reviewed final projects, the complete modern production skill set.",
+      ar: "حزمة كل شيء: حرّك في أفتر إفكتس، وأخرِج جلسات تصوير بالذكاء الاصطناعي، وولّد لقطات فيديو، ثم اصنع منها إعلانات نهائية في بريمير برو. أربع دورات وأربعة مشاريع نهائية بمراجعة، عدّة الإنتاج الحديثة كاملة.",
     },
     courseSlugs: ["adobe-after-effects", "adobe-premiere-pro", "ai-photoshoot", "ai-video-generation"],
     price: 5900,

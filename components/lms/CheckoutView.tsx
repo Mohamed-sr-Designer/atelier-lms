@@ -81,9 +81,9 @@ export default function CheckoutView() {
 
   const confirmPaid = () => {
     const msg = encodeURIComponent(
-      `${payments.waEnrollMsg} ${orderName} — ${fmtPrice(total, "en")} (${
+      `${payments.waEnrollMsg} ${orderName}: ${fmtPrice(total, "en")} (${
         method === "instapay" ? "InstaPay" : "Vodafone Cash"
-      })${promoState === "ok" ? ` — promo ${promoInput.trim()} applied` : ""}`
+      })${promoState === "ok" ? `, promo ${promoInput.trim()} applied` : ""}`
     );
     window.open(
       `https://wa.me/${site.whatsapp}?text=${msg}`,

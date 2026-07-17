@@ -4,7 +4,7 @@ import TrainingView from "@/components/lms/TrainingView";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Training for Agencies & Teams — On-site in Egypt, Live Online Worldwide",
+  title: "Training for Agencies & Teams | On-site in Egypt, Live Online Worldwide",
   description:
     "Custom Tarek programs for agencies, studios and marketing teams: brand, campaign, motion and AI production. On-site in Egypt, live online everywhere else — plus a free 60-minute strategy consultation for CEOs, founders and marketing managers.",
   alternates: { canonical: "/training/" },

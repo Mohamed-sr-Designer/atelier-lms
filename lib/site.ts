@@ -1,20 +1,20 @@
-// ---- Tarek — the school of Mohamed Tarek ----------------------------------
+// ---- Tarek, the school of Mohamed Tarek ----------------------------------
 export const site = {
-  // Platform identity — the academy carries the founder's name.
+  // Platform identity, the academy carries the founder's name.
   name: "Mohamed Tarek",
   shortName: "Mohamed Tarek",
-  fullName: "Mohamed Tarek — School of Visual Direction",
+  fullName: "Mohamed Tarek, School of Visual Direction",
   title:
-    "Mohamed Tarek — Art Director & Design Academy | Free Photoshop & Illustrator + Pro Motion & AI Production",
+    "Mohamed Tarek, Art Director & Design Academy | Free Photoshop & Illustrator + Pro Motion & AI Production",
   description:
-    "Mohamed Tarek is an art director and designer running an online design academy. His software courses — Photoshop, Illustrator, After Effects, Premiere Pro — are completely free, start to finish. The premium AI production tracks (AI photoshoots and AI video) teach the highest-earning skill in design today. Real projects, quizzes and reviewed final projects.",
+    "Mohamed Tarek is an art director and designer running an online design academy. His software courses, Photoshop, Illustrator, After Effects, Premiere Pro, are completely free, start to finish. The premium AI production tracks (AI photoshoots and AI video) teach the highest-earning skill in design today. Real projects, quizzes and reviewed final projects.",
   url: "https://mohamed-sr-designer.github.io/atelier-lms",
 
   // Instructor
   instructor: "Mohamed Tarek",
   instructorRole: "Art Director, Designer & Founder",
   instructorBio:
-    "Mohamed Tarek is an art director and graphic designer leading brand, campaign and motion work across Egypt, Saudi Arabia and Kuwait — and the founder of Mohamed Tarek Academy, teaching design and AI production to 1,200+ students across four academies.",
+    "Mohamed Tarek is an art director and graphic designer leading brand, campaign and motion work across Egypt, Saudi Arabia and Kuwait, and the founder of Mohamed Tarek Academy, teaching design and AI production to 1,200+ students across four academies.",
 
   email: "mohamed.tarek.ahmed1@gmail.com",
   phoneDisplay: "+20 10 1145 8929",
@@ -43,5 +43,5 @@ export const payments = {
     { id: "valu", label: "valU", enabled: false },
   ],
   waEnrollMsg:
-    "Hi Mohamed — I completed payment for my Mohamed Tarek enrollment. Screenshot attached. Order:",
+    "Hi Mohamed, I completed payment for my Mohamed Tarek enrollment. Screenshot attached. Order:",
 };

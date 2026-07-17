@@ -13,7 +13,7 @@ export type Post = {
   readMins: number;
   tag: string;
   cover: string;
-  relatedCourse: string; // course slug — internal linking
+  relatedCourse: string; // course slug, internal linking
   body: { h?: string; p: string }[];
   faq: { q: string; a: string }[];
 };
@@ -24,9 +24,9 @@ export const posts: Post[] = [
     title: "How Long Does It Really Take to Learn Photoshop in 2026?",
     titleAr: "قد إيه فعلًا تحتاج علشان تتعلم فوتوشوب في 2026؟",
     excerpt:
-      "Not 10,000 hours. With a structured path, a working professional workflow takes weeks — here's the honest timeline stage by stage.",
+      "Not 10,000 hours. With a structured path, a working professional workflow takes weeks, here's the honest timeline stage by stage.",
     excerptAr:
-      "مش ١٠ آلاف ساعة. بمسار منظم، الـ Workflow الاحترافي بياخد أسابيع — دي الأرقام الحقيقية مرحلة بمرحلة.",
+      "مش ١٠ آلاف ساعة. بمسار منظم، الـ Workflow الاحترافي بياخد أسابيع، دي الأرقام الحقيقية مرحلة بمرحلة.",
     date: "2026-06-12",
     readMins: 6,
     tag: "Learning Paths",
@@ -34,15 +34,15 @@ export const posts: Post[] = [
     relatedCourse: "adobe-photoshop",
     body: [
       {
-        p: "The most common question I get after nine years of teaching design — across EDUX Academy, Raya Academy, Teaching Planet and SOIC — is some version of: how long until I'm actually good at Photoshop? The honest answer is more encouraging than the mythology. You don't need years. You need sequence.",
+        p: "The most common question I get after nine years of teaching design, across EDUX Academy, Raya Academy, Teaching Planet and SOIC, is some version of: how long until I'm actually good at Photoshop? The honest answer is more encouraging than the mythology. You don't need years. You need sequence.",
       },
       {
         h: "The 4-stage timeline",
-        p: "Stage one — the canvas (week 1): layers, smart objects, adjustment layers, basic selections. Stage two — selections and masking (weeks 2–3): this is the wall where self-taught learners get stuck for months, because they learn tools instead of decision rules. Stage three — color and retouch (weeks 3–5): curves, grading, frequency-aware retouching. Stage four — compositing (weeks 5–8): building complete visuals from multiple sources. Total: about two months of consistent practice to a genuinely professional workflow.",
+        p: "Stage one, the canvas (week 1): layers, smart objects, adjustment layers, basic selections. Stage two, selections and masking (weeks 2–3): this is the wall where self-taught learners get stuck for months, because they learn tools instead of decision rules. Stage three, color and retouch (weeks 3–5): curves, grading, frequency-aware retouching. Stage four, compositing (weeks 5–8): building complete visuals from multiple sources. Total: about two months of consistent practice to a genuinely professional workflow.",
       },
       {
         h: "Why self-taught takes 10x longer",
-        p: "YouTube teaches Photoshop as ten thousand disconnected tricks. Professional workflow is maybe forty decisions applied in the right order. When my Photoshop Mastery students finish the five-hour course, they haven't seen everything Photoshop does — they've internalized the order of operations working retouchers use daily. That's the difference between knowing the software and being employable with it.",
+        p: "YouTube teaches Photoshop as ten thousand disconnected tricks. Professional workflow is maybe forty decisions applied in the right order. When my Photoshop Mastery students finish the five-hour course, they haven't seen everything Photoshop does, they've internalized the order of operations working retouchers use daily. That's the difference between knowing the software and being employable with it.",
       },
       {
         h: "The practice ratio that works",
@@ -52,7 +52,7 @@ export const posts: Post[] = [
     faq: [
       {
         q: "Can I learn Photoshop in one month?",
-        a: "Yes — a professional core workflow (selections, masking, color, retouch) is achievable in 4–8 weeks with a structured course and a 1:2 lesson-to-practice ratio.",
+        a: "Yes, a professional core workflow (selections, masking, color, retouch) is achievable in 4–8 weeks with a structured course and a 1:2 lesson-to-practice ratio.",
       },
       {
         q: "Is Photoshop still worth learning in the AI era?",
@@ -60,7 +60,7 @@ export const posts: Post[] = [
       },
       {
         q: "Do I need a drawing tablet to learn Photoshop?",
-        a: "No. Retouching and compositing are precision work, not sketching — a mouse is fine for everything in a design workflow.",
+        a: "No. Retouching and compositing are precision work, not sketching, a mouse is fine for everything in a design workflow.",
       },
     ],
   },
@@ -69,9 +69,9 @@ export const posts: Post[] = [
     title: "The 2026 Designer Roadmap: Zero to Professional Workflow",
     titleAr: "خريطة المصمم 2026: من الصفر لـ Workflow احترافي",
     excerpt:
-      "The exact tool-by-tool sequence I've used to take 1,200+ students from zero to hired — and the order most people get wrong.",
+      "The exact tool-by-tool sequence I've used to take 1,200+ students from zero to hired, and the order most people get wrong.",
     excerptAr:
-      "الترتيب الصح للأدوات اللي وصّلت بيه أكتر من ١٢٠٠ طالب من الصفر للشغل — والترتيب اللي أغلب الناس بتغلط فيه.",
+      "الترتيب الصح للأدوات اللي وصّلت بيه أكتر من ١٢٠٠ طالب من الصفر للشغل، والترتيب اللي أغلب الناس بتغلط فيه.",
     date: "2026-06-24",
     readMins: 8,
     tag: "Career",
@@ -82,30 +82,30 @@ export const posts: Post[] = [
         p: "After teaching more than 1,200 students across four academies, I can tell you the single biggest mistake beginners make: they choose tools by hype instead of by sequence. The order you learn in determines whether skills compound or evaporate.",
       },
       {
-        h: "Phase 1 — Photoshop first (weeks 1–8)",
-        p: "Photoshop teaches the fundamentals every other tool assumes: layers, masking, color, composition. It's also where the most junior paid work lives — social media design, retouching, ad adaptation. Employability arrives fastest here.",
+        h: "Phase 1, Photoshop first (weeks 1–8)",
+        p: "Photoshop teaches the fundamentals every other tool assumes: layers, masking, color, composition. It's also where the most junior paid work lives, social media design, retouching, ad adaptation. Employability arrives fastest here.",
       },
       {
-        h: "Phase 2 — Illustrator for construction (weeks 9–16)",
+        h: "Phase 2, Illustrator for construction (weeks 9–16)",
         p: "Vectors teach discipline pixels never will: geometry, optical correction, systems. Logo and identity work is the highest-value corner of graphic design, and it runs entirely on Illustrator craft.",
       },
       {
-        h: "Phase 3 — pick a multiplier (months 4–6)",
-        p: "Now branch by market: After Effects if you love rhythm and film (motion is the most requested add-on skill for designers). Figma if you're drawn to products and apps — the graphic-designer-to-UI transition is the most in-demand career move right now. Premiere Pro if content and campaigns are your world.",
+        h: "Phase 3, pick a multiplier (months 4–6)",
+        p: "Now branch by market: After Effects if you love rhythm and film (motion is the most requested add-on skill for designers). Figma if you're drawn to products and apps, the graphic-designer-to-UI transition is the most in-demand career move right now. Premiere Pro if content and campaigns are your world.",
       },
       {
-        h: "Phase 4 — the AI layer on top",
-        p: "AI photoshoots and AI video are multipliers, not shortcuts. They multiply the taste and craft you built in phases 1–3. A prompt engineer who can't retouch ships broken images; a designer who can do both replaces a production studio. That's why the AI tracks are priced against one freelance job — the first paid brief covers the course several times over.",
+        h: "Phase 4, the AI layer on top",
+        p: "AI photoshoots and AI video are multipliers, not shortcuts. They multiply the taste and craft you built in phases 1–3. A prompt engineer who can't retouch ships broken images; a designer who can do both replaces a production studio. That's why the AI tracks are priced against one freelance job, the first paid brief covers the course several times over.",
       },
     ],
     faq: [
       {
         q: "Which design tool should a complete beginner learn first?",
-        a: "Photoshop. It teaches the transferable fundamentals (layers, masking, color) and unlocks the largest pool of entry-level paid work — then Illustrator for logo and identity craft.",
+        a: "Photoshop. It teaches the transferable fundamentals (layers, masking, color) and unlocks the largest pool of entry-level paid work, then Illustrator for logo and identity craft.",
       },
       {
         q: "Should beginners skip Adobe and learn AI tools instead?",
-        a: "No — AI output still requires finishing, compositing and taste. Learn craft first, then add AI as a multiplier. Designers with both replace entire production pipelines.",
+        a: "No, AI output still requires finishing, compositing and taste. Learn craft first, then add AI as a multiplier. Designers with both replace entire production pipelines.",
       },
       {
         q: "How long from zero to first paid design work?",
@@ -115,12 +115,12 @@ export const posts: Post[] = [
   },
   {
     slug: "ai-photoshoots-real-campaigns",
-    title: "AI Photoshoots Are Already in Real Campaigns — Here's the Workflow",
-    titleAr: "جلسات تصوير الذكاء الاصطناعي في حملات حقيقية بالفعل — ده الـ Workflow",
+    title: "AI Photoshoots Are Already in Real Campaigns, Here's the Workflow",
+    titleAr: "جلسات تصوير الذكاء الاصطناعي في حملات حقيقية بالفعل، ده الـ Workflow",
     excerpt:
-      "I've shipped client campaigns shot entirely with AI. The pipeline that makes it client-grade has five stages — and none of them is 'type a prompt'.",
+      "I've shipped client campaigns shot entirely with AI. The pipeline that makes it client-grade has five stages, and none of them is 'type a prompt'.",
     excerptAr:
-      "سلّمت حملات لعملاء اتصورت بالكامل بالذكاء الاصطناعي. الخط اللي بيخليها بمستوى العميل فيه خمس مراحل — ولا واحدة منهم 'اكتب برومبت'.",
+      "سلّمت حملات لعملاء اتصورت بالكامل بالذكاء الاصطناعي. الخط اللي بيخليها بمستوى العميل فيه خمس مراحل، ولا واحدة منهم 'اكتب برومبت'.",
     date: "2026-07-01",
     readMins: 7,
     tag: "AI Production",
@@ -128,22 +128,22 @@ export const posts: Post[] = [
     relatedCourse: "ai-photoshoot",
     body: [
       {
-        p: "The gifting brand campaign in this post's cover image never saw a camera. No studio, no lighting rig, no product samples shipped across the city. It was directed, generated, retouched and delivered — and the client approved it over a traditional studio quote. This isn't the future; it's how my team works today.",
+        p: "The gifting brand campaign in this post's cover image never saw a camera. No studio, no lighting rig, no product samples shipped across the city. It was directed, generated, retouched and delivered, and the client approved it over a traditional studio quote. This isn't the future; it's how my team works today.",
       },
       {
-        h: "Stage 1 — art direction still comes first",
-        p: "AI didn't remove the moodboard; it made it mandatory. Before any generation, we lock a reference set: light quality, lens language, color world, composition rules. The model is a very fast photographer with no taste — the taste is your job.",
+        h: "Stage 1, art direction still comes first",
+        p: "AI didn't remove the moodboard; it made it mandatory. Before any generation, we lock a reference set: light quality, lens language, color world, composition rules. The model is a very fast photographer with no taste, the taste is your job.",
       },
       {
-        h: "Stage 2 — prompts as photography direction",
+        h: "Stage 2, prompts as photography direction",
         p: "The prompts that work read like a shot list: subject, scene, lens, light, mood, constraints. 'Warm product hero, 85mm, soft window light from camera left, amber palette, negative space top-right for headline.' Photography vocabulary in, photography results out.",
       },
       {
-        h: "Stage 3 — generate wide, curate ruthlessly",
-        p: "A 6-frame campaign set starts as 150+ generations. Curation — the discipline of picking hero frames — is where sets stop looking 'AI-ish'. Consistency of character, product and grade across frames is the professional requirement clients silently check.",
+        h: "Stage 3, generate wide, curate ruthlessly",
+        p: "A 6-frame campaign set starts as 150+ generations. Curation, the discipline of picking hero frames, is where sets stop looking 'AI-ish'. Consistency of character, product and grade across frames is the professional requirement clients silently check.",
       },
       {
-        h: "Stages 4 & 5 — Photoshop finishing and delivery",
+        h: "Stages 4 & 5, Photoshop finishing and delivery",
         p: "Every frame gets a retouch pass (hands, edges, artifacts), then one unified grade across the set, then proper delivery masters. The AI got us 80% in minutes; the craft closes the 20% that separates a demo from an invoice. I teach this exact pipeline, end to end, in the AI Photoshoot & Prompt Engineering course.",
       },
     ],
@@ -154,7 +154,7 @@ export const posts: Post[] = [
       },
       {
         q: "Do clients accept AI photoshoots?",
-        a: "Increasingly yes — when the finishing is professional. Clients buy the result and the cost/speed advantage; they reject uncanny artifacts. The retouch-and-grade stage is what makes approval happen.",
+        a: "Increasingly yes, when the finishing is professional. Clients buy the result and the cost/speed advantage; they reject uncanny artifacts. The retouch-and-grade stage is what makes approval happen.",
       },
       {
         q: "What's the best AI tool for product photoshoots?",
@@ -167,9 +167,9 @@ export const posts: Post[] = [
     title: "Figma vs Adobe XD vs Vibe Coding: What's the Difference in 2026?",
     titleAr: "فيجما وأدوبي XD والـ Vibe Coding: ما الفرق في 2026؟",
     excerpt:
-      "One is the industry standard, one is on life support, and one skips the design file entirely. Where each fits — and what designers should actually learn.",
+      "One is the industry standard, one is on life support, and one skips the design file entirely. Where each fits, and what designers should actually learn.",
     excerptAr:
-      "واحد معيار الصناعة، وواحد على أجهزة الإنعاش، وواحد يتخطى ملف التصميم كليًا. أين يناسب كل منها — وماذا يتعلم المصمم فعلًا.",
+      "واحد معيار الصناعة، وواحد على أجهزة الإنعاش، وواحد يتخطى ملف التصميم كليًا. أين يناسب كل منها، وماذا يتعلم المصمم فعلًا.",
     date: "2026-07-12",
     readMins: 6,
     tag: "Learning Paths",
@@ -177,29 +177,29 @@ export const posts: Post[] = [
     relatedCourse: "adobe-photoshop",
     body: [
       {
-        p: "Three names keep coming up when designers ask about interface work in 2026: Figma, Adobe XD, and the new one — vibe coding. They're not three versions of the same thing. One is the industry standard, one is effectively retired, and one skips the design file entirely. Here's the honest map.",
+        p: "Three names keep coming up when designers ask about interface work in 2026: Figma, Adobe XD, and the new one, vibe coding. They're not three versions of the same thing. One is the industry standard, one is effectively retired, and one skips the design file entirely. Here's the honest map.",
       },
       {
-        h: "Figma — the industry standard, full stop",
-        p: "Figma won the interface-design war: real-time collaboration, auto layout, components, dev mode, and a plugin economy. If a team anywhere in the world designs an app or a website today, the file is almost certainly a Figma file. For UI/UX roles it isn't optional — it's the baseline, the way Photoshop is the baseline for image work.",
+        h: "Figma, the industry standard, full stop",
+        p: "Figma won the interface-design war: real-time collaboration, auto layout, components, dev mode, and a plugin economy. If a team anywhere in the world designs an app or a website today, the file is almost certainly a Figma file. For UI/UX roles it isn't optional, it's the baseline, the way Photoshop is the baseline for image work.",
       },
       {
-        h: "Adobe XD — on life support",
-        p: "Adobe stopped meaningfully developing XD after the failed Figma acquisition; it survives in maintenance mode inside some legacy enterprise workflows. Learning XD in 2026 is learning a tool the market has already left. If you find an old course or a team still on it, the skills transfer to Figma in a week — but don't start there.",
+        h: "Adobe XD, on life support",
+        p: "Adobe stopped meaningfully developing XD after the failed Figma acquisition; it survives in maintenance mode inside some legacy enterprise workflows. Learning XD in 2026 is learning a tool the market has already left. If you find an old course or a team still on it, the skills transfer to Figma in a week, but don't start there.",
       },
       {
-        h: "Vibe coding — skipping the design file",
-        p: "Vibe coding is the new lane: describing what you want in plain language and letting AI coding tools (Cursor, Claude, v0 and friends) generate the working interface directly — no mockup stage at all. It's astonishingly fast for landing pages, internal tools and prototypes. What it doesn't replace is taste: the AI will happily generate a generic layout unless someone with design judgment directs it. Sound familiar? It's the same rule as AI photoshoots — the tool is fast, the direction is the skill.",
+        h: "Vibe coding, skipping the design file",
+        p: "Vibe coding is the new lane: describing what you want in plain language and letting AI coding tools (Cursor, Claude, v0 and friends) generate the working interface directly, no mockup stage at all. It's astonishingly fast for landing pages, internal tools and prototypes. What it doesn't replace is taste: the AI will happily generate a generic layout unless someone with design judgment directs it. Sound familiar? It's the same rule as AI photoshoots, the tool is fast, the direction is the skill.",
       },
       {
         h: "So what should a designer learn?",
-        p: "Craft first, always: Photoshop and Illustrator fundamentals build the visual judgment every other tool depends on. Then Figma if products are your lane. Then treat vibe coding like we treat AI production here — a multiplier on top of taste, not a replacement for it. Designers who can direct both images and interfaces with AI are the most leveraged people in the industry right now.",
+        p: "Craft first, always: Photoshop and Illustrator fundamentals build the visual judgment every other tool depends on. Then Figma if products are your lane. Then treat vibe coding like we treat AI production here, a multiplier on top of taste, not a replacement for it. Designers who can direct both images and interfaces with AI are the most leveraged people in the industry right now.",
       },
     ],
     faq: [
       {
         q: "Is Adobe XD dead in 2026?",
-        a: "Effectively yes — Adobe moved it to maintenance mode and its market share has collapsed to Figma. Skills transfer to Figma quickly, but new learners shouldn't start with XD.",
+        a: "Effectively yes, Adobe moved it to maintenance mode and its market share has collapsed to Figma. Skills transfer to Figma quickly, but new learners shouldn't start with XD.",
       },
       {
         q: "What is vibe coding?",
@@ -207,7 +207,7 @@ export const posts: Post[] = [
       },
       {
         q: "Will vibe coding replace Figma and designers?",
-        a: "No — it shifts the designer's job toward direction and taste. Complex products still need designed systems in Figma, and AI-generated interfaces still need someone with visual judgment steering them.",
+        a: "No, it shifts the designer's job toward direction and taste. Complex products still need designed systems in Figma, and AI-generated interfaces still need someone with visual judgment steering them.",
       },
     ],
   },
@@ -216,9 +216,9 @@ export const posts: Post[] = [
     title: "12 Photoshop Tips & Tricks the Pros Use Every Single Day",
     titleAr: "١٢ تريك في فوتوشوب المحترفين بيستخدموها كل يوم",
     excerpt:
-      "The small, high-leverage Photoshop habits that separate a beginner from a working retoucher — shortcuts, non-destructive moves and speed tricks.",
+      "The small, high-leverage Photoshop habits that separate a beginner from a working retoucher, shortcuts, non-destructive moves and speed tricks.",
     excerptAr:
-      "العادات الصغيرة عالية القيمة اللي بتفرق بين المبتدئ والريتشر المحترف — اختصارات وحركات non-destructive وتريكات سرعة.",
+      "العادات الصغيرة عالية القيمة اللي بتفرق بين المبتدئ والريتشر المحترف، اختصارات وحركات non-destructive وتريكات سرعة.",
     date: "2026-07-05",
     readMins: 7,
     tag: "Photoshop Tips",
@@ -226,11 +226,11 @@ export const posts: Post[] = [
     relatedCourse: "adobe-photoshop",
     body: [
       {
-        p: "After nine years retouching client work and teaching Photoshop across four academies, I've noticed the gap between beginners and professionals isn't knowledge of obscure features — it's a handful of tiny habits repeated thousands of times. Here are the twelve that matter most.",
+        p: "After nine years retouching client work and teaching Photoshop across four academies, I've noticed the gap between beginners and professionals isn't knowledge of obscure features, it's a handful of tiny habits repeated thousands of times. Here are the twelve that matter most.",
       },
       {
         h: "Speed tricks that compound",
-        p: "1. Hold Alt/Option while clicking a layer mask to view it full-screen. 2. Use Shift+Backspace for the Fill dialog instead of hunting menus. 3. Bracket keys [ and ] resize any brush instantly. 4. Ctrl/Cmd+J duplicates a layer; do it before every risky move. These feel trivial — but a retoucher makes each of these gestures hundreds of times a day, and the seconds add up to hours a week.",
+        p: "1. Hold Alt/Option while clicking a layer mask to view it full-screen. 2. Use Shift+Backspace for the Fill dialog instead of hunting menus. 3. Bracket keys [ and ] resize any brush instantly. 4. Ctrl/Cmd+J duplicates a layer; do it before every risky move. These feel trivial, but a retoucher makes each of these gestures hundreds of times a day, and the seconds add up to hours a week.",
       },
       {
         h: "Non-destructive is a mindset, not a feature",
@@ -238,11 +238,11 @@ export const posts: Post[] = [
       },
       {
         h: "Selection & masking tricks that save hours",
-        p: "9. Select Subject then refine in Select and Mask — start from AI, finish by hand. 10. Color Range for skies and consistent backgrounds. 11. Paint masks with a soft low-flow brush for natural edges. 12. Push a mask's contrast with a Levels adjustment clipped to it. Masking is where self-taught learners stall for months; these four moves are 80% of professional selection work.",
+        p: "9. Select Subject then refine in Select and Mask, start from AI, finish by hand. 10. Color Range for skies and consistent backgrounds. 11. Paint masks with a soft low-flow brush for natural edges. 12. Push a mask's contrast with a Levels adjustment clipped to it. Masking is where self-taught learners stall for months; these four moves are 80% of professional selection work.",
       },
       {
         h: "How to actually internalize them",
-        p: "Don't memorize this list — rebuild one real image using only these twelve moves. That's the exact practice loop inside the free Photoshop course: every lesson ends with a brief you finish with your own files, which is the only way habits like these become automatic.",
+        p: "Don't memorize this list, rebuild one real image using only these twelve moves. That's the exact practice loop inside the free Photoshop course: every lesson ends with a brief you finish with your own files, which is the only way habits like these become automatic.",
       },
     ],
     faq: [
@@ -252,7 +252,7 @@ export const posts: Post[] = [
       },
       {
         q: "What does non-destructive editing mean in Photoshop?",
-        a: "Editing through adjustment layers, masks and Smart Objects so the original pixels are never changed — every decision stays reversible, which is the baseline of employable, professional work.",
+        a: "Editing through adjustment layers, masks and Smart Objects so the original pixels are never changed, every decision stays reversible, which is the baseline of employable, professional work.",
       },
       {
         q: "Are Photoshop skills still worth it with AI tools around?",
@@ -275,11 +275,11 @@ export const posts: Post[] = [
     relatedCourse: "adobe-illustrator",
     body: [
       {
-        p: "Every Illustrator beginner hits the same wall: the Pen Tool. It feels unpredictable, the curves fight back, and most people retreat to the shape tools forever. The problem isn't your hand — it's that nobody gave you the mental model first.",
+        p: "Every Illustrator beginner hits the same wall: the Pen Tool. It feels unpredictable, the curves fight back, and most people retreat to the shape tools forever. The problem isn't your hand, it's that nobody gave you the mental model first.",
       },
       {
         h: "The one rule: anchor points go at extremes",
-        p: "Place anchor points only where a curve changes direction — the top of a hill, the bottom of a valley. Beginners scatter points everywhere and then fight the handles. Professionals use the fewest points possible. A perfect circle needs exactly four. If your path has twice the points it needs, every edit becomes a wrestling match.",
+        p: "Place anchor points only where a curve changes direction, the top of a hill, the bottom of a valley. Beginners scatter points everywhere and then fight the handles. Professionals use the fewest points possible. A perfect circle needs exactly four. If your path has twice the points it needs, every edit becomes a wrestling match.",
       },
       {
         h: "Handles are levers, not decorations",
@@ -287,7 +287,7 @@ export const posts: Post[] = [
       },
       {
         h: "The practice that builds muscle memory",
-        p: "Trace letterforms. Pull a bold serif typeface onto your artboard, lock it, and rebuild each letter with the Pen Tool. Letters contain every curve problem you'll ever face — and because you can see the target, your hand learns faster than any abstract exercise. This is exactly how the Illustrator course opens, because pen confidence unlocks everything else: logos, icons, illustration.",
+        p: "Trace letterforms. Pull a bold serif typeface onto your artboard, lock it, and rebuild each letter with the Pen Tool. Letters contain every curve problem you'll ever face, and because you can see the target, your hand learns faster than any abstract exercise. This is exactly how the Illustrator course opens, because pen confidence unlocks everything else: logos, icons, illustration.",
       },
     ],
     faq: [
@@ -301,7 +301,7 @@ export const posts: Post[] = [
       },
       {
         q: "What's the fastest way to learn the Pen Tool?",
-        a: "Trace typography. Lock a bold typeface and rebuild each letter with the Pen — letters contain every curve type, and seeing the target trains your hand faster than abstract drills.",
+        a: "Trace typography. Lock a bold typeface and rebuild each letter with the Pen, letters contain every curve type, and seeing the target trains your hand faster than abstract drills.",
       },
     ],
   },
@@ -320,7 +320,7 @@ export const posts: Post[] = [
     relatedCourse: "adobe-illustrator",
     body: [
       {
-        p: "Logo and identity work is the highest-value corner of graphic design — and it lives entirely in Illustrator craft. These are ten tricks I use on every client mark, the difference between a shape that looks drawn and one that looks engineered.",
+        p: "Logo and identity work is the highest-value corner of graphic design, and it lives entirely in Illustrator craft. These are ten tricks I use on every client mark, the difference between a shape that looks drawn and one that looks engineered.",
       },
       {
         h: "Build on a grid, correct by eye",
@@ -332,13 +332,13 @@ export const posts: Post[] = [
       },
       {
         h: "Delivery that survives the real world",
-        p: "8. Test every logo at 16px — if it dies as a favicon, it isn't finished. 9. Deliver a single-color version first; if it works in one color, it works everywhere. 10. Provide proper lockups and clear-space rules so clients can't destroy it. A logo isn't a drawing, it's a system — and the system is what you're actually paid for.",
+        p: "8. Test every logo at 16px, if it dies as a favicon, it isn't finished. 9. Deliver a single-color version first; if it works in one color, it works everywhere. 10. Provide proper lockups and clear-space rules so clients can't destroy it. A logo isn't a drawing, it's a system, and the system is what you're actually paid for.",
       },
     ],
     faq: [
       {
         q: "What is optical correction in logo design?",
-        a: "Adjusting shapes so they look correct rather than being mathematically equal — circles drawn slightly larger than squares, horizontals slightly thinner than verticals — because the eye, not the ruler, judges the final mark.",
+        a: "Adjusting shapes so they look correct rather than being mathematically equal, circles drawn slightly larger than squares, horizontals slightly thinner than verticals, because the eye, not the ruler, judges the final mark.",
       },
       {
         q: "Should a logo be designed in one color first?",
@@ -346,7 +346,7 @@ export const posts: Post[] = [
       },
       {
         q: "Why test a logo at 16 pixels?",
-        a: "Because favicons, app icons and tiny UI placements are real usage. If a mark collapses at 16px it isn't finished — legibility at small sizes is a core requirement, not an afterthought.",
+        a: "Because favicons, app icons and tiny UI placements are real usage. If a mark collapses at 16px it isn't finished, legibility at small sizes is a core requirement, not an afterthought.",
       },
     ],
   },
@@ -365,19 +365,19 @@ export const posts: Post[] = [
     relatedCourse: "ai-photoshoot",
     body: [
       {
-        p: "I've shipped client campaigns shot entirely with AI, approved over traditional studio quotes. The single biggest lever is how you prompt — and pro prompting reads like a photographer's shot list, not a pile of adjectives. Here are the seven rules.",
+        p: "I've shipped client campaigns shot entirely with AI, approved over traditional studio quotes. The single biggest lever is how you prompt, and pro prompting reads like a photographer's shot list, not a pile of adjectives. Here are the seven rules.",
       },
       {
         h: "Rules 1–3: speak photography",
-        p: "1. Lead with subject and scene, not style words. 2. Specify the lens — 85mm for flattering product heroes, 35mm for environmental context — because focal length changes everything. 3. Direct the light like on set: 'soft window light from camera left, warm key, gentle fill'. Photography vocabulary in, photography results out.",
+        p: "1. Lead with subject and scene, not style words. 2. Specify the lens, 85mm for flattering product heroes, 35mm for environmental context, because focal length changes everything. 3. Direct the light like on set: 'soft window light from camera left, warm key, gentle fill'. Photography vocabulary in, photography results out.",
       },
       {
         h: "Rules 4–5: composition & constraints",
-        p: "4. Call your composition: negative space top-right for a headline, rule-of-thirds placement, tight crop. 5. Add constraints, not just wishes — 'no text, no logos, shallow depth of field, muted amber palette'. Constraints are what stop a model from drifting into generic stock-photo territory.",
+        p: "4. Call your composition: negative space top-right for a headline, rule-of-thirds placement, tight crop. 5. Add constraints, not just wishes'no text, no logos, shallow depth of field, muted amber palette'. Constraints are what stop a model from drifting into generic stock-photo territory.",
       },
       {
         h: "Rules 6–7: consistency & curation",
-        p: "6. For a campaign SET, lock a reference and reuse the exact character, product and grade language across every frame — consistency is the professional tell clients silently check. 7. Generate wide, curate ruthlessly: a 6-frame set starts as 150+ generations, and picking hero frames is a design skill, not luck. The prompt gets you 80%; direction and curation close the rest.",
+        p: "6. For a campaign SET, lock a reference and reuse the exact character, product and grade language across every frame, consistency is the professional tell clients silently check. 7. Generate wide, curate ruthlessly: a 6-frame set starts as 150+ generations, and picking hero frames is a design skill, not luck. The prompt gets you 80%; direction and curation close the rest.",
       },
       {
         h: "Where the craft actually lives",
@@ -414,25 +414,25 @@ export const posts: Post[] = [
     relatedCourse: "ai-video-generation",
     body: [
       {
-        p: "The fastest-growing deliverable in advertising right now is AI video — and the people winning that work aren't the ones with the best model access. They're the ones who treat it like directing a film crew, not rolling a slot machine. Here's the pipeline from text idea to a spot a client signs off.",
+        p: "The fastest-growing deliverable in advertising right now is AI video, and the people winning that work aren't the ones with the best model access. They're the ones who treat it like directing a film crew, not rolling a slot machine. Here's the pipeline from text idea to a spot a client signs off.",
       },
       {
-        h: "Stage 1 — direct the camera in words",
-        p: "Before generating a single frame, write a shot list. Each shot gets camera language: 'slow push-in on subject, 35mm, handheld feel, warm dusk light'. You're directing motion and lensing, not describing a scene. Storyboard the 30-second spot first — the generation is the last step, not the first.",
+        h: "Stage 1, direct the camera in words",
+        p: "Before generating a single frame, write a shot list. Each shot gets camera language: 'slow push-in on subject, 35mm, handheld feel, warm dusk light'. You're directing motion and lensing, not describing a scene. Storyboard the 30-second spot first, the generation is the last step, not the first.",
       },
       {
-        h: "Stage 2 — generate & source",
+        h: "Stage 2, generate & source",
         p: "Drive the video models toward usable shots through iteration, and blend them with prepared stock so nobody spots the seam. Image-to-video is a secret weapon: animate frames from an AI photoshoot into moving shots for perfect consistency. The mix of generated and sourced footage is what makes a spot feel produced.",
       },
       {
-        h: "Stages 3 & 4 — cut it like film, then ship",
-        p: "Assemble in Premiere Pro with real editorial rhythm — pacing hides generation limits, and cutting before a shot drifts is how pros work. Then the half everyone forgets: sound design and mix. Finally grade for one consistent look across AI, stock and graphics, export platform masters and ratios, and present it with confidence when the client asks 'is this AI?'. The answer is a directed pipeline, and that's exactly what the premium AI Video course teaches end to end.",
+        h: "Stages 3 & 4, cut it like film, then ship",
+        p: "Assemble in Premiere Pro with real editorial rhythm, pacing hides generation limits, and cutting before a shot drifts is how pros work. Then the half everyone forgets: sound design and mix. Finally grade for one consistent look across AI, stock and graphics, export platform masters and ratios, and present it with confidence when the client asks 'is this AI?'. The answer is a directed pipeline, and that's exactly what the premium AI Video course teaches end to end.",
       },
     ],
     faq: [
       {
         q: "Can you make client-ready video with AI?",
-        a: "Yes — when it's directed, not just generated. A shot list, camera-language prompts, editing in Premiere Pro, sound design and a unified grade turn AI clips into spots clients approve.",
+        a: "Yes, when it's directed, not just generated. A shot list, camera-language prompts, editing in Premiere Pro, sound design and a unified grade turn AI clips into spots clients approve.",
       },
       {
         q: "How do you keep AI video shots consistent?",
@@ -449,9 +449,9 @@ export const posts: Post[] = [
     title: "AI vs Photoshop: Why the Best Designers Use Both (and Charge More)",
     titleAr: "الذكاء الاصطناعي ولا فوتوشوب: ليه أحسن المصممين بيستخدموا الاتنين",
     excerpt:
-      "AI isn't replacing Photoshop — it's feeding it. The designers thriving right now do both, and they replace whole production studios.",
+      "AI isn't replacing Photoshop, it's feeding it. The designers thriving right now do both, and they replace whole production studios.",
     excerptAr:
-      "الـ AI مش بيحل محل فوتوشوب — بيغذّيه. المصممين اللي بينجحوا دلوقتي بيعملوا الاتنين، وبيحلوا محل استوديوهات إنتاج كاملة.",
+      "الـ AI مش بيحل محل فوتوشوب، بيغذّيه. المصممين اللي بينجحوا دلوقتي بيعملوا الاتنين، وبيحلوا محل استوديوهات إنتاج كاملة.",
     date: "2026-07-11",
     readMins: 6,
     tag: "AI Production",
@@ -459,7 +459,7 @@ export const posts: Post[] = [
     relatedCourse: "ai-photoshoot",
     body: [
       {
-        p: "The 'AI is killing design' headlines get one thing exactly backwards. In real production, AI and Photoshop aren't rivals — they're two stages of one pipeline. The designers thriving right now are the ones who own both, and they're quietly replacing entire production studios.",
+        p: "The 'AI is killing design' headlines get one thing exactly backwards. In real production, AI and Photoshop aren't rivals, they're two stages of one pipeline. The designers thriving right now are the ones who own both, and they're quietly replacing entire production studios.",
       },
       {
         h: "AI generates. Photoshop finishes.",
@@ -467,25 +467,25 @@ export const posts: Post[] = [
       },
       {
         h: "Why 'both' is the money skill",
-        p: "A prompt engineer who can't retouch ships broken images. A retoucher who can't prompt is slower and more expensive than the market now allows. A designer who can direct AI and finish in Photoshop does a full campaign shoot in a day — that combined skill is what clients pay premium budgets for, because it replaces a photographer, a studio and a retouch team.",
+        p: "A prompt engineer who can't retouch ships broken images. A retoucher who can't prompt is slower and more expensive than the market now allows. A designer who can direct AI and finish in Photoshop does a full campaign shoot in a day, that combined skill is what clients pay premium budgets for, because it replaces a photographer, a studio and a retouch team.",
       },
       {
         h: "The sequence to learn it in",
-        p: "Craft first, AI second. Learn Photoshop fundamentals — free, in full — so you can judge and finish anything a model gives you. Then add the AI Photoshoot pipeline on top as a multiplier. That's the whole model here: Photoshop and Illustrator are free because craft is the foundation, and the premium AI tracks are where that craft turns into the highest-earning skill in design today.",
+        p: "Craft first, AI second. Learn Photoshop fundamentals, free, in full, so you can judge and finish anything a model gives you. Then add the AI Photoshoot pipeline on top as a multiplier. That's the whole model here: Photoshop and Illustrator are free because craft is the foundation, and the premium AI tracks are where that craft turns into the highest-earning skill in design today.",
       },
     ],
     faq: [
       {
         q: "Is AI going to replace Photoshop?",
-        a: "No. AI generates raw images; Photoshop retouches, composites and finishes them. Every professional AI pipeline still ends in Photoshop — they're two stages of one workflow, not competitors.",
+        a: "No. AI generates raw images; Photoshop retouches, composites and finishes them. Every professional AI pipeline still ends in Photoshop, they're two stages of one workflow, not competitors.",
       },
       {
         q: "Should I learn Photoshop or AI first?",
-        a: "Photoshop first. Craft lets you judge and finish anything AI produces. Add AI generation on top as a multiplier — designers who can do both replace entire production studios.",
+        a: "Photoshop first. Craft lets you judge and finish anything AI produces. Add AI generation on top as a multiplier, designers who can do both replace entire production studios.",
       },
       {
         q: "Why do designers who use both AI and Photoshop earn more?",
-        a: "Because the combined skill delivers a full campaign in a day — replacing a photographer, studio and retouch team. That end-to-end capability is what clients pay premium budgets for.",
+        a: "Because the combined skill delivers a full campaign in a day, replacing a photographer, studio and retouch team. That end-to-end capability is what clients pay premium budgets for.",
       },
     ],
   },
@@ -494,9 +494,9 @@ export const posts: Post[] = [
     title: "How to Hire a Graphic Designer in 2026: The Global Guide",
     titleAr: "كيف توظّف مصمم جرافيك في 2026: الدليل العالمي",
     excerpt:
-      "Portfolio signals, rates by region, red flags and the one test brief that filters 90% of applicants — from an art director who hires designers.",
+      "Portfolio signals, rates by region, red flags and the one test brief that filters 90% of applicants, from an art director who hires designers.",
     excerptAr:
-      "علامات البورتفوليو، والأسعار حسب المنطقة، وإشارات الخطر، واختبار واحد يصفّي ٩٠٪ من المتقدمين — من مدير فني يوظّف المصممين.",
+      "علامات البورتفوليو، والأسعار حسب المنطقة، وإشارات الخطر، واختبار واحد يصفّي ٩٠٪ من المتقدمين، من مدير فني يوظّف المصممين.",
     date: "2026-07-12",
     readMins: 8,
     tag: "Hiring",
@@ -504,23 +504,23 @@ export const posts: Post[] = [
     relatedCourse: "ai-photoshoot",
     body: [
       {
-        p: "I've hired designers for agencies in Egypt, Kuwait and Saudi Arabia, and I've been the freelance designer hired by clients from Europe to the Gulf. Both sides of that table taught me the same thing: most companies hire graphic designers on the wrong signals. Here's the playbook that actually works — wherever in the world you're hiring.",
+        p: "I've hired designers for agencies in Egypt, Kuwait and Saudi Arabia, and I've been the freelance designer hired by clients from Europe to the Gulf. Both sides of that table taught me the same thing: most companies hire graphic designers on the wrong signals. Here's the playbook that actually works, wherever in the world you're hiring.",
       },
       {
         h: "Read the portfolio like an art director",
-        p: "Ignore the prettiest image. Look for range across real deliverables (a campaign, a social system, a retouch job — not just posters), consistency inside each project, and evidence of process: before/after frames, grids, versioning. A designer who shows how they think is worth three who only show final renders. And check for AI fluency — in 2026, a designer who can direct AI photoshoots and finish them in Photoshop replaces an entire production line.",
+        p: "Ignore the prettiest image. Look for range across real deliverables (a campaign, a social system, a retouch job, not just posters), consistency inside each project, and evidence of process: before/after frames, grids, versioning. A designer who shows how they think is worth three who only show final renders. And check for AI fluency, in 2026, a designer who can direct AI photoshoots and finish them in Photoshop replaces an entire production line.",
       },
       {
         h: "What designers cost, region by region",
-        p: "Rates vary wildly by market: senior freelance designers run $40–$100+/hour in the US and Western Europe, $20–$50 in Eastern Europe and Latin America, and $10–$35 across MENA and South Asia — with the top MENA talent matching European quality at half the rate, which is why global brands increasingly hire remotely from Cairo, Amman and Riyadh. Fixed-scope pricing (per campaign, per identity) usually beats hourly for both sides.",
+        p: "Rates vary wildly by market: senior freelance designers run $40–$100+/hour in the US and Western Europe, $20–$50 in Eastern Europe and Latin America, and $10–$35 across MENA and South Asia, with the top MENA talent matching European quality at half the rate, which is why global brands increasingly hire remotely from Cairo, Amman and Riyadh. Fixed-scope pricing (per campaign, per identity) usually beats hourly for both sides.",
       },
       {
         h: "The test brief that filters 90%",
-        p: "Skip the unpaid spec work — it repels the best people. Instead, run a paid micro-brief: one social visual from a real (past) campaign brief, 48 hours, your brand assets. You'll see communication, speed, file hygiene and taste in one shot. Red flags: no questions asked before starting, files delivered flat, and a portfolio that suddenly doesn't match the delivered quality.",
+        p: "Skip the unpaid spec work, it repels the best people. Instead, run a paid micro-brief: one social visual from a real (past) campaign brief, 48 hours, your brand assets. You'll see communication, speed, file hygiene and taste in one shot. Red flags: no questions asked before starting, files delivered flat, and a portfolio that suddenly doesn't match the delivered quality.",
       },
       {
         h: "Or grow one instead",
-        p: "The hiring market is tight because the skill bar moved: brands now want designers who do both craft and AI production. If you have a junior with taste, training them up costs less than a senior hire — it's exactly the gap my courses exist to close, from Photoshop fundamentals to full AI campaign pipelines.",
+        p: "The hiring market is tight because the skill bar moved: brands now want designers who do both craft and AI production. If you have a junior with taste, training them up costs less than a senior hire, it's exactly the gap my courses exist to close, from Photoshop fundamentals to full AI campaign pipelines.",
       },
     ],
     faq: [
@@ -530,7 +530,7 @@ export const posts: Post[] = [
       },
       {
         q: "What should I look for in a graphic designer's portfolio?",
-        a: "Range across real deliverables, consistency within each project, visible process (grids, versions, before/after) and — in 2026 — AI production fluency: the ability to direct AI imagery and finish it professionally in Photoshop.",
+        a: "Range across real deliverables, consistency within each project, visible process (grids, versions, before/after) and, in 2026, AI production fluency: the ability to direct AI imagery and finish it professionally in Photoshop.",
       },
       {
         q: "Is it better to hire a designer or a design agency?",
@@ -543,9 +543,9 @@ export const posts: Post[] = [
     title: "AI Design Services in 2026: What They Cost and When to Use Them",
     titleAr: "خدمات التصميم بالذكاء الاصطناعي في 2026: التكلفة ومتى تستخدمها",
     excerpt:
-      "AI photoshoots at 10% of studio cost, AI video without a crew — what brands actually pay, what quality to expect, and where humans still decide.",
+      "AI photoshoots at 10% of studio cost, AI video without a crew, what brands actually pay, what quality to expect, and where humans still decide.",
     excerptAr:
-      "جلسات تصوير بالذكاء الاصطناعي بعُشر تكلفة الاستوديو، وفيديو بلا طاقم — ما تدفعه العلامات فعلًا، والجودة المتوقعة، وأين ما زال القرار بشريًا.",
+      "جلسات تصوير بالذكاء الاصطناعي بعُشر تكلفة الاستوديو، وفيديو بلا طاقم، ما تدفعه العلامات فعلًا، والجودة المتوقعة، وأين ما زال القرار بشريًا.",
     date: "2026-07-12",
     readMins: 7,
     tag: "AI Design",
@@ -553,23 +553,23 @@ export const posts: Post[] = [
     relatedCourse: "ai-photoshoot",
     body: [
       {
-        p: "Every month, more of my client work ships without a camera ever being switched on. Product campaigns, lifestyle sets, even 30-second spots — directed, generated, retouched, delivered. If you're a brand wondering what AI design services actually cost and whether the quality is real, here's the honest picture from inside the pipeline.",
+        p: "Every month, more of my client work ships without a camera ever being switched on. Product campaigns, lifestyle sets, even 30-second spots, directed, generated, retouched, delivered. If you're a brand wondering what AI design services actually cost and whether the quality is real, here's the honest picture from inside the pipeline.",
       },
       {
         h: "The economics brands care about",
-        p: "A traditional product photoshoot day runs $2,000–$10,000+ once you count studio, photographer, lighting and retouch. An AI photoshoot producing a comparable 6–10 frame campaign set typically costs 10–20% of that, and delivers in days instead of weeks. AI video is even more dramatic: a finished 30-second social spot without crew, location or actors — at a fraction of production quotes.",
+        p: "A traditional product photoshoot day runs $2,000–$10,000+ once you count studio, photographer, lighting and retouch. An AI photoshoot producing a comparable 6–10 frame campaign set typically costs 10–20% of that, and delivers in days instead of weeks. AI video is even more dramatic: a finished 30-second social spot without crew, location or actors, at a fraction of production quotes.",
       },
       {
         h: "Where the quality really comes from",
-        p: "Not from the model — from the direction. Client-grade AI work is art direction applied to a very fast, tasteless camera: locked references, photography-language prompts, ruthless curation, then real Photoshop retouching and one unified grade across the set. That last 20% of craft is the difference between 'AI slop' and an image a brand approves. It's why serious AI design services are run by designers, not by prompt hobbyists.",
+        p: "Not from the model, from the direction. Client-grade AI work is art direction applied to a very fast, tasteless camera: locked references, photography-language prompts, ruthless curation, then real Photoshop retouching and one unified grade across the set. That last 20% of craft is the difference between 'AI slop' and an image a brand approves. It's why serious AI design services are run by designers, not by prompt hobbyists.",
       },
       {
         h: "When NOT to use AI",
-        p: "Founder portraits and real-people testimonials, exact product engineering shots where every seam must be true, and anything requiring legal accuracy (labels, claims). Hybrid pipelines — real product photography composited into AI scenes — cover most of those gaps.",
+        p: "Founder portraits and real-people testimonials, exact product engineering shots where every seam must be true, and anything requiring legal accuracy (labels, claims). Hybrid pipelines, real product photography composited into AI scenes, cover most of those gaps.",
       },
       {
         h: "Buy it or build it",
-        p: "Brands have two options: commission AI production from a designer who's mastered the pipeline, or train an in-house designer to run it. The second pays back permanently — it's the exact skill set the AI Photoshoot and AI Video courses teach, and the same pipeline my team uses on paying briefs across Egypt, Saudi Arabia and Kuwait.",
+        p: "Brands have two options: commission AI production from a designer who's mastered the pipeline, or train an in-house designer to run it. The second pays back permanently, it's the exact skill set the AI Photoshoot and AI Video courses teach, and the same pipeline my team uses on paying briefs across Egypt, Saudi Arabia and Kuwait.",
       },
     ],
     faq: [
@@ -579,11 +579,11 @@ export const posts: Post[] = [
       },
       {
         q: "Is AI-generated design good enough for real brands?",
-        a: "Yes — when it's directed and finished by a professional. Locked references, photography-language prompts, curation and Photoshop retouching produce campaign sets that clients approve over studio quotes.",
+        a: "Yes, when it's directed and finished by a professional. Locked references, photography-language prompts, curation and Photoshop retouching produce campaign sets that clients approve over studio quotes.",
       },
       {
         q: "What can't AI design do yet?",
-        a: "Truthful portraits of real people, engineering-accurate product shots and legally binding visuals. Hybrid workflows — real photography composited into AI scenes — handle most of these cases.",
+        a: "Truthful portraits of real people, engineering-accurate product shots and legally binding visuals. Hybrid workflows, real photography composited into AI scenes, handle most of these cases.",
       },
     ],
   },
@@ -592,9 +592,9 @@ export const posts: Post[] = [
     title: "Why Global Brands Hire Remote Designers from MENA (And How to Find Great Ones)",
     titleAr: "لماذا توظّف العلامات العالمية مصممين عن بُعد من الشرق الأوسط (وكيف تجد الممتازين)",
     excerpt:
-      "European quality at half the rate, overlapping time zones, and bilingual campaign instincts — the case for MENA design talent, with a hiring checklist.",
+      "European quality at half the rate, overlapping time zones, and bilingual campaign instincts, the case for MENA design talent, with a hiring checklist.",
     excerptAr:
-      "جودة أوروبية بنصف السعر، ومناطق زمنية متقاربة، وحس حملات ثنائي اللغة — لماذا مواهب التصميم في المنطقة تكسب عالميًا، مع قائمة توظيف عملية.",
+      "جودة أوروبية بنصف السعر، ومناطق زمنية متقاربة، وحس حملات ثنائي اللغة، لماذا مواهب التصميم في المنطقة تكسب عالميًا، مع قائمة توظيف عملية.",
     date: "2026-07-12",
     readMins: 6,
     tag: "Hiring",
@@ -602,19 +602,19 @@ export const posts: Post[] = [
     relatedCourse: "ai-video-generation",
     body: [
       {
-        p: "Over nine years leading design teams between Cairo, Kuwait and Makkah, I've watched the same shift accelerate: global brands quietly moving their design production to MENA talent. Not to cut corners — because the math and the quality both work. Here's why, and how to hire well if you're on the buying side.",
+        p: "Over nine years leading design teams between Cairo, Kuwait and Makkah, I've watched the same shift accelerate: global brands quietly moving their design production to MENA talent. Not to cut corners, because the math and the quality both work. Here's why, and how to hire well if you're on the buying side.",
       },
       {
         h: "The arbitrage that isn't a compromise",
-        p: "Top designers in Cairo, Amman, Riyadh and Dubai deliver European-standard campaign work at 30–60% of Western European rates. They grew up on the same tools, the same references and — increasingly — the same AI production pipelines. Time zones overlap with all of Europe and half of Asia, so feedback loops run same-day instead of overnight.",
+        p: "Top designers in Cairo, Amman, Riyadh and Dubai deliver European-standard campaign work at 30–60% of Western European rates. They grew up on the same tools, the same references and, increasingly, the same AI production pipelines. Time zones overlap with all of Europe and half of Asia, so feedback loops run same-day instead of overnight.",
       },
       {
         h: "The bilingual advantage nobody prices in",
-        p: "MENA designers ship campaigns in Arabic and English natively — typography, layout direction (RTL and LTR) and cultural nuance included. For any brand touching the Gulf's fast-growing markets, that's not a nice-to-have; it's the difference between a translated campaign and a designed one.",
+        p: "MENA designers ship campaigns in Arabic and English natively, typography, layout direction (RTL and LTR) and cultural nuance included. For any brand touching the Gulf's fast-growing markets, that's not a nice-to-have; it's the difference between a translated campaign and a designed one.",
       },
       {
         h: "How to hire well from the region",
-        p: "Same rules as anywhere, sharpened: judge portfolios on shipped client work (ask which brands, which market), run one paid micro-brief, and test AI-pipeline fluency — directing an AI photoshoot and finishing it in Photoshop is the region's fastest-growing superpower. Payment is easy now too: Wise, Payoneer and direct transfer all work smoothly with Egyptian and Gulf freelancers.",
+        p: "Same rules as anywhere, sharpened: judge portfolios on shipped client work (ask which brands, which market), run one paid micro-brief, and test AI-pipeline fluency, directing an AI photoshoot and finishing it in Photoshop is the region's fastest-growing superpower. Payment is easy now too: Wise, Payoneer and direct transfer all work smoothly with Egyptian and Gulf freelancers.",
       },
     ],
     faq: [
@@ -628,7 +628,7 @@ export const posts: Post[] = [
       },
       {
         q: "How do I verify a remote designer's skill before hiring?",
-        a: "Ask for shipped client work with context, run one paid 48-hour micro-brief with your real brand assets, and check for AI production fluency — direction, curation and Photoshop finishing, not just prompting.",
+        a: "Ask for shipped client work with context, run one paid 48-hour micro-brief with your real brand assets, and check for AI production fluency, direction, curation and Photoshop finishing, not just prompting.",
       },
     ],
   },

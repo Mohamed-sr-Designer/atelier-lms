@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default: site.title,
-    template: "%s — Mohamed Tarek",
+    template: "%s | Mohamed Tarek",
   },
   description: site.description,
   keywords: [
@@ -125,7 +125,7 @@ const jsonLd = {
       "@type": ["Organization", "EducationalOrganization"],
       "@id": `${site.url}/#organization`,
       name: "Mohamed Tarek",
-      alternateName: ["Tarek", "Mohamed Tarek Academy", "Mohamed Tarek — School of Visual Direction", "محمد طارق"],
+      alternateName: ["Tarek", "Mohamed Tarek Academy", "Mohamed Tarek School of Visual Direction", "محمد طارق"],
       url: site.url,
       logo: `${site.url}/og.jpg`,
       description: site.description,
@@ -174,7 +174,7 @@ const jsonLd = {
       ],
       knowsLanguage: ["ar", "en"],
       affiliation: [
-        { "@type": "Organization", name: "SOIC — School of Cinema" },
+        { "@type": "Organization", name: "SOIC School of Cinema" },
         { "@type": "Organization", name: "EDUX Academy" },
         { "@type": "Organization", name: "Raya Academy" },
         { "@type": "Organization", name: "Teaching Planet Academy" },

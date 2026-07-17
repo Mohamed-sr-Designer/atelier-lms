@@ -196,7 +196,25 @@ export default function CourseDetailView({ course: courseStatic }: { course: Cou
                       </p>
                     )}
 
-                    <ul className="mt-7 grid gap-3 border-t border-line/10 pt-6 text-sm text-bone-300">
+                    {/* the course in numbers, Soni-style features row */}
+                    <div className="mt-6 grid grid-cols-3 gap-2 border-t border-line/10 pt-5 text-center">
+                      {[
+                        { v: String(lessons), l: t.common.lessons },
+                        { v: fmtDuration(mins, lang), l: t.common.hours },
+                        { v: String(course.modules.length), l: t.common.modules },
+                      ].map((x) => (
+                        <div key={x.l}>
+                          <p className="font-display text-lg font-semibold text-bone-50" dir="ltr">
+                            {x.v}
+                          </p>
+                          <p className="mt-0.5 text-[10px] uppercase tracking-widest text-bone-500">
+                            {x.l}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <ul className="mt-5 grid gap-3 border-t border-line/10 pt-6 text-sm text-bone-300">
                       {t.course.includesItems.map((x) => (
                         <li key={x} className="flex items-baseline gap-3">
                           <span className="text-mint">✦</span>
@@ -234,7 +252,10 @@ export default function CourseDetailView({ course: courseStatic }: { course: Cou
                 <SectionLabel index="01">{t.course.whatYouLearn}</SectionLabel>
               </Reveal>
               <Reveal delay={0.08}>
-                <p className="mt-6 text-sm leading-relaxed text-bone-400">
+                <p className="mt-6 text-[11px] uppercase tracking-ultra text-bone-500">
+                  {t.course.audienceLabel}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-bone-400">
                   {course.audience[lang]}
                 </p>
               </Reveal>
@@ -252,6 +273,14 @@ export default function CourseDetailView({ course: courseStatic }: { course: Cou
                     </span>
                   ))}
                 </div>
+              </Reveal>
+              <Reveal delay={0.16}>
+                <p className="mt-6 text-[11px] uppercase tracking-ultra text-bone-500">
+                  {t.course.reqLabel}
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-bone-400">
+                  {t.course.reqNote}
+                </p>
               </Reveal>
             </div>
             <Stagger className="grid gap-4 lg:col-span-8 sm:grid-cols-2">
@@ -416,7 +445,7 @@ export default function CourseDetailView({ course: courseStatic }: { course: Cou
               />
               <div className="relative">
                 <p className="text-[10px] uppercase tracking-ultra text-bone-400">
-                  Tarek — School of Visual Direction
+                  Tarek · School of Visual Direction
                 </p>
                 <p className="mt-4 font-serif text-2xl italic text-bone-50 md:text-3xl">
                   {t.course.outcomeTitle}
