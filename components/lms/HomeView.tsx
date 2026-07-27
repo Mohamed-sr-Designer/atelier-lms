@@ -11,6 +11,8 @@ import LogoMarquee from "@/components/LogoMarquee";
 import Counter from "@/components/lms/Counter";
 import FeaturedCourse from "@/components/lms/FeaturedCourse";
 import FreeCoursesSlider from "@/components/lms/FreeCoursesSlider";
+import VideoGallery from "@/components/lms/VideoGallery";
+import { heroFilm } from "@/lib/gallery";
 import WorkedWith from "@/components/lms/WorkedWith";
 import Aurora from "@/components/ui/Aurora";
 import GiftReveal from "@/components/ui/GiftReveal";
@@ -773,8 +775,9 @@ export default function HomeView() {
                   <div className="relative mx-6 my-10 md:mx-10">
                     <div className="relative overflow-hidden rounded-2xl border border-line/20 shadow-2xl shadow-black/50">
                       <video
-                        src={withBase("/lms/reels/video-1.mp4")}
-                        aria-label="AI-generated brand film — full pipeline result"
+                        src={withBase(heroFilm.src)}
+                        poster={withBase(heroFilm.poster)}
+                        aria-label="AI-generated brand film, the full pipeline result"
                         className="aspect-video w-full object-cover"
                         autoPlay
                         muted
@@ -783,7 +786,7 @@ export default function HomeView() {
                         preload="metadata"
                       />
                       <span className="absolute bottom-3 left-3 rounded-full bg-ink-900/75 px-3 py-1 text-[10px] uppercase tracking-widest text-bone-200 backdrop-blur">
-                        ▶ AI film — no camera, no crew
+                        ▶ AI film · no camera, no crew
                       </span>
                     </div>
                     {stackFloaters.map((f) => (
@@ -840,62 +843,6 @@ export default function HomeView() {
               </Reveal>
             ))}
           </div>
-
-          {/* featured success story */}
-          <Reveal delay={0.1}>
-            <div className="relative mt-14 overflow-hidden rounded-3xl border border-line/15 bg-ink-800/60">
-              <div
-                aria-hidden
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(120deg, rgb(var(--mint) / 0.14) 0%, transparent 45%, rgb(var(--electric) / 0.1) 100%)",
-                }}
-              />
-              <div className="relative grid gap-10 p-8 md:p-12 lg:grid-cols-12">
-                <div className="lg:col-span-7">
-                  <p className="text-xs uppercase tracking-ultra text-mint">
-                    {t.home.storyLabel}
-                  </p>
-                  <blockquote className="mt-5 text-balance font-serif text-2xl italic leading-snug text-bone-50 md:text-3xl">
-                    “{t.home.storyQuote}”
-                  </blockquote>
-                  <div className="mt-7 flex items-center gap-4">
-                    <span className="grid h-12 w-12 place-items-center rounded-full bg-mint/15 font-serif text-lg italic text-mint">
-                      {t.home.storyName.charAt(0)}
-                    </span>
-                    <div>
-                      <p className="text-bone-50">{t.home.storyName}</p>
-                      <p className="text-sm text-bone-500">{t.home.storyRole}</p>
-                    </div>
-                  </div>
-                  <div className="mt-7 flex flex-wrap gap-2">
-                    {t.home.storyChips.map((c) => (
-                      <span
-                        key={c}
-                        className="rounded-full border border-electric/30 bg-electric/5 px-4 py-2 text-xs text-electric"
-                      >
-                        ✦ {c}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="lg:col-span-5">
-                  <div className="group relative overflow-hidden rounded-2xl border border-line/15">
-                    <div className="aspect-[4/3]">
-                      <Media
-                        src="/lms/story.jpg"
-                        alt="Graduate portfolio piece — AI campaign hero visual"
-                        fill
-                        sizes="(min-width: 1024px) 40vw, 100vw"
-                        className="object-cover transition-transform duration-1000 ease-cinema group-hover:scale-[1.03]"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Reveal>
 
           {/* trust strip */}
           <Reveal delay={0.12}>
@@ -976,6 +923,36 @@ export default function HomeView() {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================= THE REEL =============== */}
+      <section className="border-t border-line/10 bg-ink-800/30">
+        <div className="container-edge mx-auto max-w-edge py-20 md:py-28">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <Reveal>
+                <SectionLabel index="07">{t.home.reelLabel}</SectionLabel>
+              </Reveal>
+              <Reveal delay={0.05}>
+                <h2 className="mt-6 max-w-2xl text-balance font-display text-4xl font-semibold leading-[1.0] tracking-tightest text-bone-50 md:text-6xl">
+                  {t.home.reelTitleA}{" "}
+                  <span className="text-grad font-serif font-normal italic tracking-normal">
+                    {t.home.reelTitleI}
+                  </span>
+                  {t.home.reelTitleB}
+                </h2>
+              </Reveal>
+            </div>
+            <Reveal delay={0.1}>
+              <p className="max-w-sm text-sm leading-relaxed text-bone-400">
+                {t.home.reelNote}
+              </p>
+            </Reveal>
+          </div>
+          <div className="mt-12">
+            <VideoGallery />
           </div>
         </div>
       </section>

@@ -10,6 +10,7 @@ import CourseCard from "@/components/lms/CourseCard";
 import PromptFixer from "@/components/lms/PromptFixer";
 import { useLang } from "@/lib/i18n";
 import { withBase } from "@/lib/base";
+import { heroFilm } from "@/lib/gallery";
 import { useStore } from "@/lib/store";
 import {
   bundle,
@@ -122,8 +123,9 @@ export default function BundleView() {
             >
               <div className="relative overflow-hidden rounded-2xl border border-line/20 shadow-2xl shadow-black/50">
                 <video
-                  src={withBase("/lms/reels/video-1.mp4")}
-                  aria-label="AI-generated brand film — full pipeline result"
+                  src={withBase(heroFilm.src)}
+                  poster={withBase(heroFilm.poster)}
+                  aria-label="AI-generated brand film, the full pipeline result"
                   className="aspect-video w-full object-cover"
                   autoPlay
                   muted
@@ -132,7 +134,7 @@ export default function BundleView() {
                   preload="metadata"
                 />
                 <span className="absolute bottom-3 left-3 rounded-full bg-ink-900/75 px-3 py-1 text-[10px] uppercase tracking-widest text-bone-200 backdrop-blur">
-                  ▶ AI film — no camera, no crew
+                  ▶ AI film · no camera, no crew
                 </span>
               </div>
               {[

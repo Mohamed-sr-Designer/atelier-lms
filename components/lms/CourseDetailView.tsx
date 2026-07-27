@@ -9,6 +9,7 @@ import GlyphPlate from "@/components/lms/GlyphPlate";
 import CurriculumIndex from "@/components/lms/CurriculumIndex";
 import FaqList from "@/components/lms/FaqList";
 import CourseCard from "@/components/lms/CourseCard";
+import VideoGallery from "@/components/lms/VideoGallery";
 import { useLang } from "@/lib/i18n";
 import { withBase } from "@/lib/base";
 import { useStore, isEnrolled } from "@/lib/store";
@@ -498,30 +499,10 @@ export default function CourseDetailView({ course: courseStatic }: { course: Cou
               </Stagger>
             )}
             {course.showcase.videos && (
-              <Stagger className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {course.showcase.videos.map((src, i) => (
-                  <StaggerItem key={src}>
-                    <motion.div
-                      whileHover={{ scale: 1.02, rotate: i % 2 === 0 ? -0.6 : 0.6 }}
-                      className="relative overflow-hidden rounded-xl border border-line/10"
-                    >
-                      <video
-                        src={withBase(src)}
-                        aria-label={`Made with this course — AI film ${i + 1}`}
-                        className="aspect-video w-full object-cover"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="metadata"
-                      />
-                      <span className="absolute bottom-3 left-3 rounded-full bg-ink-900/75 px-3 py-1 text-[10px] uppercase tracking-widest text-bone-200 backdrop-blur">
-                        ▶ AI production
-                      </span>
-                    </motion.div>
-                  </StaggerItem>
-                ))}
-              </Stagger>
+              /* the real reel: each clip keeps its own orientation */
+              <div className="mt-10">
+                <VideoGallery />
+              </div>
             )}
           </div>
         </section>

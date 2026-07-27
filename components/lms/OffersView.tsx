@@ -177,7 +177,9 @@ export default function OffersView() {
         <Reveal delay={0.1}>
           <div className="mt-20">
             <SectionLabel index="✦">{t.offersPage.compareLabel}</SectionLabel>
-            <div className="mt-8 overflow-x-auto">
+            {/* solid panel: the page's grid-paper backdrop was cutting through
+                the row rules and made the table read as a mess of lines */}
+            <div className="mt-8 overflow-x-auto rounded-3xl border border-line/15 bg-ink-900 p-5 shadow-[0_30px_80px_-50px_rgb(0_0_0/0.9)] md:p-8">
               <table className="w-full min-w-[40rem] border-separate border-spacing-0 text-sm">
                 <thead>
                   <tr>

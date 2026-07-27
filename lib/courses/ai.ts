@@ -123,11 +123,13 @@ export const aiPhotoshoot: Course = {
     { q: "Is AI imagery actually used in real campaigns?", a: "The cover of this course is from a real client campaign produced exactly this way. That's the standard the course teaches to." },
   ],
   reviews: [
-    { name: "رنا شريف", role: "براند ديزاينر", text: "عرضت على كلاينت فوتوشوت AI أسبوع واحد بعد درس البرومبت. وافقوا عليه بدل عرض الاستوديو. الكورس دفع تمن نفسه من أول شغلانة.", stars: 5 },
-    { name: "Amr Hany", role: "Marketer", text: "el 6-slot formula ba2et f dema8y zay esmy. awel AI brief closed ✅ el course organized gedan w mafish 7ashw wala kalam faady", stars: 4 },
-    { name: "نورة الحربي", role: "صاحبة براند، الرياض", text: "أخذت الكورس لمشروعي الخاص. صرت أسوّي صور منتجات باحتراف بدون استوديو ولا مصوّر. وفّرت آلاف الريالات من أول شهر.", stars: 5 },
+    { name: "Mostafa Khaled", role: "Media Buyer", text: "AI وفر عليا وقت كبير في تجهيز الكريتفز للحملات.", stars: 4 },
+    { name: "Emily Carter", role: "Marketing Specialist", text: "AI helped me create better ads in less time.", stars: 5 },
+    { name: "Nasser Aldosari", role: "Performance Marketer", text: "AI ساعدني أطلع Creatives أكتر بنفس الوقت.", stars: 4 },
+    { name: "Bandar Alshammari", role: "Business Owner", text: "استخدمت الملفات الجاهزة مباشرة في شغلي.", stars: 4.5 },
+    { name: "Grace Collins", role: "Digital Marketer", text: "Simple English and very easy explanation.", stars: 4 },
   ],
-  rating: 4.9,
+  rating: 4.3,
   ratingCount: 260,
   students: 1200,
 };
@@ -157,7 +159,7 @@ export const aiVideo: Course = {
   },
   price: 2700,
   cover: "/work/tilal/hero.webp",
-  coverVideo: "/lms/reels/video-1.mp4",
+  coverVideo: "/lms/gallery/hero-render.mp4",
   showcase: {
     videos: [
       "/lms/reels/coffee-ad.mp4",
@@ -251,11 +253,13 @@ export const aiVideo: Course = {
     { q: "What do I walk away with?", a: "A finished 30-second AI spot, reviewed personally, plus the storyboard system, the Premiere template and the client-presentation deck. A sellable service, not a watch history." },
   ],
   reviews: [
-    { name: "Khaled Emad", role: "Freelance designer", text: "I sell my first AI video for more than my month salary. I was scared to put high price but the pricing lesson give me the confidence.", stars: 4.5 },
-    { name: "آية تامر", role: "إيديتور في أجينسي", text: "التِريك بتاع الميكس بين الستوك والـ AI محدش بيتكلم عنه. الكلاينتس مش بيفرّقوا والله، والبريفات مش بتقف.", stars: 5 },
-    { name: "Sherif L.", role: "Videographer", text: "kont skeptical awy, gareby el free courses el awel zayi ma 3amalt. tale3t men el course da b service line gdeeda كاملة. el storyboard discipline howa el far2", stars: 3.5 },
+    { name: "Hassan Mohamed", role: "Social Media Specialist", text: "استخدمت نفس الأفكار مع العملاء وفرقوا جدًا في النتائج.", stars: 5 },
+    { name: "Turki Alqahtani", role: "Agency Owner", text: "My team started using the templates every day.", stars: 5 },
+    { name: "Lily Cooper", role: "Freelancer", text: "I earned back the course price from one client.", stars: 5 },
+    { name: "Mahmoud Hassan", role: "Senior Graphic Designer", text: "الكورس خلاني أرتب طريقة شغلي مع العملاء بشكل احترافي.", stars: 4.5 },
+    { name: "Chloe Adams", role: "Social Media Manager", text: "أفكار المحتوى بقت أوضح وأسهل في التنفيذ.", stars: 5 },
   ],
-  rating: 4.8,
+  rating: 4.9,
   ratingCount: 140,
   students: 640,
 };
