@@ -18,19 +18,11 @@ import {
 import { openAuth } from "@/components/lms/AuthModal";
 import { courses, getCourse, lessonCount } from "@/lib/courses";
 import { site } from "@/lib/site";
+import { useOps } from "@/lib/ops-dict";
+import { cloud } from "@/lib/cloud";
+import { myCertificates, myOrders, mySubmissions, useDb } from "@/lib/db";
 
 const ease = [0.16, 1, 0.3, 1] as const;
-
-// deterministic per-slug score for completed assignments (demo)
-const scoreFor = (slug: string) =>
-  90 + (slug.split("").reduce((n, ch) => n + ch.charCodeAt(0), 0) % 9);
-
-const nextDow = (dow: number) => {
-  const d = new Date();
-  const diff = (dow - d.getDay() + 7) % 7 || 7;
-  d.setDate(d.getDate() + diff);
-  return d;
-};
 
 const dayISO = (d: Date) => d.toISOString().slice(0, 10);
 
@@ -53,13 +45,23 @@ export default function DashboardView() {
           >
             {t.auth.loginBtn}
           </button>
-          <button
-            type="button"
-            onClick={() => loginAs("student")}
-            className="btn btn-ghost px-7 py-3.5"
-          >
-            ✦ {t.auth.previewStudent}
-          </button>
+          {cloud ? (
+            <button
+              type="button"
+              onClick={() => openAuth("register")}
+              className="btn btn-ghost px-7 py-3.5"
+            >
+              {t.auth.registerBtn}
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => loginAs("student")}
+              className="btn btn-ghost px-7 py-3.5"
+            >
+              ✦ {t.auth.previewStudent}
+            </button>
+          )}
         </div>
       </section>
     );
@@ -74,6 +76,10 @@ function Board() {
   const [tab, setTab] = useState<"active" | "archived">("active");
   const [doubt, setDoubt] = useState("");
   const [editGoal, setEditGoal] = useState(false);
+  const o = useOps();
+  const { data: orders } = useDb(myOrders, [store.user?.email]);
+  const { data: certs } = useDb(myCertificates, [store.user?.email]);
+  const { data: subs } = useDb(() => mySubmissions(), [store.user?.email]);
 
   const hour = new Date().getHours();
   const greeting =
@@ -127,39 +133,21 @@ function Board() {
   const R = 52;
   const CIRC = 2 * Math.PI * R;
 
-  // demo live sessions on the next Friday / Monday
-  const sessions = useMemo(
-    () => [
-      {
-        title: "Live portfolio review",
-        course: "AI Photoshoot",
-        date: nextDow(5),
-        time: "7:00 – 8:00 PM",
-        tone: "mint" as const,
-      },
-      {
-        title: "Open Q&A room",
-        course: "All courses",
-        date: nextDow(1),
-        time: "8:30 – 9:15 PM",
-        tone: "electric" as const,
-      },
-    ],
-    []
-  );
-  const sessionDays = sessions.map((s) => s.date.getDate());
+  const sessionDays: number[] = [];
 
   // assignments — each enrolled course's final project, status from real progress
+  // status comes from the real project review (latest submission wins)
   const assignments = enrolled.map((c) => {
     const p = courseProgress(store, c.slug);
-    const quiz = Boolean(store.quizPassed[c.slug]);
-    const status = quiz
-      ? ("done" as const)
-      : p === 100
-        ? ("review" as const)
-        : p > 0
-          ? ("progress" as const)
-          : ("upcoming" as const);
+    const sub = (subs || []).find((x) => x.courseSlug === c.slug);
+    const status =
+      sub?.status === "approved"
+        ? ("done" as const)
+        : sub?.status === "pending"
+          ? ("review" as const)
+          : p > 0 || sub
+            ? ("progress" as const)
+            : ("upcoming" as const);
     return { c, p, status };
   });
 
@@ -176,7 +164,7 @@ function Board() {
   const sendDoubt = (e: React.FormEvent) => {
     e.preventDefault();
     const msg = encodeURIComponent(
-      `Hi Mohamed — quick doubt from my dashboard:\n${doubt}`
+      `Hi Mohamed, quick doubt from my dashboard:\n${doubt}`
     );
     window.open(`https://wa.me/${site.whatsapp}?text=${msg}`, "_blank", "noopener,noreferrer");
     setDoubt("");
@@ -425,10 +413,10 @@ function Board() {
                 <SectionLabel index="02">{t.dash.assignmentsLabel}</SectionLabel>
               </Reveal>
               <div className="mt-8 space-y-3">
-                {assignments.map(({ c, status }) => (
+                {assignments.map(({ c, p, status }) => (
                   <Reveal key={c.slug}>
                     <Link
-                      href={`/learn/${c.slug}/?tab=project`}
+                      href={`/learn/${c.slug}/?tab=final`}
                       className={`group flex flex-wrap items-center gap-x-6 gap-y-2 rounded-2xl border bg-ink-800/60 p-5 transition-colors duration-300 md:p-6 ${
                         status === "done"
                           ? "border-mint/25 hover:border-mint/50"
@@ -446,10 +434,7 @@ function Board() {
                         </p>
                       </div>
                       <p className="text-sm tabular-nums text-bone-300" dir="ltr">
-                        {status === "done" ? `${scoreFor(c.slug)}/100` : "--/100"}
-                        <span className="ml-2 text-xs text-bone-500">
-                          {status === "done" ? t.dash.qualified : t.dash.aStatus[status]}
-                        </span>
+                        {p}%
                       </p>
                       <span
                         className={`rounded-full border px-3.5 py-1.5 text-[11px] font-semibold ${statusChip[status]}`}
@@ -621,56 +606,54 @@ function Board() {
             </div>
           </Reveal>
 
-          {/* upcoming sessions */}
+          {/* my orders + certificates */}
           <Reveal delay={0.05}>
-            <div className="glass rounded-2xl p-6">
-              <p className="text-xs uppercase tracking-ultra text-bone-500">
-                {t.dash.sessionsLabel}
-              </p>
-              <div className="mt-5 space-y-4">
-                {sessions.map((s) => (
-                  <div
-                    key={s.title}
-                    className={`rounded-xl border-l-2 bg-ink-900/60 p-4 ${
-                      s.tone === "mint" ? "border-mint" : "border-electric"
-                    }`}
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <p className="text-sm font-semibold text-bone-50">{s.title}</p>
-                      <span
-                        className={`shrink-0 rounded-full px-2.5 py-0.5 text-[10px] font-bold ${
-                          s.tone === "mint"
-                            ? "bg-mint/15 text-mint"
-                            : "bg-electric/15 text-electric"
-                        }`}
+            <div className="rounded-2xl border border-line/10 bg-ink-800 p-6">
+              <p className="text-xs uppercase tracking-ultra text-bone-500">{o.cert.mine}</p>
+              {certs && certs.length > 0 ? (
+                <ul className="mt-4 space-y-3">
+                  {certs.map((c) => (
+                    <li key={c.id}>
+                      <Link
+                        href={`/certificate/?id=${c.id}`}
+                        className="flex items-center justify-between gap-3 rounded-xl border border-electric/30 bg-electric/5 px-4 py-3 transition-colors hover:border-electric/60"
                       >
-                        {s.course}
-                      </span>
-                    </div>
-                    <p className="mt-2 text-xs text-bone-400" dir="ltr">
-                      {s.date.toLocaleDateString("en-GB", {
-                        weekday: "long",
-                        day: "numeric",
-                        month: "short",
-                      })}{" "}
-                      · {s.time}
-                    </p>
-                    <div className="mt-3 flex items-center justify-between">
-                      <p className="text-[11px] text-bone-500">{t.dash.sessionBy}</p>
-                      <a
-                        href={`https://wa.me/${site.whatsapp}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`text-xs font-semibold ${
-                          s.tone === "mint" ? "text-mint" : "text-electric"
-                        }`}
-                      >
-                        {t.dash.sessionJoin} →
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                        <span className="min-w-0">
+                          <span className="block truncate text-sm font-semibold text-bone-50">{c.courseTitle}</span>
+                          <span className="block font-mono text-[11px] text-bone-400" dir="ltr">{c.id}</span>
+                        </span>
+                        <span className="text-electric">✦</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-3 text-sm leading-relaxed text-bone-400">{o.cert.mineEmpty}</p>
+              )}
+
+              {orders && orders.length > 0 && (
+                <>
+                  <p className="mt-7 text-xs uppercase tracking-ultra text-bone-500">{o.orders.mine}</p>
+                  <ul className="mt-3 divide-y divide-line/10">
+                    {orders.slice(0, 5).map((x) => (
+                      <li key={x.id} className="flex items-center justify-between gap-3 py-3">
+                        <span className="min-w-0 truncate text-sm text-bone-100">{x.title}</span>
+                        <span
+                          className={`shrink-0 rounded-full px-2.5 py-1 text-[10px] font-semibold ${
+                            x.status === "approved"
+                              ? "bg-mint/15 text-mint"
+                              : x.status === "rejected"
+                                ? "bg-red-500/10 text-red-300"
+                                : "bg-ink-700 text-bone-300"
+                          }`}
+                        >
+                          {o.orders[x.status]}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
             </div>
           </Reveal>
 

@@ -10,6 +10,7 @@ import { courses, stats } from "@/lib/courses";
 import { LangProvider } from "@/lib/i18n";
 import SmoothScroll from "@/components/SmoothScroll";
 import AuthModal from "@/components/lms/AuthModal";
+import CloudBridge from "@/components/CloudBridge";
 import ScrollProgress from "@/components/ScrollProgress";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import BackToTop from "@/components/BackToTop";
@@ -228,6 +229,7 @@ export default function RootLayout({
           <BackToTop />
           <PromoPopup />
           <AuthModal />
+          <CloudBridge />
           {children}
         </LangProvider>
       </body>

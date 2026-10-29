@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLang } from "@/lib/i18n";
 import { login, loginAs, updateUser, useStore } from "@/lib/store";
+import { cloud } from "@/lib/cloud";
+import { signIn, signUp, resetPassword } from "@/lib/sync";
+import { useOps } from "@/lib/ops-dict";
 
 type Mode = "login" | "register";
 
@@ -25,6 +28,9 @@ export default function AuthModal() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
+  const [info, setInfo] = useState("");
+  const [busy, setBusy] = useState(false);
+  const o = useOps();
 
   const close = useCallback(() => setOpen(false), []);
 
@@ -32,6 +38,7 @@ export default function AuthModal() {
     const onOpen = (e: Event) => {
       setMode(((e as CustomEvent).detail as Mode) || "login");
       setErr("");
+      setInfo("");
       setOpen(true);
     };
     window.addEventListener("open-auth", onOpen);
@@ -62,8 +69,9 @@ export default function AuthModal() {
 
   const isRegister = mode === "register";
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setInfo("");
     const cleanEmail = email.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
       setErr(t.auth.errEmail);
@@ -85,8 +93,34 @@ export default function AuthModal() {
         .replace(/[._-]+/g, " ")
         .replace(/\b\w/g, (c) => c.toUpperCase());
     }
-    login(finalName, cleanEmail);
-    if (cleanPhone) updateUser({ phone: cleanPhone });
+    if (cloud) {
+      if (password.length < 8) {
+        setErr(o.auth.pwShort);
+        return;
+      }
+      setBusy(true);
+      setErr("");
+      try {
+        if (isRegister) {
+          const { needsConfirm } = await signUp(finalName, cleanEmail, cleanPhone, password);
+          if (needsConfirm) {
+            setInfo(o.auth.checkEmail);
+            setBusy(false);
+            return;
+          }
+        } else {
+          await signIn(cleanEmail, password);
+        }
+      } catch (x) {
+        setErr(String((x as Error).message || x));
+        setBusy(false);
+        return;
+      }
+      setBusy(false);
+    } else {
+      login(finalName, cleanEmail);
+      if (cleanPhone) updateUser({ phone: cleanPhone });
+    }
     setName("");
     setEmail("");
     setPhone("");
@@ -234,12 +268,42 @@ export default function AuthModal() {
                 </div>
 
                 {err && <p className="mt-3 text-sm text-mint">{err}</p>}
+                {info && (
+                  <p className="mt-3 rounded-xl border border-electric/30 bg-electric/10 p-3 text-sm text-bone-50">
+                    {info}
+                  </p>
+                )}
 
-                <button type="submit" className="btn btn-primary mt-5 w-full py-3.5">
-                  {isRegister ? t.auth.registerBtn : t.auth.loginBtn}
+                <button
+                  type="submit"
+                  disabled={busy}
+                  className="btn btn-primary mt-5 w-full py-3.5 disabled:opacity-60"
+                >
+                  {busy ? o.auth.working : isRegister ? t.auth.registerBtn : t.auth.loginBtn}
                 </button>
+                {cloud && !isRegister && (
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      const em = email.trim();
+                      if (!em) return setErr(o.auth.needEmail);
+                      try {
+                        await resetPassword(em);
+                        setErr("");
+                        setInfo(o.auth.resetSent);
+                      } catch (x) {
+                        setErr(String((x as Error).message || x));
+                      }
+                    }}
+                    className="link-underline mt-3 block w-full text-center text-xs text-bone-400"
+                  >
+                    {o.auth.forgot}
+                  </button>
+                )}
               </form>
 
+              {!cloud && (
+              <>
               {/* social sign-in (demo — instant connect in this browser) */}
               <div className="mt-4 flex items-center gap-3">
                 <span className="h-px grow bg-line/15" />
@@ -331,6 +395,8 @@ export default function AuthModal() {
                   ⌘ {t.auth.previewAdmin}
                 </button>
               </div>
+              </>
+              )}
 
               {/* switch mode + team link, one tight block */}
               <div className="mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-sm text-bone-400">

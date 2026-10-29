@@ -65,12 +65,22 @@ const read = (): Studio => {
 const listeners = new Set<() => void>();
 const emit = () => listeners.forEach((l) => l());
 
-const write = (next: Studio) => {
+// Cloud sync (lib/sync.ts) publishes the admin's edits to every visitor.
+let writeHook: ((next: Studio) => void) | null = null;
+export const onStudioWrite = (fn: ((next: Studio) => void) | null) => {
+  writeHook = fn;
+};
+
+const write = (next: Studio, silent = false) => {
   try {
     localStorage.setItem(KEY, JSON.stringify(next));
   } catch {}
   emit();
+  if (!silent) writeHook?.(next);
 };
+
+// Take the published studio from the server (no push back).
+export const hydrateStudio = (next: Studio) => write({ ...EMPTY, ...next }, true);
 
 const subscribe = (cb: () => void) => {
   listeners.add(cb);

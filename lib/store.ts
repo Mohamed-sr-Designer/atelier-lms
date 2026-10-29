@@ -11,6 +11,7 @@ import { courses, getCourse, lessonCount } from "@/lib/courses";
 
 export type Role = "user" | "admin";
 export type User = {
+  id?: string; // Supabase user id (cloud mode only)
   name: string;
   email: string;
   joined: string;
@@ -26,7 +27,12 @@ export type StoreState = {
   archived: string[]; // course slugs moved off the active shelf
   activity: Record<string, number>; // "YYYY-MM-DD" -> minutes studied that day
   goal: number; // weekly study goal, in hours
+  lastLesson: Record<string, string>; // slug -> lesson to resume on
+  positions: Record<string, number>; // lesson id -> seconds watched
+  notes: Record<string, LessonNote[]>; // slug -> timestamped notes
 };
+
+export type LessonNote = { id: string; lesson: string; sec: number | null; text: string; at: string };
 
 // Dummy instructor account — logging in with this email grants the admin role.
 export const ADMIN_EMAIL = "admin@tarek.school";
@@ -40,6 +46,9 @@ const EMPTY: StoreState = {
   archived: [],
   activity: {},
   goal: 5,
+  lastLesson: {},
+  positions: {},
+  notes: {},
 };
 
 let cache: StoreState = EMPTY;
@@ -61,12 +70,26 @@ const read = (): StoreState => {
 const listeners = new Set<() => void>();
 const emit = () => listeners.forEach((l) => l());
 
-const write = (next: StoreState) => {
+// Cloud sync (lib/sync.ts) listens here to push the student's progress.
+type WriteHook = (next: StoreState) => void;
+let writeHook: WriteHook | null = null;
+export const onStoreWrite = (fn: WriteHook | null) => {
+  writeHook = fn;
+};
+
+const write = (next: StoreState, silent = false) => {
   try {
     localStorage.setItem(KEY, JSON.stringify(next));
   } catch {}
   emit();
+  if (!silent) writeHook?.(next);
 };
+
+export const getState = () => read();
+
+// Replace the whole local copy with what the server holds (no push back).
+export const hydrate = (next: Partial<StoreState>) =>
+  write({ ...EMPTY, ...next }, true);
 
 const subscribe = (cb: () => void) => {
   listeners.add(cb);
@@ -137,6 +160,7 @@ export const loginAs = (kind: "student" | "admin") => {
     if (m) activity[dayKey(i)] = m;
   });
   write({
+    ...EMPTY,
     user: {
       name: "Demo Student",
       email: "student@tarek.school",
@@ -170,7 +194,15 @@ export const updateUser = (patch: Partial<Omit<User, "joined">>) => {
   write({ ...s, user: { ...s.user, ...patch } });
 };
 
-export const logout = () => write({ ...read(), user: null });
+// In cloud mode sync.ts registers the real sign-out here.
+let logoutHook: (() => void) | null = null;
+export const onLogout = (fn: (() => void) | null) => {
+  logoutHook = fn;
+};
+export const logout = () => {
+  if (logoutHook) return logoutHook();
+  write({ ...read(), user: null });
+};
 
 export const enroll = (slugs: string | string[]) => {
   const s = read();
@@ -204,6 +236,42 @@ export const toggleLesson = (slug: string, lessonId: string) => {
 export const passQuiz = (slug: string) => {
   const s = read();
   write({ ...s, quizPassed: { ...s.quizPassed, [slug]: true } });
+};
+
+export const setLastLesson = (slug: string, lessonId: string) => {
+  const s = read();
+  if (s.lastLesson[slug] === lessonId) return;
+  write({ ...s, lastLesson: { ...s.lastLesson, [slug]: lessonId } });
+};
+
+// Saved every few seconds by the player; marks the lesson done at 90%.
+export const savePosition = (slug: string, lessonId: string, sec: number, total: number) => {
+  const s = read();
+  const positions = { ...s.positions, [lessonId]: Math.floor(sec) };
+  const done = s.completed[slug] || [];
+  if (total > 0 && sec / total >= 0.9 && !done.includes(lessonId)) {
+    write({ ...s, positions });
+    toggleLesson(slug, lessonId);
+    return;
+  }
+  write({ ...s, positions });
+};
+
+export const addNote = (slug: string, lesson: string, text: string, sec: number | null) => {
+  const s = read();
+  const note: LessonNote = {
+    id: Math.random().toString(36).slice(2, 10),
+    lesson,
+    sec,
+    text,
+    at: new Date().toISOString(),
+  };
+  write({ ...s, notes: { ...s.notes, [slug]: [...(s.notes[slug] || []), note] } });
+};
+
+export const removeNote = (slug: string, id: string) => {
+  const s = read();
+  write({ ...s, notes: { ...s.notes, [slug]: (s.notes[slug] || []).filter((n) => n.id !== id) } });
 };
 
 // ---- derived helpers ---------------------------------------------------------

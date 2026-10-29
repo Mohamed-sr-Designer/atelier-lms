@@ -11,40 +11,11 @@ import { useLang } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 import { useStudio, setOfferOverride, mergeCourse } from "@/lib/studio";
 import { courses, fmtPrice } from "@/lib/courses";
-import { site } from "@/lib/site";
+import { useOps } from "@/lib/ops-dict";
+import { cloud } from "@/lib/cloud";
+import { allOrders, allStudents, allSubmissions, useDb } from "@/lib/db";
 
 const ease = [0.16, 1, 0.3, 1] as const;
-
-// Deterministic demo series — the studio is a static-export demo, so the
-// analytics are invented but stable between visits.
-const REVENUE_14D = Array.from(
-  { length: 14 },
-  (_, i) => 2600 + ((i * 7919) % 11) * 640 + (i % 3) * 520 + (i > 9 ? 1400 : 0)
-);
-
-const SIGNUPS = [
-  { n: "Nour El-Sayed", e: "nour.s@gmail.com", c: "AI Photoshoot", ago: "2h" },
-  { n: "Omar Khaled", e: "omar.kh@outlook.com", c: "The AI Stack", ago: "5h" },
-  { n: "Farida Adel", e: "farida.a@gmail.com", c: "Photoshop — free", ago: "9h" },
-  { n: "Youssef Hany", e: "y.hany@yahoo.com", c: "AI Video", ago: "1d" },
-  { n: "Salma Ibrahim", e: "salma.designs@gmail.com", c: "Illustrator — free", ago: "1d" },
-];
-
-const LOCATIONS = [
-  { l: "Egypt", p: 46 },
-  { l: "Saudi Arabia", p: 21 },
-  { l: "Kuwait", p: 9 },
-  { l: "UAE", p: 8 },
-  { l: "Other", p: 16 },
-];
-
-const REVIEW_QUEUE = [
-  { n: "Mariam A.", p: "Product photoshoot — sneakers drop", c: "AI Photoshoot" },
-  { n: "Ahmed R.", p: "30-second launch spot", c: "AI Video" },
-  { n: "Hager M.", p: "Poster series — 3 formats", c: "Photoshop" },
-  { n: "Karim S.", p: "Brand mark + lockups", c: "Illustrator" },
-  { n: "Dina F.", p: "Logo sting animation", c: "After Effects" },
-];
 
 export default function AdminView() {
   return (
@@ -65,21 +36,51 @@ function Studio() {
   const offerEnabled = studio.offer?.enabled !== false;
   const displayOffer = offerText ?? studio.offer?.text ?? t.offer.text;
 
-  const totalRevenue = REVENUE_14D.reduce((a, b) => a + b, 0) * 4; // ~2 months
-  const chartMax = Math.max(...REVENUE_14D);
+  const o = useOps();
+  const { data: orders } = useDb(allOrders);
+  const { data: students } = useDb(allStudents);
+  const { data: subs } = useDb(allSubmissions);
   const firstName = store.user!.name.trim().split(/\s+/)[0];
 
-  // course ranking — students × live price (overrides included)
+  const approved = useMemo(() => (orders || []).filter((x) => x.status === "approved"), [orders]);
+  const pendingOrders = (orders || []).filter((x) => x.status === "pending").length;
+  const reviewQueue = (subs || []).filter((x) => x.status === "pending");
+  const totalRevenue = approved.reduce((n, x) => n + x.amount, 0);
+
+  // confirmed revenue per day, last 14 days (today last)
+  const revenue14 = useMemo(() => {
+    const days = Array.from({ length: 14 }, () => 0);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    for (const x of approved) {
+      const d = new Date(x.reviewedAt || x.createdAt);
+      d.setHours(0, 0, 0, 0);
+      const ago = Math.round((today.getTime() - d.getTime()) / 86400000);
+      if (ago >= 0 && ago < 14) days[13 - ago] += x.amount;
+    }
+    return days;
+  }, [approved]);
+  const chartMax = Math.max(1, ...revenue14);
+
+  // course ranking: confirmed revenue (bundles split by list price) + real enrollments
   const ranked = useMemo(() => {
     const live = courses.map((c) => mergeCourse(c, studio.courses[c.slug]));
+    const rev: Record<string, number> = {};
+    for (const x of approved) {
+      const items = live.filter((c) => x.courseSlugs.includes(c.slug));
+      const list = items.reduce((n, c) => n + c.price, 0) || 1;
+      for (const c of items) rev[c.slug] = (rev[c.slug] || 0) + Math.round((x.amount * c.price) / list);
+    }
     return live
       .map((c) => ({
         c,
-        revenue: c.price * Math.round(c.students * 0.32),
+        revenue: rev[c.slug] || 0,
+        enrolled: (students || []).filter((st) => st.enrollments.includes(c.slug)).length,
       }))
-      .sort((a, b) => b.revenue - a.revenue || b.c.students - a.c.students);
-  }, [studio]);
+      .sort((a, b) => b.revenue - a.revenue || b.enrolled - a.enrolled);
+  }, [studio, approved, students]);
   const topRevenue = Math.max(1, ...ranked.map((r) => r.revenue));
+  const topEnrolled = Math.max(1, ...ranked.map((r) => r.enrolled));
 
   const saveOffer = () => {
     setOfferOverride({ text: displayOffer.trim(), enabled: offerEnabled });
@@ -105,10 +106,15 @@ function Studio() {
         </Reveal>
         <Reveal delay={0.1}>
           <div className="flex items-center gap-3">
-            <span className="glass rounded-full px-4 py-2 text-xs text-bone-200">
-              {t.admin.range}
-            </span>
-            <Link href="/admin/courses/" className="btn btn-primary px-6 py-3 text-sm">
+            <Link href="/admin/ops/" className="btn btn-primary px-6 py-3 text-sm">
+              {o.admin.opsLink}
+              {pendingOrders + reviewQueue.length > 0 && (
+                <span className="ms-2 rounded-full bg-white/20 px-2 py-0.5 text-[11px]">
+                  {pendingOrders + reviewQueue.length}
+                </span>
+              )}
+            </Link>
+            <Link href="/admin/courses/" className="btn btn-ghost px-6 py-3 text-sm">
               {t.admin.editCourses} →
             </Link>
           </div>
@@ -116,7 +122,7 @@ function Studio() {
       </div>
       <Reveal delay={0.12}>
         <p className="mt-4 max-w-xl text-sm text-bone-400 md:text-base">
-          {t.admin.sub}
+          {cloud ? o.admin.liveNote : o.admin.demoNote}
         </p>
       </Reveal>
 
@@ -124,9 +130,9 @@ function Studio() {
       <Reveal delay={0.15}>
         <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line/10 bg-line/10 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { n: totalRevenue, pre: "EGP ", l: t.admin.statRevenue, up: "+12%" },
-            { n: 1247 + (store.user ? 1 : 0), pre: "", l: t.admin.statStudents, up: "+38" },
-            { n: 4.8, pre: "", l: t.admin.statConversion, up: "+0.6", pct: true },
+            { n: totalRevenue, pre: "EGP ", l: o.admin.revenue, up: "" },
+            { n: students?.length ?? 0, pre: "", l: o.admin.students, up: "" },
+            { n: pendingOrders, pre: "", l: o.admin.pendingOrders, up: "", pct: false },
             { n: courses.length, pre: "", l: t.admin.statCourses, up: "" },
           ].map((s) => (
             <div key={s.l} className="relative bg-ink-900 p-7">
@@ -170,22 +176,22 @@ function Studio() {
               <div className="relative">
                 <div className="flex items-end justify-between gap-4">
                   <p className="text-xs uppercase tracking-ultra text-bone-500">
-                    {t.admin.chartLabel} — {t.admin.range.toLowerCase()}
+                    {t.admin.chartLabel} · {t.admin.range.toLowerCase()}
                   </p>
                   <p className="font-display text-lg font-semibold text-mint" dir="ltr">
-                    {fmtPrice(REVENUE_14D.reduce((a, b) => a + b, 0), lang)}
+                    {fmtPrice(revenue14.reduce((a, b) => a + b, 0), lang)}
                   </p>
                 </div>
                 <div className="mt-6 flex h-44 items-end gap-1.5 md:gap-2.5">
-                  {REVENUE_14D.map((v, i) => (
+                  {revenue14.map((v, i) => (
                     <div key={i} className="group relative flex h-full grow flex-col justify-end">
                       <motion.div
                         initial={{ height: 0 }}
-                        whileInView={{ height: `${(v / chartMax) * 100}%` }}
+                        whileInView={{ height: `${Math.max(2, (v / chartMax) * 100)}%` }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.7, ease, delay: i * 0.04 }}
                         className={`rounded-t-md transition-opacity ${
-                          i === REVENUE_14D.length - 1
+                          i === revenue14.length - 1
                             ? "shadow-[0_0_18px_rgb(var(--mint)/0.5)] [background:linear-gradient(180deg,rgb(var(--mint)),rgb(var(--electric)))]"
                             : "bg-bone-50/15 group-hover:bg-bone-50/30"
                         }`}
@@ -208,7 +214,7 @@ function Studio() {
                 <span className="text-bone-600">· {t.admin.topBy}</span>
               </p>
               <div className="mt-6 space-y-5">
-                {ranked.map(({ c, revenue }, i) => (
+                {ranked.map(({ c, revenue, enrolled }, i) => (
                   <div key={c.slug} className="flex items-center gap-4">
                     <span className="w-6 shrink-0 font-serif text-sm italic text-mint">
                       {String(i + 1).padStart(2, "0")}
@@ -220,15 +226,18 @@ function Studio() {
                         </p>
                         <p className="shrink-0 text-xs tabular-nums text-bone-400" dir="ltr">
                           {c.price === 0
-                            ? `${c.students.toLocaleString("en-US")} ${t.common.students}`
-                            : fmtPrice(revenue, lang)}
+                            ? `${enrolled.toLocaleString("en-US")} ${t.common.students}`
+                            : `${fmtPrice(revenue, lang)} · ${enrolled}`}
                         </p>
                       </div>
                       <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-ink-900">
                         <motion.div
                           initial={{ width: 0 }}
                           whileInView={{
-                            width: `${Math.max(6, (revenue / topRevenue) * 100)}%`,
+                            width: `${Math.max(
+                              4,
+                              c.price === 0 ? (enrolled / topEnrolled) * 100 : (revenue / topRevenue) * 100
+                            )}%`,
                           }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.9, ease, delay: i * 0.07 }}
@@ -263,29 +272,30 @@ function Studio() {
                   {t.admin.reviewLabel}
                 </p>
                 <span className="rounded-full bg-electric/15 px-3 py-1 text-xs font-bold text-electric">
-                  {REVIEW_QUEUE.length}
+                  {reviewQueue.length}
                 </span>
               </div>
               <div className="mt-5 divide-y divide-line/10">
-                {REVIEW_QUEUE.map((r) => (
-                  <div key={r.p} className="flex items-center gap-4 py-3.5">
+                {reviewQueue.length === 0 && (
+                  <p className="py-3 text-sm text-bone-500">{o.admin.empty}</p>
+                )}
+                {reviewQueue.slice(0, 6).map((r) => (
+                  <div key={r.id} className="flex items-center gap-4 py-3.5">
                     <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-mint/10 font-serif text-sm italic text-mint">
-                      {r.n.charAt(0)}
+                      {r.userName.charAt(0)}
                     </span>
                     <div className="min-w-0 grow">
-                      <p className="truncate text-sm text-bone-50">{r.p}</p>
+                      <p className="truncate text-sm text-bone-50" dir="auto">{r.userName}</p>
                       <p className="text-xs text-bone-500">
-                        {r.n} · {r.c}
+                        {courses.find((c) => c.slug === r.courseSlug)?.short[lang] || r.courseSlug}
                       </p>
                     </div>
-                    <a
-                      href={`https://wa.me/${site.whatsapp}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      href="/admin/ops/?tab=projects"
                       className="shrink-0 rounded-full border border-line/20 px-4 py-1.5 text-xs text-bone-200 transition-colors hover:border-mint/50 hover:text-mint"
                     >
                       {t.admin.reviewCta} →
-                    </a>
+                    </Link>
                   </div>
                 ))}
               </div>
@@ -372,73 +382,30 @@ function Studio() {
                 {t.admin.signupsLabel}
               </p>
               <div className="mt-4 divide-y divide-line/10">
-                {store.user && (
-                  <div className="flex items-center gap-3 py-3">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full font-serif text-sm italic text-white [background:linear-gradient(120deg,rgb(var(--mint)),rgb(var(--electric)))]">
-                      {store.user.name.charAt(0)}
-                    </span>
-                    <div className="min-w-0 grow">
-                      <p className="truncate text-sm text-bone-50">{store.user.name}</p>
-                      <p className="truncate text-xs text-bone-500">{store.user.email}</p>
-                    </div>
-                    <span className="shrink-0 rounded-full bg-mint/15 px-2.5 py-1 text-[10px] font-bold text-mint">
-                      {t.admin.youTag}
-                    </span>
-                  </div>
+                {(students || []).length === 0 && (
+                  <p className="py-3 text-sm text-bone-500">{o.admin.empty}</p>
                 )}
-                {SIGNUPS.map((s) => (
-                  <div key={s.e} className="flex items-center gap-3 py-3">
+                {(students || []).slice(0, 6).map((s) => (
+                  <div key={s.id} className="flex items-center gap-3 py-3">
                     <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-bone-50/10 font-serif text-sm italic text-bone-200">
-                      {s.n.charAt(0)}
+                      {s.name.charAt(0)}
                     </span>
                     <div className="min-w-0 grow">
-                      <p className="truncate text-sm text-bone-50">{s.n}</p>
-                      <p className="truncate text-xs text-bone-500">{s.c}</p>
+                      <p className="truncate text-sm text-bone-50" dir="auto">{s.name}</p>
+                      <p className="truncate text-xs text-bone-500" dir="ltr">{s.email}</p>
                     </div>
                     <span className="shrink-0 text-[11px] tabular-nums text-bone-500">
-                      {s.ago}
+                      {new Date(s.joined).toLocaleDateString(undefined, { day: "numeric", month: "short" })}
                     </span>
                   </div>
                 ))}
+                <Link href="/admin/ops/?tab=students" className="block pt-3 text-xs text-mint hover:underline">
+                  {o.admin.tabs.students} →
+                </Link>
               </div>
             </div>
           </Reveal>
 
-          {/* locations */}
-          <Reveal delay={0.1}>
-            <div className="glass rounded-2xl p-6">
-              <p className="text-xs uppercase tracking-ultra text-bone-500">
-                {t.admin.locationsLabel}
-              </p>
-              <div className="mt-5 space-y-4">
-                {LOCATIONS.map((x, i) => (
-                  <div key={x.l}>
-                    <div className="flex items-baseline justify-between text-sm">
-                      <span className="text-bone-200">{x.l}</span>
-                      <span className="tabular-nums text-bone-400" dir="ltr">
-                        {x.p}%
-                      </span>
-                    </div>
-                    <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-ink-900">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${x.p}%` }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.8, ease, delay: i * 0.08 }}
-                        className="h-full rounded-full [background:linear-gradient(90deg,rgb(var(--mint)),rgb(var(--electric)))]"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.12}>
-            <p className="px-2 text-center text-[11px] leading-relaxed text-bone-500">
-              {t.admin.localNote}
-            </p>
-          </Reveal>
         </div>
       </div>
     </section>

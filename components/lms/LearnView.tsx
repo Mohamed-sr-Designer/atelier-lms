@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
@@ -14,15 +14,22 @@ import {
   passQuiz,
   courseProgress,
   isEnrolled,
+  savePosition,
+  setLastLesson,
 } from "@/lib/store";
+import { courseMedia, useDb } from "@/lib/db";
+import { useOps } from "@/lib/ops-dict";
+import LessonPlayer from "@/components/lms/LessonPlayer";
+import { LessonNotes, LessonQA, ProjectSubmit } from "@/components/lms/LearnPanels";
 import { downloadResource } from "@/lib/download";
 import { useLiveCourse } from "@/lib/studio";
 import { fmtDuration, lessonCount, type Course } from "@/lib/courses";
 
-type Tab = "resources" | "board" | "final" | "quiz";
+type Tab = "notes" | "resources" | "board" | "final" | "quiz";
 
 export default function LearnView({ course: courseStatic }: { course: Course }) {
   const { t, lang } = useLang();
+  const o = useOps();
   const course = useLiveCourse(courseStatic); // studio drops appear here too
   const params = useSearchParams();
   const store = useStore();
@@ -38,8 +45,11 @@ export default function LearnView({ course: courseStatic }: { course: Course }) 
   );
 
   // first incomplete lesson (or the first) as the landing lesson
+  const resumeId = store.lastLesson[course.slug];
   const firstIncomplete =
-    allLessons.find((l) => !done.includes(l.id))?.id ?? allLessons[0].id;
+    (resumeId && allLessons.some((l) => l.id === resumeId) ? resumeId : undefined) ??
+    allLessons.find((l) => !done.includes(l.id))?.id ??
+    allLessons[0].id;
   const [currentId, setCurrentId] = useState(firstIncomplete);
   const [openModule, setOpenModule] = useState(() => {
     const idx = course.modules.findIndex((m) =>
@@ -48,13 +58,35 @@ export default function LearnView({ course: courseStatic }: { course: Course }) 
     return idx === -1 ? 0 : idx;
   });
   const [tab, setTab] = useState<Tab>(
-    params.get("tab") === "quiz" ? "quiz" : "resources"
+    params.get("tab") === "quiz" ? "quiz" : params.get("tab") === "final" ? "final" : "notes"
   );
+  const { data: media } = useDb(() => courseMedia(course.slug), [course.slug, enrolled]);
+  const [nowSec, setNowSec] = useState<number | null>(null);
+  const [seekTo, setSeekTo] = useState<{ id: string; sec: number } | null>(null);
 
   const current = allLessons.find((l) => l.id === currentId) ?? allLessons[0];
   const currentIndex = allLessons.findIndex((l) => l.id === current.id);
   const canWatch = enrolled || current.free;
   const isDone = done.includes(current.id);
+  const videoUrl = canWatch ? media?.[current.id] : undefined;
+  const startAt =
+    seekTo?.id === current.id ? seekTo.sec : store.positions[current.id] || 0;
+
+  // remember the lesson to land on next time
+  useEffect(() => {
+    if (store.user && canWatch) setLastLesson(course.slug, current.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [current.id, Boolean(store.user), canWatch]);
+  useEffect(() => setNowSec(null), [current.id]);
+
+  const openLesson = (id: string, sec?: number) => {
+    setCurrentId(id);
+    if (sec != null) setSeekTo({ id, sec });
+    const mi = course.modules.findIndex((m) => m.lessons.some((l) => l.id === id));
+    if (mi !== -1) setOpenModule(mi);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+  const titleOf = (id: string) => allLessons.find((l) => l.id === id)?.t || "";
 
   const go = (dir: 1 | -1) => {
     const next = allLessons[currentIndex + dir];
@@ -101,38 +133,39 @@ export default function LearnView({ course: courseStatic }: { course: Course }) 
       <div className="mt-8 grid gap-10 lg:grid-cols-12">
         {/* -------------------------------------------------- main column */}
         <div className="lg:col-span-8">
-          {/* player — glass frame with a living gradient edge */}
-          <div className="relative rounded-2xl p-[1.5px] [background:linear-gradient(120deg,rgb(var(--mint)/0.6),rgb(var(--line)/0.1)_40%,rgb(var(--electric)/0.5))]">
-          <div className="relative aspect-video overflow-hidden rounded-2xl bg-ink-800 shadow-[0_20px_80px_rgb(var(--mint)/0.12)]">
-            <div
-              aria-hidden
-              className="absolute inset-0"
-              style={{
-                background:
-                  "radial-gradient(110% 100% at 15% 115%, rgb(var(--mint) / 0.2) 0%, transparent 60%)",
-              }}
-            />
-            {canWatch ? (
-              <div className="relative flex h-full flex-col items-center justify-center p-8 text-center">
+          {/* player: a calm, solid frame so the video is the only thing that glows */}
+          <div className="relative aspect-video overflow-hidden rounded-2xl border border-line/10 bg-black">
+            {videoUrl ? (
+              <LessonPlayer
+                key={current.id + (seekTo?.id === current.id ? seekTo.sec : "")}
+                url={videoUrl}
+                startAt={startAt}
+                onTime={(sec, total) => {
+                  setNowSec(sec);
+                  if (store.user && enrolled) savePosition(course.slug, current.id, sec, total);
+                }}
+              />
+            ) : canWatch ? (
+              <div className="relative flex h-full flex-col items-center justify-center bg-ink-800 p-8 text-center">
                 <Media
                   src={course.cover}
                   alt=""
                   fill
                   sizes="100vw"
-                  className="object-cover opacity-20 saturate-[0.6]"
+                  className="object-cover opacity-15 saturate-[0.5]"
                 />
-                <p className="relative mt-4 text-xs uppercase tracking-ultra text-mint">
+                <p className="relative text-xs uppercase tracking-ultra text-mint">
                   {t.learn.nowPlaying}
                 </p>
                 <p className="relative mt-2 max-w-xl text-balance text-lg font-semibold text-bone-50 md:text-2xl">
                   {current.t}
                 </p>
-                <p className="relative mt-3 rounded-full border border-line/15 bg-ink-900/60 px-4 py-1.5 text-xs text-bone-300 backdrop-blur">
-                  {t.learn.comingSoon}
+                <p className="relative mt-3 rounded-full border border-line/15 bg-ink-900/80 px-4 py-1.5 text-xs text-bone-300">
+                  {o.learn.noVideo}
                 </p>
               </div>
             ) : (
-              <div className="relative flex h-full flex-col items-center justify-center p-8 text-center backdrop-blur">
+              <div className="relative flex h-full flex-col items-center justify-center bg-ink-800 p-8 text-center">
                 <span className="grid h-14 w-14 place-items-center rounded-full border border-line/20 text-xl text-bone-400">
                   🔒
                 </span>
@@ -150,25 +183,17 @@ export default function LearnView({ course: courseStatic }: { course: Course }) 
                 </Link>
               </div>
             )}
-            {/* player chrome */}
-            <div className="absolute inset-x-0 bottom-0 flex items-center gap-3 border-t border-line/10 bg-ink-900/70 px-5 py-3 backdrop-blur" dir="ltr">
-              <span className="text-mint">▶</span>
-              <div className="h-1 grow rounded-full bg-ink-600">
-                <div className="h-full w-[3%] rounded-full bg-mint" />
-              </div>
-              <span className="text-xs tabular-nums text-bone-400">
-                00:00 / {String(current.dur).padStart(2, "0")}:00
-              </span>
-            </div>
           </div>
-          </div>
-          <p className="mt-3 text-xs text-bone-500">{t.learn.playerNote}</p>
+          <p className="mt-3 text-xs text-bone-500">
+            {videoUrl && startAt > 5 ? `${o.learn.resume} · ` : ""}
+            {o.learn.autoDone}
+          </p>
 
           {/* lesson meta + actions */}
           <div className="mt-7 flex flex-wrap items-start justify-between gap-5 border-b border-line/10 pb-7">
             <div className="min-w-0">
               <p className="text-xs uppercase tracking-ultra text-bone-500">
-                {current.mod.n} · {current.mod.t} —{" "}
+                {current.mod.n} · {current.mod.t} ·{" "}
                 <span dir="ltr">
                   {current.dur}
                   {t.common.minutesShort}
@@ -235,6 +260,7 @@ export default function LearnView({ course: courseStatic }: { course: Course }) 
             <div className="flex flex-wrap gap-2 border-b border-line/10 pb-4">
               {(
                 [
+                  { id: "notes" as Tab, label: o.learn.notesTab },
                   { id: "resources" as Tab, label: t.learn.resources },
                   { id: "board" as Tab, label: t.learn.boardTab },
                   { id: "final" as Tab, label: t.learn.finalProjectTab },
@@ -294,6 +320,17 @@ export default function LearnView({ course: courseStatic }: { course: Course }) 
                 </div>
               )}
 
+              {tab === "notes" && (
+                <LessonNotes
+                  slug={course.slug}
+                  lessonId={current.id}
+                  lessonTitle={current.t}
+                  now={nowSec}
+                  onSeek={(id, sec) => openLesson(id, sec)}
+                  titleOf={titleOf}
+                />
+              )}
+
               {tab === "board" && <NotesBoard slug={course.slug} />}
 
               {tab === "final" && (
@@ -318,6 +355,7 @@ export default function LearnView({ course: courseStatic }: { course: Course }) 
                       </li>
                     ))}
                   </ul>
+                  <ProjectSubmit slug={course.slug} enrolled={enrolled} />
                 </div>
               )}
 
@@ -333,13 +371,15 @@ export default function LearnView({ course: courseStatic }: { course: Course }) 
                 ))}
             </div>
           </div>
+
+          {canWatch && <LessonQA slug={course.slug} lessonId={current.id} />}
         </div>
 
         {/* -------------------------------------------------- curriculum rail */}
         <aside className="lg:col-span-4">
-          <div className="glass rounded-2xl lg:sticky lg:top-28">
+          <div className="rounded-2xl border border-line/10 bg-ink-800 lg:sticky lg:top-28">
             <p className="border-b border-line/10 px-6 py-4 text-xs uppercase tracking-ultra text-bone-500">
-              {t.learn.curriculum} — {lessonCount(course)} {t.common.lessons} ·{" "}
+              {t.learn.curriculum} · {lessonCount(course)} {t.common.lessons} ·{" "}
               <span dir="ltr">
                 {fmtDuration(
                   course.modules.reduce(
@@ -398,7 +438,7 @@ export default function LearnView({ course: courseStatic }: { course: Course }) 
                               <li key={l.id}>
                                 <button
                                   type="button"
-                                  onClick={() => setCurrentId(l.id)}
+                                  onClick={() => openLesson(l.id)}
                                   className={`flex w-full items-center gap-3 px-6 py-3 text-start transition-colors ${
                                     active ? "bg-mint/10" : "hover:bg-ink-900/60"
                                   }`}

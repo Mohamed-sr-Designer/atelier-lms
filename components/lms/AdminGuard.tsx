@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useLang } from "@/lib/i18n";
 import { useStore, loginAs } from "@/lib/store";
 import { openAuth } from "@/components/lms/AuthModal";
+import { cloud } from "@/lib/cloud";
 
 // Wraps every /admin screen: guests and students see a glass gate with a
 // one-tap admin preview; the instructor sees the studio.
@@ -39,13 +40,15 @@ export default function AdminGuard({ children }: { children: React.ReactNode }) 
           <p className="mt-3 text-sm leading-relaxed text-bone-400">
             {t.admin.guardSub}
           </p>
-          <button
-            type="button"
-            onClick={() => loginAs("admin")}
-            className="btn btn-primary mt-7 w-full py-4"
-          >
-            {t.admin.guardCta}
-          </button>
+          {!cloud && (
+            <button
+              type="button"
+              onClick={() => loginAs("admin")}
+              className="btn btn-primary mt-7 w-full py-4"
+            >
+              {t.admin.guardCta}
+            </button>
+          )}
           <button
             type="button"
             onClick={() => openAuth("login")}

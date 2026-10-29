@@ -7,7 +7,9 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import GlyphPlate from "@/components/lms/GlyphPlate";
 import { useLang } from "@/lib/i18n";
-import { useStore, enroll } from "@/lib/store";
+import { useStore } from "@/lib/store";
+import { createOrder, enrollFree, myOrders, useDb } from "@/lib/db";
+import { useOps } from "@/lib/ops-dict";
 import { openAuth } from "@/components/lms/AuthModal";
 import { useStudio, mergeCourse } from "@/lib/studio";
 import { isValidCode, promoDiscount } from "@/lib/promo";
@@ -31,6 +33,12 @@ export default function CheckoutView() {
   const [copied, setCopied] = useState("");
   const [promoInput, setPromoInput] = useState("");
   const [promoState, setPromoState] = useState<"idle" | "ok" | "bad">("idle");
+  const [reference, setReference] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [err, setErr] = useState("");
+  const o = useOps();
+  const { data: orders } = useDb(myOrders, [store.user?.email]);
 
   // ?bundle=1 (legacy, AI stack) or ?bundle=<slug> for any pack
   const bundleParam = params.get("bundle");
@@ -73,24 +81,56 @@ export default function CheckoutView() {
     ? activeBundle.title[lang]
     : course!.short[lang];
 
-  const complete = () => {
-    enroll(activeBundle ? activeBundle.courseSlugs : course!.slug);
-    const target = activeBundle ? activeBundle.courseSlugs[0] : course!.slug;
+  const slugs = items.map((c) => c.slug);
+  const hasPending = (orders || []).some(
+    (x) => x.status === "pending" && slugs.every((sl) => x.courseSlugs.includes(sl))
+  );
+
+  // Free courses open straight away.
+  const complete = async () => {
+    try {
+      await enrollFree(slugs);
+    } catch (x) {
+      setErr(String((x as Error).message || x));
+      return;
+    }
+    const target = slugs[0];
     router.push(`/checkout/success/?course=${target}${isBundle ? "&bundle=1" : ""}`);
   };
 
-  const confirmPaid = () => {
+  const methodLabel = method === "instapay" ? "InstaPay" : "Vodafone Cash";
+
+  // Paid: the order waits in the admin desk until the transfer is confirmed.
+  const confirmPaid = async () => {
+    if (reference.trim().length < 3) {
+      setErr(o.checkout.errRef);
+      return;
+    }
+    setErr("");
+    setSending(true);
+    try {
+      await createOrder({
+        title: orderName,
+        courseSlugs: slugs,
+        amount: total,
+        promo: promoState === "ok" ? promoInput.trim() : undefined,
+        method: methodLabel,
+        reference: reference.trim(),
+      });
+      setSent(true);
+    } catch (x) {
+      setErr(String((x as Error).message || x));
+    }
+    setSending(false);
+  };
+
+  const waReceipt = () => {
     const msg = encodeURIComponent(
-      `${payments.waEnrollMsg} ${orderName}: ${fmtPrice(total, "en")} (${
-        method === "instapay" ? "InstaPay" : "Vodafone Cash"
-      })${promoState === "ok" ? `, promo ${promoInput.trim()} applied` : ""}`
+      `${payments.waEnrollMsg} ${orderName}: ${fmtPrice(total, "en")} (${methodLabel}, ${reference.trim()})${
+        promoState === "ok" ? `, promo ${promoInput.trim()}` : ""
+      }`
     );
-    window.open(
-      `https://wa.me/${site.whatsapp}?text=${msg}`,
-      "_blank",
-      "noopener,noreferrer"
-    );
-    complete();
+    window.open(`https://wa.me/${site.whatsapp}?text=${msg}`, "_blank", "noopener,noreferrer");
   };
 
   const copy = (v: string) => {
@@ -255,6 +295,26 @@ export default function CheckoutView() {
                     </button>
                   </div>
                 </div>
+              ) : sent ? (
+                <div className="text-center">
+                  <span className="mx-auto grid h-14 w-14 place-items-center rounded-full border border-mint/40 bg-mint/10 text-2xl text-mint">
+                    ✓
+                  </span>
+                  <h2 className="mt-5 font-display text-2xl font-semibold text-bone-50">
+                    {o.checkout.pendingTitle}
+                  </h2>
+                  <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-bone-400">
+                    {o.checkout.pendingBody}
+                  </p>
+                  <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                    <button type="button" onClick={waReceipt} className="btn btn-ghost py-3.5">
+                      {o.checkout.pendingWa}
+                    </button>
+                    <Link href="/dashboard/" className="btn btn-primary py-3.5">
+                      {o.checkout.toDash}
+                    </Link>
+                  </div>
+                </div>
               ) : isFree ? (
                 <div className="text-center">
                   <p className="mx-auto max-w-md text-sm leading-relaxed text-bone-400">
@@ -332,15 +392,36 @@ export default function CheckoutView() {
                   </div>
 
                   <p className="mt-6 rounded-lg bg-ink-900/70 p-4 text-xs leading-relaxed text-bone-400">
-                    {t.checkout.manualNote}
+                    {o.checkout.refNote}
                   </p>
+
+                  <label className="mt-5 block">
+                    <span className="text-xs uppercase tracking-ultra text-bone-500">
+                      {o.checkout.refLabel}
+                    </span>
+                    <input
+                      type="text"
+                      value={reference}
+                      onChange={(e) => setReference(e.target.value)}
+                      placeholder={o.checkout.refPh}
+                      className="mt-1.5 w-full rounded-xl border border-line/15 bg-ink-900 px-4 py-3 text-sm text-bone-50 placeholder:text-bone-500/60 focus:border-mint/60 focus:outline-none"
+                    />
+                  </label>
+
+                  {hasPending && (
+                    <p className="mt-4 rounded-lg border border-electric/30 bg-electric/5 p-3 text-xs text-bone-200">
+                      {o.checkout.alreadyPending}
+                    </p>
+                  )}
+                  {err && <p className="mt-3 text-sm text-mint">{err}</p>}
 
                   <button
                     type="button"
                     onClick={confirmPaid}
-                    className="btn btn-primary mt-7 w-full py-4"
+                    disabled={sending}
+                    className="btn btn-primary mt-6 w-full py-4 disabled:opacity-60"
                   >
-                    {t.checkout.confirmBtn}
+                    {sending ? o.checkout.sending : o.checkout.submit}
                   </button>
 
                   <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-line/10 pt-5">

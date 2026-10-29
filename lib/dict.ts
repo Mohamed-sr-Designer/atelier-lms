@@ -209,9 +209,9 @@ const en = {
     outcomesTitleB: ".",
     outcomes: [
       { n: 1200, s: "+", l: "students taught across four academies" },
-      { n: 78, s: "%", l: "of finishers land paid work within 3 months" },
-      { n: 21, s: "", l: "days on average to a first paid brief after the AI stack" },
-      { n: 96, s: "%", l: "completion rate, 3–5 hour courses actually get finished" },
+      { n: 49, s: "", l: "cohorts taught, project by project" },
+      { n: 4, s: "", l: "academies, two of them where he still teaches today" },
+      { n: 3, s: "", l: "markets of real client work: Egypt, Saudi Arabia, Kuwait" },
     ],
     galleryLabel: "Made with the method",
     communityNote:
@@ -280,7 +280,7 @@ const en = {
       },
       {
         t: "A portfolio piece per course",
-        d: "Every course ends in a real project I review personally. That finished piece is what gets you hired, not a certificate.",
+        d: "Every course ends in a real project I review personally. That finished piece is what gets you hired, and it is what earns your verifiable certificate.",
       },
       {
         t: "Earn it back on job #1",
@@ -648,7 +648,7 @@ const en = {
       { q: "Which courses are free, and how are the rest priced?", a: "Photoshop and Illustrator, the two foundations, are completely free, forever: full courses with projects, quizzes and reviewed final projects. After Effects (EGP 1,800), Premiere Pro (EGP 1,050) and the two AI tracks (EGP 2,300 and 2,700) are paid, each a fraction of what a single freelance motion, edit or AI brief pays in the market. The goal is that your first paid job covers the course several times over." },
       { q: "Do I get lifetime access?", a: "Yes. One payment, permanent access, all future updates to that course included." },
       { q: "What if the course isn't for me?", a: "7-day money-back guarantee. One WhatsApp message, no forms, no questions that matter." },
-      { q: "Do I get something to show employers?", a: "Something better than a paper credential: finished, personally-reviewed portfolio projects from every course. Employers and clients hire from work, not certificates, this school is built around that truth." },
+      { q: "Do I get something to show employers?", a: "Two things. Finished, personally-reviewed portfolio projects from every course, and a certificate you earn only when that project is approved, with a public link anyone can use to verify it. Clients hire from the work; the certificate proves the work was reviewed." },
       { q: "Do I need a powerful computer?", a: "No. Every course is taught on mid-range hardware, with performance workarounds (like Premiere proxies) built into the curriculum." },
       { q: "Is the teaching in Arabic or English?", a: "Lessons are taught in Arabic with English tool vocabulary, the way MENA studios actually talk. The platform itself is fully bilingual." },
       { q: "Can I get training for my team or academy?", a: "Yes, corporate and academy programs run separately (on-site in Egypt, online elsewhere). Reach out via the contact page and I'll reply personally." },
@@ -1043,9 +1043,9 @@ const ar: typeof en = {
     outcomesTitleB: ".",
     outcomes: [
       { n: 1200, s: "+", l: "طالب اتعلموا في أربع أكاديميات" },
-      { n: 78, s: "%", l: "من اللي بيخلّصوا بياخدوا شغل مدفوع خلال 3 شهور" },
-      { n: 21, s: "", l: "يوم في المتوسط لحد أول شغل مدفوع بعد حزمة الذكاء الاصطناعي" },
-      { n: 96, s: "%", l: "نسبة إكمال، الكورسات القصيرة بتتخلص فعلًا" },
+      { n: 49, s: "", l: "دفعة درّسها، مشروع ورا مشروع" },
+      { n: 4, s: "", l: "أكاديميات، ولسه بيدرّس في اتنين منهم لحد النهارده" },
+      { n: 3, s: "", l: "أسواق شغل حقيقي مع عملاء: مصر والسعودية والكويت" },
     ],
     galleryLabel: "اتعمل بالمنهج",
     communityNote:
@@ -1114,7 +1114,7 @@ const ar: typeof en = {
       },
       {
         t: "قطعة بورتفوليو من كل كورس",
-        d: "كل كورس بيخلص بمشروع حقيقي بمراجعتي الشخصية. القطعة دي هي اللي بتوظّفك، مش الشهادة.",
+        d: "كل كورس بيخلص بمشروع حقيقي بمراجعتي الشخصية. القطعة دي هي اللي بتوظّفك، وهي اللي بتجيب لك شهادة تقدر أي حد يتحقق منها.",
       },
       {
         t: "رجّع تمنه من أول شغلانة",
@@ -1481,7 +1481,7 @@ const ar: typeof en = {
       { q: "أي الدورات مجانية، وكيف تُسعَّر البقية؟", a: "فوتوشوب وإليستريتور، الأساسان، مجانيتان تمامًا وللأبد: دورات كاملة بمشاريع واختبارات ومشاريع نهائية بمراجعة. أفتر إفكتس (1,800 ج.م) وبريمير برو (1,050 ج.م) ومسارا الذكاء الاصطناعي (2,300 و2,700 ج.م) مدفوعة، كل منها جزء بسيط مما يدفعه السوق في مشروع موشن أو مونتاج أو ذكاء اصطناعي واحد. الهدف أن يغطي أول عمل مدفوع لك ثمن الدورة عدة مرات." },
       { q: "هل أحصل على وصول مدى الحياة؟", a: "نعم. دفعة واحدة، وصول دائم، وكل تحديثات تلك الدورة مشمولة." },
       { q: "ماذا لو لم تناسبني الدورة؟", a: "ضمان استرداد خلال 7 أيام. رسالة واتساب واحدة، بلا نماذج، بلا أسئلة تُذكر." },
-      { q: "هل أحصل على ما أعرضه لأصحاب العمل؟", a: "ما هو أفضل من شهادة ورقية: مشاريع بورتفوليو مكتملة ومُراجَعة شخصيًا من كل دورة. أصحاب العمل والعملاء يوظّفون من الأعمال لا الشهادات، وهذه المدرسة مبنية على هذه الحقيقة." },
+      { q: "هل أحصل على ما أعرضه لأصحاب العمل؟", a: "حاجتين. مشاريع بورتفوليو مكتملة ومتراجعة شخصيًا من كل كورس، وشهادة بتاخدها بس لما مشروعك يتقبل، وليها لينك تحقق مفتوح لأي حد. العملاء بيوظّفوا من الشغل، والشهادة بتثبت إن الشغل اتراجع." },
       { q: "هل أحتاج حاسوبًا قويًا؟", a: "لا. كل دورة مُدرَّسة على عتاد متوسط، مع حلول أداء (مثل بروكسي بريمير) مدمجة في المنهج." },
       { q: "هل التدريس بالعربية أم الإنجليزية؟", a: "الدروس بالعربية مع مصطلحات الأدوات بالإنجليزية، بالطريقة التي تتحدث بها استوديوهات المنطقة فعلًا. والمنصة نفسها ثنائية اللغة بالكامل." },
       { q: "هل يتوفر تدريب لفريقي أو أكاديميتي؟", a: "نعم، برامج الشركات والأكاديميات تُدار بشكل منفصل (حضوريًا في مصر، وأونلاين في أي مكان آخر). تواصل عبر صفحة الاتصال وسأرد شخصيًا." },

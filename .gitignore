@@ -34,3 +34,5 @@ next-env.d.ts
 # Deploys go to the gh-pages branch instead (see README).
 /.github/
 /.next-prod/
+_covers/
+.next-check/
