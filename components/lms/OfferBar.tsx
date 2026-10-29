@@ -69,7 +69,7 @@ export default function OfferBar() {
   return (
     <Link
       href="/bundle/"
-      aria-label={`${text} — ${t.offer.ends}`}
+      aria-label={`${text}, ${t.offer.ends}`}
       className="fixed inset-x-0 top-0 z-[60] block overflow-hidden bg-gradient-to-r from-mint via-mint to-electric text-[11px] text-white shadow-[0_4px_30px_rgb(var(--mint)/0.35)] md:text-xs"
     >
       <div className="animate-marquee flex w-max items-center py-2">

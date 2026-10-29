@@ -37,7 +37,7 @@ export default function DraftPreviewView() {
   const mins = totalMinutes(course);
   const lessons = lessonCount(course);
   const enrollMsg = encodeURIComponent(
-    `Hi Mohamed — I'd like to enroll in "${course.title.en}" (${fmtPrice(course.price, "en")}).`
+    `Hi Mohamed, I'd like to enroll in "${course.title.en}" (${fmtPrice(course.price, "en")}).`
   );
 
   return (

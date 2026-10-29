@@ -77,7 +77,7 @@ export default function OffersView() {
         </div>
 
         {/* ======================= the three plans, side by side ============== */}
-        <div className="mt-16 grid items-end gap-6 lg:grid-cols-3">
+        <div className={`mt-16 grid items-end gap-6 ${tiers.length === 1 ? "mx-auto max-w-md" : "lg:grid-cols-3"}`}>
           {tiers.map((b, i) => {
             const items = coursesOfBundle(b);
             const mins = items.reduce((n, c) => n + totalMinutes(c), 0);
@@ -226,7 +226,7 @@ export default function OffersView() {
                                   ✓
                                 </span>
                               ) : (
-                                <span className="text-bone-600">—</span>
+                                <span className="text-bone-600">✕</span>
                               )
                             ) : (
                               <span className="font-semibold tabular-nums text-bone-100" dir="ltr">

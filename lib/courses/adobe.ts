@@ -26,6 +26,7 @@ export const photoshop: Course = {
   price: 0,
   cover: "/work/axia/hero-2.webp",
   icon: "/lms/icons/ps.webp",
+  art: "/lms/art/ps.webp",
   plate: ["#001E36", "#31A8FF"],
   outcomes: [
     "Cut anything, hair, glass, motion blur, with clean edges",
@@ -173,6 +174,7 @@ export const illustrator: Course = {
   price: 0,
   cover: "/work/fresh-valley/marks.webp",
   icon: "/lms/icons/ai.webp",
+  art: "/lms/art/ai.webp",
   plate: ["#33000C", "#FF9A00"],
   outcomes: [
     "Draw any mark with the pen tool, confidently, not accidentally",

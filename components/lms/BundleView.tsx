@@ -45,7 +45,7 @@ export default function BundleView() {
           <div className="lg:col-span-7">
             <Reveal>
               <SectionLabel index="✦">
-                {t.bundle.kicker} — {savePct}% {t.bundle.save}
+                {t.bundle.kicker} · {savePct}% {t.bundle.save}
               </SectionLabel>
             </Reveal>
             <Reveal delay={0.06}>

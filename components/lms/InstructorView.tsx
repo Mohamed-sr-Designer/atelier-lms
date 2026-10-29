@@ -13,10 +13,10 @@ import { withBase } from "@/lib/base";
 import { stats } from "@/lib/courses";
 
 // Authority page: the working record behind the school. Proper nouns stay as
-// they are — the chrome is bilingual via dict.
+// they are · the chrome is bilingual via dict.
 const academies = [
   {
-    name: "SOIC — School of Cinema",
+    name: "SOIC · School of Cinema",
     logo: "/lms/academies/soic.jpg",
     role: "Design & AI Production Instructor",
     desc: "Cinema-focused design education: visual storytelling, key art and AI production for film students.",
@@ -45,20 +45,20 @@ const academies = [
 
 const ladder = [
   {
-    co: "Osolutions — Makkah, KSA",
+    co: "Osolutions · Makkah, KSA",
     logos: ["/lms/companies/osolutions.jpg"],
     role: "Art Team Lead",
     note: "Leading brand, campaign and motion output for regional clients.",
     now: true,
   },
   {
-    co: "Bundle IMS — Kuwait",
+    co: "Bundle IMS · Kuwait",
     logos: ["/lms/companies/bundle.jpg"],
     role: "Senior Designer, Automotive & BTL",
     note: "Key visuals and campaign systems for Rolls-Royce, Geely, GWM and AlGhanim.",
   },
   {
-    co: "JUMPPEAK — Medical",
+    co: "JUMPPEAK · Medical",
     logos: ["/lms/companies/jumppeak.jpg"],
     role: "Senior Designer",
     note: "Brand, campaign and content systems for a medical brand.",
@@ -76,10 +76,10 @@ const ladder = [
 ];
 
 const workGallery = [
-  { src: "/lms/featured-banner.jpg", alt: "AXIA banner — AI photoshoot campaign" },
-  { src: "/work/tilal/hero.webp", alt: "Tilal AI film — hero frame" },
-  { src: "/work/secure/hero.webp", alt: "Security brand film — cinematic AI still" },
-  { src: "/lms/winback.jpg", alt: "WINBACK campaign — AI production visual" },
+  { src: "/lms/featured-banner.jpg", alt: "AXIA banner · AI photoshoot campaign" },
+  { src: "/work/tilal/hero.webp", alt: "Tilal AI film · hero frame" },
+  { src: "/work/secure/hero.webp", alt: "Security brand film · cinematic AI still" },
+  { src: "/lms/winback.jpg", alt: "WINBACK campaign · AI production visual" },
 ];
 
 export default function InstructorView() {
@@ -87,12 +87,12 @@ export default function InstructorView() {
 
   return (
     <>
-      {/* hero — full-screen cinematic portrait */}
+      {/* hero · full-screen cinematic portrait */}
       <section className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={withBase("/lms/hero-landscape.jpg")}
-          alt="Mohamed Tarek — art director, standing in his spotlit studio library"
+          alt="Mohamed Tarek, art director, standing in his spotlit studio library"
           className="absolute inset-0 h-full w-full object-cover object-[center_18%]"
         />
         <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/35 to-ink-900/40" />
@@ -115,7 +115,7 @@ export default function InstructorView() {
             <div className="max-w-xl">
               <Reveal delay={0.12}>
                 <p className="text-lg text-bone-200 md:text-xl">
-                  {site.instructorRole} —{" "}
+                  {site.instructorRole} ·{" "}
                   <span className="text-bone-400">{site.markets}</span>
                 </p>
               </Reveal>

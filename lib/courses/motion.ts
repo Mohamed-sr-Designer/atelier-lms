@@ -26,6 +26,7 @@ export const aftereffects: Course = {
   price: 1800,
   cover: "/work/secure/hero.webp",
   icon: "/lms/icons/ae.webp",
+  art: "/lms/art/ae.webp",
   plate: ["#00005B", "#9999FF"],
   outcomes: [
     "Animate with real easing, nothing linear, nothing robotic",
@@ -172,6 +173,7 @@ export const premiere: Course = {
   price: 1050,
   cover: "/work/tilal/building.webp",
   icon: "/lms/icons/premiere.webp",
+  art: "/lms/art/pr.webp",
   plate: ["#00005B", "#9999FF"],
   outcomes: [
     "Cut with story logic, rhythm, motivation, breathing room",

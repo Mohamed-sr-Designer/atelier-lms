@@ -13,7 +13,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 type Lane = "program" | "consult";
 
-// Training for agencies & teams — a cinematic banner up top, then ONE panel:
+// Training for agencies & teams · a cinematic banner up top, then ONE panel:
 // a segmented switch decides which form you see, so the page never feels like
 // two competing forms.
 export default function TrainingView() {
@@ -39,7 +39,7 @@ export default function TrainingView() {
 
   const submitProgram = (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`[Mohamed Tarek — Team Program] ${agency}`);
+    const subject = encodeURIComponent(`[Mohamed Tarek, Team Program] ${agency}`);
     const body = encodeURIComponent(
       [
         `Company / agency: ${agency}`,
@@ -57,7 +57,7 @@ export default function TrainingView() {
   const submitConsult = (e: React.FormEvent) => {
     e.preventDefault();
     const msg = encodeURIComponent(
-      `Hi Mohamed — I'd like to book the free strategy consultation.\nName: ${cName}\nRole: ${cRole}\nCompany: ${cCompany}\nContact: ${cContact}\nPreferred time: ${cTime}`
+      `Hi Mohamed, I'd like to book the free strategy consultation.\nName: ${cName}\nRole: ${cRole}\nCompany: ${cCompany}\nContact: ${cContact}\nPreferred time: ${cTime}`
     );
     window.open(
       `https://wa.me/${site.whatsapp}?text=${msg}`,
@@ -84,7 +84,7 @@ export default function TrainingView() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={withBase("/lms/training-banner.jpg")}
-            alt="Tarek for business — AI production training for agencies and teams"
+            alt="Tarek for business, AI production training for agencies and teams"
             className="h-full w-full object-cover object-center"
           />
         </motion.div>
@@ -96,7 +96,7 @@ export default function TrainingView() {
           <Reveal>
             <p className="inline-flex items-center gap-2 rounded-full border border-line/25 bg-ink-900/50 px-4 py-2 text-xs uppercase tracking-ultra text-bone-200 backdrop-blur">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-mint" />
-              {t.training.bannerTag} — {t.training.kicker}
+              {t.training.bannerTag} · {t.training.kicker}
             </p>
           </Reveal>
           <Reveal delay={0.06}>

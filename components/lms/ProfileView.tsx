@@ -116,7 +116,7 @@ export default function ProfileView() {
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
                 src={store.user.avatar}
-                alt={`${store.user.name} — profile photo`}
+                alt={`${store.user.name}, profile photo`}
                 className="h-20 w-20 rounded-full border border-mint/40 object-cover"
               />
             ) : (

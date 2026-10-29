@@ -79,7 +79,7 @@ export default function Nav() {
           <Link
             href="/"
             className="group flex items-center gap-3"
-            aria-label="Tarek — home"
+            aria-label="Tarek, home"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img

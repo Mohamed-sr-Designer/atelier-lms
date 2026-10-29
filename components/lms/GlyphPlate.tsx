@@ -6,8 +6,9 @@ import type { Course } from "@/lib/courses";
 
 // Course plate, three flavors:
 //  1. coverVideo  → muted looping footage (AI Video)
-//  2. icon/plate  → official app icon on its brand gradient (software courses)
-//  3. cover image → real client work (AI Photoshoot)
+//  2. art         → artistic key visual + small official app icon badge
+//  3. icon/plate  → official app icon on its brand gradient (fallback)
+//  4. cover image → real client work (AI Photoshoot)
 export default function GlyphPlate({
   course,
   className = "",
@@ -27,7 +28,7 @@ export default function GlyphPlate({
         <video
           src={withBase(course.coverVideo)}
           poster={withBase(course.cover)}
-          aria-label={`AI-generated footage — made with the ${course.short.en} workflow`}
+          aria-label={`AI-generated footage, made with the ${course.short.en} workflow`}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-cinema group-hover/plate:scale-[1.05]"
           autoPlay
           muted
@@ -35,6 +36,25 @@ export default function GlyphPlate({
           playsInline
           preload="metadata"
         />
+      ) : course.art ? (
+        <>
+          <Media
+            src={course.art}
+            alt={`${course.short.en} course artwork`}
+            fill
+            sizes="(min-width: 1024px) 33vw, 100vw"
+            priority={eager}
+            className="object-cover transition-transform duration-700 ease-cinema group-hover/plate:scale-[1.06]"
+          />
+          {course.icon && (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              src={withBase(course.icon)}
+              alt={`${course.short.en} app icon`}
+              className="absolute left-[7%] top-[8%] z-[1] w-[17%] max-w-[4.5rem] rounded-[22%] shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition-transform duration-700 ease-cinema group-hover/plate:-translate-y-1"
+            />
+          )}
+        </>
       ) : brand ? (
         <>
           <div

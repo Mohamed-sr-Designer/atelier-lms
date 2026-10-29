@@ -66,7 +66,7 @@ export default function CheckoutView() {
     setPromoState(isValidCode(promoInput) ? "ok" : "bad");
   };
 
-  if (items.length === 0) {
+  if (items.length === 0 || items.some((c) => c.soon)) {
     return (
       <section className="container-edge mx-auto max-w-edge pb-24 pt-40 text-center">
         <p className="text-bone-400">404</p>

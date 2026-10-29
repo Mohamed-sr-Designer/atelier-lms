@@ -7,7 +7,7 @@ import Magnetic from "@/components/ui/Magnetic";
 import { useLang } from "@/lib/i18n";
 import { getCourse } from "@/lib/courses";
 
-// Enrollment success — a moment of ceremony, then straight into momentum.
+// Enrollment success · a moment of ceremony, then straight into momentum.
 export default function SuccessView() {
   const { t, lang } = useLang();
   const params = useSearchParams();
@@ -48,9 +48,9 @@ export default function SuccessView() {
           className="mx-auto mt-6 max-w-md text-pretty text-sm leading-relaxed text-bone-400 md:text-base"
         >
           {isBundle
-            ? `${t.catalog.bundleCard} — ${t.success.enrollSub}`
+            ? `${t.catalog.bundleCard} · ${t.success.enrollSub}`
             : course
-              ? `${course.title[lang]} — ${t.success.enrollSub}`
+              ? `${course.title[lang]} · ${t.success.enrollSub}`
               : t.success.enrollSub}
         </motion.p>
         <motion.div

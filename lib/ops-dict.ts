@@ -28,6 +28,12 @@ const en = {
     toDash: "Go to my dashboard",
     alreadyPending: "You already have an order for this waiting for confirmation.",
   },
+  soon: {
+    chip: "Coming soon",
+    cta: "Coming soon · notify me",
+    wa: "Hi Mohamed, let me know when this course opens:",
+    gate: "This course is being recorded. It opens soon.",
+  },
   orders: {
     mine: "My orders",
     pending: "Waiting for confirmation",
@@ -157,6 +163,12 @@ const ar: typeof en = {
     pendingWa: "ابعت الإيصال على واتساب (أسرع)",
     toDash: "روح للداشبورد",
     alreadyPending: "عندك طلب للكورس ده مستني التأكيد بالفعل.",
+  },
+  soon: {
+    chip: "قريبًا",
+    cta: "قريبًا · بلّغني",
+    wa: "أهلًا محمد، بلّغني أول ما الكورس ده يفتح:",
+    gate: "الكورس ده بيتسجل دلوقتي، وهيفتح قريب.",
   },
   orders: {
     mine: "طلباتي",

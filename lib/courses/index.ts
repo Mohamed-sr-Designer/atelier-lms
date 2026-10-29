@@ -19,6 +19,12 @@ export const courses: Course[] = [
 export const getCourse = (slug: string) =>
   courses.find((c) => c.slug === slug);
 
+// Courses that are announced but not recorded yet. Flip a slug out of this
+// list the day its videos are ready and it goes on sale everywhere.
+export const SOON = new Set(["adobe-after-effects", "adobe-premiere-pro"]);
+for (const c of courses) if (SOON.has(c.slug)) c.soon = true;
+export const isSoon = (slug: string) => SOON.has(slug);
+
 // ---- Bundles ------------------------------------------------------------------
 // Multi-course packs, each priced under the sum of its parts.
 export type Bundle = {
@@ -31,7 +37,7 @@ export type Bundle = {
   compareAt: number; // sum of the parts
 };
 
-export const bundles: Bundle[] = [
+const allBundles: Bundle[] = [
   {
     slug: "ai-production-stack",
     title: { en: "The AI Production Stack", ar: "حزمة إنتاج الذكاء الاصطناعي" },
@@ -78,6 +84,9 @@ export const bundles: Bundle[] = [
     compareAt: 7850, // 1,800 + 1,050 + 2,300 + 2,700
   },
 ];
+
+// Packs that contain a "soon" course are held back until it launches.
+export const bundles = allBundles.filter((b) => !b.courseSlugs.some(isSoon));
 
 export const getBundle = (slug: string) =>
   bundles.find((b) => b.slug === slug);

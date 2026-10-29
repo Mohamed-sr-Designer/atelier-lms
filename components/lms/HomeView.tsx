@@ -33,7 +33,7 @@ import {
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-// Rotated sticker chip — sized up so offers read instantly.
+// Rotated sticker chip · sized up so offers read instantly.
 function Sticker({
   children,
   tone = "mint",
@@ -70,7 +70,7 @@ const stackFloaters = [
   { src: "/lms/popup.jpg", alt: "AI campaign popup visual", cls: "-left-6 -top-10 w-28 rotate-[-7deg] md:w-36", d: 0.1 },
   { src: "/work/tilal/hero.webp", alt: "Tilal AI film hero frame", cls: "-right-8 -top-6 w-32 rotate-[6deg] md:w-44", d: 0.2 },
   { src: "/work/secure/03.webp", alt: "Cinematic AI still", cls: "-left-10 bottom-6 w-32 rotate-[4deg] md:w-40", d: 0.3 },
-  { src: "/lms/winback.jpg", alt: "WINBACK campaign visual — AI production", cls: "-bottom-10 -right-6 w-28 rotate-[-5deg] md:w-36", d: 0.4 },
+  { src: "/lms/winback.jpg", alt: "WINBACK campaign visual, AI production", cls: "-bottom-10 -right-6 w-28 rotate-[-5deg] md:w-36", d: 0.4 },
 ];
 
 export default function HomeView() {
@@ -103,7 +103,7 @@ export default function HomeView() {
 
   return (
     <>
-      {/* ================================================= HERO — AI showcase */}
+      {/* ================================================= HERO · AI showcase */}
       <section
         ref={heroRef}
         className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden"
@@ -118,7 +118,7 @@ export default function HomeView() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={withBase("/lms/hero-banner.jpg")}
-            alt="AI-produced editorial campaign — a model in a pixel-art world, made with the Tarek pipeline"
+            alt="AI-produced editorial campaign: a model in a pixel-art world, made with the Tarek pipeline"
             className="h-full w-full object-cover object-[center_28%]"
           />
         </motion.div>
@@ -127,7 +127,7 @@ export default function HomeView() {
         <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-ink-900 via-ink-900/55 to-ink-900/25" />
         <div aria-hidden className="vignette absolute inset-0" />
         <div aria-hidden className="absolute inset-0 bg-noise opacity-[0.07]" />
-        {/* cinematic light pass — a soft blurred beam with a bright core and a
+        {/* cinematic light pass · a soft blurred beam with a bright core and a
             faint accent tint, like a projector sweeping the artwork */}
         <motion.div
           aria-hidden
@@ -141,27 +141,22 @@ export default function HomeView() {
           <div className="absolute inset-y-0 left-[46%] w-[9%] bg-gradient-to-r from-transparent via-bone-50/25 to-transparent blur-md" />
         </motion.div>
 
-        {/* offer sticker — loud on purpose; needs lg room or it hits the kicker */}
-        <div className="absolute left-6 top-[30%] z-10 hidden lg:left-16 lg:block">
-          <Sticker tone="outline" rotate={-5}>
-            {t.home.heroStickers[1]}
-          </Sticker>
-        </div>
-
         {/* copy */}
         <motion.div
           style={{ opacity: copyOpacity }}
           className="container-edge relative z-10 mx-auto w-full max-w-edge pb-10 pt-32"
         >
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease, delay: 0.3 }}
-            className="inline-flex items-center gap-2 rounded-full border border-line/25 bg-ink-900/50 px-4 py-2 text-xs uppercase tracking-ultra text-bone-200 backdrop-blur"
-          >
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-mint" />
-            {t.home.kicker}
-          </motion.p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease, delay: 0.3 }}
+              className="inline-flex items-center gap-2 rounded-full border border-line/25 bg-ink-900/50 px-4 py-2 text-xs uppercase tracking-ultra text-bone-200 backdrop-blur"
+            >
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-mint" />
+              {t.home.kicker}
+            </motion.p>
+          </div>
 
           <h1 className="mt-6">
             <span className="block overflow-hidden">
@@ -249,7 +244,7 @@ export default function HomeView() {
                     {t.home.heroCardTag}
                   </span>
                   <span className="mt-0.5 block text-sm font-medium text-bone-50">
-                    {freePs.short[lang]} —{" "}
+                    {freePs.short[lang]} ·{" "}
                     <span className="font-bold text-mint">{fmtPrice(0, lang)}</span>
                   </span>
                 </span>
@@ -317,7 +312,7 @@ export default function HomeView() {
         </div>
       </section>
 
-      {/* ================================= WHY BOTHER — outcomes first ======== */}
+      {/* ================================= WHY BOTHER · outcomes first ======== */}
       <section className="container-edge mx-auto max-w-edge py-20 md:py-28">
         <Reveal>
           <SectionLabel index="01">{t.home.rtbLabel}</SectionLabel>
@@ -353,7 +348,7 @@ export default function HomeView() {
         </div>
       </section>
 
-      {/* ============================== WHY HERE — the honest comparison ====== */}
+      {/* ============================== WHY HERE · the honest comparison ====== */}
       <section className="relative overflow-hidden">
         <div className="container-edge mx-auto max-w-edge py-20 md:py-28">
           <Reveal>
@@ -492,14 +487,14 @@ export default function HomeView() {
                 </Link>
               </div>
             </Reveal>
-            {/* companies & academies he's worked with — under the CTAs */}
+            {/* companies & academies he's worked with · under the CTAs */}
             <Reveal delay={0.22}>
               <div className="mt-8">
                 <WorkedWith label={t.home.workedWithLabel} />
               </div>
             </Reveal>
           </div>
-          {/* vertical portrait — clean, no wash */}
+          {/* vertical portrait · clean, no wash */}
           <div className="lg:col-span-4">
             <Reveal delay={0.1}>
               <motion.div
@@ -508,7 +503,7 @@ export default function HomeView() {
               >
                 <Media
                   src="/lms/instructor-portrait.jpg"
-                  alt="Mohamed Tarek — art director and Tarek instructor"
+                  alt="Mohamed Tarek, art director and Tarek instructor"
                   sizes="(min-width: 1024px) 30vw, 100vw"
                   className="h-auto w-full object-cover"
                 />
@@ -540,7 +535,7 @@ export default function HomeView() {
           <SectionLabel index="04">{t.home.manLabel}</SectionLabel>
         </Reveal>
         <div className="mt-10 grid gap-5 lg:grid-cols-2">
-          {/* FREE — inverted light card */}
+          {/* FREE · inverted light card */}
           <Reveal>
             <motion.div
               whileHover={{ rotate: -0.6, scale: 1.005 }}
@@ -590,7 +585,7 @@ export default function HomeView() {
             </motion.div>
           </Reveal>
 
-          {/* AI — premium card */}
+          {/* AI · premium card */}
           <Reveal delay={0.08}>
             <motion.div
               whileHover={{ rotate: 0.6, scale: 1.005 }}
@@ -645,7 +640,7 @@ export default function HomeView() {
                   href="/bundle/"
                   className="link-underline mt-2 text-center text-sm text-electric"
                 >
-                  {t.catalog.bundleCard} — {fmtPrice(bundle.price, lang)} · {savePct}%− →
+                  {t.catalog.bundleCard} · {fmtPrice(bundle.price, lang)} · {savePct}%− →
                 </Link>
               </div>
             </motion.div>
@@ -902,7 +897,7 @@ export default function HomeView() {
             </div>
           </div>
 
-          {/* second strip — quick-hit glass quotes, opposite direction */}
+          {/* second strip · quick-hit glass quotes, opposite direction */}
           <div className="relative mt-6 rotate-[0.8deg] overflow-visible">
             <div className="flex w-max animate-marquee-rev items-center gap-4" style={{ animationDuration: "80s" }}>
               {[...reviewsB, ...reviewsB].map((r, i) => (
@@ -958,7 +953,7 @@ export default function HomeView() {
       </section>
 
       {/* ============================================= OBJECTIONS ============= */}
-      {/* editorial two-column — deliberately quieter than Begin below it */}
+      {/* editorial two-column · deliberately quieter than Begin below it */}
       <section className="border-t border-line/10">
         <div className="container-edge mx-auto grid max-w-edge gap-10 py-20 md:py-28 lg:grid-cols-12">
           <div className="lg:col-span-4">

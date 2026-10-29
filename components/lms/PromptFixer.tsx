@@ -91,11 +91,11 @@ export default function PromptFixer() {
       ]
         .filter(Boolean)
         .join(" ");
-      core = `${cleaned} — ${casting}${human.place ? `, in ${human.place}` : ""}`;
+      core = `${cleaned}, ${casting}${human.place ? `, in ${human.place}` : ""}`;
       extraTips.unshift("human");
     }
     const additions = gaps.map((g) => g.add);
-    setFixed(additions.length ? `${core} — ${additions.join(", ")}` : core);
+    setFixed(additions.length ? `${core}, ${additions.join(", ")}` : core);
     setTips(extraTips);
     setStage("done");
     setCopied(false);

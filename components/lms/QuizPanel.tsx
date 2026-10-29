@@ -105,7 +105,7 @@ export default function QuizPanel({
             <span className="grid h-8 w-8 place-items-center rounded-full bg-mint/15">✓</span>
             {t.learn.quizPassed}
             <span className="text-bone-400">
-              — {t.learn.quizScore}: {score}/{quiz.length}
+              · {t.learn.quizScore}: {score}/{quiz.length}
             </span>
           </p>
         ) : (

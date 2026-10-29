@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useOps } from "@/lib/ops-dict";
 import { useLang } from "@/lib/i18n";
 import { useLiveCourse } from "@/lib/studio";
 import {
@@ -30,6 +31,7 @@ export default function CourseCard({
   const liveCourse = useLiveCourse(courseStatic);
   const course = live ? liveCourse : courseStatic; // studio edits apply live
   const mins = totalMinutes(course);
+  const o = useOps();
 
   return (
     <Link
@@ -53,13 +55,19 @@ export default function CourseCard({
                 : "bg-ink-900/85 text-bone-50 ring-1 ring-mint/40"
             }`}
           >
-            {course.price === 0 ? `✦ ${fmtPrice(0, lang)}` : fmtPrice(course.price, lang)}
-            {course.compareAt ? (
+            {course.soon ? (
+              <>🔒 {o.soon.chip}</>
+            ) : course.price === 0 ? (
+              `✦ ${fmtPrice(0, lang)}`
+            ) : (
+              fmtPrice(course.price, lang)
+            )}
+            {!course.soon && course.compareAt ? (
               <span className="ml-1.5 text-xs font-medium text-bone-500 line-through">
                 {course.compareAt.toLocaleString("en-US")}
               </span>
             ) : null}
-            {course.price > 0 ? (
+            {!course.soon && course.price > 0 ? (
               <span className="ml-1.5 text-xs font-medium text-mint/80">
                 · {fmtUsd(course.price)}
               </span>

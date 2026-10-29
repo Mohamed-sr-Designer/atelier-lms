@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { useOps } from "@/lib/ops-dict";
+import { site } from "@/lib/site";
 import { motion } from "framer-motion";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
@@ -35,10 +37,15 @@ export default function CourseDetailView({ course: courseStatic }: { course: Cou
   const inBundle = bundle.courseSlugs.includes(course.slug);
   const related = courses.filter((c) => c.slug !== course.slug).slice(0, 3);
 
-  const ctaHref = enrolled
-    ? `/learn/${course.slug}/`
-    : `/checkout/?course=${course.slug}`;
-  const ctaLabel = enrolled
+  const o = useOps();
+  const ctaHref = course.soon
+    ? `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(`${o.soon.wa} ${course.short.en}`)}`
+    : enrolled
+      ? `/learn/${course.slug}/`
+      : `/checkout/?course=${course.slug}`;
+  const ctaLabel = course.soon
+    ? o.soon.cta
+    : enrolled
     ? t.common.continueLearning
     : course.price === 0
       ? t.common.enrollFree
@@ -488,7 +495,7 @@ export default function CourseDetailView({ course: courseStatic }: { course: Cou
                     >
                       <Media
                         src={src}
-                        alt={`Made with this course — AI production frame ${i + 1}`}
+                        alt={`Made with this course: AI production frame ${i + 1}`}
                         fill
                         sizes="(min-width: 768px) 25vw, 50vw"
                         className="object-cover saturate-[0.75] transition-all duration-700 ease-cinema group-hover:saturate-100"
@@ -516,7 +523,7 @@ export default function CourseDetailView({ course: courseStatic }: { course: Cou
               <div className="overflow-hidden rounded-2xl border border-line/15">
                 <Media
                   src="/lms/instructor-wide.png"
-                  alt="Mohamed Tarek — course instructor"
+                  alt="Mohamed Tarek, course instructor"
                   width={1731}
                   height={1787}
                   className="h-auto w-full object-cover"

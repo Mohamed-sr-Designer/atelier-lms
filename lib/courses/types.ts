@@ -41,6 +41,7 @@ export type Course = {
   icon?: string; // app icon path (rendered over `plate` gradient)
   tileText?: string; // drawn Adobe-style tile when no icon asset exists
   plate?: [string, string]; // brand gradient stops
+  art?: string; // artistic key visual; the app icon then sits on it as a badge
   coverVideo?: string; // muted looping cover (takes precedence)
   showcase?: { images?: string[]; videos?: string[] }; // course-page gallery
   short: Bi; // card-length name
@@ -49,6 +50,7 @@ export type Course = {
   level: Bi;
   audience: Bi;
   price: number; // EGP; 0 = free
+  soon?: boolean; // visible but locked: not sold, not playable yet
   compareAt?: number;
   cover: string; // atmosphere image (existing portfolio asset)
   outcomes: string[];

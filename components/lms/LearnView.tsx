@@ -66,7 +66,7 @@ export default function LearnView({ course: courseStatic }: { course: Course }) 
 
   const current = allLessons.find((l) => l.id === currentId) ?? allLessons[0];
   const currentIndex = allLessons.findIndex((l) => l.id === current.id);
-  const canWatch = enrolled || current.free;
+  const canWatch = !course.soon && (enrolled || current.free);
   const isDone = done.includes(current.id);
   const videoUrl = canWatch ? media?.[current.id] : undefined;
   const startAt =
@@ -170,13 +170,13 @@ export default function LearnView({ course: courseStatic }: { course: Course }) 
                   🔒
                 </span>
                 <p className="mt-5 text-lg font-semibold text-bone-50 md:text-xl">
-                  {t.learn.enrollGate}
+                  {course.soon ? o.soon.gate : t.learn.enrollGate}
                 </p>
                 <p className="mt-2 max-w-sm text-sm text-bone-400">
                   {t.learn.enrollGateSub}
                 </p>
                 <Link
-                  href={`/checkout/?course=${course.slug}`}
+                  href={course.soon ? `/courses/${course.slug}/` : `/checkout/?course=${course.slug}`}
                   className="mt-6 btn btn-primary px-7 py-3.5"
                 >
                   {course.price === 0 ? t.common.enrollFree : t.common.enroll}
