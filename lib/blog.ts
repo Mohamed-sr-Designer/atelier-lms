@@ -634,4 +634,7 @@ export const posts: Post[] = [
   },
 ];
 
+// Every post has its own editorial cover in /lms/blog/<slug>.webp.
+for (const p of posts) p.cover = `/lms/blog/${p.slug}.webp`;
+
 export const getPost = (slug: string) => posts.find((p) => p.slug === slug);

@@ -148,11 +148,11 @@ export default function LearnView({ course: courseStatic }: { course: Course }) 
             ) : canWatch ? (
               <div className="relative flex h-full flex-col items-center justify-center bg-ink-800 p-8 text-center">
                 <Media
-                  src={course.cover}
+                  src={current.mod.cover || course.cover}
                   alt=""
                   fill
                   sizes="100vw"
-                  className="object-cover opacity-15 saturate-[0.5]"
+                  className={current.mod.cover ? "object-cover opacity-40" : "object-cover opacity-15 saturate-[0.5]"}
                 />
                 <p className="relative text-xs uppercase tracking-ultra text-mint">
                   {t.learn.nowPlaying}

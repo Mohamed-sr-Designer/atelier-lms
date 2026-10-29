@@ -20,6 +20,7 @@ export type Module = {
   n: string; // "01"
   t: string;
   lessons: Lesson[];
+  cover?: string; // module key visual (set in courses/index.ts)
 };
 
 export type Project = { t: string; d: string };

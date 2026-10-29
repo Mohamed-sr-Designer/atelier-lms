@@ -23,6 +23,13 @@ export const getCourse = (slug: string) =>
 // list the day its videos are ready and it goes on sale everywhere.
 export const SOON = new Set(["adobe-after-effects", "adobe-premiere-pro"]);
 for (const c of courses) if (SOON.has(c.slug)) c.soon = true;
+
+// Module key visuals live at /lms/modules/<course>-<nn>.webp. The locked
+// courses get theirs the day they launch.
+const WITH_MODULE_COVERS = ["adobe-photoshop", "adobe-illustrator", "ai-photoshoot", "ai-video-generation"];
+for (const c of courses)
+  if (WITH_MODULE_COVERS.includes(c.slug))
+    for (const m of c.modules) m.cover = `/lms/modules/${c.slug}-${m.n}.webp`;
 export const isSoon = (slug: string) => SOON.has(slug);
 
 // ---- Bundles ------------------------------------------------------------------

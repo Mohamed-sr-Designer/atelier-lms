@@ -1,5 +1,6 @@
 "use client";
 
+import { withBase } from "@/lib/base";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLang } from "@/lib/i18n";
@@ -31,12 +32,21 @@ export default function CurriculumIndex({
               className="group flex w-full items-baseline gap-5 py-7 text-start md:gap-10"
             >
               <span
-                className={`shrink-0 font-display text-4xl font-semibold tracking-tight transition-colors duration-300 md:text-6xl ${
+                className={`w-12 shrink-0 font-display text-4xl font-semibold tracking-tight tabular-nums transition-colors duration-300 md:w-20 md:text-6xl ${
                   isOpen ? "text-mint" : "text-bone-500/50 group-hover:text-mint/70"
                 }`}
               >
                 {m.n}
               </span>
+              {m.cover && (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={withBase(m.cover)}
+                  alt=""
+                  loading="lazy"
+                  className="hidden aspect-video w-28 shrink-0 self-center rounded-lg object-cover ring-1 ring-line/10 transition-transform duration-500 group-hover:scale-[1.04] sm:block md:w-36"
+                />
+              )}
               <span className="grow">
                 <span className="block text-xl font-semibold tracking-tight text-bone-50 md:text-2xl">
                   {m.t}
