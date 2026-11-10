@@ -12,6 +12,7 @@ import { courses, fmtPrice } from "@/lib/courses";
 import { openAuth } from "@/components/lms/AuthModal";
 import ThemeToggle from "@/components/ThemeToggle";
 import LangToggle from "@/components/LangToggle";
+import SideSwitch from "@/components/SideSwitch";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -189,6 +190,8 @@ export default function Nav() {
           </nav>
 
           <div className="flex items-center gap-2.5">
+            {/* portfolio and academy are one name: the same switch is in both headers */}
+            <SideSwitch className="hidden sm:inline-flex" />
             <LangToggle />
             <ThemeToggle />
             {store.user ? (
@@ -283,6 +286,7 @@ export default function Nav() {
             transition={{ duration: 0.4 }}
             className="fixed inset-0 z-40 flex flex-col justify-center overflow-y-auto bg-ink-900 px-8 py-24 lg:hidden"
           >
+            <SideSwitch className="mb-8 w-fit sm:hidden" />
             <nav className="flex flex-col gap-2">
               {links.map((item, i) => (
                 <motion.div
